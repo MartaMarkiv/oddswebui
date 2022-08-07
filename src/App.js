@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import {Main} from "./pages/Main";
+import {Route, Routes} from "react-router-dom";
+import {Header} from "./components/Header";
+import styled from "styled-components";
+import {light, dark} from "./Theme.styled";
+import {ThemeProvider} from "styled-components";
+import {createContext, useEffect, useState} from "react";
+
+const AppStyled = styled.div`
+  padding: 0 40px;
+  background: ${({theme}) => theme.colors.bgBody};
+  color: ${({theme}) => theme.colors.textPrimary};
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const AppBody = styled.div`
+  flex: 1 0 auto;
+`;
+
+const AppFooter = styled.div`
+  flex: 0 0 auto;
+`;
+
+const themesMap = {
+    light,
+    dark
+}
+
+export const ThemePreferenceContext = createContext();
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const initialTheme = localStorage.getItem('theme') || 'light';
+    const [currentTheme, setCurrentTheme] = useState(initialTheme);
+
+    const theme = themesMap[currentTheme];
+
+    useEffect(() => {
+        if(localStorage.getItem('theme') !== currentTheme) {
+            localStorage.setItem('theme', currentTheme);
+            console.log('save');
+        }
+    }, [currentTheme]);
+
+
+    return (
+        <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
+            <ThemeProvider theme={theme}>
+                <AppStyled>
+                    <Header/>
+                    <AppBody>
+                        <Routes>
+                            <Route path="/" element={<Main/>}/>
+                        </Routes>
+                    </AppBody>
+                    <AppFooter />
+                </AppStyled>
+            </ThemeProvider>
+        </ThemePreferenceContext.Provider>
+    );
 }
 
 export default App;
