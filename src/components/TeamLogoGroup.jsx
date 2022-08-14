@@ -17,8 +17,8 @@ const TeamLogoGroupContainer = styled.div`
   }
 `;
 
-export const TeamLogoGroup = ({urls = []}) => {
+export const TeamLogoGroup = ({urls = [], size}) => {
     return <TeamLogoGroupContainer>
-        { urls.map(url => <TeamLogo key={url} imgUrl={url} />) }
+        { urls.map(url => <TeamLogo size={size} key={url} imgUrl={url} />) }
     </TeamLogoGroupContainer>
 }

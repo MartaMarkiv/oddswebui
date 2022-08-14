@@ -1,0 +1,94 @@
+[{
+  "sport": "basketball",
+  "games": [{
+    "id": "34234",
+    "game": "Alka @ NJ",
+    "type": "Live",
+    "time": "11:11",
+    "timeout": "0",
+    "sportsbooks": [{
+      "sportsbook": "Faduel",
+      "url": "https://...",
+      "bets": [{
+        "name": "Moneyline",
+        "type": ["", ""],
+        "odds": ["300", "-350"]
+      },
+        {
+          "name": "Spread - Arbitrage",
+          "type": ["+6.5", "-6.5"],
+          "odds": ["100", "-150"]
+        },
+        {
+          "name": "2nd Half Total",
+          "type": ["O71.5", "U75.1"],
+          "odds": ["100", "-150"]
+        }
+      ]
+    }, {
+      "sportsbook": "Draftkings",
+      "url": "https://...",
+      "bets": [{
+        "name": "Moneyline",
+        "type": ["", ""],
+        "odds": ["300", "-350"]
+      },
+        {
+          "name": "Spread - Arbitrage",
+          "type": ["+6.5", "-6.5"],
+          "odds": ["100", "-150"]
+        },
+        {
+          "betname": "2nd Half Total",
+          "bettype": ["O71.5", "U75.1"],
+          "odds": ["100", "-150"]
+        }
+      ]
+    }]
+  }, {
+    "id": "34234",
+    "game": "Golden Warriors @ Lakers",
+    "type": "Live",
+    "time": "10:57",
+    "timeout": "1",
+    "sportsbooks": [{
+      "sportsbook": "Faduel",
+      "url": "https://...",
+      "bets": [{
+        "name": "Moneyline",
+        "type": ["", ""],
+        "odds": ["300", "-350"]
+      },
+        {
+          "name": "Spread - Arbitrage",
+          "type": ["+6.5", "-6.5"],
+          "odds": ["100", "-150"]
+        },
+        {
+          "name": "2nd Half Total",
+          "type": ["O71.5", "U75.1"],
+          "odds": ["100", "-150"]
+        }
+      ]
+    }, {
+      "sportsbook": "Draftkings",
+      "url": "https://...",
+      "bets": [{
+        "name": "Moneyline",
+        "type": ["", ""],
+        "odds": ["300", "-350"]
+      },
+        {
+          "name": "Spread - Arbitrage",
+          "type": ["+6.5", "-6.5"],
+          "odds": ["100", "-150"]
+        },
+        {
+          "name": "2nd Half Total",
+          "type": ["O71.5", "U75.1"],
+          "odds": ["100", "-150"]
+        }
+      ]
+    }]
+  }]
+}]

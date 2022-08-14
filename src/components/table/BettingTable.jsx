@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {generateTableColumnData} from "./utils";
 import {TableRow, TableCell, TableTh} from "./components";
 import {BetBox} from "../BetBox";
+import {GameInfoBox} from "../GameInfoBox";
 
 const StyledBettingTable = styled.div`
   .ant-table {
@@ -25,9 +26,14 @@ export const BettingTable = ({ data }) => {
         return <BetBox data={data} />
     }
 
+    const gameInfoRenderer = (_, data) => {
+        return <GameInfoBox data={data} />
+    }
+
     const columns = generateTableColumnData({
         data,
-        betRenderer
+        betRenderer,
+        gameInfoRenderer
     });
 
     const components = {

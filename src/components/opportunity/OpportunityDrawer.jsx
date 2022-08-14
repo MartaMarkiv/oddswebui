@@ -72,7 +72,7 @@ const DrawerStyled= styled(Drawer)`
 `
 
 export const OpportunityDrawer = () => {
-    const [visible, setVisible] = useState(true);
+    const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
         setVisible(true);

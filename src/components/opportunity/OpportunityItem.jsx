@@ -74,7 +74,7 @@ const GridHead = styled.div`
 
 const GridRow = styled.div`
   display: grid;
-  grid-template-columns: 1.7fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1.8fr 1fr 1fr 1.5fr;
 `;
 
 const GridTh = styled.div`
@@ -126,32 +126,6 @@ const Arrow = styled(ArrowIcon)`
 
 const INITIAL_ROW_COUNT = 2;
 
-const mockData = [{
-    id: "1",
-    type: "Home",
-    name: "Moneyline",
-    value: "+300",
-    book: "Fanduel"
-}, {
-    id: "2",
-    type: "Home",
-    name: "Moneyline",
-    value: "-355",
-    book: "Points bet"
-}, {
-    id: "3",
-    type: "Home",
-    name: "Moneyline",
-    value: "-300",
-    book: "Fanduel"
-}, {
-    id: "4",
-    type: "Home",
-    name: "Moneyline",
-    value: "-355",
-    book: "Points bet"
-}]
-
 const GridRowComponent = ({item, index, toggle, isOpened}) => {
     if(index === 1) {
         return <>
@@ -167,13 +141,11 @@ const GridRowComponent = ({item, index, toggle, isOpened}) => {
         <GridTd>{item.name}</GridTd>
         <GridTd>{item.type}</GridTd>
         <GridTd isValue>{item.value}</GridTd>
-        <GridTd>{item.book}</GridTd>
+        <GridTd>{item.sportBook}</GridTd>
     </GridRow>
 }
 
 export const OpportunityItem = ({onSelect, data, selected}) => {
-    data['opportunity'] = mockData;
-
     const [showRowCount, setShowRowCount] = useState(INITIAL_ROW_COUNT);
     const [isOpened, setIsOpened] = useState(false);
 
@@ -198,17 +170,19 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                     <TeamBadge>
                         <HomeIcon />
                     </TeamBadge>
-                    Burnley
+                    {data.homeTeam}
                 </TeamName>
                 <TeamName>
                     <TeamBadge>
                         <AwayIcon />
                     </TeamBadge>
-                    Arsenal
+                    {data.awayTeam}
                 </TeamName>
             </Teams>
             <HeaderRightContent>
-                <TimeoutBadge size="small" />
+                {
+                    data.timeout && <TimeoutBadge size="small" />
+                }
                 <TeamLogoGroup urls={['team1.png', 'team2.png']} />
             </HeaderRightContent>
         </Header>
@@ -225,7 +199,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
                 <GridBody>
                     {
-                        data?.opportunity?.slice(0, showRowCount).map((item, index) =>
+                        data?.opportunities?.slice(0, showRowCount).map((item, index) =>
                             <GridRowComponent key={item.id} item={item} index={index} toggle={toggle} isOpened={isOpened} />
                         )
                     }
