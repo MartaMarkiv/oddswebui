@@ -1,1 +1,1 @@
-export * from './PendingScreen'
+export * from './Switcher'

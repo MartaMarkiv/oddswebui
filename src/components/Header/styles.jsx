@@ -1,36 +1,41 @@
 import styled from "styled-components";
+import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 
-const GameInfoBoxStyled = styled.div`
-  padding: 15px;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+const HeaderStyled = styled.header`
+  padding: 24px 0;
   display: flex;
-  flex-direction: column;
-  margin-top: 26px;
+  align-items: center;
+  justify-content: space-between;
+  flex: 0 0 auto;
+`
+
+const LogoLink = styled.a`
+  width: 175px;
+  height: 48px;
+  display: block;
+  color: ${({theme}) => theme.colors.logo};
+`
+
+const LogoImage = styled(Logo)`
+  width: 100%;
+  height: 100%;
 `;
 
-const TimeGroup = styled.div`
-  margin-top: 26px;
-  margin-bottom: 12px;
-`;
+const HeaderControlPanel = styled.div`
+  display: flex;
 
-const TextSecondary = styled.div`
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  color: ${({theme}) => theme.colors.textSecondary};
-`;
+  > *:first-child {
+    margin-right: 24px;
+  }
 
-const Text = styled(TextSecondary)`
-  color: ${({theme}) => theme.colors.textPrimary};
+  > *:last-child {
+    margin-left: 24px;
+  }
 `;
 
 export {
-    GameInfoBoxStyled,
-    TimeGroup,
-    TextSecondary,
-    Text
+    HeaderStyled,
+    LogoLink,
+    LogoImage,
+    HeaderControlPanel
 }

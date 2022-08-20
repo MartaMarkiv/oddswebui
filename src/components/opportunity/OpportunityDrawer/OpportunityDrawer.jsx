@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {Space} from "antd";
-import {Switcher} from "../Switcher";
-import {OpportunityList} from "./OpportunityList";
+import {OpportunityList} from "../OpportunityList";
 import {DrawerStyled, OpportunityButton, StarIcon} from "./styles";
+import {Switcher} from "../../Switcher";
 
 
 export const OpportunityDrawer = () => {

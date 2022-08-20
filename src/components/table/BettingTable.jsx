@@ -1,24 +1,10 @@
 import {Table} from "antd";
 import React from 'react';
-import styled from 'styled-components';
 import {generateTableColumnData} from "./utils";
-import {TableRow, TableCell, TableTh} from "./components";
 import {BetBox} from "../BetBox";
 import {GameInfoBox} from "../GameInfoBox";
-
-const StyledBettingTable = styled.div`
-  .ant-table {
-    background: ${({ theme }) => theme.colors.bgBody};
-    color: ${({ theme }) => theme.colors.textPrimary};
-  }
-  
-  &&& {
-    .ant-table-container,
-    .ant-table-container table {
-      border-color: ${({ theme }) => theme.colors.table.border};
-    }
-  }
-`;
+import {StyledBettingTable} from "./styles";
+import {TableCell, TableRow, TableTh} from "./components";
 
 export const BettingTable = ({ data }) => {
 

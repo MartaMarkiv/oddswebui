@@ -1,1 +1,1 @@
-export * from './OpportunityItem'
+export * from './BetBox'

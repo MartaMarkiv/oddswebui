@@ -1,41 +1,29 @@
 import styled from "styled-components";
-import { ReactComponent as Logo } from '../../assets/images/logo.svg';
 
-const HeaderStyled = styled.header`
-  padding: 24px 0;
+const PendingScreenStyled = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex: 0 0 auto;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: ${({ theme }) => theme.colors.bgBody};
+  z-index: 1000;
+
+  ${({ position }) => {
+    switch (position) {
+        case 'absolute':
+            return { position: 'absolute' }
+        default:
+            return {
+                position: 'fixed',
+                marginTop: '96px'
+            }
+    }
+}};
 `
-
-const LogoLink = styled.a`
-  width: 175px;
-  height: 48px;
-  display: block;
-  color: ${({theme}) => theme.colors.logo};
-`
-
-const LogoImage = styled(Logo)`
-  width: 100%;
-  height: 100%;
-`;
-
-const HeaderControlPanel = styled.div`
-  display: flex;
-
-  > *:first-child {
-    margin-right: 24px;
-  }
-
-  > *:last-child {
-    margin-left: 24px;
-  }
-`;
 
 export {
-    HeaderStyled,
-    LogoLink,
-    LogoImage,
-    HeaderControlPanel
+    PendingScreenStyled
 }

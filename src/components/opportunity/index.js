@@ -1,1 +1,5 @@
-export * from './OpportunityDrawer';
+import {OpportunityDrawer} from './OpportunityDrawer';
+
+export {
+    OpportunityDrawer
+}

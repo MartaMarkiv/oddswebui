@@ -1,1 +1,1 @@
-export * from './GameInfoBox'
+export * from './Header'

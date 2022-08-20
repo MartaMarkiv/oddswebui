@@ -1,1 +1,2 @@
-export * from './PendingScreen'
+export * from './TeamLogo'
+export * from './TeamLogoGroup'

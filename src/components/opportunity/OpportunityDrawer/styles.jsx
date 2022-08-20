@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ReactComponent as Star} from "*.svg";
+import {ReactComponent as Star} from "../../../assets/icons/star.svg";
 import {Drawer} from "antd";
 
 const OpportunityButton = styled.button`

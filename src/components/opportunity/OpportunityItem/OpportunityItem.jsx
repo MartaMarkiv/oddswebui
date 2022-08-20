@@ -1,5 +1,5 @@
-import { ReactComponent as HomeIcon } from '../../assets/icons/home.svg';
-import { ReactComponent as AwayIcon } from '../../assets/icons/away.svg';
+import { ReactComponent as HomeIcon } from '../../../assets/icons/home.svg';
+import { ReactComponent as AwayIcon } from '../../../assets/icons/away.svg';
 import {useCallback, useState} from "react";
 import {
     Arrow, Body, GridBody, GridHead,
@@ -15,7 +15,7 @@ import {
     Grid
 } from "./styles";
 import {TimeoutBadge} from "../../TimeoutBadge";
-import {TeamLogoGroup} from "../../TeamLogoGroup";
+import {TeamLogoGroup} from "../../TeamLogo";
 
 
 const INITIAL_ROW_COUNT = 2;

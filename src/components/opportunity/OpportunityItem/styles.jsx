@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {ReactComponent as ArrowIcon} from "*.svg";
+import {ReactComponent as ArrowIcon} from "../../../assets/icons/arrow.svg";
 
 const OpportunityItemContainer = styled.div`
   background: ${({theme}) => theme.colors.bgBody};
