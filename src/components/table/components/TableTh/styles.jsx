@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 const ThStyled = styled.th`
   &&&&&& {
     background: ${({ theme }) => theme.colors.table.bg};
@@ -21,6 +20,6 @@ const ThStyled = styled.th`
   }
 `
 
-export const TableTh = (props) => {
-    return <ThStyled {...props} />
+export {
+    ThStyled
 }
