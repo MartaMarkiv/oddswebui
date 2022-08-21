@@ -2,8 +2,9 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {BettingTable} from "../components/table";
 import {tableDataMapper} from "../components/table/utils";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
 import {PendingScreen} from "../components/PendingScreen";
+import {Title} from "../components/typography/Title/Title";
 
 
 const serverData = [{
@@ -36,7 +37,7 @@ const serverData = [{
                     }
                 ]
             },
-            {
+                {
                     "sportsbook": "Draftkings",
                     "url": "https://...",
                     "bets": [
@@ -93,19 +94,19 @@ const serverData = [{
                     "type": ["", ""],
                     "odds": ["300", "-350"]
                 },
-                {
-                    "name": "Spread - Arbitrage",
-                    "type": ["+6.5", "-6.5"],
-                    "odds": ["100", "-150"]
-                },
-                {
-                    "name": "2nd Half Total",
-                    "type": ["O71.5", "U75.1"],
-                    "odds": ["100", "-150"]
-                }
-            ]
-        }]
-    }
+                    {
+                        "name": "Spread - Arbitrage",
+                        "type": ["+6.5", "-6.5"],
+                        "odds": ["100", "-150"]
+                    },
+                    {
+                        "name": "2nd Half Total",
+                        "type": ["O71.5", "U75.1"],
+                        "odds": ["100", "-150"]
+                    }
+                ]
+            }]
+        },
     ]
 }];
 
@@ -114,10 +115,10 @@ const mockData = serverData[0].games.reduce((gamesAcc, game) => {
     const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => {
         return sportsbook.bets.map(bet => bet.name)
     }))];
-    // [away_value, home_value]
-    betTypes.forEach(betType => {
+
+    betTypes.forEach((betType, index) => {
         gamesAcc.push({
-            id: uuidv4(),
+            id: `${uuidv4()}${((index+1) % betTypes.length) === 1 ? '|first' : ''}`,
             game: game.game,
             type: game.type,
             time: game.time,
@@ -128,12 +129,12 @@ const mockData = serverData[0].games.reduce((gamesAcc, game) => {
                 sportsbookAcc[sportsbook.sportsbook] = {
                     bets: {
                         home: [
+                            ...(currentBet.type[1] && [{value: currentBet.type[1], status: 'secondary'}]),
                             ...(currentBet.odds[1] && [{value: currentBet.odds[1]}]),
-                            ...(currentBet.type[1] && [{value: currentBet.type[1], status: 'secondary'}])
                         ],
                         away: [
+                            ...(currentBet.type[0] && [{value: currentBet.type[0], status: 'secondary'}]),
                             ...(currentBet.odds[0] && [{value: currentBet.odds[0]}]),
-                            ...(currentBet.type[0] && [{value: currentBet.type[0], status: 'secondary'}])
                         ]
                     }
                 }
@@ -446,7 +447,7 @@ const mockData1 = [
 ]
 
 const StyledMain = styled.div`
-    position: relative;
+  position: relative;
 `;
 
 export const Main = () => {
@@ -462,7 +463,7 @@ export const Main = () => {
                 setData(tableDataMapper(mockData));
                 setPending(false);
                 setFetched(true);
-            }, 3000);
+            }, 300);
         })
     }
 
@@ -471,8 +472,12 @@ export const Main = () => {
     }, []);
 
     return <StyledMain>
-        {pending && <PendingScreen />}
-        <BettingTable data={data} />
+        {pending
+            ? <PendingScreen/>
+            : <>
+                <Title>Betting table</Title>
+                <BettingTable data={data}/>
+            </>}
     </StyledMain>
 
 }

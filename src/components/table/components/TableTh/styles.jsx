@@ -1,6 +1,9 @@
 import styled from "styled-components";
 
 const ThStyled = styled.th`
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+  
   &&&&&& {
     background: ${({ theme }) => theme.colors.table.bg};
     border-color: ${({ theme }) => theme.colors.table.border};

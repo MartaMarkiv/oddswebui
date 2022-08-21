@@ -20,3 +20,16 @@ body {
 .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
   transition: background 0s !important;
 }
+
+td.subBookHeader.odd {
+  border-right-color: transparent !important;
+}
+
+.tableHead {
+  font-weight: 400 !important;
+}
+
+.ant-table table {
+  width: auto !important;
+  min-width: auto !important;
+}

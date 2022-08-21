@@ -10,11 +10,17 @@ const common = {
                 icon: "#000000"
             }
         }
+    },
+    fonts: {
+        secondary: "'Poppins', sans-serif",
     }
 }
 
 export const light = {
     name: "light-theme",
+    fonts: {
+        ...common.fonts
+    },
     colors: {
         ...common.colors,
         bgBody: "#FFFFFF",
@@ -73,6 +79,9 @@ export const light = {
 
 export const dark = {
     name: "dark-theme",
+    fonts: {
+        ...common.fonts
+    },
     colors: {
         ...common.colors,
         bgBody: "#0C0B0E",

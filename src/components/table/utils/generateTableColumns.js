@@ -11,16 +11,18 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             title: 'Sports book',
             key: 'sportsBook',
             align: 'left',
+            className: 'tableHead cellShadow',
             fixed: true,
             children: [
                 {
                     dataIndex: 'game',
                     key: 'game',
-                    width: 129,
+                    width: 130,
                     colSpan: 2,
                     title: 'Bet type',
                     align: 'left',
                     fixed: true,
+                    className: 'tableHead cellShadow',
                     onCell: (_, index) => {
                         if (index % betTypes.length === 0) {
                             return {
@@ -37,16 +39,17 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                 {
                     dataIndex: 'betType',
                     key: 'betTypeValue',
+                    className: 'betTypeCell cellShadow',
                     fixed: true,
-                    width: 138,
-                    colSpan: 0,
+                    width: 140,
+                    colSpan: 0
                 }
             ]
         }
 
         const books  = [...new Set(Object.keys(...data.map(d => d.books)))];
 
-        const bookColumns = books.map(key => ({
+        const bookColumns = books.map((key, index) => ({
             title: capitalizeFirst(key),
             key: `${key}_${uuidv4()}`,
             className: 'bookHeader',
@@ -54,7 +57,8 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             children: [
                 {
                     title: 'Home',
-                    className: 'subBookHeader',
+                    className: `subBookHeader tableHead odd`,
+                    width: 96,
                     key: `${key}Home_${uuidv4()}`,
                     align: 'center',
                     dataIndex: ['books', key, 'bets', 'home'],
@@ -62,7 +66,8 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                 },
                 {
                     title: 'Away',
-                    className: 'subBookHeader',
+                    className: 'subBookHeader tableHead',
+                    width: 96,
                     align: 'center',
                     key: `${key}Away_${uuidv4()}`,
                     dataIndex: ['books', key, 'bets', 'away'],
