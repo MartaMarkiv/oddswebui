@@ -37,6 +37,7 @@ docker_build('157485876214.dkr.ecr.us-east-2.amazonaws.com/web-ui', '.',
     ]
 )
 
+
 ## Configure port forwarding to connect localhost directly to the port the app is running on in the pod.
 ## Port 3000 - Frontend Pod
 ## Port 5000 - Backend Pod
