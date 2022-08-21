@@ -1,0 +1,21 @@
+stages:
+  lint:
+    enabled: false
+  package: 
+    enabled: true
+    helmDir: deploy
+
+  publish:
+    enabled: true
+    buildDir: build_images
+
+  deploy:
+    enabled: true
+    name: oddsbender-web-ui
+    namespace: dev-oddsbender
+    configFiles:
+      - conf-deploy/common.values.yaml
+    kubernetesConfig:
+      name: arb-cluster
+      region: us-east-2
+      credentialsId: jenkins-aws
