@@ -11,7 +11,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             title: 'Sports book',
             key: 'sportsBook',
             align: 'left',
-            className: 'tableHead cellShadow',
+            className: 'tableHead cellShadow sportsBookCell',
             fixed: true,
             children: [
                 {
@@ -22,7 +22,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                     title: 'Bet type',
                     align: 'left',
                     fixed: true,
-                    className: 'tableHead cellShadow',
+                    className: 'tableHead cellShadow gameCell',
                     onCell: (_, index) => {
                         if (index % betTypes.length === 0) {
                             return {

@@ -21,6 +21,10 @@ body {
   transition: background 0s !important;
 }
 
+.ant-table-sticky-holder {
+  background: inherit;
+}
+
 td.subBookHeader.odd {
   border-right-color: transparent !important;
 }

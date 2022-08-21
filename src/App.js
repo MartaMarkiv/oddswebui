@@ -5,6 +5,7 @@ import styled from "styled-components";
 import {light, dark} from "./Theme.styled";
 import {ThemeProvider} from "styled-components";
 import {createContext, useEffect, useState} from "react";
+import {CommonProvider} from "./shared/context/CommonProvider";
 
 const AppStyled = styled.div`
   padding: 0 40px;
@@ -37,7 +38,7 @@ function App() {
     const theme = themesMap[currentTheme];
 
     useEffect(() => {
-        if(localStorage.getItem('theme') !== currentTheme) {
+        if (localStorage.getItem('theme') !== currentTheme) {
             localStorage.setItem('theme', currentTheme);
             console.log('save');
         }
@@ -47,15 +48,17 @@ function App() {
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <AppStyled>
-                    <Header/>
-                    <AppBody>
-                        <Routes>
-                            <Route path="/" element={<Main/>}/>
-                        </Routes>
-                    </AppBody>
-                    <AppFooter />
-                </AppStyled>
+                <CommonProvider>
+                    <AppStyled>
+                        <Header/>
+                        <AppBody>
+                            <Routes>
+                                <Route path="/" element={<Main/>}/>
+                            </Routes>
+                        </AppBody>
+                        <AppFooter/>
+                    </AppStyled>
+                </CommonProvider>
             </ThemeProvider>
         </ThemePreferenceContext.Provider>
     );

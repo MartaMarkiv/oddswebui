@@ -1,19 +1,23 @@
 import {useState} from "react";
 import {Space} from "antd";
 import {OpportunityList} from "../OpportunityList";
-import {DrawerStyled, OpportunityButton, StarIcon} from "./styles";
+import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
 import {Switcher} from "../../Switcher";
-
+import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
+import {DRAWER_WIDTH} from "../../../constants";
 
 export const OpportunityDrawer = () => {
+    const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(false);
 
     const showDrawer = () => {
+        setDrawerOpened(true)
         setVisible(true);
     };
 
     const onClose = () => {
         setVisible(false);
+        setDrawerOpened(false)
     };
 
     const switchHandler = (value) => {
@@ -30,7 +34,8 @@ export const OpportunityDrawer = () => {
                 placement="right"
                 closable
                 mask={false}
-                width={440}
+                width={DRAWER_WIDTH}
+                closeIcon={<CloseIcon />}
                 extra={
                     <Space>
                         <Switcher leftText="All"
