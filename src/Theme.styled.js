@@ -67,7 +67,11 @@ export const light = {
         },
 
         drawer: {
-            bg: '#F4F6F8'
+            bg: '#F4F6F8',
+            itemBg: '#ffffff',
+            itemBgSelected: '#000000',
+            textSelected: '#ffffff',
+            groupBgSelected: '#2d2d2d',
         },
 
         opportunity: {
@@ -128,7 +132,11 @@ export const dark = {
         },
 
         drawer: {
-            bg: '#161A1E'
+            bg: '#161A1E',
+            itemBg: '#1E2429',
+            itemBgSelected: '#000000',
+            textSelected: '#ffffff',
+            groupBgSelected: '#1E2429',
         },
 
         opportunity: {

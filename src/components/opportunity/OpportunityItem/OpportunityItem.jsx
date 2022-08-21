@@ -1,6 +1,7 @@
-import { ReactComponent as HomeIcon } from '../../../assets/icons/home.svg';
-import { ReactComponent as AwayIcon } from '../../../assets/icons/away.svg';
+import {ReactComponent as HomeIcon} from '../../../assets/icons/home.svg';
+import {ReactComponent as AwayIcon} from '../../../assets/icons/away.svg';
 import {useCallback, useState} from "react";
+
 import {
     Arrow, Body, GridBody, GridHead,
     GridRow,
@@ -12,32 +13,13 @@ import {
     TeamName,
     Teams,
     Toggle,
-    Grid
+    Grid, Group, Divider
 } from "./styles";
 import {TimeoutBadge} from "../../TimeoutBadge";
 import {TeamLogoGroup} from "../../TeamLogo";
 
 
-const INITIAL_ROW_COUNT = 2;
-
-const GridRowComponent = ({item, index, toggle, isOpened, len}) => {
-    if(index === 1) {
-        return <>
-            <GridRowComponent item={item}/>
-            {len > 2 && <Toggle onClick={toggle} opened={isOpened}>
-                {isOpened ? 'Hide other' : 'Show other'}
-                <Arrow opened={isOpened ? 1 : 0} />
-            </Toggle>}
-        </>
-    }
-
-    return <GridRow>
-        <GridTd>{item.name}</GridTd>
-        <GridTd>{item.type}</GridTd>
-        <GridTd isValue>{item.value}</GridTd>
-        <GridTd>{item.sportBook}</GridTd>
-    </GridRow>
-}
+const INITIAL_ROW_COUNT = 1;
 
 export const OpportunityItem = ({onSelect, data, selected}) => {
     const [showRowCount, setShowRowCount] = useState(INITIAL_ROW_COUNT);
@@ -46,38 +28,40 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
     const toggle = (event) => {
         event.stopPropagation();
         setIsOpened(!isOpened);
-        setShowRowCount(isOpened ? INITIAL_ROW_COUNT : data.length)
+        setShowRowCount(isOpened ? INITIAL_ROW_COUNT : Object.keys(data.opportunities).length)
     }
 
-    const selectOpportunity = useCallback((opportunity) => {
-        if(selected === opportunity.id) {
-            onSelect()
+    const groupSelectHandler = useCallback((dataId, id) => {
+        if (selected === id) {
+            onSelect(null);
         } else {
-            onSelect(opportunity.id)
+            onSelect(id)
         }
     }, [selected, onSelect]);
 
-    return <OpportunityItemContainer selected={selected === data.id} onClick={() => selectOpportunity(data)}>
+    const keys = data.opportunities ? Object.keys(data.opportunities).map(key => data.opportunities[key].id) : []
+
+    return <OpportunityItemContainer selected={keys.includes(selected)}>
         <Header>
             <Teams>
                 <TeamName>
                     <TeamBadge>
-                        <HomeIcon />
+                        <HomeIcon/>
                     </TeamBadge>
                     {data.homeTeam}
                 </TeamName>
                 <TeamName>
                     <TeamBadge>
-                        <AwayIcon />
+                        <AwayIcon/>
                     </TeamBadge>
                     {data.awayTeam}
                 </TeamName>
             </Teams>
             <HeaderRightContent>
                 {
-                    data.timeout && <TimeoutBadge size="small" />
+                    data.timeout && <TimeoutBadge size="small"/>
                 }
-                <TeamLogoGroup urls={['team1.png', 'team2.png']} />
+                <TeamLogoGroup urls={['team1.png', 'team2.png']}/>
             </HeaderRightContent>
         </Header>
         <Body>
@@ -93,14 +77,34 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
                 <GridBody>
                     {
-                        data?.opportunities?.slice(0, showRowCount).map((item, index) =>
-                            <GridRowComponent key={item.id}
-                                              item={item}
-                                              index={index}
-                                              len={data?.opportunities.length}
-                                              toggle={toggle}
-                                              isOpened={isOpened} />
-                        )
+                        data?.opportunities && Object.keys(data.opportunities).slice(0, showRowCount).map((key, index) => {
+                            return <div key={index}>
+                                {
+                                    index > 1 && <Divider />
+                                }
+
+                                <Group selected={selected === data.opportunities[key].id}
+                                       onClick={(event) => groupSelectHandler(data.id, data.opportunities[key].id)}>
+                                    {
+                                        data.opportunities[key].items.map((opportunity, i) =>
+                                            <GridRow key={i}>
+                                                <GridTd>{opportunity.name}</GridTd>
+                                                <GridTd>{opportunity.type}</GridTd>
+                                                <GridTd isValue>{opportunity.value}</GridTd>
+                                                <GridTd>{opportunity.sportBook}</GridTd>
+                                            </GridRow>
+                                        )
+                                    }
+                                </Group>
+                                {
+                                    index === 0 && Object.keys(data.opportunities).length > 1 &&
+                                    <Toggle key="some" onClick={toggle} opened={isOpened}>
+                                        {isOpened ? 'Hide other' : 'Show other'}
+                                        <Arrow opened={isOpened ? 1 : 0}/>
+                                    </Toggle>
+                                }
+                            </div>
+                        })
                     }
                 </GridBody>
             </Grid>

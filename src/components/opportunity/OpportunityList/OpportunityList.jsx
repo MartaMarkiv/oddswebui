@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {List, ListItem, OpportunityListContainer} from "./styles";
 import {PendingScreen} from "../../PendingScreen";
 import {OpportunityItem} from "../OpportunityItem";
+import camelCase from 'lodash.camelcase'
 
 const serverData = [{
     "sport": "basketball",
@@ -24,6 +25,16 @@ const serverData = [{
             {
                 "bets": {
                     "name": "Spread - Arbitrage",
+                    "type": ["+1.5", "-1.5"],
+                    "odds": ["-300", "+350"],
+                    "sportsbooks": ["Barstool", "Betmgm"],
+                    "probability": ["2.960784", "94.548387"],
+                    "sum_probability": "97.509171"
+                }
+            },
+            {
+                "bets": {
+                    "name": "Test",
                     "type": ["+1.5", "-1.5"],
                     "odds": ["-300", "+350"],
                     "sportsbooks": ["Barstool", "Betmgm"],
@@ -62,7 +73,16 @@ const opportunityMapper = data => {
             const [typeAway, typeHome] = bets.type;
             const [probabilityAway, probabilityHome] = bets.probability;
 
-            home && acc.push({
+            const key = camelCase(bets.name);
+
+            if(!acc[key]) {
+                acc[key] = {
+                    id: uuidv4(),
+                    items: []
+                }
+            }
+
+            home && acc[key].items.push({
                 id: uuidv4(),
                 value: home,
                 name: bets.name,
@@ -70,10 +90,11 @@ const opportunityMapper = data => {
                 sportBook: sportsBookHome,
                 typeValue: typeHome,
                 probability: probabilityHome,
-                sumProbability: bets.sumProbability
+                sumProbability: bets.sumProbability,
+                key
             });
 
-            away && acc.push({
+            away && acc[key].items.push({
                 id: uuidv4(),
                 value: away,
                 name: bets.name,
@@ -81,11 +102,12 @@ const opportunityMapper = data => {
                 sportBook: sportsBookAway,
                 typeValue: typeAway,
                 probability: probabilityAway,
-                sumProbability: bets.sumProbability
+                sumProbability: bets.sumProbability,
+                key
             });
 
             return acc;
-        }, []);
+        }, {});
 
         return {
             id,
@@ -136,7 +158,7 @@ export const OpportunityList = () => {
         }
         <List>
             {
-                data?.map(item => {
+                data?.map((item) => {
                     return <ListItem key={item.id}>
                         <OpportunityItem data={item} selected={selectedItem} onSelect={setSelectedItem} />
                     </ListItem>

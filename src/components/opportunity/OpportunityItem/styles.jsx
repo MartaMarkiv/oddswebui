@@ -4,25 +4,50 @@ import {ReactComponent as ArrowIcon} from "../../../assets/icons/arrow.svg";
 const OpportunityItemContainer = styled.div`
   background: ${({theme}) => theme.colors.bgBody};
   border-radius: 4px;
-  padding: 16px;
+  padding: 16px 0;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   color: ${({theme}) => theme.colors.textPrimary};
   cursor: pointer;
+  background: ${({theme}) => theme.colors.drawer.itemBg};
+  transition: all .3s;
+  
+  &:hover {
+    background: ${({theme}) => theme.colors.drawer.itemBgSelected};
+    color: ${({theme}) => theme.colors.drawer.textSelected};,
+  }
   
   ${({selected, theme}) => {
     return selected ? {
-        background: theme.colors.bgContrast,
-        color: theme.colors.textContrast,
+        background: theme.colors.drawer.itemBgSelected,
+        color: theme.colors.drawer.textSelected,
     } : {}
 }};
 `;
+
+const Group = styled.div`
+  padding: 7px 9px;
+  border-radius: 4px;
+  transition: background .3s;
+
+  &:hover {
+    background: ${({theme}) => theme.colors.drawer.groupBgSelected};
+  }
+
+  ${({selected, theme}) => {
+    return selected ? {
+      background: theme.colors.drawer.groupBgSelected,
+    } : {}
+  }};
+`
 
 const Header = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 16px;
+  padding-right: 16px;
 `;
 
 const Teams = styled.div`
@@ -56,19 +81,24 @@ const HeaderRightContent = styled.div`
   }
 `;
 
-const Body = styled.div``;
+const Body = styled.div`
+  padding-left: 7px;
+  padding-right: 7px;
+`;
 
 const Grid = styled.div`
     margin-top: 22px;
 `;
 
 const GridHead = styled.div`
-  margin-bottom: 8px;
+  margin-bottom: 3px;
+  padding-left: 9px;
+  padding-right: 9px;
 `;
 
 const GridRow = styled.div`
   display: grid;
-  grid-template-columns: 1.8fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
 `;
 
 const GridTh = styled.div`
@@ -93,6 +123,7 @@ const Toggle = styled(GridTh)`
   display: inline-flex;
   align-items: center;
   user-select: none;
+  margin-left: 9px;
 
   ${({opened}) => {
     if(opened) {
@@ -117,6 +148,13 @@ const Arrow = styled(ArrowIcon)`
 }};
 `;
 
+const Divider = styled.div`
+  height: 1px;
+  width: calc(100% - 18px);
+  margin: 0 auto;
+  background: #2d2d2d;
+`
+
 export {
     OpportunityItemContainer,
     Header,
@@ -133,4 +171,6 @@ export {
     Body,
     HeaderRightContent,
     TeamBadge,
+    Group,
+    Divider,
 }
