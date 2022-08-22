@@ -28,8 +28,9 @@ const HeaderControlPanel = styled.div`
     margin-right: 24px;
   }
 
-  > *:last-child {
+  > *:nth-child(3) {
     margin-left: 24px;
+    margin-right: 24px;
   }
 `;
 

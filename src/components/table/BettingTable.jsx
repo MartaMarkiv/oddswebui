@@ -5,6 +5,7 @@ import {BetBox} from "../BetBox";
 import {GameInfoBox} from "../GameInfoBox";
 import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
+import {FilterPanel} from "./components/FilterPanel";
 
 export const BettingTable = ({ data }) => {
 
@@ -33,6 +34,7 @@ export const BettingTable = ({ data }) => {
     };
 
     return <StyledBettingTable>
+        <FilterPanel />
         <Table
             columns={columns}
             dataSource={data}

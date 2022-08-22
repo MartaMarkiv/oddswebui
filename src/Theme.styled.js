@@ -76,6 +76,30 @@ export const light = {
 
         opportunity: {
             textSecondary: "#838B93"
+        },
+
+        button: {
+            bg: '#F4F6F8',
+            bgHover: '#000000',
+
+            text: '#000000',
+            textHover: '#FFFFFF',
+
+            countBg: '#000000',
+            countBgHover: '#FFFFFF',
+            countText: '#FFFFFF',
+            countTextHover: '#000000',
+
+            arrow: '#000000',
+            arrowHover: '#FFFFFF'
+        },
+
+        dropdown: {
+            submenu: {
+                bg: '#FFFFFF',
+                border: '#F4F6F8',
+                shadow: 'rgba(0, 0, 0, 0.05)'
+            }
         }
 
     },
@@ -141,6 +165,31 @@ export const dark = {
 
         opportunity: {
             textSecondary: "#838B93"
+        },
+
+        button: {
+            bg: '#1E2429',
+            bgHover: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #2C3844',
+
+            text: '#90969C',
+            textHover: '#FFFFFF',
+
+            countBg: '#000000',
+            countBgHover: '#FFFFFF',
+            countText: '#90969C',
+            countTextHover: '#000000',
+
+            arrow: '#90969C',
+            arrowHover: '#FFFFFF',
+
+        },
+
+        dropdown: {
+            submenu: {
+                bg: '#1E2429',
+                border: '#1E2429',
+                shadow: 'transparent'
+            }
         }
     },
 };

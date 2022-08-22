@@ -1,11 +1,13 @@
 import {Main} from "./pages/Main";
-import {Route, Routes} from "react-router-dom";
+import {Route, BrowserRouter, Routes} from "react-router-dom";
 import {Header} from "./components/Header";
 import styled from "styled-components";
 import {light, dark} from "./Theme.styled";
 import {ThemeProvider} from "styled-components";
 import {createContext, useEffect, useState} from "react";
 import {CommonProvider} from "./shared/context/CommonProvider";
+import {QueryParamProvider} from 'use-query-params';
+import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
 
 const AppStyled = styled.div`
   padding: 0 40px;
@@ -52,9 +54,11 @@ function App() {
                     <AppStyled>
                         <Header/>
                         <AppBody>
-                            <Routes>
-                                <Route path="/" element={<Main/>}/>
-                            </Routes>
+                            <QueryParamProvider adapter={ReactRouter6Adapter}>
+                                <Routes>
+                                    <Route path="/" element={<Main/>}/>
+                                </Routes>
+                            </QueryParamProvider>
                         </AppBody>
                         <AppFooter/>
                     </AppStyled>
