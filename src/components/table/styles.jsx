@@ -20,6 +20,7 @@ const StyledBettingTable = styled.div`
   .gameCell {
     min-width: 130px;
     max-width: 130px;
+    color: ${({ theme }) => theme.colors.table.secondaryText};
   }
   
   .subBookHeader {
@@ -47,6 +48,7 @@ const StyledBettingTable = styled.div`
     vertical-align: baseline;
     padding-top: 18px !important;
     padding-bottom: 18px !important;
+    color: ${({ theme }) => theme.colors.table.secondaryText};
   }
 `;
 

@@ -69,6 +69,10 @@ const DrawerStyled= styled(Drawer)`
 
   .ant-drawer-close {
     color: ${({theme}) => theme.colors.headerControls.icon};
+    
+    path {
+      fill: ${({theme}) => theme.colors.headerControls.icon};
+    }
   }
 
   .ant-drawer-extra {

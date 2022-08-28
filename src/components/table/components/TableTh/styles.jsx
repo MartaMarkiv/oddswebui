@@ -19,7 +19,7 @@ const ThStyled = styled.th`
   
   &&&&&&.bookHeader, &&&&&&.subBookHeader {
     background: ${({ theme }) => theme.colors.table.bgTh};
-    color: ${({ theme }) => theme.colors.table.bookHeaderText};
+    color: ${({ theme }) => theme.colors.table.secondaryText};
   }
 `
 

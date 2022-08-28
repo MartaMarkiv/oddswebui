@@ -50,10 +50,10 @@ export const light = {
         },
 
         table: {
-            bookHeaderText: "#000000",
             bg: "#FFFFFF",
             border: "#DFE5EB",
             bgTh: "#F4F6F8",
+            secondaryText: '#000000'
         },
 
         headerControls: {
@@ -98,7 +98,16 @@ export const light = {
             submenu: {
                 bg: '#FFFFFF',
                 border: '#F4F6F8',
-                shadow: 'rgba(0, 0, 0, 0.05)'
+                shadow: 'rgba(0, 0, 0, 0.05)',
+                text: '#000000',
+            },
+            checkbox: {
+                border: '#DFE5EB',
+                active: {
+                    bg: '#000000',
+                    border: '#000000',
+                    icon: '#FFFFFF'
+                }
             }
         }
 
@@ -139,10 +148,10 @@ export const dark = {
         },
 
         table: {
-            bookHeaderText: "#90969C",
             bg: "#0C0B0E",
             border: "#2C3844",
             bgTh: "#161A1E",
+            secondaryText: '#90969C'
         },
 
         headerControls: {
@@ -188,7 +197,16 @@ export const dark = {
             submenu: {
                 bg: '#1E2429',
                 border: '#1E2429',
-                shadow: 'transparent'
+                shadow: 'transparent',
+                text: '#FFFFFF',
+            },
+            checkbox: {
+                border: '#90969C',
+                active: {
+                    bg: '#FFFFFF',
+                    border: '#FFFFFF',
+                    icon: '#000000'
+                }
             }
         }
     },

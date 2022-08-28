@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import {Checkbox} from "antd";
+
 import {
     ArrowIcon,
     Count,
@@ -7,28 +7,33 @@ import {
     DropdownMenuItem,
     DropdownMenuStyled,
     DropdownTrigger,
-    PopoverStyled
+    PopoverStyled,
+    CheckBoxStyled,
+    Label,
 } from "./styles";
-import {StringParam, useQueryParam} from "use-query-params";
+import {useQueryParam} from "use-query-params";
 
 const checkboxRender = ({options, onChange, selectedItems}) => {
 
     return (
         <DropdownMenuStyled>
-            <Checkbox.Group onChange={onChange} value={selectedItems}>
+            <CheckBoxStyled.Group onChange={onChange} value={selectedItems}>
                 {options.map(({key, label}) => {
+                    const [team1, team2] = label.split('@');
                     return (
                         <DropdownMenuItem key={key}>
-                            <Checkbox
+                            <CheckBoxStyled
                                 key={key}
                                 value={key}
                             >
-                                {label}
-                            </Checkbox>
+                                <Label bold>{team1}</Label>
+                                @
+                                <Label>{team2}</Label>
+                            </CheckBoxStyled>
                         </DropdownMenuItem>
                     );
                 })}
-            </Checkbox.Group>
+            </CheckBoxStyled.Group>
         </DropdownMenuStyled>
     );
 };
@@ -40,7 +45,7 @@ export const Dropdown = ({
                              count = 0,
                              triggerText,
                              name
-}) => {
+                         }) => {
     const [query, setQuery] = useQueryParam(name);
 
     const [selectedItems, setSelectedItems] = useState([...value, ...(query?.split(',') || [])]);

@@ -1,4 +1,4 @@
-import {Dropdown, Popover} from 'antd';
+import {Dropdown, Popover, Checkbox} from 'antd';
 import styled from "styled-components";
 import {ReactComponent as Arrow} from "../../assets/icons/arrow.svg";
 import {Button} from "../../shared/styles";
@@ -26,6 +26,7 @@ const Count = styled.div`
   background: ${({theme}) => theme.colors.button.countBg};
   color: ${({theme}) => theme.colors.button.countText};
   margin: 0 6px;
+  line-height: 1.5;
 `;
 
 const ArrowIcon = styled(Arrow)`
@@ -88,6 +89,66 @@ const DropdownContainer = styled.div`
   flex-direction: column;
 `;
 
+const CheckBoxStyled = styled(Checkbox)`
+  .ant-checkbox {
+    top: -1px;
+  }
+  
+  .ant-checkbox-inner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid ${({theme}) => theme.colors.dropdown.checkbox.border};
+    background: transparent;
+  }
+
+  .ant-checkbox-checked .ant-checkbox-inner {
+    border-color: ${({theme}) => theme.colors.dropdown.checkbox.active.border};
+    background-color: ${({theme}) => theme.colors.dropdown.checkbox.active.bg};
+
+    &:after {
+      border-color: ${({theme}) => theme.colors.dropdown.checkbox.active.icon};
+    }
+  }
+
+  .ant-checkbox-checked::after {
+    border-color: ${({theme}) => theme.colors.dropdown.checkbox.active.border};
+  }
+
+  &.ant-checkbox-wrapper:hover .ant-checkbox-inner,
+  &.ant-checkbox:hover .ant-checkbox-inner,
+  &.ant-checkbox-input:focus + .ant-checkbox-inner {
+    border-color: ${({theme}) => theme.colors.dropdown.checkbox.active.border};
+  }
+
+  .ant-checkbox-wrapper:hover .ant-checkbox-inner, 
+  .ant-checkbox:hover .ant-checkbox-inner, 
+  .ant-checkbox-input:focus + .ant-checkbox-inner {
+    border-color: ${({theme}) => theme.colors.dropdown.checkbox.active.border};
+  }
+
+  .ant-checkbox + span {
+    font-weight: 400;
+    padding-left: 16px;
+    color: ${({theme}) => theme.colors.dropdown.submenu.text};
+  }
+
+  &.ant-checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    
+    &::after {
+      display: none;
+    }
+  }
+`
+
+const Label = styled.span`
+  font-style: normal;
+  font-weight: ${({bold}) => bold ? 500 : 400};
+  font-size: 14px;
+  color: ${({theme}) => theme.colors.dropdown.submenu.text};
+`
+
 export {
     DropdownStyled,
     DropdownTrigger,
@@ -96,5 +157,7 @@ export {
     DropdownMenuStyled,
     PopoverStyled,
     DropdownContainer,
-    DropdownMenuItem
+    DropdownMenuItem,
+    CheckBoxStyled,
+    Label,
 }

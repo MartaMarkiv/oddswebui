@@ -14,6 +14,10 @@ const LogoLink = styled.a`
   height: 48px;
   display: block;
   color: ${({theme}) => theme.colors.logo};
+  
+  &:hover {
+    color: ${({theme}) => theme.colors.logo};
+  }
 `
 
 const LogoImage = styled(Logo)`

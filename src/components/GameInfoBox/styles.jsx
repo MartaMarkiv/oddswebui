@@ -25,7 +25,7 @@ const TextSecondary = styled.div`
 `;
 
 const Text = styled(TextSecondary)`
-  color: ${({theme}) => theme.colors.textPrimary};
+  color: inherit;
 `;
 
 export {
