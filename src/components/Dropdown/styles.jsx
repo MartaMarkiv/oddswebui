@@ -26,7 +26,7 @@ const Count = styled.div`
   background: ${({theme}) => theme.colors.button.countBg};
   color: ${({theme}) => theme.colors.button.countText};
   margin: 0 6px;
-  line-height: 1.5;
+  line-height: 1.25;
 `;
 
 const ArrowIcon = styled(Arrow)`
