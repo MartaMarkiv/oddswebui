@@ -16,6 +16,6 @@ stages:
     configFiles:
       - conf-deploy/common.values.yaml
     kubernetesConfig:
-      name: arb-cluster
-      region: us-east-2
+      name: oddsbender-cluster
+      region: us-east-1
       credentialsId: jenkins-aws
