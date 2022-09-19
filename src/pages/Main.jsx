@@ -113,8 +113,6 @@ const serverData = [{
     ]
 }];
 
-console.log(serverData[0].games);
-
 const mockData = serverData[0].games.reduce((gamesAcc, game) => {
     const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => {
         return sportsbook.bets.map(bet => bet.name)
@@ -151,9 +149,6 @@ const mockData = serverData[0].games.reduce((gamesAcc, game) => {
     return gamesAcc;
 }, []);
 
-
-console.log('mocked data');
-console.log(mockData);
 
 const mockData1 = [
     {
