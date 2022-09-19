@@ -47,14 +47,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             ]
         }
 
-        console.log("DATS");
         const books  = [...new Set(data.map(d => Object.keys(d.books)).flat())];
-        console.log(data);
-
-        // const books  = [...new Set(Object.keys(...data.map(d => d.books)))];
-
-        console.log("Books ");
-        console.log(books);
 
         const bookColumns = books.map((key, index) => ({
             title: capitalizeFirst(key),

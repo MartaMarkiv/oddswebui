@@ -6,11 +6,9 @@ import {tableDataMapper, parseData} from "../components/table/utils";
 import {v4 as uuidv4} from 'uuid';
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
+import {SOCKET_URL} from "../constants";
 
-const socketUrl = "ws://localhost:8000/ws/football/table_data";
-// const socketUrl = "ws://localhost:8000/ws/basketball/opportunity_feed";
-
-const client = new WebSocket(socketUrl);
+const client = new WebSocket(SOCKET_URL);
 
 const serverData = [{
     "sport": "basketball",
@@ -122,8 +120,6 @@ const mockData = serverData[0].games.reduce((gamesAcc, game) => {
         return sportsbook.bets.map(bet => bet.name)
     }))];
 
-    // console.log("bet types mocked");
-    // console.log(betTypes);
     betTypes.forEach((betType, index) => {
         gamesAcc.push({
             id: `${uuidv4()}${((index+1) % betTypes.length) === 1 ? '|first' : ''}`,
@@ -133,11 +129,7 @@ const mockData = serverData[0].games.reduce((gamesAcc, game) => {
             timeout: game.timeout,
             betType,
             books: game.sportsbooks.reduce((sportsbookAcc, sportsbook) => {
-                // console.log("sportsbook mocked");
-                // console.log(sportsbook);
                 const currentBet = sportsbook.bets.find(bet => bet.name === betType);
-                // console.log("currentBet mocked");
-                // console.log(currentBet);
                 sportsbookAcc[sportsbook.sportsbook] = {
                     bets: {
                         home: [
@@ -485,22 +477,24 @@ export const Main = () => {
 
     const loadDataFromApi = async () => {
         setPending(true);
-        client.onopen = () => {};
+
+        client.onopen = () => {
+            console.log("WebSocket Client Connected");
+        };
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log(`Data received from server:`);
-            console.log(json[0].games);
+            console.log("Data received from server:");
+            console.log(json);
             const collection = parseData(json);
-            console.log("collection:");
+            console.log("Table data:");
             console.log(collection);
             setData(collection);
             setPending(false);
-            setFetched(true);
         };
 
         client.onerror = () => {
-            console.log("on error");
+            console.log("Socket connection error");
         };
     }
 
