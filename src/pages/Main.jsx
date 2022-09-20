@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
-import {tableDataMapper} from "../components/table/utils";
+import {tableDataMapper, parseData} from "../components/table/utils";
 import {v4 as uuidv4} from 'uuid';
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
+import {SOCKET_URL} from "../constants";
 
+const client = new WebSocket(SOCKET_URL);
 
 const serverData = [{
     "sport": "basketball",
@@ -110,7 +113,6 @@ const serverData = [{
     ]
 }];
 
-
 const mockData = serverData[0].games.reduce((gamesAcc, game) => {
     const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => {
         return sportsbook.bets.map(bet => bet.name)
@@ -146,6 +148,7 @@ const mockData = serverData[0].games.reduce((gamesAcc, game) => {
 
     return gamesAcc;
 }, []);
+
 
 const mockData1 = [
     {
@@ -467,8 +470,35 @@ export const Main = () => {
         })
     }
 
+    const loadDataFromApi = async () => {
+        setPending(true);
+
+        client.onopen = () => {
+            console.log("WebSocket Client Connected");
+        };
+
+        client.onmessage = (event) => {
+            const json = JSON.parse(event.data);
+            console.log("Data received from server:");
+            console.log(json);
+            const collection = parseData(json);
+            console.log("Table data:");
+            console.log(collection);
+            setData(collection);
+            setPending(false);
+        };
+
+        client.onerror = () => {
+            console.log("Socket connection error");
+        };
+    }
+
+    // useEffect(() => {
+    //     loadData();
+    // }, []);
+
     useEffect(() => {
-        loadData();
+        loadDataFromApi();
     }, []);
 
     return <StyledMain>
