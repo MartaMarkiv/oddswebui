@@ -10,6 +10,12 @@ service:
 basicAuth:
   authString: user:$apr1$av9fesol$zxfoN9w1IJg5NBULPWnVz/
 
+# command: 
+#   - /bin/bash 
+#   - -c
+# args:
+#   - exec nginx -g 'daemon off;'
+
 ingress:
   enabled: true
   className: "nginx"

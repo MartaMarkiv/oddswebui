@@ -1,7 +1,7 @@
 ## Specifies that Tilt is allowed to run against the specified k8s context names.
 ## In this case we want to run the app against the XENA Training Cluster
 ## https://docs.tilt.dev/api.html#api.allow_k8s_contexts
-allow_k8s_contexts('arn:aws:eks:us-east-2:157485876214:cluster/arb-cluster')
+allow_k8s_contexts('arn:aws:eks:us-east-1:157485876214:cluster/oddsbender-cluster')
 
 ## Run `helm template` on a given directory that contains a chart and return the fully rendered YAML.
 ## The `name` and `namespace` should be updated with the assigned student number.
@@ -32,8 +32,8 @@ docker_build('157485876214.dkr.ecr.us-east-2.amazonaws.com/web-ui', '.',
 	dockerfile='Dockerfile.dev',
     ignore=['csv', 'Tiltfile', '.vscode', 'deploy/*', '.venv/*'],
     live_update=[
-        sync('./src', '/app/web/src'),
-		run('cd /app/web && npm install', trigger=['./package.json'])
+      sync('./src', '/app/web/src'),
+		  run('cd /app/web && npm install', trigger=['./package.json'])
     ]
 )
 
