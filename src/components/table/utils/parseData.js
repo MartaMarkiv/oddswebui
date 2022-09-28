@@ -1,6 +1,9 @@
 import {v4 as uuidv4} from 'uuid';
 
 export const parseData = (data) => {
+    if (!data.length) {
+        return false;
+    }
     const sportsData = data[0].games;
   
     const mockData = sportsData.reduce((gamesAcc, game) => {
