@@ -482,9 +482,9 @@ export const Main = () => {
             console.log("Data received from server:");
             console.log(json);
             const collection = parseData(json);
+            setData(collection);
             console.log("Table data:");
             console.log(collection);
-            setData(collection);
             setPending(false);
         };
 
@@ -505,8 +505,15 @@ export const Main = () => {
         {pending
             ? <PendingScreen/>
             : <>
-                <Title>Betting table</Title>
-                <BettingTable data={data}/>
+                {
+                    data
+                    ? <>
+                        <Title>Betting table</Title>
+                        <BettingTable data={data}/>
+                    </>
+                    :<Title>No live games</Title>
+                }
+                
             </>}
     </StyledMain>
 
