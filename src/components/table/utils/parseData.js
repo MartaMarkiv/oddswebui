@@ -35,16 +35,18 @@ export const parseData = (data) => {
                     });
                     const currentBet = sportsbook[0].bets.find(bet => bet.name === betType);
                     if (currentBet1) {
+                        const homeBets = [];
+                        currentBet.type[1] && homeBets.push({value: currentBet.type[1], status: 'secondary'});
+                        currentBet.odds[1] && homeBets.push({value: currentBet.odds[1]});
+                        
+                        const awayBets = [];
+                        currentBet.type[0] && awayBets.push({value: currentBet.type[0], status: 'secondary'});
+                        currentBet.odds[0] && awayBets.push({value: currentBet.odds[0]});
+
                         sportsbookAcc[currentSportBook.sportsbook] = {
                             bets: {
-                                home: [
-                                    ...(currentBet.type[1] && [{value: currentBet.type[1], status: 'secondary'}]),
-                                    ...(currentBet.odds[1] && [{value: currentBet.odds[1]}]),
-                                ],
-                                away: [
-                                    ...(currentBet.type[0] && [{value: currentBet.type[0], status: 'secondary'}]),
-                                    ...(currentBet.odds[0] && [{value: currentBet.odds[0]}]),
-                                ]
+                                home: homeBets,
+                                away: awayBets
                             }
                         }
                     }
