@@ -4,6 +4,7 @@ import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
 import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
 import {Switcher} from "../../Switcher";
+import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
 import {DRAWER_WIDTH, FOOTBALL_OPPORTUNITY} from "../../../constants";
 
@@ -30,7 +31,7 @@ export const OpportunityDrawer = () => {
             console.log("Opportunity socket connection error");
         };
     }
-    
+
     useEffect(() => {
         connectSocket();
     }, []);
@@ -78,7 +79,9 @@ export const OpportunityDrawer = () => {
                 visible={visible}
             >
                 {
-                    opportunityData && <OpportunityList opportunities={opportunityData}/>
+                    opportunityData ?
+                        <OpportunityList opportunities={opportunityData}/> :
+                        <SubTitle>No opportunity right now</SubTitle>
                 }
             </DrawerStyled>
         </>

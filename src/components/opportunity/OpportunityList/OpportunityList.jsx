@@ -122,8 +122,6 @@ const opportunityMapper = data => {
 }
 
 const dataMock = opportunityMapper(serverData[0].games);
-console.log("dataMock");
-console.log(dataMock);
 
 export const OpportunityList = ({opportunities}) => {
 
@@ -148,8 +146,6 @@ export const OpportunityList = ({opportunities}) => {
             }, 200)
         });
         const parsedData = parser(opportunities.length && opportunities[0].games);
-        // console.log("Parsed data");
-        // console.log(parsedData);
         setData(parsedData);
         setPending(false);
     }
