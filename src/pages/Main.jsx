@@ -10,7 +10,6 @@ import {SubTitle} from "../components/typography/SubTitle/SubTitle";
 import {FOOTBALL_TABLE, BASKETBALL_TABLE} from "../constants";
 
 const client = new WebSocket(FOOTBALL_TABLE);
-const clientBasketball = new WebSocket(BASKETBALL_TABLE);
 
 const serverData = [{
     "sport": "basketball",
@@ -491,22 +490,7 @@ export const Main = () => {
         };
 
         client.onerror = () => {
-            console.log("Socket  clientBasketball connection error");
-        };
-
-        clientBasketball.onopen = () => {
-            console.log("WebSocket  clientBasketball Client Connected");
-        };
-
-        clientBasketball.onmessage = (event) => {
-            const json = JSON.parse(event.data);
-            console.log("Data received from server:");
-            console.log(json);
-            const collection = parseData(json);
-            setData(collection);
-            console.log("Table data:");
-            console.log(collection);
-            setPending(false);
+            console.log("Socket  client connection error");
         };
     }
 
