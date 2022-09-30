@@ -47,7 +47,6 @@ export const OpportunityDrawer = () => {
     };
 
     const switchHandler = (value) => {
-        console.log("switchHandler");
         console.log(value);
     }
 

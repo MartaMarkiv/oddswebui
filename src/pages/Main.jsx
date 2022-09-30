@@ -490,7 +490,7 @@ export const Main = () => {
         };
 
         client.onerror = () => {
-            console.log("Socket  client connection error");
+            console.log("Socket connection error");
         };
     }
 
