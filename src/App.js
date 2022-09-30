@@ -1,5 +1,5 @@
 import {Main} from "./pages/Main";
-import {Route, BrowserRouter, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import {Header} from "./components/Header";
 import styled from "styled-components";
 import {light, dark} from "./Theme.styled";
@@ -42,7 +42,6 @@ function App() {
     useEffect(() => {
         if (localStorage.getItem('theme') !== currentTheme) {
             localStorage.setItem('theme', currentTheme);
-            console.log('save');
         }
     }, [currentTheme]);
 

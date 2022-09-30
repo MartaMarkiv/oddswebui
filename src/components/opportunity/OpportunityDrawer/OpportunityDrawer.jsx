@@ -1,14 +1,40 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Space} from "antd";
+import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
 import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
 import {Switcher} from "../../Switcher";
+import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
-import {DRAWER_WIDTH} from "../../../constants";
+import {DRAWER_WIDTH, FOOTBALL_OPPORTUNITY} from "../../../constants";
+
+const client = new WebSocket(FOOTBALL_OPPORTUNITY);
 
 export const OpportunityDrawer = () => {
     const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(false);
+    const [opportunityData, setOpportunityData] = useState(null);
+
+    const connectSocket = () => {
+        client.onopen = () => {
+            console.log("Opportunity WebSocket Client Connected");
+        };
+
+        client.onmessage = (event) => {
+            const json = JSON.parse(event.data);
+            console.log("Opportunity data from server:");
+            console.log(json);
+            setOpportunityData(json);
+        };
+
+        client.onerror = () => {
+            console.log("Opportunity socket connection error");
+        };
+    }
+
+    useEffect(() => {
+        connectSocket();
+    }, []);
 
     const showDrawer = () => {
         setDrawerOpened(true)
@@ -51,7 +77,11 @@ export const OpportunityDrawer = () => {
                 onClose={onClose}
                 visible={visible}
             >
-                <OpportunityList />
+                {
+                    opportunityData ?
+                        <OpportunityList opportunities={opportunityData}/> :
+                        <SubTitle>No opportunity right now</SubTitle>
+                }
             </DrawerStyled>
         </>
     )

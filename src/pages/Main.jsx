@@ -6,9 +6,10 @@ import {tableDataMapper, parseData} from "../components/table/utils";
 import {v4 as uuidv4} from 'uuid';
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
-import {SOCKET_URL} from "../constants";
+import {SubTitle} from "../components/typography/SubTitle/SubTitle";
+import {FOOTBALL_TABLE, BASKETBALL_TABLE} from "../constants";
 
-const client = new WebSocket(SOCKET_URL);
+const client = new WebSocket(FOOTBALL_TABLE);
 
 const serverData = [{
     "sport": "basketball",
@@ -463,7 +464,7 @@ export const Main = () => {
 
         return new Promise(() => {
             setTimeout(() => {
-                setData(tableDataMapper(mockData));
+                tableDataMapper(mockData);
                 setPending(false);
                 setFetched(true);
             }, 300);
@@ -511,7 +512,7 @@ export const Main = () => {
                         <Title>Betting table</Title>
                         <BettingTable data={data}/>
                     </>
-                    :<Title>No live games</Title>
+                    :<SubTitle>No live games</SubTitle>
                 }
                 
             </>}

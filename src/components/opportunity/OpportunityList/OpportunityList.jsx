@@ -3,7 +3,8 @@ import { v4 as uuidv4 } from 'uuid';
 import {List, ListItem, OpportunityListContainer} from "./styles";
 import {PendingScreen} from "../../PendingScreen";
 import {OpportunityItem} from "../OpportunityItem";
-import camelCase from 'lodash.camelcase'
+import {parser} from "../utils";
+import camelCase from 'lodash.camelcase';
 
 const serverData = [{
     "sport": "basketball",
@@ -122,14 +123,14 @@ const opportunityMapper = data => {
 
 const dataMock = opportunityMapper(serverData[0].games);
 
-export const OpportunityList = () => {
+export const OpportunityList = ({opportunities}) => {
+
     const [data, setData] = useState([]);
     const [pending, setPending] = useState(false);
 
     const [selectedItem, setSelectedItem] = useState();
 
     useEffect(() => {
-        console.log('Select: ', selectedItem);
         if(selectedItem) {
             console.log('Select: ', selectedItem);
         }
@@ -144,8 +145,9 @@ export const OpportunityList = () => {
                 setPending(false);
             }, 200)
         });
-
-        setData(res)
+        const parsedData = parser(opportunities.length && opportunities[0].games);
+        setData(parsedData);
+        setPending(false);
     }
 
     useEffect(() => {
