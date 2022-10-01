@@ -58,4 +58,11 @@ spec:
               {{- end }}
           {{- end }}
     {{- end }}
+  {{- if .Values.ingress.defaultBackend }}
+  defaultBackend:
+    service:
+      name: {{ $fullName }}
+      port:
+        number: 3000
+  {{- end }}
 {{- end }}

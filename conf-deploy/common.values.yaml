@@ -10,11 +10,10 @@ service:
 basicAuth:
   authString: user:$apr1$av9fesol$zxfoN9w1IJg5NBULPWnVz/
 
-# command: 
-#   - /bin/bash 
-#   - -c
-# args:
-#   - exec nginx -g 'daemon off;'
+command: 
+  - '"/bin/bash", "-c"'
+args:
+  - exec nginx -g 'daemon off;'
 
 ingress:
   enabled: true
@@ -33,9 +32,7 @@ ingress:
     - hosts:
         - oddsbender.com
       secretName: oddsbender-tls
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  defaultBackend: true
 
 autoscaling:
   enabled: false
