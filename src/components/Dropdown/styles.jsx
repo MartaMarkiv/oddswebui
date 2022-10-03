@@ -20,6 +20,7 @@ const DropdownTrigger = styled(Button)`
 
 const Count = styled.div`
   width: 20px;
+  min-width: 20px;
   height: 20px;
   border-radius: 100%;
   font-weight: 500;
