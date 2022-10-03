@@ -1,5 +1,3 @@
-import {v4 as uuidv4} from 'uuid';
-
 export const parseData = (data) => {
     if (!data.length) {
         return false;

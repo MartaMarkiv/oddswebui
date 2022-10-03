@@ -36,8 +36,9 @@ export const BettingTable = ({ data, selectedRow }) => {
     return <StyledBettingTable>
         <FilterPanel />
         <Table
+            className="table-layout"
             columns={columns}
-            rowClassName={(record) => record.id === selectedRow ? 'active-row' : '' }
+            rowClassName={(record) => record.id === selectedRow ? 'data-row active-row' : 'data-row'}
             dataSource={data}
             sticky={true}
             rowKey="id"
