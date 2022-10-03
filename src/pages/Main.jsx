@@ -454,7 +454,8 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
-export const Main = () => {
+export const Main = ({selectedKey}) => {
+    console.log("selectedKey: ", selectedKey);
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
     const [fetched, setFetched] = useState(false);
@@ -510,7 +511,7 @@ export const Main = () => {
                     data
                     ? <>
                         <Title>Betting table</Title>
-                        <BettingTable data={data}/>
+                        <BettingTable data={data} selectedRow={selectedKey}/>
                     </>
                     :<SubTitle>No live games</SubTitle>
                 }

@@ -10,7 +10,7 @@ import {DRAWER_WIDTH, FOOTBALL_OPPORTUNITY} from "../../../constants";
 
 const client = new WebSocket(FOOTBALL_OPPORTUNITY);
 
-export const OpportunityDrawer = () => {
+export const OpportunityDrawer = ({changeSelectedKey, selectedKey}) => {
     const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(false);
     const [opportunityData, setOpportunityData] = useState(null);
@@ -79,7 +79,11 @@ export const OpportunityDrawer = () => {
             >
                 {
                     opportunityData ?
-                        <OpportunityList opportunities={opportunityData}/> :
+                        <OpportunityList
+                            opportunities={opportunityData}
+                            selectOpportunity={changeSelectedKey}
+                            selectedOpportunity={selectedKey}
+                        /> :
                         <SubTitle>No opportunity right now</SubTitle>
                 }
             </DrawerStyled>

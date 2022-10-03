@@ -17,7 +17,7 @@ export const parseData = (data) => {
 
         betTypes.forEach((betType, index) => {
             gamesAcc.push({
-                id: `${uuidv4()}${((index+1) % betTypes.length) === 1 ? '|first' : ''}`,
+                id: game.id,
                 game: game.game,
                 type: game.type,
                 time: game.time,

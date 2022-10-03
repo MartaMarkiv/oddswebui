@@ -7,7 +7,7 @@ import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
 
-export const BettingTable = ({ data }) => {
+export const BettingTable = ({ data, selectedRow }) => {
 
     const betRenderer = (data) => {
         return <BetBox data={data} />
@@ -37,6 +37,7 @@ export const BettingTable = ({ data }) => {
         <FilterPanel />
         <Table
             columns={columns}
+            rowClassName={(record) => record.id === selectedRow ? 'active-row' : '' }
             dataSource={data}
             sticky={true}
             rowKey="id"

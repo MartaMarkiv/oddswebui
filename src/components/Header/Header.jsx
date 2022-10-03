@@ -4,7 +4,7 @@ import {ThemeSwitcher} from "../ThemeSwitcher";
 import {OpportunityDrawer} from "../opportunity";
 import {UserAvatar} from "../UserAvatar/UserAvatar";
 
-export const Header = () => {
+export const Header = ({changeSelectedKey, selectedKey}) => {
     return (
         <HeaderStyled>
             <LogoLink href="/">
@@ -13,7 +13,10 @@ export const Header = () => {
             <HeaderControlPanel>
                 <Search />
                 <ThemeSwitcher />
-                <OpportunityDrawer />
+                <OpportunityDrawer
+                    changeSelectedKey={changeSelectedKey}
+                    selectedKey={selectedKey}
+                />
                 <UserAvatar />
             </HeaderControlPanel>
         </HeaderStyled>

@@ -123,7 +123,7 @@ const opportunityMapper = data => {
 
 const dataMock = opportunityMapper(serverData[0].games);
 
-export const OpportunityList = ({opportunities}) => {
+export const OpportunityList = ({opportunities, selectOpportunity, selectedOpportunity}) => {
 
     const [data, setData] = useState([]);
     const [pending, setPending] = useState(false);
@@ -150,6 +150,11 @@ export const OpportunityList = ({opportunities}) => {
         setPending(false);
     }
 
+    const selectItem = (value) => {
+        console.log("setSelectedItem ", value);
+        setSelectedItem(value);
+    }
+
     useEffect(() => {
         loadData();
     }, [])
@@ -162,7 +167,7 @@ export const OpportunityList = ({opportunities}) => {
             {
                 data?.map((item) => {
                     return <ListItem key={item.id}>
-                        <OpportunityItem data={item} selected={selectedItem} onSelect={setSelectedItem} />
+                        <OpportunityItem data={item} selected={selectedOpportunity} onSelect={selectOpportunity} />
                     </ListItem>
                 })
             }
