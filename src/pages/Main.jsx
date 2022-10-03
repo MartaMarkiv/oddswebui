@@ -7,9 +7,9 @@ import {v4 as uuidv4} from 'uuid';
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-import {FOOTBALL_TABLE, BASKETBALL_TABLE} from "../constants";
+import {TABLE_DATA} from "../constants";
 
-const client = new WebSocket(FOOTBALL_TABLE);
+const client = new WebSocket(TABLE_DATA);
 
 const serverData = [{
     "sport": "basketball",
@@ -485,8 +485,6 @@ export const Main = ({selectedKey}) => {
             console.log(json);
             const collection = parseData(json);
             setData(collection);
-            console.log("Table data:");
-            console.log(collection);
             setPending(false);
         };
 
