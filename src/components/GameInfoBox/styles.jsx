@@ -10,6 +10,13 @@ const GameInfoBoxStyled = styled.div`
   flex-direction: column;
 `;
 
+const GameName = styled.div`
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  color: ${({theme}) => theme.colors.textSecondary};
+`;
+
 const TimeGroup = styled.div`
   margin-top: 26px;
   margin-bottom: 12px;
@@ -28,6 +35,7 @@ const Text = styled(TextSecondary)`
 
 export {
     GameInfoBoxStyled,
+    GameName,
     TimeGroup,
     TextSecondary,
     Text
