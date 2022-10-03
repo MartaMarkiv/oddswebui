@@ -7,13 +7,9 @@ export const parseData = (data) => {
     const sportsData = data[0].games;
   
     const mockData = sportsData.reduce((gamesAcc, game) => {
-        const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => {
-            const betsList = [];
-            sportsbook.forEach((book, index) => {
-                betsList.push(...(book.bets.map(bet => bet.name)));
-            });
-            return betsList;
-        }))];
+        const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => 
+            sportsbook.bets.map(bet => bet.name)
+            ))];
 
         betTypes.forEach((betType, index) => {
             gamesAcc.push({
@@ -24,17 +20,8 @@ export const parseData = (data) => {
                 timeout: game.timeout,
                 betType,
                 books: game.sportsbooks.reduce((sportsbookAcc, sportsbook) => {
-                    let currentBet1 = {};
-                    let currentSportBook = {};
-                    sportsbook.forEach(sportBookItem => {
-                        currentBet1 = sportBookItem.bets.find(bet => bet.name === betType);
-                        if (currentBet1) {
-                            currentSportBook = sportBookItem;
-                            return;
-                        }
-                    });
-                    const currentBet = sportsbook[0].bets.find(bet => bet.name === betType);
-                    if (currentBet1) {
+                    const currentBet = sportsbook.bets.find(bet => bet.name === betType);
+                    if (currentBet) {
                         const homeBets = [];
                         currentBet.type[1] && homeBets.push({value: currentBet.type[1], status: 'secondary'});
                         currentBet.odds[1] && homeBets.push({value: currentBet.odds[1]});
@@ -43,7 +30,7 @@ export const parseData = (data) => {
                         currentBet.type[0] && awayBets.push({value: currentBet.type[0], status: 'secondary'});
                         currentBet.odds[0] && awayBets.push({value: currentBet.odds[0]});
 
-                        sportsbookAcc[currentSportBook.sportsbook] = {
+                        sportsbookAcc[sportsbook.sportsbook] = {
                             bets: {
                                 home: homeBets,
                                 away: awayBets

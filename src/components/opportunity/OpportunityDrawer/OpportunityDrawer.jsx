@@ -6,9 +6,9 @@ import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
 import {Switcher} from "../../Switcher";
 import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
-import {DRAWER_WIDTH, FOOTBALL_OPPORTUNITY} from "../../../constants";
+import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 
-const client = new WebSocket(FOOTBALL_OPPORTUNITY);
+const client = new WebSocket(OPPORTUNITY);
 
 export const OpportunityDrawer = () => {
     const setDrawerOpened = useSetDrawerOpened();
