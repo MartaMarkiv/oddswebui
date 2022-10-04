@@ -3,12 +3,11 @@ import {v4 as uuidv4} from 'uuid';
 
 export const parser = data => {
     return data.map(({id, game, timeout, type, opportunity}) => {
-        console.log("game: ", game);
         const [awayTeam, homeTeam] = game.split('@'); // Away @ Home
 
         const opportunities = opportunity.reduce((acc, {bets}) => {
-            const [away, home] = bets.odds;
-            const [sportsBookAway, sportsBookHome] = bets.sportsbooks;
+            const [away, home] = bets.odds.map(item => item.trim());
+            const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
             const [typeAway, typeHome] = bets.type;
             const [probabilityAway, probabilityHome] = bets.probability;
 
@@ -16,7 +15,7 @@ export const parser = data => {
 
             if(!acc[key]) {
                 acc[key] = {
-                    id: game,
+                    id: `${game} - ${bets.name}`,
                     items: []
                 }
             }

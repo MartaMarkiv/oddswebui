@@ -31,17 +31,31 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
         setShowRowCount(isOpened ? INITIAL_ROW_COUNT : Object.keys(data.opportunities).length)
     }
 
-    const groupSelectHandler = useCallback((dataId, id) => {
-        if (selected === id) {
+    const groupSelectHandler = useCallback(({id, items}) => {
+        if (selected.id === id) {
             onSelect(null);
         } else {
-            onSelect(id)
+            const [homeItem, awayItem] = items;
+            const {sportBook: homeBook, value: homeValue} = homeItem;
+            const {sportBook: awayBook, value: awayValue} = awayItem;
+
+            onSelect({
+                id,
+                home: {
+                    value: homeValue,
+                    book: homeBook
+                },
+                away: {
+                    value: awayValue,
+                    book: awayBook
+                }
+            });
         }
     }, [selected, onSelect]);
 
     const keys = data.opportunities ? Object.keys(data.opportunities).map(key => data.opportunities[key].id) : []
 
-    return <OpportunityItemContainer selected={keys.includes(selected)}>
+    return <OpportunityItemContainer selected={keys.includes(selected.id)}>
         <Header>
             <Teams>
                 <TeamName>
@@ -83,8 +97,8 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                     index > 1 && <Divider />
                                 }
 
-                                <Group selected={selected === data.opportunities[key].id}
-                                       onClick={(event) => groupSelectHandler(data.id, data.opportunities[key].id)}>
+                                <Group selected={selected.id === data.opportunities[key].id}
+                                       onClick={(event) => groupSelectHandler(data.opportunities[key])}>
                                     {
                                         data.opportunities[key].items.map((opportunity, i) =>
                                             <GridRow key={i}>

@@ -22,8 +22,8 @@ export const OpportunityDrawer = ({changeSelectedKey, selectedKey}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log("Opportunity data from server:");
-            console.log(json);
+            // console.log("Opportunity data from server:");
+            // console.log(json);
             setOpportunityData(json);
         };
 

@@ -455,7 +455,7 @@ const StyledMain = styled.div`
 `;
 
 export const Main = ({selectedKey}) => {
-    console.log("selectedKey: ", selectedKey);
+    // console.log("selectedKey: ", selectedKey);
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
     const [fetched, setFetched] = useState(false);
@@ -481,10 +481,12 @@ export const Main = ({selectedKey}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log("Data received from server:");
-            console.log(json);
+            // console.log("Data received from server:");
+            // console.log(json);
             const collection = parseData(json);
             setData(collection);
+            // console.log("Table data");
+            // console.log(collection);
             setPending(false);
         };
 

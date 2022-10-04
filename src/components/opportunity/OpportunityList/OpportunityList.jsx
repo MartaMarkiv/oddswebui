@@ -146,6 +146,8 @@ export const OpportunityList = ({opportunities, selectOpportunity, selectedOppor
             }, 200)
         });
         const parsedData = parser(opportunities.length && opportunities[0].games);
+        // console.log("Opportunity table:");
+        // console.log(parsedData);
         setData(parsedData);
         setPending(false);
     }

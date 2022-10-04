@@ -11,7 +11,7 @@ export const parseData = (data) => {
 
         betTypes.forEach((betType, index) => {
             gamesAcc.push({
-                id: game.id,
+                id: `${game.id} - ${betType}`,
                 game: game.game,
                 type: game.type,
                 time: game.time,

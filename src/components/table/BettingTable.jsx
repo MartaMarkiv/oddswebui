@@ -38,7 +38,12 @@ export const BettingTable = ({ data, selectedRow }) => {
         <Table
             className="table-layout"
             columns={columns}
-            rowClassName={(record) => record.id === selectedRow ? 'data-row active-row' : 'data-row'}
+            rowClassName={(record) => {
+                if(record.id === selectedRow.id) {
+                    console.log(selectedRow.id);
+                }
+                return record.id === selectedRow.id ? 'data-row active-row' : 'data-row'}
+            }
             dataSource={data}
             sticky={true}
             rowKey="id"
