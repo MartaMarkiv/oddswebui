@@ -10,7 +10,7 @@ import {FilterPanel} from "./components/FilterPanel";
 export const BettingTable = ({ data, selectedRow }) => {
 
     const betRenderer = (data) => {
-        return <BetBox data={data} />
+        return <BetBox data={data} selected={selectedRow} />
     }
 
     const gameInfoRenderer = (_, data) => {
@@ -39,10 +39,10 @@ export const BettingTable = ({ data, selectedRow }) => {
             className="table-layout"
             columns={columns}
             rowClassName={(record) => {
-                if(record.id === selectedRow.id) {
+                if(selectedRow && record.id === selectedRow.id) {
                     console.log(selectedRow.id);
                 }
-                return record.id === selectedRow.id ? 'data-row active-row' : 'data-row'}
+                return selectedRow && record.id === selectedRow.id ? 'data-row active-row' : 'data-row'}
             }
             dataSource={data}
             sticky={true}

@@ -32,22 +32,24 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
     }
 
     const groupSelectHandler = useCallback(({id, items}) => {
-        if (selected.id === id) {
+        if (selected === id) {
             onSelect(null);
         } else {
             const [homeItem, awayItem] = items;
-            const {sportBook: homeBook, value: homeValue} = homeItem;
-            const {sportBook: awayBook, value: awayValue} = awayItem;
+            const {sportBook: homeBook, value: homeValue, name: homeBetName} = homeItem;
+            const {sportBook: awayBook, value: awayValue, name: awayBetName} = awayItem;
 
             onSelect({
                 id,
                 home: {
                     value: homeValue,
-                    book: homeBook
+                    book: homeBook,
+                    betName: homeBetName
                 },
                 away: {
                     value: awayValue,
-                    book: awayBook
+                    book: awayBook,
+                    betName: awayBetName
                 }
             });
         }
@@ -55,7 +57,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
     const keys = data.opportunities ? Object.keys(data.opportunities).map(key => data.opportunities[key].id) : []
 
-    return <OpportunityItemContainer selected={keys.includes(selected.id)}>
+    return <OpportunityItemContainer selected={keys.includes(selected)}>
         <Header>
             <Teams>
                 <TeamName>
@@ -97,7 +99,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                     index > 1 && <Divider />
                                 }
 
-                                <Group selected={selected.id === data.opportunities[key].id}
+                                <Group selected={selected === data.opportunities[key].id}
                                        onClick={(event) => groupSelectHandler(data.opportunities[key])}>
                                     {
                                         data.opportunities[key].items.map((opportunity, i) =>

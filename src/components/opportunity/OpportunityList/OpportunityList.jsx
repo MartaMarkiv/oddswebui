@@ -161,15 +161,21 @@ export const OpportunityList = ({opportunities, selectOpportunity, selectedOppor
         loadData();
     }, [])
 
+    console.log(data);
+
     return <OpportunityListContainer>
         {
             pending && <PendingScreen position="absolute" />
         }
         <List>
             {
-                data?.map((item) => {
+                data && data.map((item) => {
                     return <ListItem key={item.id}>
-                        <OpportunityItem data={item} selected={selectedOpportunity} onSelect={selectOpportunity} />
+                        <OpportunityItem
+                            data={item}
+                            selected={selectedOpportunity ? selectedOpportunity.id : null}
+                            onSelect={selectOpportunity}
+                        />
                     </ListItem>
                 })
             }

@@ -485,8 +485,8 @@ export const Main = ({selectedKey}) => {
             // console.log(json);
             const collection = parseData(json);
             setData(collection);
-            // console.log("Table data");
-            // console.log(collection);
+            console.log("Table data");
+            console.log(collection);
             setPending(false);
         };
 

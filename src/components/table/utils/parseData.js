@@ -18,15 +18,38 @@ export const parseData = (data) => {
                 timeout: game.timeout,
                 betType,
                 books: game.sportsbooks.reduce((sportsbookAcc, sportsbook) => {
+                    const {sportsbook: book} = sportsbook;
                     const currentBet = sportsbook.bets.find(bet => bet.name === betType);
                     if (currentBet) {
                         const homeBets = [];
-                        currentBet.type[1] && homeBets.push({value: currentBet.type[1], status: 'secondary'});
-                        currentBet.odds[1] && homeBets.push({value: currentBet.odds[1]});
+                        currentBet.type[1] && homeBets.push({
+                            value: currentBet.type[1].trim(),
+                            status: 'secondary',
+                            key: 'home',
+                            book: book.trim(),
+                            betName: currentBet.name
+                        });
+                        currentBet.odds[1] && homeBets.push({
+                            value: currentBet.odds[1].trim(),
+                            key: 'home',
+                            book: book.trim(),
+                            betName: currentBet.name
+                        });
                         
                         const awayBets = [];
-                        currentBet.type[0] && awayBets.push({value: currentBet.type[0], status: 'secondary'});
-                        currentBet.odds[0] && awayBets.push({value: currentBet.odds[0]});
+                        currentBet.type[0] && awayBets.push({
+                            value: currentBet.type[0].trim(),
+                            status: 'secondary',
+                            key: 'away',
+                            book: book.trim(),
+                            betName: currentBet.name
+                        });
+                        currentBet.odds[0] && awayBets.push({
+                            value: currentBet.odds[0].trim(),
+                            key: 'away',
+                            book: book.trim(),
+                            betName: currentBet.name
+                        });
 
                         sportsbookAcc[sportsbook.sportsbook] = {
                             bets: {
