@@ -78,7 +78,7 @@ export const OpportunityDrawer = ({
                     </Space>
                 }
                 onClose={onClose}
-                visible={visible}
+                open={visible}
             >
                 {
                     collection ?

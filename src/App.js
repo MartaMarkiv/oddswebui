@@ -48,7 +48,6 @@ function App() {
     }, [currentTheme]);
 
     const changeSelectedKey = value => {
-        console.log("changeSelectedKey: ", value);
         setSelectedKey(value);
     }
 
