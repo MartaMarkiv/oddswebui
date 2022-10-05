@@ -46,15 +46,15 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
             <Teams>
                 <TeamName>
                     <TeamBadge>
-                        <HomeIcon/>
-                    </TeamBadge>
-                    {data.homeTeam}
-                </TeamName>
-                <TeamName>
-                    <TeamBadge>
                         <AwayIcon/>
                     </TeamBadge>
                     {data.awayTeam}
+                </TeamName>
+                <TeamName>
+                    <TeamBadge>
+                        <HomeIcon/>
+                    </TeamBadge>
+                    {data.homeTeam}
                 </TeamName>
             </Teams>
             <HeaderRightContent>
