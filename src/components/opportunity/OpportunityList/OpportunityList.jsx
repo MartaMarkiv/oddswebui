@@ -123,53 +123,16 @@ const opportunityMapper = data => {
 
 const dataMock = opportunityMapper(serverData[0].games);
 
-export const OpportunityList = ({opportunities, selectOpportunity, selectedOpportunity}) => {
-
-    const [data, setData] = useState([]);
-    const [pending, setPending] = useState(false);
-
-    const [selectedItem, setSelectedItem] = useState();
-
-    useEffect(() => {
-        if(selectedItem) {
-            console.log('Select: ', selectedItem);
-        }
-    }, [selectedItem]);
-
-
-    const loadData = async () => {
-        setPending(true);
-        const res = await new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(dataMock)
-                setPending(false);
-            }, 200)
-        });
-        const parsedData = parser(opportunities.length && opportunities[0].games);
-        // console.log("Opportunity table:");
-        // console.log(parsedData);
-        setData(parsedData);
-        setPending(false);
-    }
-
-    const selectItem = (value) => {
-        console.log("setSelectedItem ", value);
-        setSelectedItem(value);
-    }
-
-    useEffect(() => {
-        loadData();
-    }, [])
-
-    console.log(data);
+export const OpportunityList = ({
+    opportunities,
+    selectOpportunity,
+    selectedOpportunity
+}) => {
 
     return <OpportunityListContainer>
-        {
-            pending && <PendingScreen position="absolute" />
-        }
         <List>
             {
-                data && data.map((item) => {
+                opportunities && opportunities.map((item) => {
                     return <ListItem key={item.id}>
                         <OpportunityItem
                             data={item}

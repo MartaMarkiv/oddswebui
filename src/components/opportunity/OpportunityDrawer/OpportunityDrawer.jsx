@@ -7,13 +7,20 @@ import {Switcher} from "../../Switcher";
 import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
 import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
+import {parser} from "../utils";
+
 
 const client = new WebSocket(OPPORTUNITY);
 
-export const OpportunityDrawer = ({changeSelectedKey, selectedKey}) => {
+export const OpportunityDrawer = ({
+    changeSelectedKey,
+    selectedKey,
+    setCollection,
+    collection
+}) => {
+
     const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(false);
-    const [opportunityData, setOpportunityData] = useState(null);
 
     const connectSocket = () => {
         client.onopen = () => {
@@ -24,7 +31,10 @@ export const OpportunityDrawer = ({changeSelectedKey, selectedKey}) => {
             const json = JSON.parse(event.data);
             // console.log("Opportunity data from server:");
             // console.log(json);
-            setOpportunityData(json);
+            const parsedData = json.length ? parser(json[0].games) : false;
+            setCollection(parsedData);
+            console.log("Opportunity:");
+            console.log(parsedData);
         };
 
         client.onerror = () => {
@@ -78,9 +88,9 @@ export const OpportunityDrawer = ({changeSelectedKey, selectedKey}) => {
                 visible={visible}
             >
                 {
-                    opportunityData ?
+                    collection ?
                         <OpportunityList
-                            opportunities={opportunityData}
+                            opportunities={collection}
                             selectOpportunity={changeSelectedKey}
                             selectedOpportunity={selectedKey}
                         /> :

@@ -37,6 +37,7 @@ function App() {
     const initialTheme = localStorage.getItem('theme') || 'light';
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
     const [selectedKey, setSelectedKey] = useState(null);
+    const [opportunities, setOpportunities] = useState(null);
 
     const theme = themesMap[currentTheme];
 
@@ -59,13 +60,15 @@ function App() {
                         <Header
                             changeSelectedKey={changeSelectedKey}
                             selectedKey={selectedKey}
+                            opportunities={opportunities}
+                            setOpportunities={setOpportunities}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
                                 <Routes>
                                     <Route path="/" element=
                                     {
-                                        <Main selectedKey={selectedKey}/>
+                                        <Main selectedKey={selectedKey} opportunities={opportunities}/>
                                     }/>
                                 </Routes>
                             </QueryParamProvider>

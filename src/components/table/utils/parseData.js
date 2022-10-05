@@ -27,13 +27,15 @@ export const parseData = (data) => {
                             status: 'secondary',
                             key: 'home',
                             book: book.trim(),
-                            betName: currentBet.name
+                            betName: currentBet.name,
+                            game: game.game
                         });
                         currentBet.odds[1] && homeBets.push({
                             value: currentBet.odds[1].trim(),
                             key: 'home',
                             book: book.trim(),
-                            betName: currentBet.name
+                            betName: currentBet.name,
+                            game: game.game
                         });
                         
                         const awayBets = [];
@@ -42,13 +44,15 @@ export const parseData = (data) => {
                             status: 'secondary',
                             key: 'away',
                             book: book.trim(),
-                            betName: currentBet.name
+                            betName: currentBet.name,
+                            game: game.game
                         });
                         currentBet.odds[0] && awayBets.push({
                             value: currentBet.odds[0].trim(),
                             key: 'away',
                             book: book.trim(),
-                            betName: currentBet.name
+                            betName: currentBet.name,
+                            game: game.game
                         });
 
                         sportsbookAcc[sportsbook.sportsbook] = {

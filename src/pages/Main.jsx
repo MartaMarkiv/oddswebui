@@ -454,7 +454,7 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
-export const Main = ({selectedKey}) => {
+export const Main = ({selectedKey, opportunities}) => {
     // console.log("selectedKey: ", selectedKey);
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
@@ -485,8 +485,8 @@ export const Main = ({selectedKey}) => {
             // console.log(json);
             const collection = parseData(json);
             setData(collection);
-            console.log("Table data");
-            console.log(collection);
+            // console.log("Table data");
+            // console.log(collection);
             setPending(false);
         };
 
@@ -511,7 +511,11 @@ export const Main = ({selectedKey}) => {
                     data
                     ? <>
                         <Title>Betting table</Title>
-                        <BettingTable data={data} selectedRow={selectedKey}/>
+                        <BettingTable
+                            data={data}
+                            selectedRow={selectedKey}
+                            opportunities={opportunities}
+                        />
                     </>
                     :<SubTitle>No live games</SubTitle>
                 }

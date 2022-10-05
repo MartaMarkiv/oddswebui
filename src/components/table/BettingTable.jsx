@@ -7,10 +7,10 @@ import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
 
-export const BettingTable = ({ data, selectedRow }) => {
+export const BettingTable = ({ data, selectedRow, opportunities }) => {
 
     const betRenderer = (data) => {
-        return <BetBox data={data} selected={selectedRow} />
+        return <BetBox data={data} selected={selectedRow} opportunities={opportunities} />
     }
 
     const gameInfoRenderer = (_, data) => {
@@ -38,12 +38,6 @@ export const BettingTable = ({ data, selectedRow }) => {
         <Table
             className="table-layout"
             columns={columns}
-            rowClassName={(record) => {
-                if(selectedRow && record.id === selectedRow.id) {
-                    console.log(selectedRow.id);
-                }
-                return selectedRow && record.id === selectedRow.id ? 'data-row active-row' : 'data-row'}
-            }
             dataSource={data}
             sticky={true}
             rowKey="id"
