@@ -4,8 +4,11 @@ import {CellBoxStyled} from "./styles";
 
 export const BetBox = ({data}) => {
     return <Row justify="center">
-        {data?.map(d => {
-            return <div key={uuidv4()}><CellBoxStyled status={d.status || 'default'}>{d.value}</CellBoxStyled></div>
-        })}
+        { data.length ?
+            data.map(d => {
+                return <div key={uuidv4()}><CellBoxStyled status={d.status || 'default'}>{d.value}</CellBoxStyled></div>
+            }) :
+            <div key={uuidv4()}><CellBoxStyled status={'default'}>-</CellBoxStyled></div>
+        }
     </Row>
 }
