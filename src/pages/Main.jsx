@@ -15,7 +15,6 @@ const StyledMain = styled.div`
 `;
 
 export const Main = ({opportunities}) => {
-    // console.log("selectedKey: ", selectedKey);
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
 
