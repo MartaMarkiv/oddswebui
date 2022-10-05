@@ -23,18 +23,11 @@ export const OpportunityDrawer = ({
     const [visible, setVisible] = useState(false);
 
     const connectSocket = () => {
-        client.onopen = () => {
-            console.log("Opportunity WebSocket Client Connected");
-        };
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            // console.log("Opportunity data from server:");
-            // console.log(json);
             const parsedData = json.length ? parser(json[0].games) : false;
             setCollection(parsedData);
-            console.log("Opportunity:");
-            console.log(parsedData);
         };
 
         client.onerror = () => {
