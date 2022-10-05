@@ -16,14 +16,9 @@ export const OpportunityDrawer = () => {
     const [opportunityData, setOpportunityData] = useState(null);
 
     const connectSocket = () => {
-        client.onopen = () => {
-            console.log("Opportunity WebSocket Client Connected");
-        };
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log("Opportunity data from server:");
-            console.log(json);
             setOpportunityData(json);
         };
 

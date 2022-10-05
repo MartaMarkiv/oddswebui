@@ -21,14 +21,8 @@ export const Main = () => {
     const loadDataFromApi = async () => {
         setPending(true);
 
-        client.onopen = () => {
-            console.log("WebSocket Client Connected");
-        };
-
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log("Data received from server:");
-            console.log(json);
             const collection = parseData(json);
             setData(collection);
             setPending(false);
