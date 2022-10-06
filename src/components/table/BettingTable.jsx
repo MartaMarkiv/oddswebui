@@ -34,7 +34,7 @@ export const BettingTable = ({ data }) => {
     };
 
     return <StyledBettingTable>
-        <FilterPanel />
+        {/* <FilterPanel /> */}
         <Table
             columns={columns}
             dataSource={data}

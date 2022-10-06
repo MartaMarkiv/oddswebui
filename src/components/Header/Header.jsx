@@ -11,10 +11,10 @@ export const Header = () => {
                 <LogoImage />
             </LogoLink>
             <HeaderControlPanel>
-                <Search />
+                {/* <Search /> */}
                 <ThemeSwitcher />
                 <OpportunityDrawer />
-                <UserAvatar />
+                {/* <UserAvatar /> */}
             </HeaderControlPanel>
         </HeaderStyled>
     )
