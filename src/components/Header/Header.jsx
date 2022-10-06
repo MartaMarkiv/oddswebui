@@ -16,7 +16,7 @@ export const Header = ({
                 <LogoImage />
             </LogoLink>
             <HeaderControlPanel>
-                <Search />
+                {/* <Search /> */}
                 <ThemeSwitcher />
                 <OpportunityDrawer
                     changeSelectedKey={changeSelectedKey}
@@ -24,7 +24,7 @@ export const Header = ({
                     collection={opportunities}
                     setCollection={setOpportunities}
                 />
-                <UserAvatar />
+                {/* <UserAvatar /> */}
             </HeaderControlPanel>
         </HeaderStyled>
     )
