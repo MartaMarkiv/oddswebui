@@ -1,5 +1,3 @@
-import {v4 as uuidv4} from 'uuid';
-
 export const parseData = (data) => {
     if (!data.length) {
         return false;
@@ -13,22 +11,49 @@ export const parseData = (data) => {
 
         betTypes.forEach((betType, index) => {
             gamesAcc.push({
-                id: `${uuidv4()}${((index+1) % betTypes.length) === 1 ? '|first' : ''}`,
+                id: `${game.id} - ${betType}`,
                 game: game.game,
                 type: game.type,
                 time: game.time,
                 timeout: game.timeout,
                 betType,
                 books: game.sportsbooks.reduce((sportsbookAcc, sportsbook) => {
+                    const {sportsbook: book} = sportsbook;
                     const currentBet = sportsbook.bets.find(bet => bet.name === betType);
                     if (currentBet) {
                         const homeBets = [];
-                        currentBet.type[1] && homeBets.push({value: currentBet.type[1], status: 'secondary'});
-                        currentBet.odds[1] && homeBets.push({value: currentBet.odds[1]});
+                        currentBet.type[1] && homeBets.push({
+                            value: currentBet.type[1].trim(),
+                            status: 'secondary',
+                            key: 'home',
+                            book: book.trim(),
+                            betName: currentBet.name,
+                            game: game.game
+                        });
+                        currentBet.odds[1] && homeBets.push({
+                            value: currentBet.odds[1].trim(),
+                            key: 'home',
+                            book: book.trim(),
+                            betName: currentBet.name,
+                            game: game.game
+                        });
                         
                         const awayBets = [];
-                        currentBet.type[0] && awayBets.push({value: currentBet.type[0], status: 'secondary'});
-                        currentBet.odds[0] && awayBets.push({value: currentBet.odds[0]});
+                        currentBet.type[0] && awayBets.push({
+                            value: currentBet.type[0].trim(),
+                            status: 'secondary',
+                            key: 'away',
+                            book: book.trim(),
+                            betName: currentBet.name,
+                            game: game.game
+                        });
+                        currentBet.odds[0] && awayBets.push({
+                            value: currentBet.odds[0].trim(),
+                            key: 'away',
+                            book: book.trim(),
+                            betName: currentBet.name,
+                            game: game.game
+                        });
 
                         sportsbookAcc[sportsbook.sportsbook] = {
                             bets: {

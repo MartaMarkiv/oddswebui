@@ -7,10 +7,10 @@ import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
 
-export const BettingTable = ({ data }) => {
+export const BettingTable = ({ data, opportunities }) => {
 
     const betRenderer = (data) => {
-        return <BetBox data={data} />
+        return <BetBox data={data} opportunities={opportunities} />
     }
 
     const gameInfoRenderer = (_, data) => {
@@ -36,6 +36,7 @@ export const BettingTable = ({ data }) => {
     return <StyledBettingTable>
         {/* <FilterPanel /> */}
         <Table
+            className="table-layout"
             columns={columns}
             dataSource={data}
             sticky={true}

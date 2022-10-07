@@ -14,7 +14,7 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
-export const Main = () => {
+export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
 
@@ -45,7 +45,10 @@ export const Main = () => {
                     data
                     ? <>
                         <Title>Betting table</Title>
-                        <BettingTable data={data}/>
+                        <BettingTable
+                            data={data}
+                            opportunities={opportunities}
+                        />
                     </>
                     :<SubTitle>No live games</SubTitle>
                 }

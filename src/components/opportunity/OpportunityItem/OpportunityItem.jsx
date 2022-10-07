@@ -31,11 +31,27 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
         setShowRowCount(isOpened ? INITIAL_ROW_COUNT : Object.keys(data.opportunities).length)
     }
 
-    const groupSelectHandler = useCallback((dataId, id) => {
+    const groupSelectHandler = useCallback(({id, items}) => {
         if (selected === id) {
             onSelect(null);
         } else {
-            onSelect(id)
+            const [homeItem, awayItem] = items;
+            const {sportBook: homeBook, value: homeValue, name: homeBetName} = homeItem;
+            const {sportBook: awayBook, value: awayValue, name: awayBetName} = awayItem;
+
+            onSelect({
+                id,
+                home: {
+                    value: homeValue,
+                    book: homeBook,
+                    betName: homeBetName
+                },
+                away: {
+                    value: awayValue,
+                    book: awayBook,
+                    betName: awayBetName
+                }
+            });
         }
     }, [selected, onSelect]);
 
@@ -84,7 +100,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                 }
 
                                 <Group selected={selected === data.opportunities[key].id}
-                                       onClick={(event) => groupSelectHandler(data.id, data.opportunities[key].id)}>
+                                       onClick={(event) => groupSelectHandler(data.opportunities[key])}>
                                     {
                                         data.opportunities[key].items.map((opportunity, i) =>
                                             <GridRow key={i}>

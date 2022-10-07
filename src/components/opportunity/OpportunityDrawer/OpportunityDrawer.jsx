@@ -7,19 +7,27 @@ import {Switcher} from "../../Switcher";
 import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
 import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
+import {parser} from "../utils";
+
 
 const client = new WebSocket(OPPORTUNITY);
 
-export const OpportunityDrawer = () => {
+export const OpportunityDrawer = ({
+    changeSelectedKey,
+    selectedKey,
+    setCollection,
+    collection
+}) => {
+
     const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(false);
-    const [opportunityData, setOpportunityData] = useState(null);
 
     const connectSocket = () => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            setOpportunityData(json);
+            const parsedData = json.length ? parser(json[0].games) : null;
+            setCollection(parsedData);
         };
 
         client.onerror = () => {
@@ -70,11 +78,15 @@ export const OpportunityDrawer = () => {
                     </Space>
                 }
                 onClose={onClose}
-                visible={visible}
+                open={visible}
             >
                 {
-                    opportunityData ?
-                        <OpportunityList opportunities={opportunityData}/> :
+                    collection ?
+                        <OpportunityList
+                            opportunities={collection}
+                            selectOpportunity={changeSelectedKey}
+                            selectedOpportunity={selectedKey}
+                        /> :
                         <SubTitle>No opportunity right now</SubTitle>
                 }
             </DrawerStyled>

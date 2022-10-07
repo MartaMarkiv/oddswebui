@@ -36,6 +36,8 @@ export const ThemePreferenceContext = createContext();
 function App() {
     const initialTheme = localStorage.getItem('theme') || 'light';
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
+    const [selectedKey, setSelectedKey] = useState(null);
+    const [opportunities, setOpportunities] = useState(null);
 
     const theme = themesMap[currentTheme];
 
@@ -45,17 +47,28 @@ function App() {
         }
     }, [currentTheme]);
 
+    const changeSelectedKey = value => {
+        setSelectedKey(value);
+    }
 
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
                 <CommonProvider>
                     <AppStyled>
-                        <Header/>
+                        <Header
+                            changeSelectedKey={changeSelectedKey}
+                            selectedKey={selectedKey}
+                            opportunities={opportunities}
+                            setOpportunities={setOpportunities}
+                        />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
                                 <Routes>
-                                    <Route path="/" element={<Main/>}/>
+                                    <Route path="/" element=
+                                    {
+                                        <Main opportunities={opportunities}/>
+                                    }/>
                                 </Routes>
                             </QueryParamProvider>
                         </AppBody>
