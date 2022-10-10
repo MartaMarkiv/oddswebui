@@ -5,7 +5,7 @@ import {compareBets} from '../table/utils';
 
 export const BetBox = ({data, opportunities}) => {
     return <Row justify="center">
-        { data.length ?
+        { data && data.length ?
             data.map(d => {
                 const isOpportunity = d && opportunities ? compareBets(opportunities, d) : false;
                 return <div key={uuidv4()}>
