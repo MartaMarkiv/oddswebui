@@ -23,7 +23,6 @@ export const Main = ({opportunities}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log(json);
             const collection = parseData(json);
             setData(collection);
             setPending(false);
