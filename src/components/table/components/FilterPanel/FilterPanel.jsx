@@ -20,7 +20,7 @@ export const FilterPanel = () => {
             <FilterPanelItem>
                 <SportsBookFilter />
             </FilterPanelItem>
-            <FilterPanelItem>
+            {/* <FilterPanelItem>
                 <SportFilter />
             </FilterPanelItem>
             <FilterPanelItem>
@@ -40,7 +40,7 @@ export const FilterPanel = () => {
             </FilterPanelItem>
             <FilterPanelItem>
                 <RefreshButton />
-            </FilterPanelItem>
+            </FilterPanelItem> */}
         </FilterPanelContainer>
     )
 }

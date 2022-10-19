@@ -16,6 +16,7 @@ const StyledMain = styled.div`
 
 export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
+    const [sportsBooks, setSportsBooks] = useState(null);
     const [pending, setPending] = useState(false);
 
     const loadDataFromApi = async () => {
@@ -23,8 +24,14 @@ export const Main = ({opportunities}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            const collection = parseData(json);
-            setData(collection);
+            console.log(json);
+
+            const {
+                tableData,
+                books
+             } = parseData(json);
+            setData(tableData);
+            setSportsBooks(books);
             setPending(false);
         };
 
