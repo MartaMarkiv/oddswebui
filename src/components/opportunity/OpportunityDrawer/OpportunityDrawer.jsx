@@ -90,20 +90,17 @@ export const OpportunityDrawer = ({
                 open={visible}
                 >
                 {
-                    // loading ? 
-                    //     <PendingScreen position={"absolute"}/> :
-                        // {
-                            collection ?
-                                <OpportunityList
-                                    opportunities={collection}
-                                    selectOpportunity={changeSelectedKey}
-                                    selectedOpportunity={selectedKey}
-                                /> :
-                                <SubTitle>No opportunity right now</SubTitle>
-                        // }
+                    loading ? 
+                        <PendingScreen position={"absolute"}/> :
+                        collection ?
+                            <OpportunityList
+                                opportunities={collection}
+                                selectOpportunity={changeSelectedKey}
+                                selectedOpportunity={selectedKey}
+                            /> :
+                            <SubTitle>No opportunity right now</SubTitle>
                 }
             </DrawerStyled>
-            
         </>
     )
 };

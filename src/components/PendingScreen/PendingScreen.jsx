@@ -3,7 +3,7 @@ import {PendingScreenStyled} from "./styles";
 
 export const PendingScreen = ({position}) => {
 
-    return <PendingScreenStyled position={position}>
+    return <PendingScreenStyled className="spinner" position={position}>
         <Spin />
     </PendingScreenStyled>
 }

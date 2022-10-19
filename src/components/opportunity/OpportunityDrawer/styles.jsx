@@ -85,7 +85,7 @@ const DrawerStyled= styled(Drawer)`
     box-shadow: none;
   }
 
-  .ant-drawer-body div {
+  .ant-drawer-body .spinner {
     background: none;
   }
     
