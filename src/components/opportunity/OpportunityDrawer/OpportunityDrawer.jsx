@@ -35,7 +35,6 @@ export const OpportunityDrawer = ({
             const json = JSON.parse(event.data);
             const parsedData = json.length ? parser(json[0].games) : null;
             setCollection(parsedData);
-            console.log("parsed");
         };
 
         client.onerror = () => {

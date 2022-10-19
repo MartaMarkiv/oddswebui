@@ -91,9 +91,7 @@ const DrawerStyled= styled(Drawer)`
     
 `
 
-const CloseIcon = styled(Close)`
-z-index: 12;
-`
+const CloseIcon = styled(Close)``
 
 export {
     OpportunityButton,
