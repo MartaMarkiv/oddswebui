@@ -11,7 +11,6 @@ import {
     CheckBoxStyled,
     Label,
 } from "./styles";
-import {useQueryParam} from "use-query-params";
 
 const checkboxRender = ({options, onChange, selectedItems}) => {
 

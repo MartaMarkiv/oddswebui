@@ -27,18 +27,20 @@ export const Main = ({opportunities}) => {
             const json = JSON.parse(event.data);
             if (!json || !json.length) {
                 setData(null);
-            } else {
-                console.log(json);
-                const games = json[0].games;
-                const {
-                    tableData,
-                    books
-                 } = parseData(games);
-                setData(tableData);
-                setSportsBooks(books);
                 setPending(false);
-                // console.log(tableData);
+                return;
             }
+
+            const games = json[0].games;
+            const {
+                tableData,
+                books
+            } = parseData(games);
+
+            setData(tableData);
+            setSportsBooks(books);
+            setPending(false);
+            
         };
 
         client.onerror = () => {
@@ -51,7 +53,6 @@ export const Main = ({opportunities}) => {
     }, []);
 
     const changeSportsBook = (value) => {
-        console.log("changeSportsBook: ", value);
         setSelectedSportsBooks(value);
     }
 
@@ -59,7 +60,6 @@ export const Main = ({opportunities}) => {
         sportsBooksFilter(data, selectedSportsBooks) :
         data;
 
-    console.log("selectedSportsBooksL ", selectedSportsBooks);
     return <StyledMain>
         {pending
             ? <PendingScreen/>
