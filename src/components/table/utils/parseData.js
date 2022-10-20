@@ -1,9 +1,4 @@
-export const parseData = (data) => {
-    if (!data.length) {
-        return false;
-    }
-    const sportsData = data[0].games;
-
+export const parseData = (sportsData) => {
     const sportsBooksList = new Set();
   
     const tableData = sportsData.reduce((gamesAcc, game) => {
@@ -19,7 +14,7 @@ export const parseData = (data) => {
                 time: game.time,
                 timeout: game.timeout,
                 betType,
-                books: game.sportsbooks.reduce((sportsbookAcc, sportsbook) => {
+                books: game.sportsbooks.reduce((sportsbookAcc, sportsbook, index) => {
                     const {sportsbook: book} = sportsbook;
                     sportsBooksList.add(sportsbook.sportsbook);
                     const currentBet = sportsbook.bets.find(bet => bet.name === betType);
@@ -75,6 +70,6 @@ export const parseData = (data) => {
 
     return {
         tableData,
-        books: Array.from(sportsBooksList)
+        books: Array.from(sportsBooksList).map((item) => {return { key: item, label: item};}) //temporarily key
     };
 };
