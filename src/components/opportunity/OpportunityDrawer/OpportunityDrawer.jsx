@@ -6,6 +6,7 @@ import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
 import {Switcher} from "../../Switcher";
 import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
+import {PendingScreen} from "../../../components/PendingScreen";
 import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 import {parser} from "../utils";
 
@@ -20,9 +21,15 @@ export const OpportunityDrawer = ({
 }) => {
 
     const setDrawerOpened = useSetDrawerOpened();
-    const [visible, setVisible] = useState(false);
+    const [visible, setVisible] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     const connectSocket = () => {
+
+        client.onopen =(() => {
+            setLoading(false);
+            setDrawerOpened(true);
+        });
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
@@ -67,27 +74,30 @@ export const OpportunityDrawer = ({
                 closeIcon={<CloseIcon />}
                 extra={
                     <Space>
-                        <Switcher leftText="All"
-                                  rightText="Arbs"
-                                  name="opportunity"
-                                  leftValue="all"
-                                  rightValue="arbs"
-                                  initialValue="all"
-                                  onUpdate={switchHandler}
+                        <Switcher
+                            leftText="All"
+                            rightText="Arbs"
+                            name="opportunity"
+                            leftValue="all"
+                            rightValue="arbs"
+                            initialValue="all"
+                            onUpdate={switchHandler}
                         />
                     </Space>
                 }
                 onClose={onClose}
                 open={visible}
-            >
+                >
                 {
-                    collection ?
-                        <OpportunityList
-                            opportunities={collection}
-                            selectOpportunity={changeSelectedKey}
-                            selectedOpportunity={selectedKey}
-                        /> :
-                        <SubTitle>No opportunity right now</SubTitle>
+                    loading ? 
+                        <PendingScreen position={"absolute"}/> :
+                        collection ?
+                            <OpportunityList
+                                opportunities={collection}
+                                selectOpportunity={changeSelectedKey}
+                                selectedOpportunity={selectedKey}
+                            /> :
+                            <SubTitle>No opportunity right now</SubTitle>
                 }
             </DrawerStyled>
         </>

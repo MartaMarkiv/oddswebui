@@ -9,7 +9,7 @@ const PendingScreenStyled = styled.div`
   top: 0;
   bottom: 0;
   background: ${({ theme }) => theme.colors.bgBody};
-  z-index: 1000;
+  z-index: 10;
 
   ${({ position }) => {
     switch (position) {

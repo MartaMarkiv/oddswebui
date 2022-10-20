@@ -73,6 +73,8 @@ const DrawerStyled= styled(Drawer)`
     path {
       fill: ${({theme}) => theme.colors.headerControls.icon};
     }
+
+    z-index: 15;
   }
 
   .ant-drawer-extra {
@@ -81,6 +83,10 @@ const DrawerStyled= styled(Drawer)`
   
   .ant-drawer-content-wrapper {
     box-shadow: none;
+  }
+
+  .ant-drawer-body .spinner {
+    background: none;
   }
     
 `
