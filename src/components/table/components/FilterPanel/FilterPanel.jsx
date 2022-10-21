@@ -9,7 +9,7 @@ import {RefreshButton} from "./RefreshButton/RefreshButton";
 import {FavoriteButton} from "./FavoriteButton";
 import {ArrayParam, useQueryParams, withDefault} from "use-query-params";
 
-export const FilterPanel = () => {
+export const FilterPanel = ({sportsBooks, changeBook}) => {
     const MyFiltersParam = withDefault(ArrayParam, [])
     const [query, setQuery] = useQueryParams({
         filters: MyFiltersParam,
@@ -18,9 +18,9 @@ export const FilterPanel = () => {
     return (
         <FilterPanelContainer>
             <FilterPanelItem>
-                <SportsBookFilter />
+                <SportsBookFilter books={sportsBooks} changeFilter={changeBook}/>
             </FilterPanelItem>
-            <FilterPanelItem>
+            {/* <FilterPanelItem>
                 <SportFilter />
             </FilterPanelItem>
             <FilterPanelItem>
@@ -40,7 +40,7 @@ export const FilterPanel = () => {
             </FilterPanelItem>
             <FilterPanelItem>
                 <RefreshButton />
-            </FilterPanelItem>
+            </FilterPanelItem> */}
         </FilterPanelContainer>
     )
 }

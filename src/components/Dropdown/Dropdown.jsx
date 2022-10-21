@@ -11,7 +11,6 @@ import {
     CheckBoxStyled,
     Label,
 } from "./styles";
-import {useQueryParam} from "use-query-params";
 
 const checkboxRender = ({options, onChange, selectedItems}) => {
 
@@ -27,7 +26,7 @@ const checkboxRender = ({options, onChange, selectedItems}) => {
                                 value={key}
                             >
                                 <Label bold>{team1}</Label>
-                                @
+                                { team2 && '@' }
                                 <Label>{team2}</Label>
                             </CheckBoxStyled>
                         </DropdownMenuItem>
@@ -39,22 +38,19 @@ const checkboxRender = ({options, onChange, selectedItems}) => {
 };
 
 export const Dropdown = ({
-                             options,
-                             value = [],
-                             onChange,
-                             count = 0,
-                             triggerText,
-                             name
-                         }) => {
-    const [query, setQuery] = useQueryParam(name);
+    options,
+    value = [],
+    onChange,
+    count = 0,
+    triggerText,
+    name
+}) => {
 
-    const [selectedItems, setSelectedItems] = useState([...value, ...(query?.split(',') || [])]);
+    const [selectedItems, setSelectedItems] = useState([]);
 
     const onChangeHandler = selection => {
         setSelectedItems([...selection]);
         onChange && onChange([...selection]);
-
-        setQuery(selection.length ? [...selection] : undefined, 'pushIn');
     };
 
     const ref = useRef();
