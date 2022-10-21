@@ -111,6 +111,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                             </GridRow>
                                         )
                                     }
+                                    <div>Sum probability: {data.opportunities[key].sumProbability}</div>
                                 </Group>
                                 {
                                     index === 0 && Object.keys(data.opportunities).length > 1 &&

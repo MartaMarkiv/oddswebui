@@ -4,6 +4,7 @@ import {v4 as uuidv4} from 'uuid';
 export const parser = data => {
     return data?.map(({id, game, timeout, type, opportunity}) => {
         const [awayTeam, homeTeam] = game.split('@'); // Away @ Home
+        
 
         const opportunities = opportunity.reduce((acc, {bets}) => {
             const [away, home] = bets.odds.map(item => item.trim());
@@ -16,7 +17,8 @@ export const parser = data => {
             if(!acc[key]) {
                 acc[key] = {
                     id: `${game} - ${bets.name}`,
-                    items: []
+                    items: [],
+                    sumProbability: bets.sum_probability,
                 }
             }
 
@@ -28,7 +30,7 @@ export const parser = data => {
                 sportBook: sportsBookHome,
                 typeValue: typeHome,
                 probability: probabilityHome,
-                sumProbability: bets.sumProbability,
+                sumProbability: bets.sum_probability,
                 key
             });
 
@@ -40,7 +42,7 @@ export const parser = data => {
                 sportBook: sportsBookAway,
                 typeValue: typeAway,
                 probability: probabilityAway,
-                sumProbability: bets.sumProbability,
+                sumProbability: bets.sum_probability,
                 key
             });
 
