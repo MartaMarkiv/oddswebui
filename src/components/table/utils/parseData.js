@@ -1,7 +1,8 @@
 export const parseData = (sportsData) => {
-    const sportsBooksList = new Set();
   
-    const tableData = sportsData.reduce((gamesAcc, game) => {
+    let prevGameBetsCount = 0; //to correct display table data if there is empty line
+
+    const tableData = sportsData.reduce((gamesAcc, game, gameIndex) => {
         const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => 
             sportsbook.bets.map(bet => bet.name)
             ))];
@@ -14,9 +15,11 @@ export const parseData = (sportsData) => {
                 time: game.time,
                 timeout: game.timeout,
                 betType,
+                countBetTypes: betTypes.length,
+                prevGameBets: prevGameBetsCount || betTypes.length,
+                gameIndex,
                 books: game.sportsbooks.reduce((sportsbookAcc, sportsbook, index) => {
                     const {sportsbook: book} = sportsbook;
-                    sportsBooksList.add(sportsbook.sportsbook);
                     const currentBet = sportsbook.bets.find(bet => bet.name === betType);
                     if (currentBet) {
                         const homeBets = [];
@@ -65,11 +68,10 @@ export const parseData = (sportsData) => {
             })
         })
     
+        prevGameBetsCount += betTypes.length;
+        
         return gamesAcc;
     }, []);
 
-    return {
-        tableData,
-        books: Array.from(sportsBooksList).map((item) => {return { key: item, label: item};}) //temporarily key
-    };
+    return tableData;
 };

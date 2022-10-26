@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
-import {parseData, sportsBooksFilter} from "../components/table/utils";
+import {parseData, sportsBooksFilter, getSportsBooks} from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
@@ -25,6 +25,7 @@ export const Main = ({opportunities}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
+            // console.log(json);
             if (!json || !json.length) {
                 setData(null);
                 setPending(false);
@@ -32,13 +33,11 @@ export const Main = ({opportunities}) => {
             }
 
             const games = json[0].games;
-            const {
-                tableData,
-                books
-            } = parseData(games);
+            const booksList = getSportsBooks(games);
+            const tableData = parseData(games, booksList);
 
             setData(tableData);
-            setSportsBooks(books);
+            setSportsBooks(booksList);
             setPending(false);
             
         };
