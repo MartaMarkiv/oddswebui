@@ -48,6 +48,8 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
 
         const books  = [...new Set(data.map(d => Object.keys(d.books)).flat())];
 
+        // console.log("books ", books);
+
         const bookColumns = books.map((key, index) => ({
             title: capitalizeFirst(key),
             key: `${key}_${uuidv4()}`,

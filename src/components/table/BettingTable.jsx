@@ -10,7 +10,7 @@ import {FilterPanel} from "./components/FilterPanel";
 export const BettingTable = ({ data, opportunities, sportsBooks, changeBook }) => {
 
     const betRenderer = (data) => {
-        return <BetBox data={data} opportunities={opportunities} />
+        return <BetBox data={data} opportunities={opportunities}/>
     }
 
     const gameInfoRenderer = (_, data) => {
