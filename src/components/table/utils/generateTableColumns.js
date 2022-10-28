@@ -5,7 +5,6 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
     const initialColumns = [];
 
     if(data && data.length) {
-        const betTypes  = [...new Set(data.map(d => d.betType))];
 
         const gameColumn = {
             title: 'Sports book',
@@ -23,10 +22,10 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                     align: 'left',
                     fixed: true,
                     className: 'tableHead cellShadow gameCell',
-                    onCell: (_, index) => {
-                        if (index % betTypes.length === 0) {
+                    onCell: (record, index) => {
+                        if (index % record.prevGameBets === 0) {
                             return {
-                                rowSpan: betTypes.length,
+                                rowSpan: record.countBetTypes,
                             };
                         }
 
