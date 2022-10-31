@@ -36,7 +36,7 @@ export const Main = ({opportunities}) => {
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
-            setData(tableData.flat());
+            setData(tableData);
             setSportsBooks(booksList);
             setPending(false);
         };
