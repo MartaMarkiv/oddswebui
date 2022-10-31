@@ -25,20 +25,20 @@ export const Main = ({opportunities}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
+
             if (!json || !json.length) {
                 setData(null);
                 setPending(false);
                 return;
             }
 
-            const games = json[0].games;
-            const booksList = getSportsBooks(games);
-            const tableData = parseData(games, booksList);
+            const allGames = json.map(sports => sports.games.map(gameItem => {return {...gameItem, sport: sports.sport};})).flat();
+            const booksList = getSportsBooks(allGames);
+            const tableData = parseData(allGames, booksList);
 
             setData(tableData);
             setSportsBooks(booksList);
             setPending(false);
-            
         };
 
         client.onerror = () => {
