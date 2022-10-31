@@ -68,6 +68,7 @@ export const parseData = (sportsData, booksList) => {
 
             gamesAcc.push({
                 id: `${game.id} - ${betType}`,
+                sport: game.sport,
                 game: game.game,
                 type: game.type,
                 time: game.time,

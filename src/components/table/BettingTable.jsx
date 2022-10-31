@@ -43,6 +43,7 @@ export const BettingTable = ({ data, opportunities, sportsBooks, changeBook }) =
             rowKey="id"
             bordered
             scroll={{ x: window.innerWidth }}
+            pagination={false}
             size="middle"
             components={components}
         />
