@@ -17,6 +17,8 @@ const StyledMain = styled.div`
 export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
+    const [sportsTypes, setSportsTypes] = useState([]);
+    const [selectedSports, setSelectedSports] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
     const [pending, setPending] = useState(false);
@@ -33,11 +35,19 @@ export const Main = ({opportunities}) => {
                 return;
             }
 
-            const allGames = json.map(sports => sports.games.map(gameItem => {return {...gameItem, sport: sports.sport};})).flat();
+            const sportsList = [];
+            const allGames = json.map(sports => {
+                sportsList.push(sports.sport);
+                return sports.games.map(gameItem => {
+                    return {...gameItem, sport: sports.sport};
+                });
+            }).flat();
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
+            console.log("sportsList: ", sportsList);
+            setSportsTypes(sportsList);
             setSportsBooks(booksList);
             setPending(false);
         };
@@ -58,6 +68,11 @@ export const Main = ({opportunities}) => {
     const changeQuarters = (values) => {
         const list = values.map(item => QUARTERS_LIST[item]).flat();
         setSelectedQuarters(list);
+    }
+
+    const changeSportType = (values) => {
+        console.log(values);
+        setSelectedSports(values);
     }
 
     let filteredData = selectedSportsBooks.length ?
@@ -83,6 +98,8 @@ export const Main = ({opportunities}) => {
                             changeBook={changeSportsBook}
                             changeQuarter={changeQuarters}
                             selectedQuarters={selectedQuarters}
+                            sportsTypes={sportsTypes}
+                            changeSport={changeSportType}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
