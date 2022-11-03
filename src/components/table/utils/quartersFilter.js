@@ -42,7 +42,7 @@ export const quartersFilter = (data, quarters) => {
                 (prev, curr) => prev || game.time.toLowerCase().indexOf(curr) >= 0,
                 false
               );
-              !isQuartersGame && saveGame();
+            !isQuartersGame && saveGame();
         }
     });
 
