@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
-import {parseData, sportsBooksFilter, getSportsBooks} from "../components/table/utils";
+import {parseData, sportsBooksFilter, getSportsBooks, quartersFilter} from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
@@ -18,7 +18,7 @@ export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
-    const [selectedQuarters, setSelectedQuarters] = useState(["all"]);
+    const [selectedQuarters, setSelectedQuarters] = useState([]);
     const [pending, setPending] = useState(false);
 
     const loadDataFromApi = () => {
@@ -37,7 +37,7 @@ export const Main = ({opportunities}) => {
             // console.log(allGames);
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
-            // console.log(tableData);
+            console.log(tableData);
 
             setData(tableData);
             setSportsBooks(booksList);
@@ -65,9 +65,13 @@ export const Main = ({opportunities}) => {
         if (list.indexOf("all") >= 0) return;
     }
 
-    const filteredData = selectedSportsBooks.length ?
+    let filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(data, selectedSportsBooks) :
         data;
+
+    filteredData = selectedQuarters.length ?
+        quartersFilter(filteredData, selectedQuarters) :
+        filteredData;
 
     return <StyledMain>
         {pending
