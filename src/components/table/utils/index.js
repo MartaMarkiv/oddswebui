@@ -3,4 +3,6 @@ export * from './dataMapper';
 export * from './parseData';
 export * from './compareBets';
 export * from './sportsBookfilter';
+export * from './sportsBookfilter';
 export * from './getSportsBooks';
+export * from './quartersFilter';

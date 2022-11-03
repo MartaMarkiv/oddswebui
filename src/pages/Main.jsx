@@ -2,11 +2,11 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
-import {parseData, sportsBooksFilter, getSportsBooks} from "../components/table/utils";
+import {parseData, sportsBooksFilter, getSportsBooks, quartersFilter} from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-import {TABLE_DATA} from "../constants";
+import {TABLE_DATA, QUARTERS_LIST} from "../constants";
 
 const client = new WebSocket(TABLE_DATA);
 
@@ -18,6 +18,7 @@ export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
+    const [selectedQuarters, setSelectedQuarters] = useState([]);
     const [pending, setPending] = useState(false);
 
     const loadDataFromApi = () => {
@@ -54,9 +55,18 @@ export const Main = ({opportunities}) => {
         setSelectedSportsBooks(value);
     }
 
-    const filteredData = selectedSportsBooks.length ?
+    const changeQuarters = (values) => {
+        const list = values.map(item => QUARTERS_LIST[item]).flat();
+        setSelectedQuarters(list);
+    }
+
+    let filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(data, selectedSportsBooks) :
         data;
+
+    filteredData = selectedQuarters.length ?
+        quartersFilter(filteredData, selectedQuarters) :
+        filteredData;
 
     return <StyledMain>
         {pending
@@ -71,6 +81,8 @@ export const Main = ({opportunities}) => {
                             data={filteredData}
                             opportunities={opportunities}
                             changeBook={changeSportsBook}
+                            changeQuarter={changeQuarters}
+                            selectedQuarters={selectedQuarters}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

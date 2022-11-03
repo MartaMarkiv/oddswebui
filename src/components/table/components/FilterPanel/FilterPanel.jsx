@@ -7,13 +7,13 @@ import {BetsShownFilter} from "./BetsShownFilter";
 import {MiddleRangeFilter} from "./MiddleRangeFilter/MiddleRangeFilter";
 import {RefreshButton} from "./RefreshButton/RefreshButton";
 import {FavoriteButton} from "./FavoriteButton";
-import {ArrayParam, useQueryParams, withDefault} from "use-query-params";
 
-export const FilterPanel = ({sportsBooks, changeBook}) => {
-    const MyFiltersParam = withDefault(ArrayParam, [])
-    const [query, setQuery] = useQueryParams({
-        filters: MyFiltersParam,
-    });
+export const FilterPanel = ({
+    sportsBooks,
+    changeBook,
+    changeQuarter,
+    quarters
+}) => {
 
     return (
         <FilterPanelContainer>
@@ -28,11 +28,11 @@ export const FilterPanel = ({sportsBooks, changeBook}) => {
             </FilterPanelItem>
             <FilterPanelItem>
                 <BetsFilter />
-            </FilterPanelItem>
+            </FilterPanelItem> */}
             <FilterPanelItem>
-                <BetsShownFilter />
+                <BetsShownFilter changeFilter={changeQuarter} quarters={quarters}/>
             </FilterPanelItem>
-            <FilterPanelItem>
+            {/* <FilterPanelItem>
                 <MiddleRangeFilter />
             </FilterPanelItem>
             <FilterPanelItem>

@@ -39,14 +39,14 @@ const checkboxRender = ({options, onChange, selectedItems}) => {
 
 export const Dropdown = ({
     options,
-    value = [],
+    values = [],
     onChange,
     count = 0,
     triggerText,
     name
 }) => {
 
-    const [selectedItems, setSelectedItems] = useState([]);
+    const [selectedItems, setSelectedItems] = useState(values);
 
     const onChangeHandler = selection => {
         setSelectedItems([...selection]);
