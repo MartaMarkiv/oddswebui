@@ -6,7 +6,7 @@ import {parseData, sportsBooksFilter, getSportsBooks} from "../components/table/
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-import {TABLE_DATA} from "../constants";
+import {TABLE_DATA, QUARTERS_LIST} from "../constants";
 
 const client = new WebSocket(TABLE_DATA);
 
@@ -18,6 +18,7 @@ export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
+    const [selectedQuarters, setSelectedQuarters] = useState(["all"]);
     const [pending, setPending] = useState(false);
 
     const loadDataFromApi = () => {
@@ -33,8 +34,10 @@ export const Main = ({opportunities}) => {
             }
 
             const allGames = json.map(sports => sports.games.map(gameItem => {return {...gameItem, sport: sports.sport};})).flat();
+            // console.log(allGames);
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
+            // console.log(tableData);
 
             setData(tableData);
             setSportsBooks(booksList);
@@ -54,6 +57,14 @@ export const Main = ({opportunities}) => {
         setSelectedSportsBooks(value);
     }
 
+    const changeQuarters = (values) => {
+        console.log(values);
+        const list = values.map(item => QUARTERS_LIST[item]).flat();
+        console.log(list);
+        setSelectedQuarters(list);
+        if (list.indexOf("all") >= 0) return;
+    }
+
     const filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(data, selectedSportsBooks) :
         data;
@@ -71,6 +82,8 @@ export const Main = ({opportunities}) => {
                             data={filteredData}
                             opportunities={opportunities}
                             changeBook={changeSportsBook}
+                            changeQuarter={changeQuarters}
+                            selectedQuarters={selectedQuarters}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

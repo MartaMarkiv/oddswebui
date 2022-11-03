@@ -1,18 +1,15 @@
 import {Dropdown} from "../../../../Dropdown";
+import { QUARTERS_FILTERS } from "../../../../../constants";
 
-export const BetsShownFilter = () => {
+export const BetsShownFilter = ({changeFilter, quarters}) => {
 
     return (
         <Dropdown
             triggerText="Bets Shown"
             name="betsShown"
-            options={[
-                {key: '1', label: "Los Angeles Dodgers @ Chicago White Sox"},
-                {key: '2', label: "Boston Red Sox @ Los Angeles Angels"},
-                {key: '3', label: "Boston Red Sox @ Los Angeles Angels"},
-                {key: '4', label: "New Youk Yankees @ Minnesota Twins"},
-                {key: '5', label: "Boston Celtics @ Golden State Warrioes"},
-            ]}
+            options={QUARTERS_FILTERS}
+            onChange={changeFilter}
+            values={quarters}
         />
     )
 }

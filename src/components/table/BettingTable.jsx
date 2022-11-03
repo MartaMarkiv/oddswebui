@@ -7,7 +7,14 @@ import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
 
-export const BettingTable = ({ data, opportunities, sportsBooks, changeBook }) => {
+export const BettingTable = ({
+    data,
+    opportunities,
+    sportsBooks,
+    changeBook,
+    changeQuarter,
+    selectedQuarters
+}) => {
 
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities}/>
@@ -34,7 +41,12 @@ export const BettingTable = ({ data, opportunities, sportsBooks, changeBook }) =
     };
 
     return <StyledBettingTable>
-        <FilterPanel sportsBooks={sportsBooks} changeBook={changeBook}/>
+        <FilterPanel
+            sportsBooks={sportsBooks}
+            changeBook={changeBook}
+            changeQuarter={changeQuarter}
+            quarters={selectedQuarters}
+        />
         <Table
             className="table-layout"
             columns={columns}
