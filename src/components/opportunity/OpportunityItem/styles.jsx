@@ -115,6 +115,7 @@ const GridTd = styled.div`
   font-size: 14px;
   color: ${({theme, isValue}) => isValue ? theme.colors.textSuccess : 'inherit'};
   font-weight: ${({isValue}) => isValue ? 500 : 400};
+  word-break: break-word;
 `;
 
 const Toggle = styled(GridTh)`
