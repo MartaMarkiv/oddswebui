@@ -1,6 +1,6 @@
 export const parseData = (sportsData, booksList) => {
   
-    let prevGameBetsCount = 0; //to correct display table data if there is empty line
+    let prevGameName = ""; //to correct display table data if there is empty line
 
     const tableData = sportsData.reduce((gamesAcc, game) => {
         const betTypes = [...new Set(game.sportsbooks.flatMap(sportsbook => 
@@ -75,13 +75,13 @@ export const parseData = (sportsData, booksList) => {
                 timeout: game.timeout,
                 betType,
                 countBetTypes: betTypes.length,
-                prevGameBets: prevGameBetsCount || betTypes.length,
+                isDisplayName: game.game !== prevGameName,
                 books: gameSportsBook,
-            })
+            });
+
+            prevGameName= game.game;
         })
     
-        prevGameBetsCount += betTypes.length;
-
         return gamesAcc;
     }, []);
 

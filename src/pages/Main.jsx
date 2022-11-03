@@ -34,10 +34,8 @@ export const Main = ({opportunities}) => {
             }
 
             const allGames = json.map(sports => sports.games.map(gameItem => {return {...gameItem, sport: sports.sport};})).flat();
-            // console.log(allGames);
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
-            console.log(tableData);
 
             setData(tableData);
             setSportsBooks(booksList);
@@ -58,9 +56,7 @@ export const Main = ({opportunities}) => {
     }
 
     const changeQuarters = (values) => {
-        console.log(values);
         const list = values.map(item => QUARTERS_LIST[item]).flat();
-        console.log(list);
         setSelectedQuarters(list);
         if (list.indexOf("all") >= 0) return;
     }

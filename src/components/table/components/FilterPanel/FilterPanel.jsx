@@ -7,7 +7,6 @@ import {BetsShownFilter} from "./BetsShownFilter";
 import {MiddleRangeFilter} from "./MiddleRangeFilter/MiddleRangeFilter";
 import {RefreshButton} from "./RefreshButton/RefreshButton";
 import {FavoriteButton} from "./FavoriteButton";
-import {ArrayParam, useQueryParams, withDefault} from "use-query-params";
 
 export const FilterPanel = ({
     sportsBooks,
@@ -15,10 +14,6 @@ export const FilterPanel = ({
     changeQuarter,
     quarters
 }) => {
-    const MyFiltersParam = withDefault(ArrayParam, [])
-    const [query, setQuery] = useQueryParams({
-        filters: MyFiltersParam,
-    });
 
     return (
         <FilterPanelContainer>

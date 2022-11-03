@@ -23,7 +23,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                     fixed: true,
                     className: 'tableHead cellShadow gameCell',
                     onCell: (record, index) => {
-                        if (index % record.prevGameBets === 0) {
+                        if (record.isDisplayName) {
                             return {
                                 rowSpan: record.countBetTypes,
                             };

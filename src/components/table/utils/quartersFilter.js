@@ -1,13 +1,18 @@
-import {QUARTERS_LIST} from "../../../constants";
+import {FULL_QUARTERS} from "../../../constants";
 
 export const quartersFilter = (data, quarters) => {
     
-    const fullBets = quarters.indexOf('full') >= 0 || quarters.indexOf('q4') >= 0;
-    console.log("fullBets: ", fullBets);
-    const gameQuarters = quarters.indexOf('q4') >= 0 ? QUARTERS_LIST.q4 : quarters;
-    console.log("gameQuarters: ", gameQuarters);
+    const fullBets = quarters.indexOf('full') >= 0;
+    const otherGames = quarters.indexOf('other') >= 0;
+    const gameQuarters = quarters;
 
-    const tableData = data.filter((game) => {
+    let prevGameBets = 0;
+    let countBetsCounter = 0;
+    let prevGameName = data[0].game;
+
+    const tableData = [];
+
+    data.forEach((game) => {
         const filteredBets = fullBets ?
             game.betType :
             quarters.reduce(
@@ -20,12 +25,26 @@ export const quartersFilter = (data, quarters) => {
             false
           );
 
+        const saveGame = () => {
+            if (game.game !== prevGameName) {
+                prevGameBets = countBetsCounter;
+                prevGameName = game.game;
+            }
+            countBetsCounter++;
+            
+            tableData.push({...game, prevGameBets: prevGameBets || 0});
+        }
+
         if (isFilteredGame && filteredBets) {
-            return game;
-        } else return false;
+            saveGame();
+        } else if(otherGames) {
+            const isQuartersGame = FULL_QUARTERS.reduce(
+                (prev, curr) => prev || game.time.toLowerCase().indexOf(curr) >= 0,
+                false
+              );
+              !isQuartersGame && saveGame();
+        }
     });
 
-    console.log("Filtered quarters: ");
-    console.log(tableData);
     return tableData;
 };
