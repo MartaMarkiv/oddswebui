@@ -58,7 +58,6 @@ export const Main = ({opportunities}) => {
     const changeQuarters = (values) => {
         const list = values.map(item => QUARTERS_LIST[item]).flat();
         setSelectedQuarters(list);
-        if (list.indexOf("all") >= 0) return;
     }
 
     let filteredData = selectedSportsBooks.length ?
