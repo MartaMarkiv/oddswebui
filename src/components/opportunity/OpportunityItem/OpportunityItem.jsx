@@ -77,7 +77,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                 {
                     data.timeout && <TimeoutBadge size="small"/>
                 }
-                <TeamLogoGroup urls={['team1.png', 'team2.png']}/>
+                {/* <TeamLogoGroup urls={['team1.png', 'team2.png']}/> */}
             </HeaderRightContent>
         </Header>
         <Body>
