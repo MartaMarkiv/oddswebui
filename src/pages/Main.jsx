@@ -2,7 +2,13 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
-import {parseData, sportsBooksFilter, getSportsBooks, quartersFilter} from "../components/table/utils";
+import {
+    parseData,
+    sportsBooksFilter,
+    getSportsBooks,
+    quartersFilter,
+    sportsFilter
+} from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
@@ -46,7 +52,6 @@ export const Main = ({opportunities}) => {
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
-            console.log("sportsList: ", sportsList);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
             setPending(false);
@@ -61,23 +66,18 @@ export const Main = ({opportunities}) => {
         loadDataFromApi();
     }, []);
 
-    const changeSportsBook = (value) => {
-        setSelectedSportsBooks(value);
-    }
-
     const changeQuarters = (values) => {
         const list = values.map(item => QUARTERS_LIST[item]).flat();
         setSelectedQuarters(list);
     }
 
-    const changeSportType = (values) => {
-        console.log(values);
-        setSelectedSports(values);
-    }
-
-    let filteredData = selectedSportsBooks.length ?
-        sportsBooksFilter(data, selectedSportsBooks) :
+    let filteredData = selectedSports.length ?
+        sportsFilter(data, selectedSports) :
         data;
+
+    filteredData = selectedSportsBooks.length ?
+        sportsBooksFilter(filteredData, selectedSportsBooks) :
+        filteredData;
 
     filteredData = selectedQuarters.length ?
         quartersFilter(filteredData, selectedQuarters) :
@@ -95,11 +95,11 @@ export const Main = ({opportunities}) => {
                             sportsBooks={sportsBooks}
                             data={filteredData}
                             opportunities={opportunities}
-                            changeBook={changeSportsBook}
+                            changeBook={setSelectedSportsBooks}
                             changeQuarter={changeQuarters}
                             selectedQuarters={selectedQuarters}
                             sportsTypes={sportsTypes}
-                            changeSport={changeSportType}
+                            changeSport={setSelectedSports}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
