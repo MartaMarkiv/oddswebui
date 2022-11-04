@@ -2,7 +2,13 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
-import {parseData, sportsBooksFilter, getSportsBooks, quartersFilter} from "../components/table/utils";
+import {
+    parseData,
+    sportsBooksFilter,
+    getSportsBooks,
+    quartersFilter,
+    sportsFilter
+} from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
@@ -17,6 +23,8 @@ const StyledMain = styled.div`
 export const Main = ({opportunities}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
+    const [sportsTypes, setSportsTypes] = useState([]);
+    const [selectedSports, setSelectedSports] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
     const [pending, setPending] = useState(false);
@@ -33,11 +41,18 @@ export const Main = ({opportunities}) => {
                 return;
             }
 
-            const allGames = json.map(sports => sports.games.map(gameItem => {return {...gameItem, sport: sports.sport};})).flat();
+            const sportsList = [];
+            const allGames = json.map(sports => {
+                sportsList.push(sports.sport);
+                return sports.games.map(gameItem => {
+                    return {...gameItem, sport: sports.sport};
+                });
+            }).flat();
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
+            setSportsTypes(sportsList);
             setSportsBooks(booksList);
             setPending(false);
         };
@@ -51,18 +66,18 @@ export const Main = ({opportunities}) => {
         loadDataFromApi();
     }, []);
 
-    const changeSportsBook = (value) => {
-        setSelectedSportsBooks(value);
-    }
-
     const changeQuarters = (values) => {
         const list = values.map(item => QUARTERS_LIST[item]).flat();
         setSelectedQuarters(list);
     }
 
-    let filteredData = selectedSportsBooks.length ?
-        sportsBooksFilter(data, selectedSportsBooks) :
+    let filteredData = selectedSports.length ?
+        sportsFilter(data, selectedSports) :
         data;
+
+    filteredData = selectedSportsBooks.length ?
+        sportsBooksFilter(filteredData, selectedSportsBooks) :
+        filteredData;
 
     filteredData = selectedQuarters.length ?
         quartersFilter(filteredData, selectedQuarters) :
@@ -80,9 +95,11 @@ export const Main = ({opportunities}) => {
                             sportsBooks={sportsBooks}
                             data={filteredData}
                             opportunities={opportunities}
-                            changeBook={changeSportsBook}
+                            changeBook={setSelectedSportsBooks}
                             changeQuarter={changeQuarters}
                             selectedQuarters={selectedQuarters}
+                            sportsTypes={sportsTypes}
+                            changeSport={setSelectedSports}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

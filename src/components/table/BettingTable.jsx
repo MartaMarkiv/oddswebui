@@ -13,7 +13,9 @@ export const BettingTable = ({
     sportsBooks,
     changeBook,
     changeQuarter,
-    selectedQuarters
+    selectedQuarters,
+    sportsTypes,
+    changeSport
 }) => {
 
     const betRenderer = (data) => {
@@ -46,6 +48,8 @@ export const BettingTable = ({
             changeBook={changeBook}
             changeQuarter={changeQuarter}
             quarters={selectedQuarters}
+            sports={sportsTypes}
+            changeSport={changeSport}
         />
         <Table
             className="table-layout"

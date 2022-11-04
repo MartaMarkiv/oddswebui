@@ -6,3 +6,4 @@ export * from './sportsBookfilter';
 export * from './sportsBookfilter';
 export * from './getSportsBooks';
 export * from './quartersFilter';
+export * from './sportsFilter';
