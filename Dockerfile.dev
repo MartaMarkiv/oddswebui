@@ -1,0 +1,16 @@
+FROM node:14-slim
+
+RUN apt-get update -y \
+	&& apt-get install -y dnsutils curl vim \
+	&& npm install -g wscat
+
+WORKDIR /app/web
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY ./src ./src
+COPY ./public ./public
+
+ENTRYPOINT [ "npm", "start" ]
