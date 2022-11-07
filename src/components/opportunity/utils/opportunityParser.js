@@ -57,5 +57,11 @@ export const parser = data => {
             });
         });
     });
-    return collection;
+    return collection.sort((a, b) => {
+        const betKeyA = Object.keys(a.opportunity);
+        const betKeyB = Object.keys(b.opportunity);
+        const sumProbabilityA = Number(a.opportunity[betKeyA[0]].sumProbability);
+        const sumProbabilityB = Number(b.opportunity[betKeyB[0]].sumProbability);
+        return sumProbabilityA - sumProbabilityB;
+    });
 }
