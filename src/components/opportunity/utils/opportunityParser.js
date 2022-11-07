@@ -2,27 +2,28 @@ import camelCase from 'lodash.camelcase';
 import {v4 as uuidv4} from 'uuid';
 
 export const parser = data => {
-    return data?.map(({id, game, timeout, type, opportunity}) => {
-        const [awayTeam, homeTeam] = game.split('@'); // Away @ Home
+    const collection = [];
+    data?.forEach(({id, game, timeout, type, opportunity}) => {
+        const [awayTeam, homeTeam] = game.indexOf('@') >= 0 ? game.split('@') : game.split(' v '); // Away @ Home
         
 
-        const opportunities = opportunity.reduce((acc, {bets}) => {
+        opportunity.forEach(opportunityItem => {
+            const {bets} = opportunityItem;
             const [away, home] = bets.odds.map(item => item.trim());
             const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
             const [typeAway, typeHome] = bets.type;
             const [probabilityAway, probabilityHome] = bets.probability;
 
             const key = camelCase(bets.name);
-
-            if(!acc[key]) {
-                acc[key] = {
-                    id: `${game} - ${bets.name}`,
-                    items: [],
-                    sumProbability: bets.sum_probability,
-                }
+            
+            let opportunity = {};
+            opportunity[key] = {
+                id: `${game} - ${bets.name}`,
+                items: [],
+                sumProbability: bets.sum_probability,
             }
 
-            home && acc[key].items.push({
+            home && opportunity[key].items.push({
                 id: uuidv4(),
                 value: home,
                 name: bets.name,
@@ -34,7 +35,7 @@ export const parser = data => {
                 key
             });
 
-            away && acc[key].items.push({
+            away && opportunity[key].items.push({
                 id: uuidv4(),
                 value: away,
                 name: bets.name,
@@ -46,16 +47,15 @@ export const parser = data => {
                 key
             });
 
-            return acc;
-        }, {});
-
-        return {
-            id,
-            homeTeam,
-            awayTeam,
-            timeout: !!(+timeout),
-            type,
-            opportunities,
-        }
-    })
+            collection.push({
+                id: `${id} - ${bets.name}`,
+                homeTeam,
+                awayTeam,
+                timeout: !!(+timeout),
+                type,
+                opportunity,
+            });
+        });
+    });
+    return collection;
 }
