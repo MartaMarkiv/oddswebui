@@ -10,8 +10,8 @@ export const OpportunityList = ({
     return <OpportunityListContainer>
         <List>
             {
-                opportunities && opportunities.map((item) => {
-                    return <ListItem key={item.id}>
+                opportunities && opportunities.map((item, index) => {
+                    return <ListItem key={`${item.id}-${index}`}>
                         <OpportunityItem
                             data={item}
                             selected={selectedOpportunity ? selectedOpportunity.id : null}

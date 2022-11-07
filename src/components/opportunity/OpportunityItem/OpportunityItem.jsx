@@ -93,16 +93,16 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
                 <GridBody>
                     {
-                        data?.opportunities && Object.keys(data.opportunities).slice(0, showRowCount).map((key, index) => {
+                        data?.opportunity && Object.keys(data.opportunity).slice(0, showRowCount).map((key, index) => {
                             return <div key={index}>
                                 {
                                     index > 1 && <Divider />
                                 }
 
-                                <Group selected={selected === data.opportunities[key].id}
-                                       onClick={(event) => groupSelectHandler(data.opportunities[key])}>
+                                <Group selected={selected === data.opportunity[key].id}
+                                       onClick={(event) => groupSelectHandler(data.opportunity[key])}>
                                     {
-                                        data.opportunities[key].items.map((opportunity, i) =>
+                                        data.opportunity[key].items.map((opportunity, i) =>
                                             <GridRow key={i}>
                                                 <GridTd>{opportunity.name}</GridTd>
                                                 <GridTd>{opportunity.type}</GridTd>
@@ -111,15 +111,8 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                             </GridRow>
                                         )
                                     }
-                                    <div>Sum probability: {data.opportunities[key].sumProbability}</div>
+                                    <div>Sum probability: {data.opportunity[key].sumProbability}</div>
                                 </Group>
-                                {
-                                    index === 0 && Object.keys(data.opportunities).length > 1 &&
-                                    <Toggle key="some" onClick={toggle} opened={isOpened}>
-                                        {isOpened ? 'Hide other' : 'Show other'}
-                                        <Arrow opened={isOpened ? 1 : 0}/>
-                                    </Toggle>
-                                }
                             </div>
                         })
                     }
