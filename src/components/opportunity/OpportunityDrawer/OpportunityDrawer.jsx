@@ -33,7 +33,8 @@ export const OpportunityDrawer = ({
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            const parsedData = json.length ? parser(json[0].games) : null;
+            const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
+            const parsedData = parser(allOpportunities);
             setCollection(parsedData);
         };
 

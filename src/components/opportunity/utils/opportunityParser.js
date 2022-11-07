@@ -5,7 +5,6 @@ export const parser = data => {
     const collection = [];
     data?.forEach(({id, game, timeout, type, opportunity}) => {
         const [awayTeam, homeTeam] = game.indexOf('@') >= 0 ? game.split('@') : game.split(' v '); // Away @ Home
-        
 
         opportunity.forEach(opportunityItem => {
             const {bets} = opportunityItem;
@@ -63,5 +62,5 @@ export const parser = data => {
         const sumProbabilityA = Number(a.opportunity[betKeyA[0]].sumProbability);
         const sumProbabilityB = Number(b.opportunity[betKeyB[0]].sumProbability);
         return sumProbabilityA - sumProbabilityB;
-    });
+    }).slice(0, 10);
 }
