@@ -20,7 +20,7 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
-export const Main = ({opportunities}) => {
+export const Main = ({opportunities, selectedKey}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
@@ -34,7 +34,7 @@ export const Main = ({opportunities}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-
+            
             if (!json || !json.length) {
                 setData(null);
                 setPending(false);
@@ -100,6 +100,7 @@ export const Main = ({opportunities}) => {
                             selectedQuarters={selectedQuarters}
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
+                            selectedRow={selectedKey}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

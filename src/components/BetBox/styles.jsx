@@ -10,6 +10,8 @@ const CellBoxStyled = styled.div`
             return theme.colors.betBox.borderSecondary;
         case 'success':
             return theme.colors.betBox.borderSuccess;
+        case 'selected':
+            return theme.colors.betBox.borderSelected;
         default:
             return theme.colors.betBox.borderPrimary;
     }
@@ -24,6 +26,8 @@ const CellBoxStyled = styled.div`
             return theme.colors.betBox.bgSecondary;
         case 'success':
             return theme.colors.betBox.bgSuccess;
+        case 'selected':
+            return theme.colors.betBox.bgSelected;
         default:
             return theme.colors.betBox.bgPrimary;
     }
