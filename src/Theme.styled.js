@@ -40,10 +40,12 @@ export const light = {
             borderPrimary: "#F4F6F8",
             borderSuccess: "rgba(82, 218, 169, 0.21)",
             borderSecondary: "#F4F6F8",
+            borderSelected: "none",
 
             bgPrimary: "#FFFFFF",
             bgSecondary: "#F4F6F8",
             bgSuccess: "rgba(82, 218, 169, 0.21)",
+            bgSelected: "linear-gradient(116.06deg, #FCBE1D 9.63%, #FF0C0C 95.26%)",
 
             text: "#000000",
             textSuccess: "#52DAA9",

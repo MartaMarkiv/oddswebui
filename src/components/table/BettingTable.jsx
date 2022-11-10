@@ -15,11 +15,11 @@ export const BettingTable = ({
     changeQuarter,
     selectedQuarters,
     sportsTypes,
-    changeSport
+    changeSport,
+    selectedRow
 }) => {
-
     const betRenderer = (data) => {
-        return <BetBox data={data} opportunities={opportunities}/>
+        return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
     }
 
     const gameInfoRenderer = (_, data) => {
@@ -62,6 +62,11 @@ export const BettingTable = ({
             pagination={false}
             size="middle"
             components={components}
+            rowClassName={(record, index) => {
+                if (selectedRow && record.id === selectedRow.id) {
+                    return "selected"
+                } else return "row"
+            }}
         />
     </StyledBettingTable>
 };

@@ -33,6 +33,7 @@ export const OpportunityDrawer = ({
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
+            
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
             const parsedData = parser(allOpportunities);
             setCollection(parsedData);
@@ -92,7 +93,7 @@ export const OpportunityDrawer = ({
                 {
                     loading ? 
                         <PendingScreen position={"absolute"}/> :
-                        collection ?
+                        collection && collection.length ?
                             <OpportunityList
                                 opportunities={collection}
                                 selectOpportunity={changeSelectedKey}

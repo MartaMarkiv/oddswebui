@@ -67,7 +67,10 @@ function App() {
                                 <Routes>
                                     <Route path="/" element=
                                     {
-                                        <Main opportunities={opportunities}/>
+                                        <Main
+                                            opportunities={opportunities}
+                                            selectedKey={selectedKey}
+                                        />
                                     }/>
                                 </Routes>
                             </QueryParamProvider>
