@@ -4,13 +4,11 @@ import {CellBoxStyled} from "./styles";
 import {compareBets, isSelectedBet} from '../table/utils';
 
 export const BetBox = ({data, opportunities, selectedBet}) => {
-    // console.log(data);
     return <Row justify="center">
         { data && data.length &&
             data.map(d => {
                 const isOpportunity = d && opportunities ? compareBets(opportunities, d) : false;
                 const isSelected = isSelectedBet(selectedBet, d);
-                // console.log("isSelected: ", isSelected);
                 const status = isOpportunity ? 'success' : d.status || 'default';
                 return <div key={uuidv4()}>
                     <CellBoxStyled
