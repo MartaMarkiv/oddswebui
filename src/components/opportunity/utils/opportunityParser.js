@@ -9,55 +9,52 @@ export const parser = data => {
         opportunity.forEach(opportunityItem => {
             const {bets} = opportunityItem;
             const sumProbability = Number(bets.sum_probability);
-            if (sumProbability <= 100) {
-                const [away, home] = bets.odds.map(item => item.trim());
-                const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
-                const [typeAway, typeHome] = bets.type;
-                const [probabilityAway, probabilityHome] = bets.probability;
+            const [away, home] = bets.odds.map(item => item.trim());
+            const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
+            const [typeAway, typeHome] = bets.type;
+            const [probabilityAway, probabilityHome] = bets.probability;
 
-                const key = camelCase(bets.name);
-                
-                let opportunity = {};
-                opportunity[key] = {
-                    id: `${game} - ${bets.name}`,
-                    items: [],
-                    sumProbability: sumProbability,
-                }
-
-                home && opportunity[key].items.push({
-                    id: uuidv4(),
-                    value: home,
-                    name: bets.name,
-                    type: 'Home',
-                    sportBook: sportsBookHome,
-                    typeValue: typeHome,
-                    probability: probabilityHome,
-                    sumProbability: sumProbability,
-                    key
-                });
-
-                away && opportunity[key].items.push({
-                    id: uuidv4(),
-                    value: away,
-                    name: bets.name,
-                    type: 'Away',
-                    sportBook: sportsBookAway,
-                    typeValue: typeAway,
-                    probability: probabilityAway,
-                    sumProbability: sumProbability,
-                    key
-                });
-
-                collection.push({
-                    id: `${id} - ${bets.name}`,
-                    homeTeam,
-                    awayTeam,
-                    timeout: !!(+timeout),
-                    type,
-                    opportunity,
-                });
+            const key = camelCase(bets.name);
+            
+            let opportunity = {};
+            opportunity[key] = {
+                id: `${game} - ${bets.name}`,
+                items: [],
+                sumProbability: sumProbability,
             }
 
+            home && opportunity[key].items.push({
+                id: uuidv4(),
+                value: home,
+                name: bets.name,
+                type: 'Home',
+                sportBook: sportsBookHome,
+                typeValue: typeHome,
+                probability: probabilityHome,
+                sumProbability: sumProbability,
+                key
+            });
+
+            away && opportunity[key].items.push({
+                id: uuidv4(),
+                value: away,
+                name: bets.name,
+                type: 'Away',
+                sportBook: sportsBookAway,
+                typeValue: typeAway,
+                probability: probabilityAway,
+                sumProbability: sumProbability,
+                key
+            });
+
+            collection.push({
+                id: `${id} - ${bets.name}`,
+                homeTeam,
+                awayTeam,
+                timeout: !!(+timeout),
+                type,
+                opportunity,
+            });
         });
     });
     return collection.sort((a, b) => {
