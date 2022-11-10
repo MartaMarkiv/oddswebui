@@ -6,7 +6,8 @@ export const compareBets = (list, bet) => {
     if (gameInfo) {
         const betKey = camelCase(bet.betName);
         const opportunityInfo = gameInfo.opportunity[betKey];
-        const opportunityItem = opportunityInfo ?
+        const sumProbability = opportunityInfo ? opportunityInfo.sumProbability : 120; // 120 - we need to display below 100
+        const opportunityItem = opportunityInfo && sumProbability < 100 ?
         opportunityInfo.items.find(item => 
             item.value === bet.value &&
             item.sportBook === bet.book &&
