@@ -50,6 +50,15 @@ const StyledBettingTable = styled.div`
     padding-bottom: 18px !important;
     color: ${({ theme }) => theme.colors.table.secondaryText};
   }
+
+  .row-cell .selected:last-child {
+    border-top: 2px solid #52DAA9;
+    border-bottom: 2px solid #52DAA9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 export {
