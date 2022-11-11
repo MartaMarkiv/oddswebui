@@ -11,7 +11,7 @@ export const BetBox = ({data, opportunities, selectedBet}) => {
                 const isSelected = isSelectedBet(selectedBet, d);
                 const isSelectedGame = isSelectedRow(selectedBet, d);
                 const status = isOpportunity ? 'success' : d.status || 'default';
-                return <div key={uuidv4()} className={isSelectedGame ? 'selected' : 'cell'}>
+                return <div key={uuidv4()} className={`${isSelectedGame ? 'selected' : 'cell'}`}>
                     <CellBoxStyled
                         status={isSelected ? 'selected' : status}
                     >

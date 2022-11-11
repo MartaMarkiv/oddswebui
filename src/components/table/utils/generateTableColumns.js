@@ -48,6 +48,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
 
         const books  = [...new Set(data.map(d => Object.keys(d.books)).flat())];
 
+        const booksCount = books.length;
         const bookColumns = books.map((key, index) => ({
             title: capitalizeFirst(key),
             key: `${key}_${uuidv4()}`,
@@ -56,7 +57,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             children: [
                 {
                     title: 'Home',
-                    className: `subBookHeader tableHead odd`,
+                    className: `subBookHeader tableHead odd ${index === 0 ? 'first' : ''}`,
                     width: 96,
                     key: `${key}Home_${uuidv4()}`,
                     align: 'center',
@@ -65,7 +66,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                 },
                 {
                     title: 'Away',
-                    className: 'subBookHeader tableHead',
+                    className: `subBookHeader tableHead ${index === booksCount - 1 ? 'last' : ''}`,
                     width: 96,
                     align: 'center',
                     key: `${key}Away_${uuidv4()}`,

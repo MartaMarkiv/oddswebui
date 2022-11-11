@@ -18,7 +18,7 @@ export const parseData = (sportsData, booksList) => {
 
             const gameSportsBook = {};
 
-            booksList.forEach(bookItem => {
+            booksList.forEach((bookItem, index) => {
                 const {key: bookName} = bookItem;
                 const sportsbook = game.sportsbooks.find(sportsBookItem => sportsBookItem.sportsbook === bookName);
                 const currentBet = sportsbook ? sportsbook.bets.find(bet => bet.name === betType) : null;
@@ -31,14 +31,16 @@ export const parseData = (sportsData, booksList) => {
                     key: 'home',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
-                    game: game.game
+                    game: game.game,
+                    index
                 });
                 homeBets.push({
                     value: odds[1] ? odds[1].trim() : '-',
                     key: 'home',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
-                    game: game.game
+                    game: game.game,
+                    index
                 });
                 
                 const awayBets = [];
@@ -48,14 +50,16 @@ export const parseData = (sportsData, booksList) => {
                     key: 'away',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
-                    game: game.game
+                    game: game.game,
+                    index
                 });
                 awayBets.push({
                     value: odds[0] ? odds[0].trim() : '-',
                     key: 'away',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
-                    game: game.game
+                    game: game.game,
+                    index
                 });
 
                 gameSportsBook[bookName] = {
