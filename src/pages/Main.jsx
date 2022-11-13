@@ -34,7 +34,6 @@ export const Main = ({opportunities, selectedKey}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            // console.log(json);
             
             if (!json || !json.length) {
                 setData(null);
