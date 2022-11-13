@@ -102,14 +102,26 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                 <Group selected={selected === data.opportunity[key].id}
                                        onClick={(event) => groupSelectHandler(data.opportunity[key])}>
                                     {
-                                        data.opportunity[key].items.map((opportunity, i) =>
-                                            <GridRow key={i}>
+                                        data.opportunity[key].items.map((opportunity, i) => {
+                                            let typeValue = opportunity.type;
+                                            switch (opportunity.name) {
+                                                case 'Spread':
+                                                    typeValue = `${opportunity.type} ${opportunity.typeValue}`;
+                                                    break;
+                                                case 'Total':
+                                                    typeValue = opportunity.typeValue;
+                                                    break;
+                                                default:
+                                                    typeValue = opportunity.type;
+                                                    break;
+                                            }
+                                            return <GridRow key={i}>
                                                 <GridTd>{opportunity.name}</GridTd>
-                                                <GridTd>{opportunity.type} {opportunity.typeValue}</GridTd>
+                                                <GridTd>{typeValue}</GridTd>
                                                 <GridTd isValue>{opportunity.value} {}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
                                             </GridRow>
-                                        )
+                                        })
                                     }
                                     <div>Sum probability: {data.opportunity[key].sumProbability}</div>
                                 </Group>
