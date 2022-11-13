@@ -105,8 +105,8 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                         data.opportunity[key].items.map((opportunity, i) =>
                                             <GridRow key={i}>
                                                 <GridTd>{opportunity.name}</GridTd>
-                                                <GridTd>{opportunity.type}</GridTd>
-                                                <GridTd isValue>{opportunity.value}</GridTd>
+                                                <GridTd>{opportunity.type} {opportunity.typeValue}</GridTd>
+                                                <GridTd isValue>{opportunity.value} {}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
                                             </GridRow>
                                         )

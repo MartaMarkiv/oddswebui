@@ -1,3 +1,5 @@
+import camelCase from 'lodash.camelcase';
+
 export const parseData = (sportsData, booksList) => {
   
     let prevGameName = ""; //to correct display table data if there is empty line
@@ -71,7 +73,7 @@ export const parseData = (sportsData, booksList) => {
             })
 
             gamesAcc.push({
-                id: `${game.id} - ${betType}`,
+                id: camelCase(`${game.id} - ${betType}`),
                 sport: game.sport,
                 game: game.game,
                 type: game.type,

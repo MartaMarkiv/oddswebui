@@ -1,7 +1,7 @@
 import camelCase from 'lodash.camelcase';
 
 export const compareBets = (list, bet) => {
-    const betId = `${bet.game} - ${bet.betName}`
+    const betId = camelCase(`${bet.game} - ${bet.betName}`);
     const gameInfo = list.find(gameItem => gameItem.id === betId);
     if (gameInfo) {
         const betKey = camelCase(bet.betName);
