@@ -3,7 +3,7 @@ import {ReactComponent as AwayIcon} from '../../../assets/icons/away.svg';
 import {useCallback, useState} from "react";
 
 import {
-    Arrow, Body, GridBody, GridHead,
+    Body, GridBody, GridHead,
     GridRow,
     GridTd, GridTh,
     Header,
@@ -12,7 +12,6 @@ import {
     TeamBadge,
     TeamName,
     Teams,
-    Toggle,
     Grid, Group, Divider
 } from "./styles";
 import {TimeoutBadge} from "../../TimeoutBadge";
@@ -55,7 +54,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
         }
     }, [selected, onSelect]);
 
-    const keys = data.opportunities ? Object.keys(data.opportunities).map(key => data.opportunities[key].id) : []
+    const keys = data.opportunity ? Object.keys(data.opportunity).map(key => data.opportunity[key].id) : []
 
     return <OpportunityItemContainer selected={keys.includes(selected)}>
         <Header>

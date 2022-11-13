@@ -38,6 +38,7 @@ const Group = styled.div`
   ${({selected, theme}) => {
     return selected ? {
       background: theme.colors.drawer.groupBgSelected,
+      color: theme.colors.drawer.textSelected,
     } : {}
   }};
 `
@@ -98,7 +99,7 @@ const GridHead = styled.div`
 
 const GridRow = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  grid-template-columns: 2fr 1.5fr 1fr 1.5fr;
 `;
 
 const GridTh = styled.div`
