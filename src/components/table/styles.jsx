@@ -9,7 +9,7 @@ const StyledBettingTable = styled.div`
   &&& {
     .ant-table-container,
     .ant-table-container table {
-      border-color: ${({ theme }) => theme.colors.bgBody};
+      border-color: ${({ theme }) => theme.colors.table.border};
     }
   }
   
