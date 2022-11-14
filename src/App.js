@@ -56,7 +56,7 @@ function App() {
 
     const handleScroll = (value) => {
         const element = document.querySelector(`.${value.id}`);
-        element.scrollIntoView({block: 'center'});
+        element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
 
     return (
