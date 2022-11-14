@@ -49,6 +49,14 @@ function App() {
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
+        if (value) {
+            handleScroll(value);
+        }
+    }
+
+    const handleScroll = (value) => {
+        const element = document.querySelector(`.${value.id}`);
+        element.scrollIntoView({block: 'center'});
     }
 
     return (
