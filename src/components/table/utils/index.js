@@ -8,3 +8,4 @@ export * from './getSportsBooks';
 export * from './quartersFilter';
 export * from './sportsFilter';
 export * from "./isSelectedBet";
+export * from "./isSelectedRow";

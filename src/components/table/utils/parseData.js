@@ -1,3 +1,5 @@
+import camelCase from 'lodash.camelcase';
+
 export const parseData = (sportsData, booksList) => {
   
     let prevGameName = ""; //to correct display table data if there is empty line
@@ -18,7 +20,7 @@ export const parseData = (sportsData, booksList) => {
 
             const gameSportsBook = {};
 
-            booksList.forEach(bookItem => {
+            booksList.forEach((bookItem, index) => {
                 const {key: bookName} = bookItem;
                 const sportsbook = game.sportsbooks.find(sportsBookItem => sportsBookItem.sportsbook === bookName);
                 const currentBet = sportsbook ? sportsbook.bets.find(bet => bet.name === betType) : null;
@@ -30,15 +32,17 @@ export const parseData = (sportsData, booksList) => {
                     status: type[1] && 'secondary',
                     key: 'home',
                     book: bookName.trim(),
-                    betName: currentBet ? currentBet.name : '-',
-                    game: game.game
+                    betName: currentBet ? currentBet.name : betType,
+                    game: game.game,
+                    index
                 });
                 homeBets.push({
                     value: odds[1] ? odds[1].trim() : '-',
                     key: 'home',
                     book: bookName.trim(),
-                    betName: currentBet ? currentBet.name : '-',
-                    game: game.game
+                    betName: currentBet ? currentBet.name : betType,
+                    game: game.game,
+                    index
                 });
                 
                 const awayBets = [];
@@ -47,15 +51,17 @@ export const parseData = (sportsData, booksList) => {
                     status: type[0] && 'secondary',
                     key: 'away',
                     book: bookName.trim(),
-                    betName: currentBet ? currentBet.name : '-',
-                    game: game.game
+                    betName: currentBet ? currentBet.name : betType,
+                    game: game.game,
+                    index
                 });
                 awayBets.push({
                     value: odds[0] ? odds[0].trim() : '-',
                     key: 'away',
                     book: bookName.trim(),
-                    betName: currentBet ? currentBet.name : '-',
-                    game: game.game
+                    betName: currentBet ? currentBet.name : betType,
+                    game: game.game,
+                    index
                 });
 
                 gameSportsBook[bookName] = {
@@ -63,11 +69,11 @@ export const parseData = (sportsData, booksList) => {
                         home: homeBets,
                         away: awayBets
                     }
-                }
+                };
             })
 
             gamesAcc.push({
-                id: `${game.id} - ${betType}`,
+                id: camelCase(`${game.id} - ${betType}`),
                 sport: game.sport,
                 game: game.game,
                 type: game.type,

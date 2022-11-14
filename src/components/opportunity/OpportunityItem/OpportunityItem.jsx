@@ -3,7 +3,7 @@ import {ReactComponent as AwayIcon} from '../../../assets/icons/away.svg';
 import {useCallback, useState} from "react";
 
 import {
-    Arrow, Body, GridBody, GridHead,
+    Body, GridBody, GridHead,
     GridRow,
     GridTd, GridTh,
     Header,
@@ -12,7 +12,6 @@ import {
     TeamBadge,
     TeamName,
     Teams,
-    Toggle,
     Grid, Group, Divider
 } from "./styles";
 import {TimeoutBadge} from "../../TimeoutBadge";
@@ -55,7 +54,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
         }
     }, [selected, onSelect]);
 
-    const keys = data.opportunities ? Object.keys(data.opportunities).map(key => data.opportunities[key].id) : []
+    const keys = data.opportunity ? Object.keys(data.opportunity).map(key => data.opportunity[key].id) : []
 
     return <OpportunityItemContainer selected={keys.includes(selected)}>
         <Header>
@@ -102,14 +101,26 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                 <Group selected={selected === data.opportunity[key].id}
                                        onClick={(event) => groupSelectHandler(data.opportunity[key])}>
                                     {
-                                        data.opportunity[key].items.map((opportunity, i) =>
-                                            <GridRow key={i}>
+                                        data.opportunity[key].items.map((opportunity, i) => {
+                                            let typeValue = opportunity.type;
+                                            switch (opportunity.name) {
+                                                case 'Spread':
+                                                    typeValue = `${opportunity.type} ${opportunity.typeValue}`;
+                                                    break;
+                                                case 'Total':
+                                                    typeValue = opportunity.typeValue;
+                                                    break;
+                                                default:
+                                                    typeValue = opportunity.type;
+                                                    break;
+                                            }
+                                            return <GridRow key={i}>
                                                 <GridTd>{opportunity.name}</GridTd>
-                                                <GridTd>{opportunity.type}</GridTd>
-                                                <GridTd isValue>{opportunity.value}</GridTd>
+                                                <GridTd>{typeValue}</GridTd>
+                                                <GridTd isValue>{opportunity.value} {}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
                                             </GridRow>
-                                        )
+                                        })
                                     }
                                     <div>Sum probability: {data.opportunity[key].sumProbability}</div>
                                 </Group>

@@ -62,11 +62,6 @@ export const BettingTable = ({
             pagination={false}
             size="middle"
             components={components}
-            rowClassName={(record, index) => {
-                if (selectedRow && record.id === selectedRow.id) {
-                    return "selected"
-                } else return "row"
-            }}
         />
     </StyledBettingTable>
 };

@@ -46,9 +46,51 @@ const StyledBettingTable = styled.div`
   .betTypeCell {
     min-width: 140px;
     vertical-align: baseline;
-    padding-top: 18px !important;
-    padding-bottom: 18px !important;
+    padding: 18px 5px !important;
     color: ${({ theme }) => theme.colors.table.secondaryText};
+  }
+
+  .row-cell .selected:last-child {
+    border-top: 2px solid #52DAA9;
+    border-bottom: 2px solid #52DAA9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 5px #52daa9;
+    position: relative;
+    &::before { 
+      content: "";
+      background-color: white;
+      position:absolute;
+      height: 100%;
+      top:0;
+      left:-10px;
+      width: 10px;
+    }
+    &::after { 
+      content: "";
+      background-color: white;
+      position:absolute;
+      height: 100%;
+      top:0;
+      right:-10px;
+      width: 10px;
+    }
+  }
+
+  .ant-table-cell.first .row-cell .selected:last-child {
+    border-left: 2px solid #52DAA9;
+    &::before { 
+      opacity: 0;
+    }
+  }
+
+  .ant-table-cell.last .row-cell .selected:last-child {
+    border-right: 2px solid #52DAA9;
+    &::after { 
+      opacity: 0;
+    }
   }
 `;
 

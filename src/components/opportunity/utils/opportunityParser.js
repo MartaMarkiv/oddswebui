@@ -18,7 +18,7 @@ export const parser = data => {
             
             let opportunity = {};
             opportunity[key] = {
-                id: `${game} - ${bets.name}`,
+                id: camelCase(`${game} - ${bets.name}`),
                 items: [],
                 sumProbability: sumProbability,
             }

@@ -1,5 +1,7 @@
+import camelCase from 'lodash.camelcase';
+
 export const isSelectedBet = (selected, bet) => {
-    const betId = `${bet.game} - ${bet.betName}`
+    const betId = camelCase(`${bet.game} - ${bet.betName}`);
     const isSelectedGame = selected && selected.id === betId;
     if (isSelectedGame) {
         const betInfo = selected[bet.key];
