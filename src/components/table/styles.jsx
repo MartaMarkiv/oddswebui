@@ -61,7 +61,7 @@ const StyledBettingTable = styled.div`
     position: relative;
     &::before { 
       content: "";
-      background-color: white;
+      background-color: ${({ theme }) => theme.colors.bgBody};
       position:absolute;
       height: 100%;
       top:0;
@@ -70,7 +70,7 @@ const StyledBettingTable = styled.div`
     }
     &::after { 
       content: "";
-      background-color: white;
+      background-color: ${({ theme }) => theme.colors.bgBody};
       position:absolute;
       height: 100%;
       top:0;

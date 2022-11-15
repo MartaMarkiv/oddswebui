@@ -140,10 +140,12 @@ export const dark = {
             borderPrimary: "#2C3844",
             borderSuccess: "rgba(82, 218, 169, 0.21)",
             borderSecondary: "#2C3844",
+            borderSelected: "none",
 
             bgPrimary: "#0C0B0E",
             bgSecondary: "#0C0B0E",
             bgSuccess: "rgba(82, 218, 169, 0.21)",
+            bgSelected: "linear-gradient(116.06deg, #FCBE1D 9.63%, #FF0C0C 95.26%)",
 
             text: "#FFFFFF",
             textSuccess: "#52DAA9",
