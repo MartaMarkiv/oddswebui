@@ -41,12 +41,12 @@ spec:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
           readinessProbe:
             httpGet:
               path: /
               port: http
-            initialDelaySeconds: 60
+            initialDelaySeconds: 10
           command: {{ .Values.command }}
           args: {{ .Values.args }}
           resources:

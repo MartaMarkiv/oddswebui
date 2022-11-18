@@ -8,7 +8,7 @@ service:
   port: 80
 
 basicAuth:
-  authString: user:$apr1$av9fesol$zxfoN9w1IJg5NBULPWnVz/
+  authString: user:$apr1$BuKn3DhM$nGKMk0hwQOObznaIef0FJ0
 
 command: 
   - '"/bin/bash", "-c"'
