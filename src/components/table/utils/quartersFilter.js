@@ -1,38 +1,37 @@
-import {FULL_QUARTERS} from "../../../constants";
+import {FULL_QUARTERS, QUARTERS_LIST} from "../../../constants";
 
 export const quartersFilter = (data, quarters) => {
     
     const fullBets = quarters.indexOf('full') >= 0;
     const otherGames = quarters.indexOf('other') >= 0;
-    const gameQuarters = quarters;
 
-    let prevGameBets = 0;
-    let countBetsCounter = 0;
-    let prevGameName = data[0].game;
+    let prevGameName = '';
 
     const tableData = [];
 
     data.forEach((game) => {
-        const filteredBets = fullBets ?
-            game.betType :
-            quarters.reduce(
-                (prev, curr) => prev || game.betType.toLowerCase().indexOf(curr) >= 0,
-                false
-              );
-
-        const isFilteredGame = gameQuarters.reduce(
-            (prev, curr) => prev || game.time.toLowerCase().indexOf(curr) >= 0,
+        const isFilteredGame = quarters.reduce(
+            (prev, curr) => prev || QUARTERS_LIST[curr].filter(item =>
+                game.time.toLowerCase().indexOf(item) >= 0).length > 0,
             false
           );
 
+        const filteredBets = fullBets ?
+            game.betType :
+            quarters.reduce(
+                (prev, curr) => prev || QUARTERS_LIST[curr].filter(item =>
+                    game.betType.toLowerCase().indexOf(item) >= 0).length > 0,
+                false
+                );
+
         const saveGame = () => {
+            let isDisplayName = false;
             if (game.game !== prevGameName) {
-                prevGameBets = countBetsCounter;
                 prevGameName = game.game;
+                isDisplayName = true;
             }
-            countBetsCounter++;
             
-            tableData.push({...game, prevGameBets: prevGameBets || 0});
+            tableData.push({...game, isDisplayName});
         }
 
         if (isFilteredGame && filteredBets) {
@@ -46,5 +45,8 @@ export const quartersFilter = (data, quarters) => {
         }
     });
 
-    return tableData;
+    return tableData.map(item => {
+        const countBetsCounter = tableData.filter(elem => elem.game === item.game).length;
+        return {...item, countBetTypes: countBetsCounter}
+    });
 };
