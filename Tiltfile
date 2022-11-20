@@ -11,10 +11,11 @@ yaml = helm(
   # The release name, equivalent to helm --name
   name='oddsbender-web-ui',
   # REPLACE HERE - The namespace to install in, equivalent to helm --namespace
-  namespace='dev-oddsbender',
+  namespace='prod-oddsbender',
   # The values file to substitute into the chart.
   values=[
-    'conf-deploy/common.values.yaml'
+    'conf-deploy/common.values.yaml',
+    'conf-deploy/production.values.yaml'
   ],
   set = [
     'command=[]', 'args=[]'
@@ -31,8 +32,8 @@ k8s_yaml(yaml)
 ## When the package.json or package-lock.json are changed trigger an npm install inside of the pod.
 ## https://docs.tilt.dev/api.html#api.docker_build-ui
 docker_build('157485876214.dkr.ecr.us-east-2.amazonaws.com/web-ui', '.',
-	dockerfile='Dockerfile.dev',
-  # dockerfile='./build_images/web-ui/Dockerfile',
+	# dockerfile='Dockerfile.dev',
+  dockerfile='./build_images/web-ui/Dockerfile',
     ignore=['csv', 'Tiltfile', '.vscode', 'deploy/*', '.venv/*'],
     live_update=[
       sync('./src', '/app/web/src'),
