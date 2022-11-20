@@ -11,10 +11,11 @@ yaml = helm(
   # The release name, equivalent to helm --name
   name='oddsbender-web-ui',
   # REPLACE HERE - The namespace to install in, equivalent to helm --namespace
-  namespace='dev-oddsbender',
+  namespace='prod-oddsbender',
   # The values file to substitute into the chart.
   values=[
-    'conf-deploy/common.values.yaml'
+    'conf-deploy/common.values.yaml',
+    'conf-deploy/production.values.yaml'
   ],
   set = [
     'command=[]', 'args=[]'
