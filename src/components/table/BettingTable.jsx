@@ -58,7 +58,6 @@ export const BettingTable = ({
             dataLength={data.length}
             next={loadMoreData}
             hasMore={hasMore}
-            loader={<h4>Loading more 2 itens...</h4>}
         >
             <Table
                 className="table-layout"

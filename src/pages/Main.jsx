@@ -71,7 +71,7 @@ export const Main = ({
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
                             loadMoreData={loadMoreData}
-                            hasMore={tableData.length !== dataLength}
+                            hasMore={tableData.length < dataLength}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
