@@ -12,7 +12,7 @@ import {
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-import {TABLE_DATA, QUARTERS_LIST} from "../constants";
+import {TABLE_DATA} from "../constants";
 
 const client = new WebSocket(TABLE_DATA);
 
@@ -22,6 +22,7 @@ const StyledMain = styled.div`
 
 export const Main = ({opportunities, selectedKey}) => {
     const [data, setData] = useState(null);
+    const [dataLength, setDataLength] = useState(20);
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedSports, setSelectedSports] = useState([]);
@@ -66,14 +67,19 @@ export const Main = ({opportunities, selectedKey}) => {
         loadDataFromApi();
     }, []);
 
-    const changeQuarters = (values) => {
-        const list = values.map(item => QUARTERS_LIST[item]).flat();
-        setSelectedQuarters(list);
+    const loadMoreData = () => {
+        setDataLength(dataLength + 2);
     }
 
-    let filteredData = selectedSports.length ?
-        sportsFilter(data, selectedSports) :
-        data;
+    const changeQuarters = (values) => {
+        setSelectedQuarters(values);
+    }
+
+    let filteredData = data ? data.slice(0, dataLength) : [];
+
+    filteredData = selectedSports.length ?
+        sportsFilter(filteredData, selectedSports) :
+        filteredData;
 
     filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(filteredData, selectedSportsBooks) :
@@ -101,6 +107,8 @@ export const Main = ({opportunities, selectedKey}) => {
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
+                            loadMoreData={loadMoreData}
+                            hasMore={filteredData.length !== data.length}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

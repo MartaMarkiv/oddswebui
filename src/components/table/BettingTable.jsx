@@ -6,6 +6,7 @@ import {GameInfoBox} from "../GameInfoBox";
 import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 export const BettingTable = ({
     data,
@@ -16,7 +17,9 @@ export const BettingTable = ({
     selectedQuarters,
     sportsTypes,
     changeSport,
-    selectedRow
+    selectedRow,
+    loadMoreData,
+    hasMore
 }) => {
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
@@ -51,17 +54,25 @@ export const BettingTable = ({
             sports={sportsTypes}
             changeSport={changeSport}
         />
-        <Table
-            className="table-layout"
-            columns={columns}
-            dataSource={data}
-            sticky={true}
-            rowKey="id"
-            bordered
-            scroll={{ x: window.innerWidth }}
-            pagination={false}
-            size="middle"
-            components={components}
-        />
+        <InfiniteScroll
+            dataLength={data.length}
+            next={loadMoreData}
+            hasMore={hasMore}
+            loader={<h4>Loading more 2 itens...</h4>}
+        >
+            <Table
+                className="table-layout"
+                columns={columns}
+                dataSource={data}
+                sticky={true}
+                rowKey="id"
+                bordered
+                scroll={{ x: window.innerWidth }}
+                pagination={false}
+                size="middle"
+                components={components}
+            />
+        </InfiniteScroll>
+        
     </StyledBettingTable>
 };
