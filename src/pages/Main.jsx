@@ -25,20 +25,13 @@ export const Main = ({
     tableData,
     loadMoreData
 }) => {
-    // const [dataLength, setDataLength] = useState(10);
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
 
-    // const loadMoreData = () => {
-    //     setDataLength(dataLength + 2);
-    // }
-
     const changeQuarters = (values) => {
         setSelectedQuarters(values);
     }
-
-    // let filteredData = tableData ? tableData.slice(0, dataLength) : [];
 
     let filteredData = selectedSports.length ?
         sportsFilter(tableData, selectedSports) :
