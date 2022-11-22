@@ -15,25 +15,34 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
-export const Main = ({opportunities, selectedKey, data, sportsTypes, sportsBooks, pending}) => {
-    const [dataLength, setDataLength] = useState(10);
+export const Main = ({
+    opportunities,
+    selectedKey,
+    dataLength,
+    sportsTypes,
+    sportsBooks,
+    pending,
+    tableData,
+    loadMoreData
+}) => {
+    // const [dataLength, setDataLength] = useState(10);
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
 
-    const loadMoreData = () => {
-        setDataLength(dataLength + 2);
-    }
+    // const loadMoreData = () => {
+    //     setDataLength(dataLength + 2);
+    // }
 
     const changeQuarters = (values) => {
         setSelectedQuarters(values);
     }
 
-    let filteredData = data ? data.slice(0, dataLength) : [];
+    // let filteredData = tableData ? tableData.slice(0, dataLength) : [];
 
-    filteredData = selectedSports.length ?
-        sportsFilter(filteredData, selectedSports) :
-        filteredData;
+    let filteredData = selectedSports.length ?
+        sportsFilter(tableData, selectedSports) :
+        tableData;
 
     filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(filteredData, selectedSportsBooks) :
@@ -48,7 +57,7 @@ export const Main = ({opportunities, selectedKey, data, sportsTypes, sportsBooks
             ? <PendingScreen/>
             : <>
                 {
-                    data
+                    dataLength
                     ? <>
                         <Title>Betting table</Title>
                         <BettingTable
@@ -62,7 +71,7 @@ export const Main = ({opportunities, selectedKey, data, sportsTypes, sportsBooks
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
                             loadMoreData={loadMoreData}
-                            hasMore={filteredData.length !== data.length}
+                            hasMore={tableData.length !== dataLength}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

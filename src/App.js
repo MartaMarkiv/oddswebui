@@ -40,8 +40,11 @@ export const ThemePreferenceContext = createContext();
 function App() {
     const initialTheme = localStorage.getItem('theme') || 'light';
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
+
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
+    const [dataLength, setDataLength] = useState(10);
+
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
@@ -94,15 +97,27 @@ function App() {
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
-        if (value) {
-            handleScroll(value);
+        if (value && data) {
+            const indexTableData =  data.map(e => e.id).indexOf(value.id);
+            if (indexTableData > dataLength) {
+                setDataLength(indexTableData + 2);
+                setTimeout(() => handleScroll(value), 500);
+            } else {
+                handleScroll(value);
+            }
         }
+    }
+
+     const loadMoreData = () => {
+        setDataLength(dataLength + 2);
     }
 
     const handleScroll = (value) => {
         const element = document.querySelector(`.${value.id}`);
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
+
+    const tableData = data ? data.slice(0, dataLength) : [];
 
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
@@ -123,10 +138,12 @@ function App() {
                                         <Main
                                             opportunities={opportunities}
                                             selectedKey={selectedKey}
-                                            data={data}
+                                            dataLength={data ? data.length : 0}
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
+                                            loadMoreData={loadMoreData}
+                                            tableData={tableData}
                                         />
                                     }/>
                                 </Routes>
