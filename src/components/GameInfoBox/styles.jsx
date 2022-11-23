@@ -18,8 +18,7 @@ const GameName = styled.div`
 `;
 
 const TimeGroup = styled.div`
-  margin-top: 26px;
-  margin-bottom: 12px;
+  margin: 12px 0;
 `;
 
 const TextSecondary = styled.div`

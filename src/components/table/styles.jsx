@@ -4,6 +4,10 @@ const StyledBettingTable = styled.div`
   .ant-table {
     background: ${({ theme }) => theme.colors.bgBody};
     color: ${({ theme }) => theme.colors.textPrimary};
+
+    &.ant-table-middle {
+      font-size: 13px;
+    }
   }
   
   &&& {
@@ -24,7 +28,7 @@ const StyledBettingTable = styled.div`
   }
   
   .subBookHeader {
-    min-width: 96px;
+    min-width: 90px;
     max-width: 96px;
   }
   
