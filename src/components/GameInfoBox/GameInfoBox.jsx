@@ -8,7 +8,7 @@ export const GameInfoBox = ({data}) => {
         <TimeGroup>
             <TextSecondary>Time remaining</TextSecondary>
             <Text>{time}</Text>
+            {!!(+timeout) && <TimeoutBadge/>}
         </TimeGroup>
-        {!!(+timeout) && <TimeoutBadge/>}
     </GameInfoBoxStyled>
 }

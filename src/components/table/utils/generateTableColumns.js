@@ -41,7 +41,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                     className: 'betTypeCell cellShadow',
                     fixed: true,
                     width: 140,
-                    colSpan: 0
+                    colSpan: 0,
                 }
             ]
         }

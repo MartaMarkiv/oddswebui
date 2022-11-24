@@ -23,7 +23,6 @@ const StyledBettingTable = styled.div`
   
   .gameCell {
     min-width: 130px;
-    max-width: 130px;
     color: ${({ theme }) => theme.colors.table.secondaryText};
   }
   

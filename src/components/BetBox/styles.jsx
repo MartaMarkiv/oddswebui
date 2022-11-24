@@ -16,7 +16,6 @@ const CellBoxStyled = styled.div`
             return theme.colors.betBox.borderPrimary;
     }
 }};
-  margin: 5px;
   display: flex;
   align-items: center;
   justify-content: center;

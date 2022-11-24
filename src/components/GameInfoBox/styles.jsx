@@ -2,18 +2,15 @@ import styled from "styled-components";
 
 const GameInfoBoxStyled = styled.div`
   padding: 15px;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
 `;
 
 const GameName = styled.div`
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
+  margin-left: 10px;
   color: ${({theme}) => theme.colors.textSecondary};
 `;
 

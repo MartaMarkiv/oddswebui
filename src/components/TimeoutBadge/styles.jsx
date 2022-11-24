@@ -4,6 +4,7 @@ const TimeoutBadgeContainer = styled.div`
   background: #FFD43D;
   font-weight: 400;
   font-size: 14px;
+  margin-top: 10px;
   color: #000000;
   display: flex;
   align-items: center;
