@@ -1,7 +1,7 @@
 import {capitalizeFirst} from "../../../utils/capitalizeFirst";
 import {v4 as uuidv4} from "uuid";
 
-export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) => {
+export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer, betTypeRenderer}) => {
     const initialColumns = [];
 
     if(data && data.length) {
@@ -42,6 +42,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                     fixed: true,
                     width: 140,
                     colSpan: 0,
+                    render: betTypeRenderer
                 }
             ]
         }

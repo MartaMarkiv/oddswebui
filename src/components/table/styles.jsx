@@ -49,7 +49,6 @@ const StyledBettingTable = styled.div`
   .betTypeCell {
     min-width: 140px;
     vertical-align: baseline;
-    padding: 18px 5px !important;
     color: ${({ theme }) => theme.colors.table.secondaryText};
   }
 
