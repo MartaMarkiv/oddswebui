@@ -18,7 +18,7 @@ const StyledBettingTable = styled.div`
   }
   
   .sportsBookCell {
-    min-width: 270px;
+    min-width: 445px;
   }
   
   .gameCell {

@@ -27,7 +27,25 @@ export const parseData = (sportsData, booksList) => {
                 const {type = [], odds = []} = currentBet || {};
 
                 const homeBets = [];
-                countBets === 2 && homeBets.push({
+                // countBets === 2 && homeBets.push({
+                //     value: type[1] ? type[1].trim() : '-',
+                //     status: type[1] && 'secondary',
+                //     key: 'home',
+                //     book: bookName.trim(),
+                //     betName: currentBet ? currentBet.name : betType,
+                //     game: game.game,
+                //     index
+                // });
+                // homeBets.push({
+                //     value: odds[1] ? odds[1].trim() : '-',
+                //     key: 'home',
+                //     book: bookName.trim(),
+                //     betName: currentBet ? currentBet.name : betType,
+                //     game: game.game,
+                //     index
+                // });
+
+                homeBets.push({
                     value: type[1] ? type[1].trim() : '-',
                     status: type[1] && 'secondary',
                     key: 'home',
@@ -37,7 +55,8 @@ export const parseData = (sportsData, booksList) => {
                     index
                 });
                 homeBets.push({
-                    value: odds[1] ? odds[1].trim() : '-',
+                    value: type[0] ? type[0].trim() : '-',
+                    status: type[0] && 'secondary',
                     key: 'home',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
@@ -46,9 +65,8 @@ export const parseData = (sportsData, booksList) => {
                 });
                 
                 const awayBets = [];
-                countBets === 2 && awayBets.push({
-                    value: type[0] ? type[0].trim() : '-',
-                    status: type[0] && 'secondary',
+                awayBets.push({
+                    value: odds[1] ? odds[1].trim() : '-',
                     key: 'away',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,

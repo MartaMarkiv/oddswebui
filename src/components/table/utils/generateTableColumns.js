@@ -57,7 +57,6 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer, be
             align: 'center',
             children: [
                 {
-                    title: 'Home',
                     className: `subBookHeader tableHead odd ${index === 0 ? 'first' : ''}`,
                     width: 96,
                     key: `${key}Home_${uuidv4()}`,
@@ -66,7 +65,6 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer, be
                     render: betRenderer,
                 },
                 {
-                    title: 'Away',
                     className: `subBookHeader tableHead ${index === booksCount - 1 ? 'last' : ''}`,
                     width: 96,
                     align: 'center',

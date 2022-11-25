@@ -48,6 +48,7 @@ export const Main = ({opportunities, selectedKey}) => {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
+            console.log(allGames);
             const booksList = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 

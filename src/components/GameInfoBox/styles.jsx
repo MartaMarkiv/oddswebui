@@ -3,7 +3,12 @@ import styled from "styled-components";
 const GameInfoBoxStyled = styled.div`
   padding: 15px;
   display: flex;
-  flex-direction: row-reverse;
+  flex-direction: row;
+`;
+
+const GameNameGroup = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 const GameName = styled.div`
@@ -11,17 +16,20 @@ const GameName = styled.div`
   font-weight: 600;
   font-size: 14px;
   margin-left: 10px;
+  white-space: nowrap;
   color: ${({theme}) => theme.colors.textSecondary};
 `;
 
 const TimeGroup = styled.div`
-  margin-top: 12px;
+  width: 100px;
+  border-right: 1px solid #DFE5EB;
+  padding-right: 10px;
 `;
 
 const TextSecondary = styled.div`
   font-style: normal;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 13px;
   color: ${({theme}) => theme.colors.textSecondary};
 `;
 
@@ -31,6 +39,7 @@ const Text = styled(TextSecondary)`
 
 export {
     GameInfoBoxStyled,
+    GameNameGroup,
     GameName,
     TimeGroup,
     TextSecondary,

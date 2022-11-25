@@ -3,7 +3,7 @@ import styled from "styled-components";
 const TimeoutBadgeContainer = styled.div`
   background: #FFD43D;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 12px;
   margin-top: 10px;
   color: #000000;
   display: flex;
@@ -28,7 +28,7 @@ const TimeoutBadgeContainer = styled.div`
             return {
                 height: '24px',
                 borderRadius: '4px',
-                width: '79px'
+                width: '70px'
             }
     }
 }}

@@ -21,6 +21,10 @@ body {
   transition: background 0s !important;
 }
 
+.ant-table-thead > tr:nth-child(2) {
+  display: none;
+}
+
 .ant-table-sticky-holder {
   background: inherit;
 }
