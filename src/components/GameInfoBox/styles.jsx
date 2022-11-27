@@ -9,6 +9,7 @@ const GameInfoBoxStyled = styled.div`
 const GameNameGroup = styled.div`
   display: flex;
   flex-direction: column;
+  width: 150px;
 `;
 
 const GameName = styled.div`
@@ -16,7 +17,6 @@ const GameName = styled.div`
   font-weight: 600;
   font-size: 14px;
   margin-left: 10px;
-  white-space: nowrap;
   color: ${({theme}) => theme.colors.textSecondary};
 `;
 

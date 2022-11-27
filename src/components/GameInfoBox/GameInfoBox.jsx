@@ -11,8 +11,7 @@ export const GameInfoBox = ({data}) => {
             {!!(+timeout) && <TimeoutBadge/>}
         </TimeGroup>
         <GameNameGroup>
-            <GameName>{awayTeam}</GameName>
-            <GameName>@</GameName>
+            <GameName>{awayTeam} @</GameName>
             <GameName>{homeTeam}</GameName>
         </GameNameGroup>
     </GameInfoBoxStyled>

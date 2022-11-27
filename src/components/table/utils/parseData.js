@@ -26,56 +26,44 @@ export const parseData = (sportsData, booksList) => {
                 const currentBet = sportsbook ? sportsbook.bets.find(bet => bet.name === betType) : null;
                 const {type = [], odds = []} = currentBet || {};
 
-                const homeBets = [];
-                // countBets === 2 && homeBets.push({
-                //     value: type[1] ? type[1].trim() : '-',
-                //     status: type[1] && 'secondary',
-                //     key: 'home',
-                //     book: bookName.trim(),
-                //     betName: currentBet ? currentBet.name : betType,
-                //     game: game.game,
-                //     index
-                // });
-                // homeBets.push({
-                //     value: odds[1] ? odds[1].trim() : '-',
-                //     key: 'home',
-                //     book: bookName.trim(),
-                //     betName: currentBet ? currentBet.name : betType,
-                //     game: game.game,
-                //     index
-                // });
+                const typeBets = [];
+                // console.log(currentBet && currentBet.name, "    ", odds[0], "   ", odds[1]);
 
-                homeBets.push({
-                    value: type[1] ? type[1].trim() : '-',
-                    status: type[1] && 'secondary',
-                    key: 'home',
+                const awayValue = currentBet && currentBet.name === 'Moneyline' ? 'Away' :
+                    type[0] ? type[0].trim() : '-';
+                typeBets.push({
+                    value: awayValue,//type[0] ? type[0].trim() : '-',
+                    status: 'secondary',
+                    key: 'type',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
                     index
                 });
-                homeBets.push({
-                    value: type[0] ? type[0].trim() : '-',
-                    status: type[0] && 'secondary',
-                    key: 'home',
+                const homeValue = currentBet && currentBet.name === 'Moneyline' ? 'Home' :
+                    type[1] ? type[1].trim() : '-';
+                typeBets.push({
+                    value: homeValue, //type[1] ? type[1].trim() : '-',
+                    status: 'secondary',
+                    key: 'type',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
                     index
                 });
                 
-                const awayBets = [];
-                awayBets.push({
-                    value: odds[1] ? odds[1].trim() : '-',
-                    key: 'away',
+                const oddsBets = [];
+                oddsBets.push({
+                    value: odds[0] ? odds[0].trim() : '-',
+                    key: 'odds',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
                     index
                 });
-                awayBets.push({
-                    value: odds[0] ? odds[0].trim() : '-',
-                    key: 'away',
+                oddsBets.push({
+                    value: odds[1] ? odds[1].trim() : '-',
+                    key: 'odds',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
@@ -84,8 +72,8 @@ export const parseData = (sportsData, booksList) => {
 
                 gameSportsBook[bookName] = {
                     bets: {
-                        home: homeBets,
-                        away: awayBets
+                        type: typeBets,
+                        odds: oddsBets
                     }
                 };
             })

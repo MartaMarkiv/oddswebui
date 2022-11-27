@@ -18,17 +18,17 @@ const StyledBettingTable = styled.div`
   }
   
   .sportsBookCell {
-    min-width: 445px;
+    min-width: 400px;
   }
   
   .gameCell {
-    min-width: 130px;
+    max-width: 280px;
     color: ${({ theme }) => theme.colors.table.secondaryText};
   }
   
   .subBookHeader {
-    min-width: 90px;
-    max-width: 96px;
+    max-width: 85px;
+    min-width: 75px;
   }
   
   .cellShadow {
@@ -47,9 +47,10 @@ const StyledBettingTable = styled.div`
   }
 
   .betTypeCell {
-    min-width: 140px;
     vertical-align: baseline;
     color: ${({ theme }) => theme.colors.table.secondaryText};
+    padding: 10px !important;
+    min-width: 120px
   }
 
   .row-cell .selected:last-child {

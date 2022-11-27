@@ -3,7 +3,6 @@ import React from 'react';
 import {generateTableColumnData} from "./utils";
 import {BetBox} from "../BetBox";
 import {GameInfoBox} from "../GameInfoBox";
-import {BetTypeBox} from "../BetTypeBox";
 import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
@@ -27,13 +26,10 @@ export const BettingTable = ({
         return <GameInfoBox data={data} />
     }
 
-    const betTypeRenderer = (_, data) => <BetTypeBox data={data} />
-
     const columns = generateTableColumnData({
         data,
         betRenderer,
-        gameInfoRenderer,
-        betTypeRenderer
+        gameInfoRenderer
     });
 
     const components = {

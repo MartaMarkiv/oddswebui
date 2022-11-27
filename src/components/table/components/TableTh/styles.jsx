@@ -17,7 +17,7 @@ const ThStyled = styled.th`
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
-    min-width: 180px;
+    min-width: 150px;
   }
 `
 
