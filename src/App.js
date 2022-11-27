@@ -50,12 +50,12 @@ function App() {
     const changeSelectedKey = value => {
         setSelectedKey(value);
         if (value) {
-            setTimeout(() => handleScroll(), 100);
+            handleScroll(value);
         }
     }
 
-    const handleScroll = () => {
-        const element = document.querySelector(`.selected-game-row`);
+    const handleScroll = (value) => {
+        const element = document.querySelector(`.${value.id}`);
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
 

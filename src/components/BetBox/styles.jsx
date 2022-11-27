@@ -3,7 +3,6 @@ import styled from "styled-components";
 const CellBoxStyled = styled.div`
   width: 60px;
   height: 30px;
-  border-radius: 4px;
   border: 1px solid ${({theme, status}) => {
     switch (status) {
         case 'secondary':
