@@ -53,7 +53,7 @@ const StyledBettingTable = styled.div`
     min-width: 120px
   }
 
-  .row-cell .selected:last-child {
+  .row-cell.selected-game-row:last-child {
     border-top: 2px solid #52DAA9;
     border-bottom: 2px solid #52DAA9;
     width: 100%;
@@ -82,14 +82,14 @@ const StyledBettingTable = styled.div`
     }
   }
 
-  .ant-table-cell.first .row-cell .selected:last-child {
+  .ant-table-cell.first .row-cell.selected-game-row:last-child {
     border-left: 2px solid #52DAA9;
     &::before { 
       opacity: 0;
     }
   }
 
-  .ant-table-cell.last .row-cell .selected:last-child {
+  .ant-table-cell.last .row-cell.selected-game-row:last-child {
     border-right: 2px solid #52DAA9;
     &::after { 
       opacity: 0;

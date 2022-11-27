@@ -5,8 +5,10 @@ import {CellBoxStyled} from "./styles";
 import {compareBets, isSelectedBet, isSelectedRow} from '../table/utils';
 
 export const BetBox = ({data, opportunities, selectedBet}) => {
+    // console.log(data);
     const rowName = data ? camelCase(`${data[0].game} - ${data[0].betName}`) : '';
-    return <Row justify="center" className={`row-cell ${rowName}`}>
+    const rowClassName = selectedBet && rowName === selectedBet.id ? 'selected-game-row' : 'row-game';
+    return <Row justify="center" className={`row-cell ${rowClassName}`}>
         { data && data.length &&
             data.map(d => {
                 const isOpportunity = d && opportunities ? compareBets(opportunities, d) : false;

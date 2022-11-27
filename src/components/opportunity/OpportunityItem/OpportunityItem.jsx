@@ -1,6 +1,6 @@
 import {ReactComponent as HomeIcon} from '../../../assets/icons/home.svg';
 import {ReactComponent as AwayIcon} from '../../../assets/icons/away.svg';
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 
 import {
     Body, GridBody, GridHead,
@@ -17,18 +17,7 @@ import {
 import {TimeoutBadge} from "../../TimeoutBadge";
 import {TeamLogoGroup} from "../../TeamLogo";
 
-
-const INITIAL_ROW_COUNT = 1;
-
 export const OpportunityItem = ({onSelect, data, selected}) => {
-    const [showRowCount, setShowRowCount] = useState(INITIAL_ROW_COUNT);
-    const [isOpened, setIsOpened] = useState(false);
-
-    const toggle = (event) => {
-        event.stopPropagation();
-        setIsOpened(!isOpened);
-        setShowRowCount(isOpened ? INITIAL_ROW_COUNT : Object.keys(data.opportunities).length)
-    }
 
     const groupSelectHandler = useCallback(({id, items}) => {
         if (selected === id) {
@@ -92,7 +81,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
                 <GridBody>
                     {
-                        data?.opportunity && Object.keys(data.opportunity).slice(0, showRowCount).map((key, index) => {
+                        data?.opportunity && Object.keys(data.opportunity).map((key, index) => {
                             return <div key={index}>
                                 {
                                     index > 1 && <Divider />

@@ -48,7 +48,7 @@ export const parser = data => {
             });
 
             collection.push({
-                id: `${id} - ${bets.name}`,
+                id: camelCase(`${id} - ${bets.name}`),
                 homeTeam,
                 awayTeam,
                 timeout: !!(+timeout),

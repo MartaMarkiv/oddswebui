@@ -27,29 +27,30 @@ export const parseData = (sportsData, booksList) => {
                 const {type = [], odds = []} = currentBet || {};
 
                 const typeBets = [];
-                // console.log(currentBet && currentBet.name, "    ", odds[0], "   ", odds[1]);
 
                 const awayValue = currentBet && currentBet.name === 'Moneyline' ? 'Away' :
                     type[0] ? type[0].trim() : '-';
                 typeBets.push({
-                    value: awayValue,//type[0] ? type[0].trim() : '-',
+                    value: awayValue,
                     status: 'secondary',
                     key: 'type',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
-                    index
+                    index,
+                    type: 'away',
                 });
                 const homeValue = currentBet && currentBet.name === 'Moneyline' ? 'Home' :
                     type[1] ? type[1].trim() : '-';
                 typeBets.push({
-                    value: homeValue, //type[1] ? type[1].trim() : '-',
+                    value: homeValue,
                     status: 'secondary',
                     key: 'type',
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
-                    index
+                    index,
+                    type: 'home',
                 });
                 
                 const oddsBets = [];
@@ -59,7 +60,8 @@ export const parseData = (sportsData, booksList) => {
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
-                    index
+                    index,
+                    type: 'away',
                 });
                 oddsBets.push({
                     value: odds[1] ? odds[1].trim() : '-',
@@ -67,7 +69,8 @@ export const parseData = (sportsData, booksList) => {
                     book: bookName.trim(),
                     betName: currentBet ? currentBet.name : betType,
                     game: game.game,
-                    index
+                    index,
+                    type: 'home'
                 });
 
                 gameSportsBook[bookName] = {
