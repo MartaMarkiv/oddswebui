@@ -45,7 +45,10 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
     const keys = data.opportunity ? Object.keys(data.opportunity).map(key => data.opportunity[key].id) : []
 
-    return <OpportunityItemContainer selected={keys.includes(selected)}>
+    const betKey = data.opportunity ? Object.keys(data.opportunity) : [];
+
+    const isHigh =  data.opportunity ? data.opportunity[betKey[0]].sumProbability < 100 : false;
+    return <OpportunityItemContainer selected={keys.includes(selected)} isHigh={isHigh}>
         <Header>
             <Teams>
                 <TeamName>
