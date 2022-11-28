@@ -10,6 +10,7 @@ export const parser = data => {
             const {bets} = opportunityItem;
             const sumProbability = Number(bets.sum_probability);
             const [away, home] = bets.odds.map(item => item.trim());
+            const [awayProp, homeProp] = bets.is_prop.map(item => Number(item) === 1);
             const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
             const [typeAway, typeHome] = bets.type;
             const [probabilityAway, probabilityHome] = bets.probability;
@@ -26,6 +27,7 @@ export const parser = data => {
             home && opportunity[key].items.push({
                 id: uuidv4(),
                 value: home,
+                isProp: homeProp,
                 name: bets.name,
                 type: 'Home',
                 sportBook: sportsBookHome,
@@ -38,6 +40,7 @@ export const parser = data => {
             away && opportunity[key].items.push({
                 id: uuidv4(),
                 value: away,
+                isProp: awayProp,
                 name: bets.name,
                 type: 'Away',
                 sportBook: sportsBookAway,

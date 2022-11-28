@@ -97,19 +97,22 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                     {
                                         bets.map((opportunity, i) => {
                                             let typeValue = opportunity.type;
+                                            let opporunityName = opportunity.name;
                                             switch (opportunity.name) {
                                                 case 'Spread':
                                                     typeValue = `${opportunity.type} ${opportunity.typeValue}`;
+                                                    opporunityName = `${opportunity.isProp === 1 ? 'Alternate' : 'Popular'} ${opportunity.name}`
                                                     break;
                                                 case 'Total':
                                                     typeValue = opportunity.typeValue;
+                                                    opporunityName = `${opportunity.isProp === 1 ? 'Alternate' : 'Popular'} ${opportunity.name}`
                                                     break;
                                                 default:
                                                     typeValue = opportunity.type;
                                                     break;
                                             }
                                             return <GridRow key={i}>
-                                                <GridTd>{opportunity.name}</GridTd>
+                                                <GridTd>{opporunityName}</GridTd>
                                                 <GridTd>{typeValue}</GridTd>
                                                 <GridTd isValue>{opportunity.value}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
