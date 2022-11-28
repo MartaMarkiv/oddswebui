@@ -11,15 +11,13 @@ const ThStyled = styled.th`
   }
   
   &&&&&&.bookHeader {
+    background: ${({ theme }) => theme.colors.table.bgTh};
+    color: ${({ theme }) => theme.colors.table.secondaryText};
     font-style: normal;
     font-weight: 500;
     font-size: 18px;
     line-height: 24px;
-  }
-  
-  &&&&&&.bookHeader, &&&&&&.subBookHeader {
-    background: ${({ theme }) => theme.colors.table.bgTh};
-    color: ${({ theme }) => theme.colors.table.secondaryText};
+    min-width: 150px;
   }
 `
 

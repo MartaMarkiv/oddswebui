@@ -3,7 +3,6 @@ import {TimeoutBadgeContainer} from "./styles";
 
 export const TimeoutBadge = ({size}) => {
     return <TimeoutBadgeContainer size={size}>
-        <TimeIcon />
-        {size !== 'small' && <span className="text">Timeout</span>}
+        <TimeIcon title="Timeout"/>
     </TimeoutBadgeContainer>
 };

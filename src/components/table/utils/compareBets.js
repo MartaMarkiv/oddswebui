@@ -11,7 +11,7 @@ export const compareBets = (list, bet) => {
         opportunityInfo.items.find(item => 
             item.value === bet.value &&
             item.sportBook === bet.book &&
-            item.type.toLowerCase() === bet.key
+            item.type.toLowerCase() === bet.type
         ) : false;
 
         return !!opportunityItem;

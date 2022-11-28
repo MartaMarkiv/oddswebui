@@ -23,7 +23,9 @@ const OpportunityItemContainer = styled.div`
         background: theme.colors.drawer.itemBgSelected,
         color: theme.colors.drawer.textSelected,
     } : {}
-}};
+  }};
+
+  box-shadow: inset 0 0 17px ${({isHigh, theme}) => { return isHigh ? theme.colors.textSuccess : "none";}};
 `;
 
 const Group = styled.div`

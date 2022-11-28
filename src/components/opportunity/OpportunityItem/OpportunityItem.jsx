@@ -1,6 +1,6 @@
 import {ReactComponent as HomeIcon} from '../../../assets/icons/home.svg';
 import {ReactComponent as AwayIcon} from '../../../assets/icons/away.svg';
-import {useCallback, useState} from "react";
+import {useCallback} from "react";
 
 import {
     Body, GridBody, GridHead,
@@ -17,18 +17,7 @@ import {
 import {TimeoutBadge} from "../../TimeoutBadge";
 import {TeamLogoGroup} from "../../TeamLogo";
 
-
-const INITIAL_ROW_COUNT = 1;
-
 export const OpportunityItem = ({onSelect, data, selected}) => {
-    const [showRowCount, setShowRowCount] = useState(INITIAL_ROW_COUNT);
-    const [isOpened, setIsOpened] = useState(false);
-
-    const toggle = (event) => {
-        event.stopPropagation();
-        setIsOpened(!isOpened);
-        setShowRowCount(isOpened ? INITIAL_ROW_COUNT : Object.keys(data.opportunities).length)
-    }
 
     const groupSelectHandler = useCallback(({id, items}) => {
         if (selected === id) {
@@ -56,7 +45,10 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
     const keys = data.opportunity ? Object.keys(data.opportunity).map(key => data.opportunity[key].id) : []
 
-    return <OpportunityItemContainer selected={keys.includes(selected)}>
+    const betKey = data.opportunity ? Object.keys(data.opportunity) : [];
+
+    const isHigh =  data.opportunity ? data.opportunity[betKey[0]].sumProbability < 100 : false;
+    return <OpportunityItemContainer selected={keys.includes(selected)} isHigh={isHigh}>
         <Header>
             <Teams>
                 <TeamName>
@@ -92,7 +84,9 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
 
                 <GridBody>
                     {
-                        data?.opportunity && Object.keys(data.opportunity).slice(0, showRowCount).map((key, index) => {
+                        data?.opportunity && Object.keys(data.opportunity).map((key, index) => {
+                            
+                            const bets = data.opportunity[key].items.slice().reverse();
                             return <div key={index}>
                                 {
                                     index > 1 && <Divider />
@@ -101,23 +95,26 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                 <Group selected={selected === data.opportunity[key].id}
                                        onClick={(event) => groupSelectHandler(data.opportunity[key])}>
                                     {
-                                        data.opportunity[key].items.map((opportunity, i) => {
+                                        bets.map((opportunity, i) => {
                                             let typeValue = opportunity.type;
+                                            let opporunityName = opportunity.name;
                                             switch (opportunity.name) {
                                                 case 'Spread':
                                                     typeValue = `${opportunity.type} ${opportunity.typeValue}`;
+                                                    opporunityName = `${opportunity.isProp === 1 ? 'Alternate' : 'Popular'} ${opportunity.name}`
                                                     break;
                                                 case 'Total':
                                                     typeValue = opportunity.typeValue;
+                                                    opporunityName = `${opportunity.isProp === 1 ? 'Alternate' : 'Popular'} ${opportunity.name}`
                                                     break;
                                                 default:
                                                     typeValue = opportunity.type;
                                                     break;
                                             }
                                             return <GridRow key={i}>
-                                                <GridTd>{opportunity.name}</GridTd>
+                                                <GridTd>{opporunityName}</GridTd>
                                                 <GridTd>{typeValue}</GridTd>
-                                                <GridTd isValue>{opportunity.value} {}</GridTd>
+                                                <GridTd isValue>{opportunity.value}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
                                             </GridRow>
                                         })
