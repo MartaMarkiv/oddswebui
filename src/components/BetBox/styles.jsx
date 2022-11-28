@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 const CellBoxStyled = styled.div`
-  width: 60px;
-  height: 30px;
-  border: 1px solid ${({theme, status}) => {
+    width: 60px;
+    height: 30px;
+    border: 1px solid ${({theme, status}) => {
     switch (status) {
         case 'secondary':
             return theme.colors.betBox.borderSecondary;
@@ -15,10 +15,11 @@ const CellBoxStyled = styled.div`
             return theme.colors.betBox.borderPrimary;
     }
 }};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: ${({theme, status}) => {
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${({theme, status}) => {
     switch (status) {
         case 'secondary':
             return theme.colors.betBox.bgSecondary;
@@ -30,7 +31,7 @@ const CellBoxStyled = styled.div`
             return theme.colors.betBox.bgPrimary;
     }
 }};
-  color: ${({theme, status}) => {
+    color: ${({theme, status}) => {
     switch (status) {
         case 'success':
             return theme.colors.betBox.textSuccess;

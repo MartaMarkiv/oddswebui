@@ -9,9 +9,10 @@ const Td = styled.td`
   }
 
   .ant-row {
+    height: 74px;
     padding: 5px 0;
     flex-flow: column nowrap;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
   }
 `
