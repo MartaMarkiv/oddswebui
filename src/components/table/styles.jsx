@@ -58,7 +58,7 @@ const StyledBettingTable = styled.div`
     border-bottom: 2px solid #52DAA9;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 5px #52daa9;
     position: relative;
@@ -68,7 +68,7 @@ const StyledBettingTable = styled.div`
       position:absolute;
       height: 100%;
       top:0;
-      left:-10px;
+      left: -5px;
       width: 10px;
     }
     &::after { 
