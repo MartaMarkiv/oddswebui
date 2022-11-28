@@ -4,6 +4,10 @@ const StyledBettingTable = styled.div`
   .ant-table {
     background: ${({ theme }) => theme.colors.bgBody};
     color: ${({ theme }) => theme.colors.textPrimary};
+
+    &.ant-table-middle {
+      font-size: 13px;
+    }
   }
   
   &&& {
@@ -14,18 +18,17 @@ const StyledBettingTable = styled.div`
   }
   
   .sportsBookCell {
-    min-width: 270px;
+    min-width: 400px;
   }
   
   .gameCell {
-    min-width: 130px;
-    max-width: 130px;
+    max-width: 280px;
     color: ${({ theme }) => theme.colors.table.secondaryText};
   }
   
   .subBookHeader {
-    min-width: 96px;
-    max-width: 96px;
+    max-width: 85px;
+    min-width: 75px;
   }
   
   .cellShadow {
@@ -44,13 +47,13 @@ const StyledBettingTable = styled.div`
   }
 
   .betTypeCell {
-    min-width: 140px;
     vertical-align: baseline;
-    padding: 18px 5px !important;
     color: ${({ theme }) => theme.colors.table.secondaryText};
+    padding: 10px !important;
+    min-width: 120px
   }
 
-  .row-cell .selected:last-child {
+  .row-cell.selected-game-row:last-child {
     border-top: 2px solid #52DAA9;
     border-bottom: 2px solid #52DAA9;
     width: 100%;
@@ -79,14 +82,14 @@ const StyledBettingTable = styled.div`
     }
   }
 
-  .ant-table-cell.first .row-cell .selected:last-child {
+  .ant-table-cell.first .row-cell.selected-game-row:last-child {
     border-left: 2px solid #52DAA9;
     &::before { 
       opacity: 0;
     }
   }
 
-  .ant-table-cell.last .row-cell .selected:last-child {
+  .ant-table-cell.last .row-cell.selected-game-row:last-child {
     border-right: 2px solid #52DAA9;
     &::after { 
       opacity: 0;

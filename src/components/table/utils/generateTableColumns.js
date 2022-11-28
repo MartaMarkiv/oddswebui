@@ -40,8 +40,8 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
                     key: 'betTypeValue',
                     className: 'betTypeCell cellShadow',
                     fixed: true,
-                    width: 140,
-                    colSpan: 0
+                    width: 110,
+                    colSpan: 0,
                 }
             ]
         }
@@ -54,23 +54,22 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             key: `${key}_${uuidv4()}`,
             className: 'bookHeader',
             align: 'center',
+            width: 150,
             children: [
                 {
-                    title: 'Home',
                     className: `subBookHeader tableHead odd ${index === 0 ? 'first' : ''}`,
-                    width: 96,
-                    key: `${key}Home_${uuidv4()}`,
+                    width: 75,
+                    key: `${key}Type_${uuidv4()}`,
                     align: 'center',
-                    dataIndex: ['books', key, 'bets', 'home'],
+                    dataIndex: ['books', key, 'bets', 'type'],
                     render: betRenderer,
                 },
                 {
-                    title: 'Away',
                     className: `subBookHeader tableHead ${index === booksCount - 1 ? 'last' : ''}`,
-                    width: 96,
+                    width: 75,
                     align: 'center',
-                    key: `${key}Away_${uuidv4()}`,
-                    dataIndex: ['books', key, 'bets', 'away'],
+                    key: `${key}Odds_${uuidv4()}`,
+                    dataIndex: ['books', key, 'bets', 'odds'],
                     render: betRenderer,
                 }
             ]

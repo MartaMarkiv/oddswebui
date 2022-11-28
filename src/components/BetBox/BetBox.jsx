@@ -6,7 +6,8 @@ import {compareBets, isSelectedBet, isSelectedRow} from '../table/utils';
 
 export const BetBox = ({data, opportunities, selectedBet}) => {
     const rowName = data ? camelCase(`${data[0].game} - ${data[0].betName}`) : '';
-    return <Row justify="center" className={`row-cell ${rowName}`}>
+    const rowClassName = selectedBet && rowName === selectedBet.id ? 'selected-game-row' : 'row-game';
+    return <Row justify="center" className={`row-cell ${rowName} ${rowClassName}`}>
         { data && data.length &&
             data.map(d => {
                 const isOpportunity = d && opportunities ? compareBets(opportunities, d) : false;

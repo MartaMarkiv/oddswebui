@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const CellBoxStyled = styled.div`
-  width: 78px;
-  height: 42px;
-  border-radius: 4px;
+  width: 60px;
+  height: 30px;
   border: 1px solid ${({theme, status}) => {
     switch (status) {
         case 'secondary':
@@ -16,7 +15,6 @@ const CellBoxStyled = styled.div`
             return theme.colors.betBox.borderPrimary;
     }
 }};
-  margin: 5px;
   display: flex;
   align-items: center;
   justify-content: center;

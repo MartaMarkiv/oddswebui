@@ -85,6 +85,8 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                 <GridBody>
                     {
                         data?.opportunity && Object.keys(data.opportunity).map((key, index) => {
+                            
+                            const bets = data.opportunity[key].items.slice().reverse();
                             return <div key={index}>
                                 {
                                     index > 1 && <Divider />
@@ -93,7 +95,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                 <Group selected={selected === data.opportunity[key].id}
                                        onClick={(event) => groupSelectHandler(data.opportunity[key])}>
                                     {
-                                        data.opportunity[key].items.map((opportunity, i) => {
+                                        bets.map((opportunity, i) => {
                                             let typeValue = opportunity.type;
                                             switch (opportunity.name) {
                                                 case 'Spread':
@@ -109,7 +111,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                             return <GridRow key={i}>
                                                 <GridTd>{opportunity.name}</GridTd>
                                                 <GridTd>{typeValue}</GridTd>
-                                                <GridTd isValue>{opportunity.value} {}</GridTd>
+                                                <GridTd isValue>{opportunity.value}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
                                             </GridRow>
                                         })
