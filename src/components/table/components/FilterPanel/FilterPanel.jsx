@@ -15,7 +15,8 @@ export const FilterPanel = ({
     quarters,
     sports,
     changeSport,
-    betsTypes
+    betsTypes,
+    changeBets
 }) => {
 
     return (
@@ -30,7 +31,7 @@ export const FilterPanel = ({
                 <GamesFilter />
             </FilterPanelItem>*/}
             <FilterPanelItem>
-                <BetsFilter bets={betsTypes}/>
+                <BetsFilter changeFilter={changeBets} bets={betsTypes}/>
             </FilterPanelItem> 
             <FilterPanelItem>
                 <BetsShownFilter changeFilter={changeQuarter} quarters={quarters}/>
