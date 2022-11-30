@@ -23,9 +23,11 @@ const StyledMain = styled.div`
 export const Main = ({opportunities, selectedKey}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
+    const [games, setGames] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
+    const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
     const [pending, setPending] = useState(false);
 
@@ -34,6 +36,7 @@ export const Main = ({opportunities, selectedKey}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
+            console.log(json);
             
             if (!json || !json.length) {
                 setData(null);
@@ -48,12 +51,13 @@ export const Main = ({opportunities, selectedKey}) => {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
-            const booksList = getSportsBooks(allGames);
+            const {books: booksList, games} = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
+            setGames(games);
             setPending(false);
         };
 
@@ -101,6 +105,7 @@ export const Main = ({opportunities, selectedKey}) => {
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
+                            games={games}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
