@@ -8,6 +8,7 @@ import {
     getSportsBooks,
     quartersFilter,
     sportsFilter,
+    betsFilter,
     gameFilter
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
@@ -23,13 +24,20 @@ const StyledMain = styled.div`
 
 export const Main = ({opportunities, selectedKey}) => {
     const [data, setData] = useState(null);
-    const [sportsBooks, setSportsBooks] = useState(null);
-    const [games, setGames] = useState(null);
+
+    //For filters panel
+    const [betsTypes, setBetsTypes] = useState([]);
+    const [sportsBooks, setSportsBooks] = useState([]);
+    const [games, setGames] = useState([]);
     const [sportsTypes, setSportsTypes] = useState([]);
+    
+    //Selected filters
     const [selectedSports, setSelectedSports] = useState([]);
+    const [selectedBets, setSelectedBets] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
     const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
+
     const [pending, setPending] = useState(false);
 
     const loadDataFromApi = () => {
@@ -51,12 +59,13 @@ export const Main = ({opportunities, selectedKey}) => {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
-            const {books: booksList, games} = getSportsBooks(allGames);
+            const {books: booksList, bets, games} = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
+            setBetsTypes(bets);
             setGames(games);
             setPending(false);
         };
@@ -70,15 +79,14 @@ export const Main = ({opportunities, selectedKey}) => {
         loadDataFromApi();
     }, []);
 
-    const changeQuarters = (values) => {
-        const list = values.map(item => QUARTERS_LIST[item]).flat();
-        setSelectedQuarters(list);
-    }
-
     let filteredData = selectedSports.length ?
         sportsFilter(data, selectedSports) :
         data;
     
+    filteredData = selectedBets.length ?
+        betsFilter(filteredData, selectedBets) :
+        filteredData;
+        
     filteredData = selectedGames.length ?
         gameFilter(filteredData, selectedGames) :
         filteredData;
@@ -91,6 +99,7 @@ export const Main = ({opportunities, selectedKey}) => {
         quartersFilter(filteredData, selectedQuarters) :
         filteredData;
 
+        console.log(betsTypes);
     return <StyledMain>
         {pending
             ? <PendingScreen/>
@@ -104,11 +113,13 @@ export const Main = ({opportunities, selectedKey}) => {
                             data={filteredData}
                             opportunities={opportunities}
                             changeBook={setSelectedSportsBooks}
-                            changeQuarter={changeQuarters}
+                            changeQuarter={setSelectedQuarters}
                             selectedQuarters={selectedQuarters}
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
+                            betsTypes={betsTypes}
+                            changeBets={setSelectedBets}
                             games={games}
                             selectGame={setSelectedGames}
                         />

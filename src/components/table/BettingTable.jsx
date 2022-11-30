@@ -17,6 +17,8 @@ export const BettingTable = ({
     sportsTypes,
     changeSport,
     selectedRow,
+    betsTypes,
+    changeBets,
     games,
     selectGame
 }) => {
@@ -52,6 +54,8 @@ export const BettingTable = ({
             quarters={selectedQuarters}
             sports={sportsTypes}
             changeSport={changeSport}
+            betsTypes={betsTypes}
+            changeBets={changeBets}
             games={games}
             changeGame={selectGame}
         />

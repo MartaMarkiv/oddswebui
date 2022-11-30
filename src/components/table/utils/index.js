@@ -4,6 +4,7 @@ export * from './parseData';
 export * from './compareBets';
 export * from './sportsBookfilter';
 export * from './sportsBookfilter';
+export * from './betsFilter';
 export * from './getSportsBooks';
 export * from './quartersFilter';
 export * from './sportsFilter';
