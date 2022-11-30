@@ -27,8 +27,8 @@ export const Main = ({opportunities, selectedKey}) => {
 
     //For filters panel
     const [betsTypes, setBetsTypes] = useState([]);
-    const [sportsBooks, setSportsBooks] = useState(null);
-    const [games, setGames] = useState(null);
+    const [sportsBooks, setSportsBooks] = useState([]);
+    const [games, setGames] = useState([]);
     const [sportsTypes, setSportsTypes] = useState([]);
     
     //Selected filters
@@ -99,6 +99,7 @@ export const Main = ({opportunities, selectedKey}) => {
         quartersFilter(filteredData, selectedQuarters) :
         filteredData;
 
+        console.log(betsTypes);
     return <StyledMain>
         {pending
             ? <PendingScreen/>

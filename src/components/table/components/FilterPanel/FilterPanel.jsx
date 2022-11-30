@@ -33,7 +33,7 @@ export const FilterPanel = ({
                 <GamesFilter games={games} selectGame={changeGame}/>
             </FilterPanelItem>
             <FilterPanelItem>
-                <BetsFilter />
+                <BetsFilter bets={betsTypes} changeFilter={changeBets}/>
             </FilterPanelItem>
             <FilterPanelItem>
                 <BetsShownFilter changeFilter={changeQuarter} quarters={quarters}/>
