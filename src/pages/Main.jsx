@@ -8,7 +8,8 @@ import {
     getSportsBooks,
     quartersFilter,
     sportsFilter,
-    betsFilter
+    betsFilter,
+    gameFilter
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
@@ -25,14 +26,16 @@ export const Main = ({opportunities, selectedKey}) => {
     const [data, setData] = useState(null);
 
     //For filters panel
-    const [sportsBooks, setSportsBooks] = useState([]);
     const [betsTypes, setBetsTypes] = useState([]);
+    const [sportsBooks, setSportsBooks] = useState(null);
+    const [games, setGames] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     
     //Selected filters
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedBets, setSelectedBets] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
+    const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
 
     const [pending, setPending] = useState(false);
@@ -56,13 +59,14 @@ export const Main = ({opportunities, selectedKey}) => {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
-            const {books: booksList, bets} = getSportsBooks(allGames);
+            const {books: booksList, bets, games} = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
             setBetsTypes(bets);
+            setGames(games);
             setPending(false);
         };
 
@@ -81,6 +85,10 @@ export const Main = ({opportunities, selectedKey}) => {
     
     filteredData = selectedBets.length ?
         betsFilter(filteredData, selectedBets) :
+        filteredData;
+        
+    filteredData = selectedGames.length ?
+        gameFilter(filteredData, selectedGames) :
         filteredData;
 
     filteredData = selectedSportsBooks.length ?
@@ -111,6 +119,8 @@ export const Main = ({opportunities, selectedKey}) => {
                             selectedRow={selectedKey}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
+                            games={games}
+                            selectGame={setSelectedGames}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
