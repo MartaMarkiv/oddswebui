@@ -7,7 +7,8 @@ import {
     sportsBooksFilter,
     getSportsBooks,
     quartersFilter,
-    sportsFilter
+    sportsFilter,
+    gameFilter
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
@@ -23,9 +24,11 @@ const StyledMain = styled.div`
 export const Main = ({opportunities, selectedKey}) => {
     const [data, setData] = useState(null);
     const [sportsBooks, setSportsBooks] = useState(null);
+    const [games, setGames] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedSports, setSelectedSports] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
+    const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
     const [pending, setPending] = useState(false);
 
@@ -48,12 +51,13 @@ export const Main = ({opportunities, selectedKey}) => {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
-            const booksList = getSportsBooks(allGames);
+            const {books: booksList, games} = getSportsBooks(allGames);
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
+            setGames(games);
             setPending(false);
         };
 
@@ -74,6 +78,10 @@ export const Main = ({opportunities, selectedKey}) => {
     let filteredData = selectedSports.length ?
         sportsFilter(data, selectedSports) :
         data;
+    
+    filteredData = selectedGames.length ?
+        gameFilter(filteredData, selectedGames) :
+        filteredData;
 
     filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(filteredData, selectedSportsBooks) :
@@ -101,6 +109,8 @@ export const Main = ({opportunities, selectedKey}) => {
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
+                            games={games}
+                            selectGame={setSelectedGames}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
