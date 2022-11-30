@@ -7,7 +7,8 @@ import {
     sportsBooksFilter,
     getSportsBooks,
     quartersFilter,
-    sportsFilter
+    sportsFilter,
+    gameFilter
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
@@ -36,7 +37,6 @@ export const Main = ({opportunities, selectedKey}) => {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log(json);
             
             if (!json || !json.length) {
                 setData(null);
@@ -78,6 +78,10 @@ export const Main = ({opportunities, selectedKey}) => {
     let filteredData = selectedSports.length ?
         sportsFilter(data, selectedSports) :
         data;
+    
+    filteredData = selectedGames.length ?
+        gameFilter(filteredData, selectedGames) :
+        filteredData;
 
     filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(filteredData, selectedSportsBooks) :
@@ -106,6 +110,7 @@ export const Main = ({opportunities, selectedKey}) => {
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
                             games={games}
+                            selectGame={setSelectedGames}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

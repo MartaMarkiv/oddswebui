@@ -17,7 +17,8 @@ export const BettingTable = ({
     sportsTypes,
     changeSport,
     selectedRow,
-    games
+    games,
+    selectGame
 }) => {
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
@@ -52,6 +53,7 @@ export const BettingTable = ({
             sports={sportsTypes}
             changeSport={changeSport}
             games={games}
+            changeGame={selectGame}
         />
         <Table
             className="table-layout"
