@@ -29,12 +29,6 @@ export const Main = ({
     tableData,
     loadMoreData
 }) => {
-
-    //For filters panel
-    // const [betsTypes, setBetsTypes] = useState([]);
-    // const [sportsBooks, setSportsBooks] = useState([]);
-    // const [games, setGames] = useState([]);
-    // const [sportsTypes, setSportsTypes] = useState([]);
     
     //Selected filters
     const [selectedSports, setSelectedSports] = useState([]);
@@ -42,11 +36,6 @@ export const Main = ({
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
     const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
-
-
-    const changeQuarters = (values) => {
-        setSelectedQuarters(values);
-    }
 
     let filteredData = selectedSports.length ?
         sportsFilter(tableData, selectedSports) :
