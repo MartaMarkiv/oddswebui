@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const CellBoxStyled = styled.div`
     width: 60px;
-    height: 30px;
+    min-height: 30px;
     border: 1px solid ${({theme, status}) => {
     switch (status) {
         case 'secondary':
@@ -19,6 +19,7 @@ const CellBoxStyled = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    word-break: break-word;
     background: ${({theme, status}) => {
     switch (status) {
         case 'secondary':

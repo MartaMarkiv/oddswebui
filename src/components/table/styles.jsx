@@ -29,6 +29,7 @@ const StyledBettingTable = styled.div`
   .subBookHeader {
     max-width: 85px;
     min-width: 75px;
+    padding: 5px !important;
   }
   
   .cellShadow {
@@ -82,10 +83,18 @@ const StyledBettingTable = styled.div`
     }
   }
 
-  .ant-table-cell.first .row-cell.selected-game-row:last-child {
-    border-left: 2px solid #52DAA9;
-    &::before { 
-      opacity: 0;
+  .ant-table-cell.first .row-cell {
+    .cell {
+      width: 100%;
+      &:first-child {
+        margin-bottom: 3px;
+      }
+    }
+    &&.selected-game-row:last-child {
+      border-left: 2px solid #52DAA9;
+      &::before { 
+        opacity: 0;
+      }
     }
   }
 
