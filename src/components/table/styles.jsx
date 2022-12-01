@@ -29,7 +29,6 @@ const StyledBettingTable = styled.div`
   .subBookHeader {
     max-width: 85px;
     min-width: 75px;
-    padding: 5px !important;
   }
   
   .cellShadow {
@@ -54,43 +53,47 @@ const StyledBettingTable = styled.div`
     min-width: 120px
   }
 
-  .row-cell.selected-game-row:last-child {
-    border-top: 2px solid #52DAA9;
-    border-bottom: 2px solid #52DAA9;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0px 0px 5px #52daa9;
-    position: relative;
-    &::before { 
-      content: "";
-      background-color: ${({ theme }) => theme.colors.bgBody};
-      position:absolute;
-      height: 100%;
-      top:0;
-      left: -5px;
-      width: 10px;
+  .row-cell {
+    padding: 5px;
+    &.selected-game-row {
+      border-top: 2px solid #52DAA9;
+      border-bottom: 2px solid #52DAA9;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0px 0px 5px #52daa9;
+      position: relative;
+      &::before { 
+        content: "";
+        background-color: ${({ theme }) => theme.colors.bgBody};
+        position:absolute;
+        height: 100%;
+        top:0;
+        left: -5px;
+        width: 10px;
+      }
+      &::after { 
+        content: "";
+        background-color: ${({ theme }) => theme.colors.bgBody};
+        position:absolute;
+        height: 100%;
+        top:0;
+        right:-10px;
+        width: 10px;
+      }
     }
-    &::after { 
-      content: "";
-      background-color: ${({ theme }) => theme.colors.bgBody};
-      position:absolute;
-      height: 100%;
-      top:0;
-      right:-10px;
-      width: 10px;
-    }
-  }
 
-  .ant-table-cell.first .row-cell {
     .cell {
       width: 100%;
       &:first-child {
         margin-bottom: 3px;
       }
     }
-    &&.selected-game-row:last-child {
+  }
+
+  .ant-table-cell.first .row-cell {
+    &.selected-game-row {
       border-left: 2px solid #52DAA9;
       &::before { 
         opacity: 0;
@@ -98,7 +101,7 @@ const StyledBettingTable = styled.div`
     }
   }
 
-  .ant-table-cell.last .row-cell.selected-game-row:last-child {
+  .ant-table-cell.last .row-cell.selected-game-row {
     border-right: 2px solid #52DAA9;
     &::after { 
       opacity: 0;

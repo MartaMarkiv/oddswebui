@@ -99,7 +99,6 @@ export const Main = ({opportunities, selectedKey}) => {
         quartersFilter(filteredData, selectedQuarters) :
         filteredData;
 
-        console.log(betsTypes);
     return <StyledMain>
         {pending
             ? <PendingScreen/>
