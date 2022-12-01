@@ -8,6 +8,10 @@ import {createContext, useEffect, useState} from "react";
 import {CommonProvider} from "./shared/context/CommonProvider";
 import {QueryParamProvider} from 'use-query-params';
 import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
+import {TABLE_DATA} from "./constants";
+import {parseData, getSportsBooks} from "./components/table/utils";
+
+const client = new WebSocket(TABLE_DATA);
 
 const AppStyled = styled.div`
   padding: 0 40px;
@@ -36,10 +40,59 @@ export const ThemePreferenceContext = createContext();
 function App() {
     const initialTheme = localStorage.getItem('theme') || 'light';
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
+
+    const [data, setData] = useState(null);
+    const [pending, setPending] = useState(false);
+    const [dataLength, setDataLength] = useState(10);
+
+    const [sportsBooks, setSportsBooks] = useState(null);
+    const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
     const [opportunities, setOpportunities] = useState(null);
+    const [betsTypes, setBetsTypes] = useState([]);
+    const [games, setGames] = useState([]);
 
     const theme = themesMap[currentTheme];
+
+    const loadDataFromApi = () => {
+        setPending(true);
+
+        client.onmessage = (event) => {
+            const json = JSON.parse(event.data);
+            
+            if (!json || !json.length) {
+                setData(null);
+                setPending(false);
+                return;
+            }
+
+            const sportsList = [];
+            const allGames = json.map(sports => {
+                sportsList.push(sports.sport);
+                return sports.games.map(gameItem => {
+                    return {...gameItem, sport: sports.sport};
+                });
+            }).flat();
+            const {books: booksList, bets, games} = getSportsBooks(allGames);
+
+            const tableData = parseData(allGames, booksList);
+
+            setData(tableData);
+            setSportsTypes(sportsList);
+            setSportsBooks(booksList);
+            setPending(false);
+            setBetsTypes(bets);
+            setGames(games);
+        };
+
+        client.onerror = () => {
+            console.log("Socket connection error");
+        };
+    }
+
+    useEffect(() => {
+        loadDataFromApi();
+    }, []);
 
     useEffect(() => {
         if (localStorage.getItem('theme') !== currentTheme) {
@@ -49,15 +102,27 @@ function App() {
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
-        if (value) {
-            handleScroll(value);
+        if (value && data) {
+            const indexTableData =  data.map(e => e.id).indexOf(value.id);
+            if (indexTableData > dataLength) {
+                setDataLength(indexTableData + 2);
+                setTimeout(() => handleScroll(value), 500);
+            } else {
+                handleScroll(value);
+            }
         }
+    }
+
+     const loadMoreData = () => {
+        setDataLength(dataLength + 2);
     }
 
     const handleScroll = (value) => {
         const element = document.querySelector(`.${value.id}`);
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
+
+    const tableData = data ? data.slice(0, dataLength) : [];
 
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
@@ -78,6 +143,14 @@ function App() {
                                         <Main
                                             opportunities={opportunities}
                                             selectedKey={selectedKey}
+                                            dataLength={data ? data.length : 0}
+                                            sportsBooks={sportsBooks}
+                                            sportsTypes={sportsTypes}
+                                            pending={pending}
+                                            loadMoreData={loadMoreData}
+                                            tableData={tableData}
+                                            betsTypes={betsTypes}
+                                            games={games}
                                         />
                                     }/>
                                 </Routes>

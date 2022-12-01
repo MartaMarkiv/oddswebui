@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import styled from "styled-components";
-import { w3cwebsocket as WebSocket } from "websocket";
 import {BettingTable} from "../components/table";
 import {
-    parseData,
     sportsBooksFilter,
-    getSportsBooks,
     quartersFilter,
     sportsFilter,
     betsFilter,
@@ -14,22 +11,24 @@ import {
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-import {TABLE_DATA, QUARTERS_LIST} from "../constants";
 
-const client = new WebSocket(TABLE_DATA);
 
 const StyledMain = styled.div`
   position: relative;
 `;
 
-export const Main = ({opportunities, selectedKey}) => {
-    const [data, setData] = useState(null);
-
-    //For filters panel
-    const [betsTypes, setBetsTypes] = useState([]);
-    const [sportsBooks, setSportsBooks] = useState([]);
-    const [games, setGames] = useState([]);
-    const [sportsTypes, setSportsTypes] = useState([]);
+export const Main = ({
+    opportunities,
+    selectedKey,
+    dataLength,
+    sportsTypes,
+    betsTypes,
+    games,
+    sportsBooks,
+    pending,
+    tableData,
+    loadMoreData
+}) => {
     
     //Selected filters
     const [selectedSports, setSelectedSports] = useState([]);
@@ -38,50 +37,9 @@ export const Main = ({opportunities, selectedKey}) => {
     const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
 
-    const [pending, setPending] = useState(false);
-
-    const loadDataFromApi = () => {
-        setPending(true);
-
-        client.onmessage = (event) => {
-            const json = JSON.parse(event.data);
-            
-            if (!json || !json.length) {
-                setData(null);
-                setPending(false);
-                return;
-            }
-
-            const sportsList = [];
-            const allGames = json.map(sports => {
-                sportsList.push(sports.sport);
-                return sports.games.map(gameItem => {
-                    return {...gameItem, sport: sports.sport};
-                });
-            }).flat();
-            const {books: booksList, bets, games} = getSportsBooks(allGames);
-            const tableData = parseData(allGames, booksList);
-
-            setData(tableData);
-            setSportsTypes(sportsList);
-            setSportsBooks(booksList);
-            setBetsTypes(bets);
-            setGames(games);
-            setPending(false);
-        };
-
-        client.onerror = () => {
-            console.log("Socket connection error");
-        };
-    }
-
-    useEffect(() => {
-        loadDataFromApi();
-    }, []);
-
     let filteredData = selectedSports.length ?
-        sportsFilter(data, selectedSports) :
-        data;
+        sportsFilter(tableData, selectedSports) :
+        tableData;
     
     filteredData = selectedBets.length ?
         betsFilter(filteredData, selectedBets) :
@@ -104,7 +62,7 @@ export const Main = ({opportunities, selectedKey}) => {
             ? <PendingScreen/>
             : <>
                 {
-                    data
+                    dataLength
                     ? <>
                         <Title>Betting table</Title>
                         <BettingTable
@@ -117,6 +75,8 @@ export const Main = ({opportunities, selectedKey}) => {
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
+                            loadMoreData={loadMoreData}
+                            hasMore={tableData.length < dataLength}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
                             games={games}
