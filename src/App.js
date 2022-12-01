@@ -49,6 +49,8 @@ function App() {
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
     const [opportunities, setOpportunities] = useState(null);
+    const [betsTypes, setBetsTypes] = useState([]);
+    const [games, setGames] = useState([]);
 
     const theme = themesMap[currentTheme];
 
@@ -71,13 +73,16 @@ function App() {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
-            const booksList = getSportsBooks(allGames);
+            const {books: booksList, bets, games} = getSportsBooks(allGames);
+
             const tableData = parseData(allGames, booksList);
 
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
             setPending(false);
+            setBetsTypes(bets);
+            setGames(games);
         };
 
         client.onerror = () => {
@@ -144,6 +149,8 @@ function App() {
                                             pending={pending}
                                             loadMoreData={loadMoreData}
                                             tableData={tableData}
+                                            betsTypes={betsTypes}
+                                            games={games}
                                         />
                                     }/>
                                 </Routes>

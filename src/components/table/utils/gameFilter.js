@@ -1,0 +1,1 @@
+export const gameFilter = (data, games) => data.filter(item => games.indexOf(item.game) >= 0);

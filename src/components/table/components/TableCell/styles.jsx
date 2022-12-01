@@ -9,8 +9,7 @@ const Td = styled.td`
   }
 
   .ant-row {
-    height: 74px;
-    padding: 5px 0;
+    min-height: 65px;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;

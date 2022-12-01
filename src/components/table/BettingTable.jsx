@@ -19,7 +19,11 @@ export const BettingTable = ({
     changeSport,
     selectedRow,
     loadMoreData,
-    hasMore
+    hasMore,
+    betsTypes,
+    changeBets,
+    games,
+    selectGame
 }) => {
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
@@ -53,6 +57,10 @@ export const BettingTable = ({
             quarters={selectedQuarters}
             sports={sportsTypes}
             changeSport={changeSport}
+            betsTypes={betsTypes}
+            changeBets={changeBets}
+            games={games}
+            changeGame={selectGame}
         />
         <InfiniteScroll
             dataLength={data.length}

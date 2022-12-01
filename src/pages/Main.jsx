@@ -4,7 +4,9 @@ import {BettingTable} from "../components/table";
 import {
     sportsBooksFilter,
     quartersFilter,
-    sportsFilter
+    sportsFilter,
+    betsFilter,
+    gameFilter
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {Title} from "../components/typography/Title/Title";
@@ -20,14 +22,27 @@ export const Main = ({
     selectedKey,
     dataLength,
     sportsTypes,
+    betsTypes,
+    games,
     sportsBooks,
     pending,
     tableData,
     loadMoreData
 }) => {
+
+    //For filters panel
+    // const [betsTypes, setBetsTypes] = useState([]);
+    // const [sportsBooks, setSportsBooks] = useState([]);
+    // const [games, setGames] = useState([]);
+    // const [sportsTypes, setSportsTypes] = useState([]);
+    
+    //Selected filters
     const [selectedSports, setSelectedSports] = useState([]);
+    const [selectedBets, setSelectedBets] = useState([]);
     const [selectedSportsBooks, setSelectedSportsBooks] = useState([]);
+    const [selectedGames, setSelectedGames] = useState([]);
     const [selectedQuarters, setSelectedQuarters] = useState([]);
+
 
     const changeQuarters = (values) => {
         setSelectedQuarters(values);
@@ -36,6 +51,14 @@ export const Main = ({
     let filteredData = selectedSports.length ?
         sportsFilter(tableData, selectedSports) :
         tableData;
+    
+    filteredData = selectedBets.length ?
+        betsFilter(filteredData, selectedBets) :
+        filteredData;
+        
+    filteredData = selectedGames.length ?
+        gameFilter(filteredData, selectedGames) :
+        filteredData;
 
     filteredData = selectedSportsBooks.length ?
         sportsBooksFilter(filteredData, selectedSportsBooks) :
@@ -58,13 +81,17 @@ export const Main = ({
                             data={filteredData}
                             opportunities={opportunities}
                             changeBook={setSelectedSportsBooks}
-                            changeQuarter={changeQuarters}
+                            changeQuarter={setSelectedQuarters}
                             selectedQuarters={selectedQuarters}
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
                             loadMoreData={loadMoreData}
                             hasMore={tableData.length < dataLength}
+                            betsTypes={betsTypes}
+                            changeBets={setSelectedBets}
+                            games={games}
+                            selectGame={setSelectedGames}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>
