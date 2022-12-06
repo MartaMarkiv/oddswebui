@@ -10,7 +10,6 @@ import {QueryParamProvider} from 'use-query-params';
 import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
 import {TABLE_DATA} from "./constants";
 import {parseData, getSportsBooks} from "./components/table/utils";
-import { getDefaultNormalizer } from "@testing-library/react";
 
 const client = new WebSocket(TABLE_DATA);
 
@@ -56,7 +55,6 @@ function App() {
     const [loadTimer, setLoadTimer] = useState(false);
 
     const theme = themesMap[currentTheme];
-
  
     const loadDataFromApi = () => {
         setPending(true);
