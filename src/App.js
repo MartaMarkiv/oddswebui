@@ -10,6 +10,7 @@ import {QueryParamProvider} from 'use-query-params';
 import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
 import {TABLE_DATA} from "./constants";
 import {parseData, getSportsBooks} from "./components/table/utils";
+import { getDefaultNormalizer } from "@testing-library/react";
 
 const client = new WebSocket(TABLE_DATA);
 
@@ -52,8 +53,7 @@ function App() {
     const [betsTypes, setBetsTypes] = useState([]);
     const [games, setGames] = useState([]);
 
-
-    const [throttleTimer, setThrottleTimer] = useState(false);
+    const [loadTimer, setLoadTimer] = useState(false);
 
     const theme = themesMap[currentTheme];
 
@@ -63,7 +63,6 @@ function App() {
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
-            console.log(json);
             
             if (!json || !json.length) {
                 setData(null);
@@ -82,7 +81,6 @@ function App() {
 
             const tableData = parseData(allGames, booksList);
 
-            console.log("parsed data: ", tableData.length);
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
@@ -96,31 +94,6 @@ function App() {
         };
     }
 
-    
-
-    const handleInfiniteScroll = () => {
-        const throttle = (callback, time) => {
-            console.log("throttleTimer: ", throttleTimer);
-            if (throttleTimer) return;
-            setThrottleTimer(true);
-            
-            setTimeout(() => {
-                callback();
-                setThrottleTimer(false);
-            }, time);
-        };
-
-        throttle(() => {
-            const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 40;
-    
-            if (endOfPage) {
-                console.log("loadMoreData ", dataLength);
-                setDataLength(dataLength + 2);
-            }
-            setThrottleTimer(false);
-        }, 1000);
-      };
-
     useEffect(() => {
         loadDataFromApi();
     }, []);
@@ -131,10 +104,33 @@ function App() {
         }
     }, [currentTheme]);
 
-    // useEffect(() => {
-    //     window.addEventListener("scroll", handleInfiniteScroll, { passive: true });
-    //     return () => window.removeEventListener("scroll", handleInfiniteScroll);
-    // }, [dataLength]);
+    useEffect(() => {
+        const loadingTimeout = (callback, time) => {
+            if (loadTimer) return;
+
+            setLoadTimer(true);
+            
+            setTimeout(() => {
+                callback();
+                setLoadTimer(false);
+            }, time);
+        };
+
+        const handleInfiniteScroll = () => {
+            loadingTimeout(() => {
+                const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 20;
+        
+                if (endOfPage) {
+                    setDataLength(dataLength + 2);
+                }
+    
+                setLoadTimer(false);
+            }, 1000);
+        };
+        
+        window.addEventListener("scroll", handleInfiniteScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleInfiniteScroll);
+    }, [dataLength, loadTimer]);
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
@@ -142,21 +138,20 @@ function App() {
             const indexTableData =  data.map(e => e.id).indexOf(value.id);
             if (indexTableData > dataLength) {
                 setDataLength(indexTableData + 2);
-                setTimeout(() => handleScroll(value), 500);
+                setTimeout(() => scrollToRow(value), 500);
             } else {
-                handleScroll(value);
+                scrollToRow(value);
             }
         }
     }
 
-    const handleScroll = (value) => {
+    const scrollToRow = (value) => {
         const element = document.querySelector(`.${value.id}`);
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
 
     const tableData = data ? data.slice(0, dataLength) : [];
 
-    console.log(" ----- tableData --------- ", tableData ? tableData.length : 0, " ------------- ", dataLength);
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
@@ -180,7 +175,7 @@ function App() {
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
-                                            loadMoreData={()=>{}}
+                                            loadingRows={loadTimer}
                                             tableData={tableData}
                                             betsTypes={betsTypes}
                                             games={games}

@@ -17,10 +17,6 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
-const TableWrapper = styled.div`
-  padding-bottom: 40px;
-`;
-
 export const Main = ({
     opportunities,
     selectedKey,
@@ -31,7 +27,7 @@ export const Main = ({
     sportsBooks,
     pending,
     tableData,
-    loadMoreData
+    loadingRows
 }) => {
     
     //Selected filters
@@ -67,7 +63,7 @@ export const Main = ({
             : <>
                 {
                     dataLength
-                    ? <TableWrapper>
+                    ? <>
                         <Title>Betting table</Title>
                         <BettingTable
                             sportsBooks={sportsBooks}
@@ -79,14 +75,14 @@ export const Main = ({
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
-                            loadMoreData={loadMoreData}
-                            hasMore={tableData.length < dataLength}
+                            countRows={dataLength - tableData.length}
+                            loadingRows={loadingRows}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
                             games={games}
                             selectGame={setSelectedGames}
                         />
-                    </TableWrapper>
+                    </>
                     :<SubTitle>No live games</SubTitle>
                 }
                 

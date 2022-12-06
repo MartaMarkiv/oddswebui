@@ -3,10 +3,10 @@ import React from 'react';
 import {generateTableColumnData} from "./utils";
 import {BetBox} from "../BetBox";
 import {GameInfoBox} from "../GameInfoBox";
+import {LoadingRowsInfo} from "../LoadingRowsInfo";
 import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
 import {FilterPanel} from "./components/FilterPanel";
-import InfiniteScroll from 'react-infinite-scroll-component';
 
 export const BettingTable = ({
     data,
@@ -18,8 +18,8 @@ export const BettingTable = ({
     sportsTypes,
     changeSport,
     selectedRow,
-    loadMoreData,
-    hasMore,
+    countRows,
+    loadingRows,
     betsTypes,
     changeBets,
     games,
@@ -62,24 +62,18 @@ export const BettingTable = ({
             games={games}
             changeGame={selectGame}
         />
-        {/* <InfiniteScroll
-            dataLength={data.length}
-            next={loadMoreData}
-            hasMore={hasMore}
-        > */}
-            <Table
-                className="table-layout"
-                columns={columns}
-                dataSource={data}
-                sticky={true}
-                rowKey="id"
-                bordered
-                scroll={{ x: window.innerWidth }}
-                pagination={false}
-                size="middle"
-                components={components}
-            />
-        {/* </InfiniteScroll> */}
-        
+        <Table
+            className="table-layout"
+            columns={columns}
+            dataSource={data}
+            sticky={true}
+            rowKey="id"
+            bordered
+            scroll={{ x: window.innerWidth }}
+            pagination={false}
+            size="middle"
+            components={components}
+        />
+        <LoadingRowsInfo rows={countRows} isLoading={loadingRows} />
     </StyledBettingTable>
 };
