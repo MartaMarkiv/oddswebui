@@ -62,11 +62,11 @@ export const BettingTable = ({
             games={games}
             changeGame={selectGame}
         />
-        <InfiniteScroll
+        {/* <InfiniteScroll
             dataLength={data.length}
             next={loadMoreData}
             hasMore={hasMore}
-        >
+        > */}
             <Table
                 className="table-layout"
                 columns={columns}
@@ -79,7 +79,7 @@ export const BettingTable = ({
                 size="middle"
                 components={components}
             />
-        </InfiniteScroll>
+        {/* </InfiniteScroll> */}
         
     </StyledBettingTable>
 };

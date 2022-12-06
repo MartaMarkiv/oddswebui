@@ -43,7 +43,7 @@ function App() {
 
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
-    const [dataLength, setDataLength] = useState(10);
+    const [dataLength, setDataLength] = useState(15);
 
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
@@ -52,13 +52,18 @@ function App() {
     const [betsTypes, setBetsTypes] = useState([]);
     const [games, setGames] = useState([]);
 
+
+    const [throttleTimer, setThrottleTimer] = useState(false);
+
     const theme = themesMap[currentTheme];
 
+ 
     const loadDataFromApi = () => {
         setPending(true);
 
         client.onmessage = (event) => {
             const json = JSON.parse(event.data);
+            console.log(json);
             
             if (!json || !json.length) {
                 setData(null);
@@ -77,6 +82,7 @@ function App() {
 
             const tableData = parseData(allGames, booksList);
 
+            console.log("parsed data: ", tableData.length);
             setData(tableData);
             setSportsTypes(sportsList);
             setSportsBooks(booksList);
@@ -90,6 +96,31 @@ function App() {
         };
     }
 
+    
+
+    const handleInfiniteScroll = () => {
+        const throttle = (callback, time) => {
+            console.log("throttleTimer: ", throttleTimer);
+            if (throttleTimer) return;
+            setThrottleTimer(true);
+            
+            setTimeout(() => {
+                callback();
+                setThrottleTimer(false);
+            }, time);
+        };
+
+        throttle(() => {
+            const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 40;
+    
+            if (endOfPage) {
+                console.log("loadMoreData ", dataLength);
+                setDataLength(dataLength + 2);
+            }
+            setThrottleTimer(false);
+        }, 1000);
+      };
+
     useEffect(() => {
         loadDataFromApi();
     }, []);
@@ -99,6 +130,11 @@ function App() {
             localStorage.setItem('theme', currentTheme);
         }
     }, [currentTheme]);
+
+    // useEffect(() => {
+    //     window.addEventListener("scroll", handleInfiniteScroll, { passive: true });
+    //     return () => window.removeEventListener("scroll", handleInfiniteScroll);
+    // }, [dataLength]);
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
@@ -113,10 +149,6 @@ function App() {
         }
     }
 
-     const loadMoreData = () => {
-        setDataLength(dataLength + 2);
-    }
-
     const handleScroll = (value) => {
         const element = document.querySelector(`.${value.id}`);
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
@@ -124,6 +156,7 @@ function App() {
 
     const tableData = data ? data.slice(0, dataLength) : [];
 
+    console.log(" ----- tableData --------- ", tableData ? tableData.length : 0, " ------------- ", dataLength);
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
@@ -147,7 +180,7 @@ function App() {
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
-                                            loadMoreData={loadMoreData}
+                                            loadMoreData={()=>{}}
                                             tableData={tableData}
                                             betsTypes={betsTypes}
                                             games={games}

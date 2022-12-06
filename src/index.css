@@ -3,7 +3,6 @@
 
 html, body {
   width: 100%;
-  height: 100%;
 }
 
 body {
@@ -11,11 +10,12 @@ body {
   font-family: 'Geomanist', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: auto;
 }
 
-#root {
+/* #root {
   height: 100%;
-}
+} */
 
 .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
   transition: background 0s !important;

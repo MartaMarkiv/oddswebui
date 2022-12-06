@@ -17,6 +17,10 @@ const StyledMain = styled.div`
   position: relative;
 `;
 
+const TableWrapper = styled.div`
+  padding-bottom: 40px;
+`;
+
 export const Main = ({
     opportunities,
     selectedKey,
@@ -63,7 +67,7 @@ export const Main = ({
             : <>
                 {
                     dataLength
-                    ? <>
+                    ? <TableWrapper>
                         <Title>Betting table</Title>
                         <BettingTable
                             sportsBooks={sportsBooks}
@@ -82,7 +86,7 @@ export const Main = ({
                             games={games}
                             selectGame={setSelectedGames}
                         />
-                    </>
+                    </TableWrapper>
                     :<SubTitle>No live games</SubTitle>
                 }
                 
