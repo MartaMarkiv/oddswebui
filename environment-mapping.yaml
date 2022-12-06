@@ -1,6 +1,4 @@
-- branchNamePattern: (main|master)
-  environment: production
-- branchNamePattern: dev.*
-  environment: development
-- branchNamePattern: '.*.'
-  environment: predev
+- branchNamePattern: feature/.*
+  environment: dev
+- branchNamePattern: master
+  environment: prod

@@ -12,10 +12,23 @@ stages:
   deploy:
     enabled: true
     name: oddsbender-web-ui
-    namespace: dev-oddsbender
-    configFiles:
-      - conf-deploy/common.values.yaml
     kubernetesConfig:
       name: oddsbender-cluster
       region: us-east-1
       credentialsId: jenkins-aws
+
+environments:
+  dev:
+    stages:
+      deploy:
+        namespace: dev-oddsbender
+        configFiles:
+          - conf-deploy/common.values.yaml
+          - conf-deploy/development.values.yaml
+  prod:
+    stages:
+      deploy:
+        namespace: prod-oddsbender
+        configFiles:
+          - conf-deploy/common.values.yaml
+          - conf-deploy/production.values.yaml
