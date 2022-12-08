@@ -43,7 +43,7 @@ function App() {
 
     const [data, setData] = useState(null);
     const [pending, setPending] = useState(false);
-    const [dataLength, setDataLength] = useState(10);
+    const [dataLength, setDataLength] = useState(15);
 
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
@@ -52,8 +52,10 @@ function App() {
     const [betsTypes, setBetsTypes] = useState([]);
     const [games, setGames] = useState([]);
 
-    const theme = themesMap[currentTheme];
+    const [loadingProcess, setLoadingProcess] = useState(false);
 
+    const theme = themesMap[currentTheme];
+ 
     const loadDataFromApi = () => {
         setPending(true);
 
@@ -100,24 +102,48 @@ function App() {
         }
     }, [currentTheme]);
 
+    useEffect(() => {
+        const loadingTimeout = (callback, time) => {
+            if (loadingProcess) return;
+
+            setLoadingProcess(true);
+            
+            setTimeout(() => {
+                callback();
+                setLoadingProcess(false);
+            }, time);
+        };
+
+        const handleInfiniteScroll = () => {
+            loadingTimeout(() => {
+                const endOfPage = window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 20;
+        
+                if (endOfPage) {
+                    setDataLength(dataLength + 2);
+                }
+    
+                setLoadingProcess(false);
+            }, 1000);
+        };
+        
+        window.addEventListener("scroll", handleInfiniteScroll, { passive: true });
+        return () => window.removeEventListener("scroll", handleInfiniteScroll);
+    }, [dataLength, loadingProcess]);
+
     const changeSelectedKey = value => {
         setSelectedKey(value);
         if (value && data) {
             const indexTableData =  data.map(e => e.id).indexOf(value.id);
             if (indexTableData > dataLength) {
                 setDataLength(indexTableData + 2);
-                setTimeout(() => handleScroll(value), 500);
+                setTimeout(() => scrollToRow(value), 500);
             } else {
-                handleScroll(value);
+                scrollToRow(value);
             }
         }
     }
 
-     const loadMoreData = () => {
-        setDataLength(dataLength + 2);
-    }
-
-    const handleScroll = (value) => {
+    const scrollToRow = (value) => {
         const element = document.querySelector(`.${value.id}`);
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
@@ -147,7 +173,7 @@ function App() {
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
-                                            loadMoreData={loadMoreData}
+                                            loadingRows={loadingProcess}
                                             tableData={tableData}
                                             betsTypes={betsTypes}
                                             games={games}

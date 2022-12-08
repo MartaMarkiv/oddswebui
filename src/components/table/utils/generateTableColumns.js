@@ -55,6 +55,7 @@ export const generateTableColumnData = ({data, betRenderer, gameInfoRenderer}) =
             className: 'bookHeader',
             align: 'center',
             width: 150,
+            fixed: true,
             children: [
                 {
                     className: `subBookHeader tableHead odd ${index === 0 ? 'first' : ''}`,

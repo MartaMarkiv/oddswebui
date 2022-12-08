@@ -65,6 +65,6 @@ export const parser = data => {
         const betKeyB = Object.keys(b.opportunity);
         const sumProbabilityA = Number(a.opportunity[betKeyA[0]].sumProbability);
         const sumProbabilityB = Number(b.opportunity[betKeyB[0]].sumProbability);
-        return sumProbabilityA - sumProbabilityB;
+        return sumProbabilityB - sumProbabilityA;
     }).slice(0, 10);
 }
