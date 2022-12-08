@@ -52,7 +52,7 @@ function App() {
     const [betsTypes, setBetsTypes] = useState([]);
     const [games, setGames] = useState([]);
 
-    const [loadTimer, setLoadTimer] = useState(false);
+    const [loadingProcess, setLoadingProcess] = useState(false);
 
     const theme = themesMap[currentTheme];
  
@@ -104,13 +104,13 @@ function App() {
 
     useEffect(() => {
         const loadingTimeout = (callback, time) => {
-            if (loadTimer) return;
+            if (loadingProcess) return;
 
-            setLoadTimer(true);
+            setLoadingProcess(true);
             
             setTimeout(() => {
                 callback();
-                setLoadTimer(false);
+                setLoadingProcess(false);
             }, time);
         };
 
@@ -122,13 +122,13 @@ function App() {
                     setDataLength(dataLength + 2);
                 }
     
-                setLoadTimer(false);
+                setLoadingProcess(false);
             }, 1000);
         };
         
         window.addEventListener("scroll", handleInfiniteScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleInfiniteScroll);
-    }, [dataLength, loadTimer]);
+    }, [dataLength, loadingProcess]);
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
@@ -173,7 +173,7 @@ function App() {
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
-                                            loadingRows={loadTimer}
+                                            loadingRows={loadingProcess}
                                             tableData={tableData}
                                             betsTypes={betsTypes}
                                             games={games}
