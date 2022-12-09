@@ -27,7 +27,7 @@ export const Main = ({
     sportsBooks,
     pending,
     tableData,
-    loadMoreData
+    loadingRows
 }) => {
     
     //Selected filters
@@ -75,8 +75,8 @@ export const Main = ({
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
-                            loadMoreData={loadMoreData}
-                            hasMore={tableData.length < dataLength}
+                            countRows={dataLength - tableData.length}
+                            loadingRows={loadingRows}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
                             games={games}
