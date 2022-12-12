@@ -8,8 +8,7 @@ import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
 import {PendingScreen} from "../../../components/PendingScreen";
 import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
-import {parser} from "../utils";
-
+import {parser, arbitrageFilter} from "../utils";
 
 const client = new WebSocket(OPPORTUNITY);
 
@@ -23,7 +22,9 @@ export const OpportunityDrawer = ({
     const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(true);
     const [loading, setLoading] = useState(true);
+
     const [showAll, setShowAll] = useState(true);
+    const [displayedList, setDisplayedList] = useState([]);
 
     const connectSocket = () => {
 
@@ -37,8 +38,10 @@ export const OpportunityDrawer = ({
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
             const parsedData = parser(allOpportunities);
-            console.log(parsedData);
             setCollection(parsedData);
+
+            const list = showAll ? parsedData : arbitrageFilter(parsedData);
+            setDisplayedList(list);
         };
 
         client.onerror = () => {
@@ -61,8 +64,9 @@ export const OpportunityDrawer = ({
     };
 
     const switchHandler = (value) => {
-        console.log(value);
         setShowAll(value === "all");
+        const list = value === "all" ? collection : arbitrageFilter(collection);
+        setDisplayedList(list);
     }
 
     return (
@@ -98,7 +102,7 @@ export const OpportunityDrawer = ({
                         <PendingScreen position={"absolute"}/> :
                         collection && collection.length ?
                             <OpportunityList
-                                opportunities={collection}
+                                opportunities={displayedList}
                                 selectOpportunity={changeSelectedKey}
                                 selectedOpportunity={selectedKey}
                                 allList={showAll}
