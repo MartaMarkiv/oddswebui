@@ -23,6 +23,7 @@ export const OpportunityDrawer = ({
     const setDrawerOpened = useSetDrawerOpened();
     const [visible, setVisible] = useState(true);
     const [loading, setLoading] = useState(true);
+    const [showAll, setShowAll] = useState(true);
 
     const connectSocket = () => {
 
@@ -36,6 +37,7 @@ export const OpportunityDrawer = ({
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
             const parsedData = parser(allOpportunities);
+            console.log(parsedData);
             setCollection(parsedData);
         };
 
@@ -60,6 +62,7 @@ export const OpportunityDrawer = ({
 
     const switchHandler = (value) => {
         console.log(value);
+        setShowAll(value === "all");
     }
 
     return (
@@ -98,6 +101,7 @@ export const OpportunityDrawer = ({
                                 opportunities={collection}
                                 selectOpportunity={changeSelectedKey}
                                 selectedOpportunity={selectedKey}
+                                allList={showAll}
                             /> :
                             <SubTitle>No opportunity right now</SubTitle>
                 }
