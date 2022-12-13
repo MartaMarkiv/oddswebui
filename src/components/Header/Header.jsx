@@ -3,7 +3,8 @@ import {
     HeaderStyled,
     LogoImage,
     LogoLink,
-    FilterButton
+    FilterButton,
+    FilterImage
 } from "./styles";
 import {Search} from "../Search";
 import {ThemeSwitcher} from "../ThemeSwitcher";
@@ -30,8 +31,9 @@ export const Header = ({
             <HeaderControlPanel>
                 {/* <Search /> */}
                 <FilterButton onClick={showFilter}>
-                    Open
+                    <FilterImage />
                 </FilterButton>
+                
                 <ThemeSwitcher />
                 <OpportunityDrawer
                     changeSelectedKey={changeSelectedKey}
