@@ -149,8 +149,6 @@ function App() {
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
 
-    const tableData = data ? data.slice(0, dataLength) : [];
-
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
@@ -172,11 +170,12 @@ function App() {
                                             opportunities={opportunities}
                                             selectedKey={selectedKey}
                                             dataLength={data ? data.length : 0}
+                                            data={data}
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
                                             loadingRows={loadingProcess}
-                                            tableData={tableData}
+                                            sliceCounter={dataLength}
                                             betsTypes={betsTypes}
                                             games={games}
                                             toggleFilter={setIsOpenFilter}

@@ -9,7 +9,6 @@ import {
     gameFilter
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
-import {Title} from "../components/typography/Title/Title";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
 
 
@@ -26,10 +25,10 @@ export const Main = ({
     games,
     sportsBooks,
     pending,
-    tableData,
     loadingRows,
     toggleFilter,
-    isOpenFilter
+    isOpenFilter,
+    data, sliceCounter
 }) => {
     
     //Selected filters
@@ -40,8 +39,8 @@ export const Main = ({
     const [selectedQuarters, setSelectedQuarters] = useState([]);
 
     let filteredData = selectedSports.length ?
-        sportsFilter(tableData, selectedSports) :
-        tableData;
+        sportsFilter(data, selectedSports) :
+        data;
     
     filteredData = selectedBets.length ?
         betsFilter(filteredData, selectedBets) :
@@ -59,6 +58,7 @@ export const Main = ({
         quartersFilter(filteredData, selectedQuarters) :
         filteredData;
 
+    filteredData = filteredData ? filteredData.slice(0, sliceCounter) : [];
     return <StyledMain>
         {pending
             ? <PendingScreen/>
@@ -76,7 +76,7 @@ export const Main = ({
                             sportsTypes={sportsTypes}
                             changeSport={setSelectedSports}
                             selectedRow={selectedKey}
-                            countRows={dataLength - tableData.length}
+                            countRows={dataLength - filteredData.length}
                             loadingRows={loadingRows}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
