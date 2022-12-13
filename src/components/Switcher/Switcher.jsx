@@ -2,21 +2,20 @@ import {useState} from "react";
 import {SwitcherContainer, SwitcherInput, SwitcherInputContainer, SwitcherLabel} from "./styles";
 
 export const Switcher = ({
-                             leftText,
-                             rightText,
-                             leftValue,
-                             rightValue,
-                             name,
-                             initialValue,
-                             onUpdate
-                         }) => {
+    leftText,
+    rightText,
+    leftValue,
+    rightValue,
+    name,
+    initialValue,
+    onUpdate
+}) => {
     const [selectedValue, setSelectedValue] = useState(initialValue);
 
     const checkHandler = e => {
         setSelectedValue(e.target.value);
         onUpdate && onUpdate(e.target.value)
     };
-
 
     return <SwitcherContainer>
         <SwitcherInputContainer>
