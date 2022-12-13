@@ -5,7 +5,7 @@ export const LoadingRowsInfo = ({rows, isLoading}) => {
     return <LoadingBoxStyled>
         { rows > 0 &&
             <TextGroup>
-                { !isLoading && <Spin /> }
+                { isLoading && <Spin /> }
             </TextGroup>
         }
     </LoadingBoxStyled>
