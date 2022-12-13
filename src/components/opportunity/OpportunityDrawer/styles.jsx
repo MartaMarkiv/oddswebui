@@ -6,6 +6,7 @@ import {Drawer} from "antd";
 const OpportunityButton = styled.button`
   width: 48px;
   height: 48px;
+  min-width: 48px;
   border-radius: 100%;
   background: ${({theme}) => theme.colors.headerControls.bg};
   display: flex;
