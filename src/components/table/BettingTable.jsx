@@ -23,7 +23,9 @@ export const BettingTable = ({
     betsTypes,
     changeBets,
     games,
-    selectGame
+    selectGame,
+    isOpenFilter,
+    toggleFilter
 }) => {
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
@@ -61,6 +63,8 @@ export const BettingTable = ({
             changeBets={changeBets}
             games={games}
             changeGame={selectGame}
+            isOpenFilter={isOpenFilter}
+            toggleFilter={toggleFilter}
         />
         <Table
             className="table-layout"

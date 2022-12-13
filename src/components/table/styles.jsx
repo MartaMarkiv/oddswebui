@@ -8,6 +8,10 @@ const StyledBettingTable = styled.div`
     &.ant-table-middle {
       font-size: 13px;
     }
+
+    .ant-table-body::-webkit-scrollbar {
+      display: none;
+    }
   }
   
   &&& {

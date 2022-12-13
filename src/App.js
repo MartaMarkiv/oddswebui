@@ -53,6 +53,7 @@ function App() {
     const [games, setGames] = useState([]);
 
     const [loadingProcess, setLoadingProcess] = useState(false);
+    const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const theme = themesMap[currentTheme];
  
@@ -148,8 +149,6 @@ function App() {
         element.scrollIntoView({behavior: 'smooth', block: 'center'});
     }
 
-    const tableData = data ? data.slice(0, dataLength) : [];
-
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
@@ -160,6 +159,7 @@ function App() {
                             selectedKey={selectedKey}
                             opportunities={opportunities}
                             setOpportunities={setOpportunities}
+                            openFilter={setIsOpenFilter}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
@@ -170,13 +170,16 @@ function App() {
                                             opportunities={opportunities}
                                             selectedKey={selectedKey}
                                             dataLength={data ? data.length : 0}
+                                            data={data}
                                             sportsBooks={sportsBooks}
                                             sportsTypes={sportsTypes}
                                             pending={pending}
                                             loadingRows={loadingProcess}
-                                            tableData={tableData}
+                                            sliceCounter={dataLength}
                                             betsTypes={betsTypes}
                                             games={games}
+                                            toggleFilter={setIsOpenFilter}
+                                            isOpenFilter={isOpenFilter}
                                         />
                                     }/>
                                 </Routes>
