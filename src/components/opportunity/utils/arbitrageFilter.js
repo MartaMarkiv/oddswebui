@@ -1,0 +1,1 @@
+export const arbitrageFilter = list => list.filter(item => item.sumProbability >= 0);

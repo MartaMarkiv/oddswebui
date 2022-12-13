@@ -21,7 +21,6 @@ export const parser = data => {
             opportunity[key] = {
                 id: camelCase(`${game} - ${bets.name}`),
                 items: [],
-                sumProbability: sumProbability,
             }
 
             home && opportunity[key].items.push({
@@ -33,7 +32,6 @@ export const parser = data => {
                 sportBook: sportsBookHome,
                 typeValue: typeHome,
                 probability: probabilityHome,
-                sumProbability: sumProbability,
                 key
             });
 
@@ -46,7 +44,6 @@ export const parser = data => {
                 sportBook: sportsBookAway,
                 typeValue: typeAway,
                 probability: probabilityAway,
-                sumProbability: sumProbability,
                 key
             });
 
@@ -57,14 +54,10 @@ export const parser = data => {
                 timeout: !!(+timeout),
                 type,
                 opportunity,
+                sumProbability
             });
         });
     });
-    return collection.sort((a, b) => {
-        const betKeyA = Object.keys(a.opportunity);
-        const betKeyB = Object.keys(b.opportunity);
-        const sumProbabilityA = Number(a.opportunity[betKeyA[0]].sumProbability);
-        const sumProbabilityB = Number(b.opportunity[betKeyB[0]].sumProbability);
-        return sumProbabilityB - sumProbabilityA;
-    }).slice(0, 10);
+    return collection.sort((a, b) => b.opportunity.sumProbability - a.opportunity.sumProbability)
+        .slice(0, 10);
 }
