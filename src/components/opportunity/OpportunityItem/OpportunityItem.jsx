@@ -119,7 +119,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                             </GridRow>
                                         })
                                     }
-                                    <div>Sum probability: {data.opportunity[key].sumProbability}</div>
+                                    <div>EV: {data.opportunity[key].sumProbability}</div>
                                 </Group>
                             </div>
                         })
