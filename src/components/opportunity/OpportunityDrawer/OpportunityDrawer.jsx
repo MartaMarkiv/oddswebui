@@ -75,7 +75,6 @@ export const OpportunityDrawer = ({
                 <StarIcon />
             </OpportunityButton>
             <DrawerStyled
-                title="Opportunity"
                 placement="right"
                 closable
                 mask={false}

@@ -1,4 +1,11 @@
-import {HeaderControlPanel, HeaderStyled, LogoImage, LogoLink} from "./styles";
+import {
+    HeaderControlPanel,
+    HeaderStyled,
+    LogoImage,
+    LogoLink,
+    FilterButton,
+    FilterImage
+} from "./styles";
 import {Search} from "../Search";
 import {ThemeSwitcher} from "../ThemeSwitcher";
 import {OpportunityDrawer} from "../opportunity";
@@ -8,8 +15,14 @@ export const Header = ({
     changeSelectedKey,
     selectedKey,
     opportunities,
-    setOpportunities
+    setOpportunities,
+    openFilter
 }) => {
+
+    const showFilter = () => {
+        openFilter(true);
+    };
+
     return (
         <HeaderStyled>
             <LogoLink href="/">
@@ -17,6 +30,10 @@ export const Header = ({
             </LogoLink>
             <HeaderControlPanel>
                 {/* <Search /> */}
+                <FilterButton onClick={showFilter}>
+                    <FilterImage />
+                </FilterButton>
+                
                 <ThemeSwitcher />
                 <OpportunityDrawer
                     changeSelectedKey={changeSelectedKey}
