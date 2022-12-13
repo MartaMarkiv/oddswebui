@@ -27,7 +27,9 @@ export const Main = ({
     sportsBooks,
     pending,
     tableData,
-    loadingRows
+    loadingRows,
+    toggleFilter,
+    isOpenFilter
 }) => {
     
     //Selected filters
@@ -80,6 +82,8 @@ export const Main = ({
                             changeBets={setSelectedBets}
                             games={games}
                             selectGame={setSelectedGames}
+                            toggleFilter={toggleFilter}
+                            isOpenFilter={isOpenFilter}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

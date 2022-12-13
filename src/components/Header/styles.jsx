@@ -7,6 +7,7 @@ const HeaderStyled = styled.header`
   align-items: center;
   justify-content: space-between;
   flex: 0 0 auto;
+  position: relative;
 `
 
 const LogoLink = styled.a`

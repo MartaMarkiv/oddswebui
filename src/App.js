@@ -53,6 +53,7 @@ function App() {
     const [games, setGames] = useState([]);
 
     const [loadingProcess, setLoadingProcess] = useState(false);
+    const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     const theme = themesMap[currentTheme];
  
@@ -160,6 +161,7 @@ function App() {
                             selectedKey={selectedKey}
                             opportunities={opportunities}
                             setOpportunities={setOpportunities}
+                            openFilter={setIsOpenFilter}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
@@ -177,6 +179,8 @@ function App() {
                                             tableData={tableData}
                                             betsTypes={betsTypes}
                                             games={games}
+                                            toggleFilter={setIsOpenFilter}
+                                            isOpenFilter={isOpenFilter}
                                         />
                                     }/>
                                 </Routes>
