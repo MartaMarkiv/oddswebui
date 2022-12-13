@@ -1,5 +1,10 @@
-import {HeaderControlPanel, HeaderStyled, LogoImage, LogoLink} from "./styles";
-import { Button } from "antd";
+import {
+    HeaderControlPanel,
+    HeaderStyled,
+    LogoImage,
+    LogoLink,
+    FilterButton
+} from "./styles";
 import {Search} from "../Search";
 import {ThemeSwitcher} from "../ThemeSwitcher";
 import {OpportunityDrawer} from "../opportunity";
@@ -24,9 +29,9 @@ export const Header = ({
             </LogoLink>
             <HeaderControlPanel>
                 {/* <Search /> */}
-                <Button type="primary" onClick={showFilter}>
+                <FilterButton onClick={showFilter}>
                     Open
-                </Button>
+                </FilterButton>
                 <ThemeSwitcher />
                 <OpportunityDrawer
                     changeSelectedKey={changeSelectedKey}

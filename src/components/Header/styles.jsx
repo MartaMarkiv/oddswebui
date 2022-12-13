@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ReactComponent as Logo } from '../../assets/images/logo.svg';
+import {Button} from "../../shared/styles";
 
 const HeaderStyled = styled.header`
   padding: 24px 0;
@@ -39,9 +40,18 @@ const HeaderControlPanel = styled.div`
   }
 `;
 
+const FilterButton = styled(Button)`
+  &:hover {
+    path {
+      stroke: ${({theme}) => theme.colors.button.arrowHover};   
+    }
+  }
+`
+
 export {
     HeaderStyled,
     LogoLink,
     LogoImage,
-    HeaderControlPanel
+    HeaderControlPanel,
+    FilterButton
 }
