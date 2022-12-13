@@ -64,7 +64,6 @@ export const Main = ({
                 {
                     dataLength
                     ? <>
-                        <Title>Betting table</Title>
                         <BettingTable
                             sportsBooks={sportsBooks}
                             data={filteredData}
