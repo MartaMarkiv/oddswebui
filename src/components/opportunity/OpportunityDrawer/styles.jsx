@@ -42,7 +42,7 @@ const DrawerStyled= styled(Drawer)`
   .ant-drawer-header {
     position: relative;
     padding: 0 12px;
-    max-height: 90px;
+    max-height: 96px;
     flex-grow: 1;
     
     align-items: center;
