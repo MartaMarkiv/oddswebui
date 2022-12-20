@@ -13,7 +13,7 @@ body {
   height: 100%;
 }
 
-body > div {
+body #root {
   height: 100%;
 }
 .ant-table-tbody > tr > td, .ant-table-thead > tr > th {
