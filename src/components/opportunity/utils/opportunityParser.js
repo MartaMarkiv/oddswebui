@@ -26,7 +26,7 @@ export const parser = data => {
             home && opportunity[key].items.push({
                 id: uuidv4(),
                 value: home,
-                isProp: homeProp,
+                prop: homeProp,
                 name: bets.name,
                 type: 'Home',
                 sportBook: sportsBookHome,
@@ -38,7 +38,7 @@ export const parser = data => {
             away && opportunity[key].items.push({
                 id: uuidv4(),
                 value: away,
-                isProp: awayProp,
+                prop: awayProp,
                 name: bets.name,
                 type: 'Away',
                 sportBook: sportsBookAway,
