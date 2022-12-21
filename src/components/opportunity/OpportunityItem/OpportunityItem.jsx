@@ -99,11 +99,11 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                             switch (opportunity.name) {
                                                 case 'Spread':
                                                     typeValue = `${opportunity.type} ${opportunity.typeValue}`;
-                                                    opporunityName = `${opportunity.isProp === 1 ? 'Alternate' : 'Popular'} ${opportunity.name}`
+                                                    opporunityName = opportunity.isProp;
                                                     break;
                                                 case 'Total':
                                                     typeValue = opportunity.typeValue;
-                                                    opporunityName = `${opportunity.isProp === 1 ? 'Alternate' : 'Popular'} ${opportunity.name}`
+                                                    opporunityName = opportunity.isProp;
                                                     break;
                                                 default:
                                                     typeValue = opportunity.type;
