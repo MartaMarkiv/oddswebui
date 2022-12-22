@@ -95,7 +95,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                                     {
                                         bets.map((opportunity, i) => {
                                             return <GridRow key={i}>
-                                                <GridTd>{opportunity.prop}</GridTd>
+                                                <GridTd>{opportunity.betName}</GridTd>
                                                 <GridTd>{opportunity.type}</GridTd>
                                                 <GridTd isValue>{opportunity.value}</GridTd>
                                                 <GridTd>{opportunity.sportBook}</GridTd>
