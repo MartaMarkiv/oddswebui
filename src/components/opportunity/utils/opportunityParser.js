@@ -4,13 +4,12 @@ import {v4 as uuidv4} from 'uuid';
 export const parser = data => {
     const collection = [];
     data?.forEach(({id, game, timeout, type, opportunity}) => {
-        const [awayTeam, homeTeam] = game.indexOf('@') >= 0 ? game.split('@') : game.split(' v '); // Away @ Home
+        const [awayTeam, homeTeam] = game.indexOf('@') >= 0 ? game.split(' @ ') : game.split(' v '); // Away @ Home
 
         opportunity.forEach(opportunityItem => {
             const {bets} = opportunityItem;
             const sumProbability = Number(bets.sum_probability);
             const [away, home] = bets.odds.map(item => item.trim());
-            const [awayProp, homeProp] = bets.is_prop.map(item => Number(item) === 1);
             const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
             const [typeAway, typeHome] = bets.type;
             const [probabilityAway, probabilityHome] = bets.probability;
@@ -26,7 +25,7 @@ export const parser = data => {
             home && opportunity[key].items.push({
                 id: uuidv4(),
                 value: home,
-                isProp: homeProp,
+                betName: bets.BET_NAME.trim(),
                 name: bets.name,
                 type: 'Home',
                 sportBook: sportsBookHome,
@@ -38,7 +37,7 @@ export const parser = data => {
             away && opportunity[key].items.push({
                 id: uuidv4(),
                 value: away,
-                isProp: awayProp,
+                betName: bets.BET_NAME.trim(),
                 name: bets.name,
                 type: 'Away',
                 sportBook: sportsBookAway,
@@ -58,6 +57,6 @@ export const parser = data => {
             });
         });
     });
-    return collection.sort((a, b) => b.opportunity.sumProbability - a.opportunity.sumProbability)
+    return collection.sort((a, b) => b.sumProbability - a.sumProbability)
         .slice(0, 10);
 }
