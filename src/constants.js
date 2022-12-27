@@ -1,8 +1,6 @@
 export const DRAWER_WIDTH = 400;
-
 export const TABLE_DATA = "wss://user:Oddsbender@backend.oddsbender.com/ws/table_data";
 export const OPPORTUNITY= "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed";
-
 export const QUARTERS_LIST = {
     q1: ["q1", "1st"],
     q2: ["q2", "2nd"],
