@@ -12,7 +12,10 @@ import {
     TeamBadge,
     TeamName,
     Teams,
-    Grid, Group, Divider
+    Grid,
+    Group,
+    Divider,
+    GameTime
 } from "./styles";
 import {TimeoutBadge} from "../../TimeoutBadge";
 import {TeamLogoGroup} from "../../TeamLogo";
@@ -66,6 +69,7 @@ export const OpportunityItem = ({onSelect, data, selected}) => {
                 {
                     data.timeout && <TimeoutBadge size="small"/>
                 }
+                <GameTime>{data.gameTime}</GameTime>
                 {/* <TeamLogoGroup urls={['team1.png', 'team2.png']}/> */}
             </HeaderRightContent>
         </Header>

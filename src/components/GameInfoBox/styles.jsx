@@ -35,6 +35,7 @@ const TextSecondary = styled.div`
 
 const Text = styled(TextSecondary)`
   color: inherit;
+  margin-bottom: 10px;
 `;
 
 export {
