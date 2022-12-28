@@ -3,7 +3,7 @@ import {v4 as uuidv4} from 'uuid';
 
 export const parser = data => {
     const collection = [];
-    data?.forEach(({id, game, timeout, type, opportunity}) => {
+    data?.forEach(({id, game, timeout, type, opportunity, time: gameTime}) => {
         const [awayTeam, homeTeam] = game.indexOf('@') >= 0 ? game.split(' @ ') : game.split(' v '); // Away @ Home
 
         opportunity.forEach(opportunityItem => {
@@ -53,7 +53,8 @@ export const parser = data => {
                 timeout: !!(+timeout),
                 type,
                 opportunity,
-                sumProbability
+                sumProbability,
+                gameTime
             });
         });
     });
