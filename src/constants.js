@@ -1,6 +1,7 @@
 export const DRAWER_WIDTH = 400;
-export const TABLE_DATA = "wss://user:Oddsbender@backend.oddsbender.com/ws/table_data";
-export const OPPORTUNITY= "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed";
+export const TABLE_DATA = process.env.REACT_APP_TABLE_DATA;
+export const OPPORTUNITY= process.env.REACT_APP_OPPORTUNITY;
+
 export const QUARTERS_LIST = {
     q1: ["q1", "1st"],
     q2: ["q2", "2nd"],

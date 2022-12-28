@@ -159,6 +159,10 @@ const Divider = styled.div`
   background: #2d2d2d;
 `
 
+const GameTime = styled.div`
+  font-size: 12px
+`
+
 export {
     OpportunityItemContainer,
     Header,
@@ -177,4 +181,5 @@ export {
     TeamBadge,
     Group,
     Divider,
+    GameTime
 }
