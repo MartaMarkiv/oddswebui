@@ -7,8 +7,8 @@ import {ThemeProvider} from "styled-components";
 import {createContext, useEffect, useState} from "react";
 import {CommonProvider} from "./shared/context/CommonProvider";
 import {QueryParamProvider} from 'use-query-params';
-import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
 import {TABLE_DATA} from "./constants";
+import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
 import {parseData, getSportsBooks} from "./components/table/utils";
 
 const client = new WebSocket(TABLE_DATA);
