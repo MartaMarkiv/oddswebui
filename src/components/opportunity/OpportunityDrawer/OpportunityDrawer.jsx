@@ -24,7 +24,6 @@ export const OpportunityDrawer = ({
     const [loading, setLoading] = useState(true);
 
     const [showAll, setShowAll] = useState(true);
-    const [displayedList, setDisplayedList] = useState([]);
 
     const connectSocket = () => {
 
@@ -39,9 +38,6 @@ export const OpportunityDrawer = ({
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
             const parsedData = parser(allOpportunities);
             setCollection(parsedData);
-
-            const list = showAll ? parsedData : arbitrageFilter(parsedData);
-            setDisplayedList(list);
         };
 
         client.onerror = () => {
@@ -65,9 +61,9 @@ export const OpportunityDrawer = ({
 
     const switchHandler = (value) => {
         setShowAll(value === "all");
-        const list = value === "all" ? collection : arbitrageFilter(collection);
-        setDisplayedList(list);
     }
+
+    const list = showAll ? collection : arbitrageFilter(collection);
 
     return (
         <>
@@ -101,7 +97,7 @@ export const OpportunityDrawer = ({
                         <PendingScreen position={"absolute"}/> :
                         collection && collection.length ?
                             <OpportunityList
-                                opportunities={displayedList}
+                                opportunities={list}
                                 selectOpportunity={changeSelectedKey}
                                 selectedOpportunity={selectedKey}
                                 allList={showAll}
