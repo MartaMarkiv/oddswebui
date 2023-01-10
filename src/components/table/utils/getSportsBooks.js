@@ -6,7 +6,7 @@ export const getSportsBooks = (sportsData) => {
   
     sportsData.forEach(game => {
         games.push({ key: game.game, label: game.game});
-        game.sportsbooks.forEach(sportsbook => {
+        game.sportsbooks?.forEach(sportsbook => {
             sportsBooksList.add(sportsbook.sportsbook);
             sportsbook.bets.forEach(betType => betsTypesList.add(betType.name));
         });
