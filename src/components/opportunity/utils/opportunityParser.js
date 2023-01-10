@@ -11,10 +11,12 @@ export const parser = data => {
             const sumProbability = Number(bets.sum_probability);
             const [away, home] = bets.odds.map(item => item.trim());
             const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
-            const [typeAway, typeHome] = bets.type;
+            
             const [probabilityAway, probabilityHome] = bets.probability;
 
             const key = camelCase(bets.name);
+
+            const [typeAway, typeHome] = key === "moneyline" ? ["Away", "Home"] : bets.type;
             
             let opportunity = {};
             opportunity[key] = {
