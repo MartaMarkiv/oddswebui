@@ -12,6 +12,8 @@ RUN npm run build
 
 FROM nginx:1.23
 
+ENV NODE_ENV=production
+
 WORKDIR /app
 COPY --from=builder /usr/src/app/build /app/web
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
