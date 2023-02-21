@@ -50,7 +50,7 @@ const DrawerStyled= styled(Drawer)`
   }
 
   .ant-drawer-body {
-    padding: 0 12px;
+    padding: 0;
   }
 
   .ant-drawer-title {
@@ -92,6 +92,13 @@ const DrawerStyled= styled(Drawer)`
     
 `
 
+const OpportunitiesWrapper = styled.div`
+  background: ${({theme}) => theme.colors.headerControls.bg};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const CloseIcon = styled(Close)``
 
 export {
@@ -99,4 +106,5 @@ export {
     DrawerStyled,
     StarIcon,
     CloseIcon,
+    OpportunitiesWrapper
 }

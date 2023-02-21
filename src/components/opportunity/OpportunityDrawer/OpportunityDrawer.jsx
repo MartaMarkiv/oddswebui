@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import {Space} from "antd";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
-import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
+import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon, OpportunitiesWrapper} from "./styles";
 import {Switcher} from "../../Switcher";
 import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
@@ -36,7 +36,10 @@ export const OpportunityDrawer = ({
             const json = JSON.parse(event.data);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
+            console.log(allOpportunities);
+
             const parsedData = parser(allOpportunities);
+            console.log(parsedData);
             setCollection(parsedData);
         };
 
@@ -74,7 +77,7 @@ export const OpportunityDrawer = ({
                 placement="right"
                 closable
                 mask={false}
-                width={DRAWER_WIDTH}
+                width={800}
                 closeIcon={<CloseIcon />}
                 extra={
                     <Space>
@@ -95,14 +98,24 @@ export const OpportunityDrawer = ({
                 {
                     loading ? 
                         <PendingScreen position={"absolute"}/> :
-                        collection && collection.length ?
+                        collection && collection.length &&
+                        <OpportunitiesWrapper>
                             <OpportunityList
                                 opportunities={list}
                                 selectOpportunity={changeSelectedKey}
                                 selectedOpportunity={selectedKey}
                                 allList={showAll}
-                            /> :
-                            <SubTitle>No opportunity right now</SubTitle>
+                                title="Prop Feed"
+                            />
+                            <OpportunityList
+                                opportunities={list}
+                                selectOpportunity={changeSelectedKey}
+                                selectedOpportunity={selectedKey}
+                                allList={showAll}
+                                title="Popular Feed"
+                            />
+                        </OpportunitiesWrapper>
+                            
                 }
             </DrawerStyled>
         </>

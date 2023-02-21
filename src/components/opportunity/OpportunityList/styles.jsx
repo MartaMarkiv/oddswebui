@@ -1,6 +1,8 @@
 import styled from "styled-components";
 
-const OpportunityListContainer = styled.div``;
+const OpportunityListContainer = styled.div`
+margin-left: 10px;`;
+
 const List = styled.ul`
   padding: 0;
   list-style: none;
