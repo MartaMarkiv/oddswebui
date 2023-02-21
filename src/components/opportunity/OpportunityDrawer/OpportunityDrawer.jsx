@@ -7,7 +7,7 @@ import {Switcher} from "../../Switcher";
 import {SubTitle} from "../../typography/SubTitle/SubTitle";
 import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
 import {PendingScreen} from "../../../components/PendingScreen";
-import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
+import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
 
 const client = new WebSocket(OPPORTUNITY);

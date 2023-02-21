@@ -5,7 +5,7 @@ import {DRAWER_WIDTH} from "../../constants";
 
 const Wrapper = styled.div`
   transition: width 0.3s;
-  width: ${({drawerOpened}) => drawerOpened ? 'calc(100% - ' + DRAWER_WIDTH + 'px)' : '100%'};
+  width: ${({drawerOpened}) => drawerOpened ? 'calc(100% - ' + 800 + 'px)' : '100%'};
   height: 100%;
 `;
 

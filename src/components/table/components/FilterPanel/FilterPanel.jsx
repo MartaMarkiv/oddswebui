@@ -12,6 +12,7 @@ import {BetsShownFilter} from "./BetsShownFilter";
 import {MiddleRangeFilter} from "./MiddleRangeFilter/MiddleRangeFilter";
 import {RefreshButton} from "./RefreshButton/RefreshButton";
 import {FavoriteButton} from "./FavoriteButton";
+import { ViewSettings } from "../../../ViewSettings"
 
 export const FilterPanel = ({
     sportsBooks,
@@ -68,6 +69,7 @@ export const FilterPanel = ({
                     <RefreshButton />
                 </FilterPanelItem> */}
             </FilterPanelContainer>
+            <ViewSettings></ViewSettings>
         </DrawerStyled>
     )
 }
