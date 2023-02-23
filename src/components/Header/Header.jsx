@@ -16,7 +16,11 @@ export const Header = ({
     selectedKey,
     opportunities,
     setOpportunities,
-    openFilter
+    openFilter,
+    isProp,
+    isPopular,
+    setPropFeedView,
+    setPopularFeedView
 }) => {
 
     const showFilter = () => {
@@ -40,6 +44,10 @@ export const Header = ({
                     selectedKey={selectedKey}
                     collection={opportunities}
                     setCollection={setOpportunities}
+                    isProp={isProp}
+                    isPopular={isPopular}
+                    setPropFeedView={setPropFeedView}
+                    setPopularFeedView={setPopularFeedView}
                 />
                 {/* <UserAvatar /> */}
             </HeaderControlPanel>

@@ -6,29 +6,13 @@ import {GameInfoBox} from "../GameInfoBox";
 import {LoadingRowsInfo} from "../LoadingRowsInfo";
 import {StyledBettingTable} from "./styles";
 import {TableCell, TableRow, TableTh} from "./components";
-import {FilterPanel} from "./components/FilterPanel";
 
 export const BettingTable = ({
     data,
     opportunities,
-    sportsBooks,
-    changeBook,
-    changeQuarter,
-    selectedQuarters,
-    sportsTypes,
-    changeSport,
     selectedRow,
     countRows,
-    loadingRows,
-    betsTypes,
-    changeBets,
-    games,
-    selectGame,
-    isOpenFilter,
-    toggleFilter,
-    isTable,
-    isProp,
-    isPopular
+    loadingRows
 }) => {
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
@@ -55,20 +39,6 @@ export const BettingTable = ({
     };
 
     return <StyledBettingTable>
-        {/* <FilterPanel
-            sportsBooks={sportsBooks}
-            changeBook={changeBook}
-            changeQuarter={changeQuarter}
-            quarters={selectedQuarters}
-            sports={sportsTypes}
-            changeSport={changeSport}
-            betsTypes={betsTypes}
-            changeBets={changeBets}
-            games={games}
-            changeGame={selectGame}
-            isOpenFilter={isOpenFilter}
-            toggleFilter={toggleFilter}
-        /> */}
         <Table
             className="table-layout"
             columns={columns}

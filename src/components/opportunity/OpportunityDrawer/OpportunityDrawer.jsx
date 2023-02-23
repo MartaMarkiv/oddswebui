@@ -16,7 +16,11 @@ export const OpportunityDrawer = ({
     changeSelectedKey,
     selectedKey,
     setCollection,
-    collection
+    collection,
+    isProp,
+    isPopular,
+    setPropFeedView,
+    setPopularFeedView
 }) => {
 
     const setDrawerOpened = useSetDrawerOpened();
@@ -75,7 +79,7 @@ export const OpportunityDrawer = ({
                 placement="right"
                 closable
                 mask={false}
-                width={800}
+                width={isProp&&isPopular ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
                 closeIcon={<CloseIcon />}
                 extra={
                     <Space>
@@ -98,21 +102,25 @@ export const OpportunityDrawer = ({
                         <PendingScreen position={"absolute"}/> :
                         collection && collection.length &&
                         <OpportunitiesWrapper>
-                            <OpportunityList
-                                opportunities={list}
-                                selectOpportunity={changeSelectedKey}
-                                selectedOpportunity={selectedKey}
-                                allList={showAll}
-                                name="Prop"
-                            />
-                            <OpportunityList
-                                opportunities={list}
-                                selectOpportunity={changeSelectedKey}
-                                selectedOpportunity={selectedKey}
-                                allList={showAll}
-                                name="Popular"
-                                switchHandler={switchHandler}
-                            />
+                            { isProp && 
+                                <OpportunityList
+                                    opportunities={list}
+                                    selectOpportunity={changeSelectedKey}
+                                    selectedOpportunity={selectedKey}
+                                    allList={showAll}
+                                    name="Prop"
+                                />
+                            }
+                            { isPopular &&
+                                <OpportunityList
+                                    opportunities={list}
+                                    selectOpportunity={changeSelectedKey}
+                                    selectedOpportunity={selectedKey}
+                                    allList={showAll}
+                                    name="Popular"
+                                    switchHandler={switchHandler}
+                                />
+                            }
                         </OpportunitiesWrapper>
                             
                 }

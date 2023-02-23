@@ -45,7 +45,7 @@ function App() {
     const [pending, setPending] = useState(false);
     const [dataLength, setDataLength] = useState(15);
 
-    //filters
+    //Filters
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
@@ -56,6 +56,7 @@ function App() {
     const [loadingProcess, setLoadingProcess] = useState(false);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
+    //View settings
     const [tableVisible, setTableVisible] = useState(true);
     const [propVisible, setPropVisible] = useState(false);
     const [popularVisible, setPopularVisible] = useState(true);
@@ -81,7 +82,7 @@ function App() {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
-            // console.log("gamess: ", allGames.length);
+
             const {books: booksList, bets, games} = getSportsBooks(allGames);
 
             const tableData = parseData(allGames, booksList);
@@ -158,7 +159,7 @@ function App() {
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <CommonProvider isOpen="true">
+                <CommonProvider fullFeed={propVisible && popularVisible}>
                     <AppStyled>
                         <Header
                             changeSelectedKey={changeSelectedKey}
@@ -166,6 +167,10 @@ function App() {
                             opportunities={opportunities}
                             setOpportunities={setOpportunities}
                             openFilter={setIsOpenFilter}
+                            isProp={propVisible}
+                            isPopular={popularVisible}
+                            setPropFeedView={setPropVisible}
+                            setPopularFeedView={setPopularVisible}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
