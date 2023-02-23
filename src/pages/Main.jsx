@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import {BettingTable} from "../components/table";
+import { BettingTable } from "../components/table";
 import {
     sportsBooksFilter,
     quartersFilter,
@@ -8,9 +8,10 @@ import {
     betsFilter,
     gameFilter
 } from "../components/table/utils";
-import {PendingScreen} from "../components/PendingScreen";
-import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-import {FilterPanel} from "../components/table/components/FilterPanel";
+import { PendingScreen } from "../components/PendingScreen";
+import { SubTitle } from "../components/typography/SubTitle/SubTitle";
+import { FilterPanel } from "../components/table/components/FilterPanel";
+import { EmptyView } from '../components/EmptyView';
 
 const StyledMain = styled.div`
   position: relative;
@@ -93,13 +94,18 @@ export const Main = ({
                             setPropFeedView={setPropFeedView}
                             setPopularFeedView={setPopularFeedView}
                         />
-                        <BettingTable
-                            data={filteredData}
-                            opportunities={opportunities}
-                            selectedRow={selectedKey}
-                            countRows={dataLength - filteredData.length}
-                            loadingRows={loadingRows}
-                        />
+                        {
+                            (isTable || isProp || isPopular) ?
+                                <BettingTable
+                                    data={filteredData}
+                                    opportunities={opportunities}
+                                    selectedRow={selectedKey}
+                                    countRows={dataLength - filteredData.length}
+                                    loadingRows={loadingRows}
+                                /> :
+                                <EmptyView />
+                        }
+                        
                     </>
                     :<SubTitle>No live games</SubTitle>
                 }

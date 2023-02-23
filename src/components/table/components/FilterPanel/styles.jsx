@@ -93,7 +93,9 @@ const CloseIcon = styled(Close)``;
 
 const SettingsTitle = styled.div`
 font-size: 16px;
-font-weight: 500;`;
+font-weight: 500;
+color: ${({theme}) => theme.colors.textPrimary};
+`;
 
 export {
     FilterPanelContainer,

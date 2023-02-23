@@ -24,6 +24,9 @@ const AppStyled = styled.div`
 
 const AppBody = styled.div`
   flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const AppFooter = styled.div`
