@@ -105,14 +105,15 @@ export const OpportunityDrawer = ({
                                 selectOpportunity={changeSelectedKey}
                                 selectedOpportunity={selectedKey}
                                 allList={showAll}
-                                title="Prop Feed"
+                                name="Prop"
                             />
                             <OpportunityList
                                 opportunities={list}
                                 selectOpportunity={changeSelectedKey}
                                 selectedOpportunity={selectedKey}
                                 allList={showAll}
-                                title="Popular Feed"
+                                name="Popular"
+                                switchHandler={switchHandler}
                             />
                         </OpportunitiesWrapper>
                             

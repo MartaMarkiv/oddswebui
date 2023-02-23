@@ -1,13 +1,15 @@
-import {List, ListItem, OpportunityListContainer} from "./styles";
+import {List, ListItem, OpportunityListContainer, Title} from "./styles";
 import {OpportunityItem} from "../OpportunityItem";
 
 export const OpportunityList = ({
     opportunities,
     selectOpportunity,
-    selectedOpportunity
+    selectedOpportunity,
+    name
 }) => {
 
     return <OpportunityListContainer>
+        <Title>{name} Feed</Title>
         <List>
             {
                 opportunities && opportunities.map((item, index) => {
