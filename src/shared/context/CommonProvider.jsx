@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 
 const CommonContext = React.createContext({});
 
-export const CommonProvider = ({children}) => {
+export const CommonProvider = ({isOpen, children}) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
 
   return (

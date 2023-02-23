@@ -1,6 +1,6 @@
 import {SettingsBoxStyled, CheckBoxStyled, Label} from "./styles";
 
-export const ViewSettings = ({rows, isLoading}) => {
+export const ViewSettings = ({isTable, isProp, isPopular}) => {
     return <SettingsBoxStyled>
         <CheckBoxStyled>
             <Label>Table</Label>

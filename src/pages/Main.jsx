@@ -10,7 +10,7 @@ import {
 } from "../components/table/utils";
 import {PendingScreen} from "../components/PendingScreen";
 import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-
+import {FilterPanel} from "../components/table/components/FilterPanel";
 
 const StyledMain = styled.div`
   position: relative;
@@ -28,7 +28,11 @@ export const Main = ({
     loadingRows,
     toggleFilter,
     isOpenFilter,
-    data, sliceCounter
+    data,
+    sliceCounter,
+    isTable,
+    isProp,
+    isPopular
 }) => {
     
     //Selected filters
@@ -66,24 +70,29 @@ export const Main = ({
                 {
                     dataLength
                     ? <>
-                        <BettingTable
+                        <FilterPanel
                             sportsBooks={sportsBooks}
-                            data={filteredData}
-                            opportunities={opportunities}
                             changeBook={setSelectedSportsBooks}
                             changeQuarter={setSelectedQuarters}
-                            selectedQuarters={selectedQuarters}
-                            sportsTypes={sportsTypes}
+                            quarters={selectedQuarters}
+                            sports={sportsTypes}
                             changeSport={setSelectedSports}
-                            selectedRow={selectedKey}
-                            countRows={dataLength - filteredData.length}
-                            loadingRows={loadingRows}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
                             games={games}
-                            selectGame={setSelectedGames}
-                            toggleFilter={toggleFilter}
+                            changeGame={setSelectedGames}
                             isOpenFilter={isOpenFilter}
+                            toggleFilter={toggleFilter}
+                            isTable={isTable}
+                            isProp={isProp}
+                            isPopular={isPopular}
+                        />
+                        <BettingTable
+                            data={filteredData}
+                            opportunities={opportunities}
+                            selectedRow={selectedKey}
+                            countRows={dataLength - filteredData.length}
+                            loadingRows={loadingRows}
                         />
                     </>
                     :<SubTitle>No live games</SubTitle>

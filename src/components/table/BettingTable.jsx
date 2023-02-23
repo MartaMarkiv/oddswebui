@@ -25,7 +25,10 @@ export const BettingTable = ({
     games,
     selectGame,
     isOpenFilter,
-    toggleFilter
+    toggleFilter,
+    isTable,
+    isProp,
+    isPopular
 }) => {
     const betRenderer = (data) => {
         return <BetBox data={data} opportunities={opportunities} selectedBet={selectedRow}/>
@@ -52,7 +55,7 @@ export const BettingTable = ({
     };
 
     return <StyledBettingTable>
-        <FilterPanel
+        {/* <FilterPanel
             sportsBooks={sportsBooks}
             changeBook={changeBook}
             changeQuarter={changeQuarter}
@@ -65,7 +68,7 @@ export const BettingTable = ({
             changeGame={selectGame}
             isOpenFilter={isOpenFilter}
             toggleFilter={toggleFilter}
-        />
+        /> */}
         <Table
             className="table-layout"
             columns={columns}

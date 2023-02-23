@@ -36,10 +36,8 @@ export const OpportunityDrawer = ({
             const json = JSON.parse(event.data);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
-            console.log(allOpportunities);
 
             const parsedData = parser(allOpportunities);
-            console.log(parsedData);
             setCollection(parsedData);
         };
 

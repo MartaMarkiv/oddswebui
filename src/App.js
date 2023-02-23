@@ -45,6 +45,7 @@ function App() {
     const [pending, setPending] = useState(false);
     const [dataLength, setDataLength] = useState(15);
 
+    //filters
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
@@ -54,6 +55,10 @@ function App() {
 
     const [loadingProcess, setLoadingProcess] = useState(false);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
+
+    const [tableVisible, setTableVisible] = useState(true);
+    const [propVisible, setPropVisible] = useState(false);
+    const [popularVisible, setPopularVisible] = useState(true);
 
     const theme = themesMap[currentTheme];
  
@@ -79,6 +84,7 @@ function App() {
             const {books: booksList, bets, games} = getSportsBooks(allGames);
 
             const tableData = parseData(allGames, booksList);
+            console.log("tableData");
 
             setData(tableData);
             setSportsTypes(sportsList);
@@ -152,7 +158,7 @@ function App() {
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <CommonProvider>
+                <CommonProvider isOpen="true">
                     <AppStyled>
                         <Header
                             changeSelectedKey={changeSelectedKey}
@@ -180,6 +186,9 @@ function App() {
                                             games={games}
                                             toggleFilter={setIsOpenFilter}
                                             isOpenFilter={isOpenFilter}
+                                            isTable={tableVisible}
+                                            isProp={propVisible}
+                                            isPopular={popularVisible}
                                         />
                                     }/>
                                 </Routes>
