@@ -81,10 +81,10 @@ function App() {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
+            // console.log("gamess: ", allGames.length);
             const {books: booksList, bets, games} = getSportsBooks(allGames);
 
             const tableData = parseData(allGames, booksList);
-            console.log("tableData");
 
             setData(tableData);
             setSportsTypes(sportsList);
@@ -189,6 +189,9 @@ function App() {
                                             isTable={tableVisible}
                                             isProp={propVisible}
                                             isPopular={popularVisible}
+                                            setTableView={setTableVisible}
+                                            setPropFeedView={setPropVisible}
+                                            setPopularFeedView={setPopularVisible}
                                         />
                                     }/>
                                 </Routes>

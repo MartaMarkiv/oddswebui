@@ -27,7 +27,13 @@ export const FilterPanel = ({
     games,
     changeGame,
     isOpenFilter,
-    toggleFilter
+    toggleFilter,
+    isTable,
+    isProp,
+    isPopular,
+    setTableView,
+    setPropFeedView,
+    setPopularFeedView
 }) => {
 
     const closeFilter = () => {
@@ -72,7 +78,14 @@ export const FilterPanel = ({
                 </FilterPanelItem> */}
             </FilterPanelContainer>
             <SettingsTitle>Display settings:</SettingsTitle>
-            <ViewSettings></ViewSettings>
+            <ViewSettings
+                isTable={isTable}
+                isProp={isProp}
+                isPopular={isPopular}
+                setTableView={setTableView}
+                setPropFeedView={setPropFeedView}
+                setPopularFeedView={setPopularFeedView}
+            />
         </DrawerStyled>
     )
 }

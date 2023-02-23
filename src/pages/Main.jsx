@@ -32,7 +32,10 @@ export const Main = ({
     sliceCounter,
     isTable,
     isProp,
-    isPopular
+    isPopular,
+    setTableView,
+    setPropFeedView,
+    setPopularFeedView
 }) => {
     
     //Selected filters
@@ -86,6 +89,9 @@ export const Main = ({
                             isTable={isTable}
                             isProp={isProp}
                             isPopular={isPopular}
+                            setTableView={setTableView}
+                            setPropFeedView={setPropFeedView}
+                            setPopularFeedView={setPopularFeedView}
                         />
                         <BettingTable
                             data={filteredData}
