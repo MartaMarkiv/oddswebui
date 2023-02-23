@@ -3,12 +3,6 @@ import styled from "styled-components";
 import {Button} from "../../../../shared/styles";
 import {ReactComponent as Close} from "../../../../assets/icons/close.svg";
 
-const FilterPanelWrapper = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
-`;
-
 const FilterPanelContainer = styled.ul`
   padding: 0;
   list-style: none;
@@ -95,11 +89,16 @@ const ButtonStyled = styled(Button)`
   }
 `;
 
-const CloseIcon = styled(Close)``
+const CloseIcon = styled(Close)``;
+
+const SettingsTitle = styled.div`
+font-size: 16px;
+font-weight: 500;`;
 
 export {
     FilterPanelContainer,
     FilterPanelItem,
     DrawerStyled,
-    CloseIcon
+    CloseIcon,
+    SettingsTitle
 }

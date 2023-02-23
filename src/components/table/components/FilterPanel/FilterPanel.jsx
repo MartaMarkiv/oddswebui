@@ -2,7 +2,8 @@ import {
     FilterPanelContainer,
     FilterPanelItem,
     DrawerStyled,
-    CloseIcon
+    CloseIcon,
+    SettingsTitle
 } from "./styles";
 import {SportsBookFilter} from "./SportsBookFilter";
 import {SportFilter} from "./SportFilter";
@@ -43,6 +44,7 @@ export const FilterPanel = ({
             onClose={closeFilter}
             open={isOpenFilter}
         >
+            <SettingsTitle>Data table settings:</SettingsTitle>
             <FilterPanelContainer>
                 <FilterPanelItem>
                     <SportsBookFilter books={sportsBooks} changeFilter={changeBook}/>
@@ -69,6 +71,7 @@ export const FilterPanel = ({
                     <RefreshButton />
                 </FilterPanelItem> */}
             </FilterPanelContainer>
+            <SettingsTitle>Display settings:</SettingsTitle>
             <ViewSettings></ViewSettings>
         </DrawerStyled>
     )
