@@ -24,9 +24,6 @@ const AppStyled = styled.div`
 
 const AppBody = styled.div`
   flex: 1 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const AppFooter = styled.div`
@@ -64,7 +61,27 @@ function App() {
     const [propVisible, setPropVisible] = useState(false);
     const [popularVisible, setPopularVisible] = useState(true);
 
+    const [feedVisibility, setFeedVisibility] = useState(true);
+
     const theme = themesMap[currentTheme];
+
+    const changePropFeedVisibility = (value) => {
+        setPropVisible(value);
+        console.log(popularVisible,  "  ", value, "  1: ", !popularVisible && !value);
+        if (!popularVisible && !value) {
+            console.log("setFeedVisibility");
+            setFeedVisibility(false);
+        }
+    }
+
+    const changePopularFeedVisibility = (value) => {
+        setPopularVisible(value);
+        console.log(propVisible,  "  ", value,  "  2  ", !propVisible && !value);
+        if (!propVisible && !value) {
+            console.log("setFeedVisibility");
+            setFeedVisibility(false);
+        }
+    }
  
     const loadDataFromApi = () => {
         setPending(true);
@@ -143,6 +160,7 @@ function App() {
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
+        if (!tableVisible) return;
         if (value && data) {
             const indexTableData =  data.map(e => e.id).indexOf(value.id);
             if (indexTableData > dataLength) {
@@ -162,7 +180,7 @@ function App() {
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <CommonProvider fullFeed={propVisible && popularVisible}>
+                <CommonProvider fullFeed={propVisible && popularVisible} isDrawerOpened={feedVisibility}>
                     <AppStyled>
                         <Header
                             changeSelectedKey={changeSelectedKey}
@@ -172,8 +190,8 @@ function App() {
                             openFilter={setIsOpenFilter}
                             isProp={propVisible}
                             isPopular={popularVisible}
-                            setPropFeedView={setPropVisible}
-                            setPopularFeedView={setPopularVisible}
+                            visible={feedVisibility}
+                            setVisible={setFeedVisibility}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
@@ -198,8 +216,8 @@ function App() {
                                             isProp={propVisible}
                                             isPopular={popularVisible}
                                             setTableView={setTableVisible}
-                                            setPropFeedView={setPropVisible}
-                                            setPopularFeedView={setPopularVisible}
+                                            setPropFeedView={changePropFeedVisibility}
+                                            setPopularFeedView={changePopularFeedVisibility}
                                         />
                                     }/>
                                 </Routes>

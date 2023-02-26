@@ -1,16 +1,14 @@
 import styled from "styled-components";
 import {ReactComponent as SettingsIcon} from '../../assets/icons/filter.svg';
 
-const ViewWrapper = styled.div`
-  margin-bottom: 150px;
-`
-
 const Title = styled.div`
   font-weight: 400;
   font-size: 20px;
   color: ${({theme}) => theme.colors.textPrimary};
   display: flex;
   align-items: center;
+  justify-content: center;
+  margin-top: 150px;
 `;
 
 
@@ -29,7 +27,6 @@ background: ${({theme}) => theme.colors.headerControls.bg};
 `
 
 export {
-  ViewWrapper,
   Title,
   SettingsImage,
   Wrapper

@@ -19,8 +19,8 @@ export const Header = ({
     openFilter,
     isProp,
     isPopular,
-    setPropFeedView,
-    setPopularFeedView
+    visible,
+    setVisible
 }) => {
 
     const showFilter = () => {
@@ -46,8 +46,8 @@ export const Header = ({
                     setCollection={setOpportunities}
                     isProp={isProp}
                     isPopular={isPopular}
-                    setPropFeedView={setPropFeedView}
-                    setPopularFeedView={setPopularFeedView}
+                    visible={visible}
+                    setVisible={setVisible}
                 />
                 {/* <UserAvatar /> */}
             </HeaderControlPanel>

@@ -27,6 +27,15 @@ const OpportunityButton = styled.button`
       stroke: ${({theme}) => theme.colors.headerControls.starStrokeHover};
     } 
   }
+
+  &:disabled {
+    cursor: default;
+    background: ${({theme}) => theme.colors.headerControls.bg};
+    path {
+      stroke: ${({theme}) => theme.colors.headerControls.starStroke};
+      fill: ${({theme}) => theme.colors.headerControls.starBg};
+    } 
+  }
 `;
 
 const StarIcon = styled(Star)`

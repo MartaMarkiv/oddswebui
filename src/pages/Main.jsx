@@ -95,15 +95,15 @@ export const Main = ({
                             setPopularFeedView={setPopularFeedView}
                         />
                         {
-                            (isTable || isProp || isPopular) ?
-                                <BettingTable
+                            !(isTable || isProp || isPopular) ?
+                                <EmptyView /> :
+                                isTable && <BettingTable
                                     data={filteredData}
                                     opportunities={opportunities}
                                     selectedRow={selectedKey}
                                     countRows={dataLength - filteredData.length}
                                     loadingRows={loadingRows}
-                                /> :
-                                <EmptyView />
+                                />
                         }
                         
                     </>

@@ -11,16 +11,15 @@ const Wrapper = styled.div`
 
 const CommonContext = React.createContext({});
 
-export const CommonProvider = ({fullFeed, children}) => {
+export const CommonProvider = ({fullFeed, isDrawerOpened, children}) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
 
   return (
     <CommonContext.Provider
       value={{
-        drawerOpened,
-        setDrawerOpened
+        isDrawerOpened
       }}>
-       <Wrapper drawerOpened={drawerOpened} space={fullFeed ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}>
+       <Wrapper drawerOpened={isDrawerOpened} space={fullFeed ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}>
            { children }
        </Wrapper>
     </CommonContext.Provider>
