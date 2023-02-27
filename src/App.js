@@ -180,6 +180,7 @@ function App() {
                     fullFeed={propVisible && popularVisible}
                     drawerOpened={drawerOpened}
                     setDrawerOpened={setDrawerOpened}
+                    isTable={tableVisible}
                 >
                     <AppStyled>
                         <Header
@@ -190,6 +191,7 @@ function App() {
                             openFilter={setIsOpenFilter}
                             isProp={propVisible}
                             isPopular={popularVisible}
+                            isTable={tableVisible}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>

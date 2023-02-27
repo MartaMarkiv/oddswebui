@@ -17,12 +17,12 @@ export const OpportunityDrawer = ({
     setCollection,
     collection,
     isProp,
-    isPopular
+    isPopular,
+    isTable
 }) => {
 
     const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
-    // console.log("drawerOpened: ", drawerOpened);
-    // const [visible, setVisible] = useState(true);
+    
     const [loading, setLoading] = useState(true);
 
     const [showAll, setShowAll] = useState(true);
@@ -54,11 +54,9 @@ export const OpportunityDrawer = ({
 
     const showDrawer = () => {
         setDrawerOpened(true)
-        // setVisible(true);
     };
 
     const onClose = () => {
-        // setVisible(false);
         setDrawerOpened(false)
     };
 
@@ -74,7 +72,7 @@ export const OpportunityDrawer = ({
                 <StarIcon />
             </OpportunityButton>
             <DrawerStyled
-                placement="right"
+                placement={isTable ? "right" : "left"}
                 closable
                 mask={false}
                 width={isProp&&isPopular ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
