@@ -1,4 +1,4 @@
-- branchNamePattern: feature/.*
+- branchNamePattern: develop
   environment: dev
 - branchNamePattern: master
   environment: prod
