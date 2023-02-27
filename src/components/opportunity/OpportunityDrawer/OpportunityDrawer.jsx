@@ -1,10 +1,10 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {Space} from "antd";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
 import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon, OpportunitiesWrapper} from "./styles";
 import {Switcher} from "../../Switcher";
-// import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
+import {CommonContext} from "../../../shared/context/CommonProvider";
 import {PendingScreen} from "../../../components/PendingScreen";
 import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
@@ -17,12 +17,11 @@ export const OpportunityDrawer = ({
     setCollection,
     collection,
     isProp,
-    isPopular,
-    visible,
-    setVisible
+    isPopular
 }) => {
 
-    // const setDrawerOpened = useSetDrawerOpened();
+    const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
+    // console.log("drawerOpened: ", drawerOpened);
     // const [visible, setVisible] = useState(true);
     const [loading, setLoading] = useState(true);
 
@@ -32,7 +31,7 @@ export const OpportunityDrawer = ({
 
         client.onopen =(() => {
             setLoading(false);
-            setVisible(true);
+            setDrawerOpened(true);
         });
 
         client.onmessage = (event) => {
@@ -53,6 +52,16 @@ export const OpportunityDrawer = ({
         connectSocket();
     }, []);
 
+    const showDrawer = () => {
+        setDrawerOpened(true)
+        // setVisible(true);
+    };
+
+    const onClose = () => {
+        // setVisible(false);
+        setDrawerOpened(false)
+    };
+
     const switchHandler = (value) => {
         setShowAll(value === "all");
     }
@@ -61,7 +70,7 @@ export const OpportunityDrawer = ({
 
     return (
         <>
-            <OpportunityButton onClick={()=>setVisible(true)} disabled={!(isProp || isPopular)}>
+            <OpportunityButton onClick={showDrawer} disabled={!(isProp || isPopular)}>
                 <StarIcon />
             </OpportunityButton>
             <DrawerStyled
@@ -83,8 +92,8 @@ export const OpportunityDrawer = ({
                         />
                     </Space>
                 }
-                onClose={()=>setVisible(false)}
-                open={visible}
+                onClose={onClose}
+                open={drawerOpened}
                 >
                 {
                     loading ? 

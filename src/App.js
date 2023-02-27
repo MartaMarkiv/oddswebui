@@ -38,6 +38,7 @@ const themesMap = {
 export const ThemePreferenceContext = createContext();
 
 function App() {
+
     const initialTheme = localStorage.getItem('theme') || 'light';
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
@@ -61,25 +62,20 @@ function App() {
     const [propVisible, setPropVisible] = useState(false);
     const [popularVisible, setPopularVisible] = useState(true);
 
-    const [feedVisibility, setFeedVisibility] = useState(true);
-
     const theme = themesMap[currentTheme];
+    const [drawerOpened, setDrawerOpened] = useState(false);
 
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
-        console.log(popularVisible,  "  ", value, "  1: ", !popularVisible && !value);
-        if (!popularVisible && !value) {
-            console.log("setFeedVisibility");
-            setFeedVisibility(false);
+        if (!popularVisible) {
+            setDrawerOpened(value);
         }
     }
 
     const changePopularFeedVisibility = (value) => {
         setPopularVisible(value);
-        console.log(propVisible,  "  ", value,  "  2  ", !propVisible && !value);
-        if (!propVisible && !value) {
-            console.log("setFeedVisibility");
-            setFeedVisibility(false);
+        if (!propVisible) {
+            setDrawerOpened(value);
         }
     }
  
@@ -180,7 +176,11 @@ function App() {
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <CommonProvider fullFeed={propVisible && popularVisible} isDrawerOpened={feedVisibility}>
+                <CommonProvider
+                    fullFeed={propVisible && popularVisible}
+                    drawerOpened={drawerOpened}
+                    setDrawerOpened={setDrawerOpened}
+                >
                     <AppStyled>
                         <Header
                             changeSelectedKey={changeSelectedKey}
@@ -190,8 +190,6 @@ function App() {
                             openFilter={setIsOpenFilter}
                             isProp={propVisible}
                             isPopular={popularVisible}
-                            visible={feedVisibility}
-                            setVisible={setFeedVisibility}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
