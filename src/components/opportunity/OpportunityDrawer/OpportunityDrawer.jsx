@@ -22,7 +22,7 @@ export const OpportunityDrawer = ({
 }) => {
 
     const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
-    
+
     const [loading, setLoading] = useState(true);
 
     const [showAll, setShowAll] = useState(true);
@@ -114,7 +114,6 @@ export const OpportunityDrawer = ({
                                     selectedOpportunity={selectedKey}
                                     allList={showAll}
                                     name="Popular"
-                                    switchHandler={switchHandler}
                                 />
                             }
                         </OpportunitiesWrapper>
