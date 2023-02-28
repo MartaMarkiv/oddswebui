@@ -7,7 +7,7 @@ const Wrapper = styled.div`
   transition: width 0.3s;
   width: ${({drawerOpened, space}) => drawerOpened ? 'calc(100% - ' + space + 'px)' : '100%'};
   height: 100%;
-  margin-left: ${({isTable, space})=> isTable ? '0' : space + 'px'};
+  margin-left: ${({isTable, drawerOpened, space})=> isTable || !drawerOpened ? '0' : space + 'px'};
 `;
 
 export const CommonContext = React.createContext({});
