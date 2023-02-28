@@ -1,4 +1,5 @@
 import {Main} from "./pages/Main";
+import {LoginWindow} from "./components/LoginWindow";
 import {Route, Routes} from "react-router-dom";
 import {Header} from "./components/Header";
 import styled from "styled-components";
@@ -193,6 +194,7 @@ function App() {
                             isPopular={popularVisible}
                             isTable={tableVisible}
                         />
+                        <LoginWindow isOpen={true}></LoginWindow>
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
                                 <Routes>

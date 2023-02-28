@@ -36,6 +36,8 @@ export const light = {
 
         bgBadge: "#FFD43D",
 
+        linkColor: "#3367D6",
+
         betBox: {
             borderPrimary: "#F4F6F8",
             borderSuccess: "rgba(82, 218, 169, 0.21)",
@@ -135,6 +137,8 @@ export const dark = {
         textDanger: "#FF0C0C",
 
         bgBadge: "#FFD43D",
+
+        linkColor: "#3367D6",
 
         betBox: {
             borderPrimary: "#2C3844",

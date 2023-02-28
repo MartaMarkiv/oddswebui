@@ -43,6 +43,10 @@ const StarIcon = styled(Star)`
 `
 
 const DrawerStyled= styled(Drawer)`
+  &.ant-drawer {
+    z-index: 10;
+  }
+  
   .ant-drawer-content, .ant-drawer-header {
     background: ${({theme}) => theme.colors.drawer.bg};
     border-color: ${({theme}) => theme.colors.drawer.bg};
