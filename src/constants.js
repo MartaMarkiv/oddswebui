@@ -1,4 +1,5 @@
 export const DRAWER_WIDTH = 400;
+export const MULTI_DRAWER_WIDTH = 800;
 export const TABLE_DATA = process.env.REACT_APP_TABLE_DATA;
 export const OPPORTUNITY= process.env.REACT_APP_OPPORTUNITY;
 

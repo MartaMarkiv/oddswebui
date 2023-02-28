@@ -38,6 +38,7 @@ const themesMap = {
 export const ThemePreferenceContext = createContext();
 
 function App() {
+
     const initialTheme = localStorage.getItem('theme') || 'light';
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
@@ -45,6 +46,7 @@ function App() {
     const [pending, setPending] = useState(false);
     const [dataLength, setDataLength] = useState(15);
 
+    //Filters
     const [sportsBooks, setSportsBooks] = useState(null);
     const [sportsTypes, setSportsTypes] = useState([]);
     const [selectedKey, setSelectedKey] = useState(null);
@@ -55,7 +57,27 @@ function App() {
     const [loadingProcess, setLoadingProcess] = useState(false);
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
+    //View settings
+    const [tableVisible, setTableVisible] = useState(true);
+    const [propVisible, setPropVisible] = useState(false);
+    const [popularVisible, setPopularVisible] = useState(true);
+
     const theme = themesMap[currentTheme];
+    const [drawerOpened, setDrawerOpened] = useState(false);
+
+    const changePropFeedVisibility = (value) => {
+        setPropVisible(value);
+        if (!popularVisible) {
+            setDrawerOpened(value);
+        }
+    }
+
+    const changePopularFeedVisibility = (value) => {
+        setPopularVisible(value);
+        if (!propVisible) {
+            setDrawerOpened(value);
+        }
+    }
  
     const loadDataFromApi = () => {
         setPending(true);
@@ -76,6 +98,7 @@ function App() {
                     return {...gameItem, sport: sports.sport};
                 });
             }).flat();
+
             const {books: booksList, bets, games} = getSportsBooks(allGames);
 
             const tableData = parseData(allGames, booksList);
@@ -133,6 +156,7 @@ function App() {
 
     const changeSelectedKey = value => {
         setSelectedKey(value);
+        if (!tableVisible) return;
         if (value && data) {
             const indexTableData =  data.map(e => e.id).indexOf(value.id);
             if (indexTableData > dataLength) {
@@ -152,7 +176,12 @@ function App() {
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <CommonProvider>
+                <CommonProvider
+                    fullFeed={propVisible && popularVisible}
+                    drawerOpened={drawerOpened}
+                    setDrawerOpened={setDrawerOpened}
+                    isTable={tableVisible}
+                >
                     <AppStyled>
                         <Header
                             changeSelectedKey={changeSelectedKey}
@@ -160,6 +189,9 @@ function App() {
                             opportunities={opportunities}
                             setOpportunities={setOpportunities}
                             openFilter={setIsOpenFilter}
+                            isProp={propVisible}
+                            isPopular={popularVisible}
+                            isTable={tableVisible}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
@@ -180,6 +212,12 @@ function App() {
                                             games={games}
                                             toggleFilter={setIsOpenFilter}
                                             isOpenFilter={isOpenFilter}
+                                            isTable={tableVisible}
+                                            isProp={propVisible}
+                                            isPopular={popularVisible}
+                                            setTableView={setTableVisible}
+                                            setPropFeedView={changePropFeedVisibility}
+                                            setPopularFeedView={changePopularFeedVisibility}
                                         />
                                     }/>
                                 </Routes>

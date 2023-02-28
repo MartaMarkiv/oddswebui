@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from "styled-components";
-import {BettingTable} from "../components/table";
+import { BettingTable } from "../components/table";
 import {
     sportsBooksFilter,
     quartersFilter,
@@ -8,9 +8,10 @@ import {
     betsFilter,
     gameFilter
 } from "../components/table/utils";
-import {PendingScreen} from "../components/PendingScreen";
-import {SubTitle} from "../components/typography/SubTitle/SubTitle";
-
+import { PendingScreen } from "../components/PendingScreen";
+import { SubTitle } from "../components/typography/SubTitle/SubTitle";
+import { FilterPanel } from "../components/table/components/FilterPanel";
+import { EmptyView } from '../components/EmptyView';
 
 const StyledMain = styled.div`
   position: relative;
@@ -28,7 +29,14 @@ export const Main = ({
     loadingRows,
     toggleFilter,
     isOpenFilter,
-    data, sliceCounter
+    data,
+    sliceCounter,
+    isTable,
+    isProp,
+    isPopular,
+    setTableView,
+    setPropFeedView,
+    setPopularFeedView
 }) => {
     
     //Selected filters
@@ -66,25 +74,38 @@ export const Main = ({
                 {
                     dataLength
                     ? <>
-                        <BettingTable
+                        <FilterPanel
                             sportsBooks={sportsBooks}
-                            data={filteredData}
-                            opportunities={opportunities}
                             changeBook={setSelectedSportsBooks}
                             changeQuarter={setSelectedQuarters}
-                            selectedQuarters={selectedQuarters}
-                            sportsTypes={sportsTypes}
+                            quarters={selectedQuarters}
+                            sports={sportsTypes}
                             changeSport={setSelectedSports}
-                            selectedRow={selectedKey}
-                            countRows={dataLength - filteredData.length}
-                            loadingRows={loadingRows}
                             betsTypes={betsTypes}
                             changeBets={setSelectedBets}
                             games={games}
-                            selectGame={setSelectedGames}
-                            toggleFilter={toggleFilter}
+                            changeGame={setSelectedGames}
                             isOpenFilter={isOpenFilter}
+                            toggleFilter={toggleFilter}
+                            isTable={isTable}
+                            isProp={isProp}
+                            isPopular={isPopular}
+                            setTableView={setTableView}
+                            setPropFeedView={setPropFeedView}
+                            setPopularFeedView={setPopularFeedView}
                         />
+                        {
+                            !(isTable || isProp || isPopular) ?
+                                <EmptyView /> :
+                                isTable && <BettingTable
+                                    data={filteredData}
+                                    opportunities={opportunities}
+                                    selectedRow={selectedKey}
+                                    countRows={dataLength - filteredData.length}
+                                    loadingRows={loadingRows}
+                                />
+                        }
+                        
                     </>
                     :<SubTitle>No live games</SubTitle>
                 }

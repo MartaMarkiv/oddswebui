@@ -2,7 +2,8 @@ import {
     FilterPanelContainer,
     FilterPanelItem,
     DrawerStyled,
-    CloseIcon
+    CloseIcon,
+    SettingsTitle
 } from "./styles";
 import {SportsBookFilter} from "./SportsBookFilter";
 import {SportFilter} from "./SportFilter";
@@ -12,6 +13,7 @@ import {BetsShownFilter} from "./BetsShownFilter";
 import {MiddleRangeFilter} from "./MiddleRangeFilter/MiddleRangeFilter";
 import {RefreshButton} from "./RefreshButton/RefreshButton";
 import {FavoriteButton} from "./FavoriteButton";
+import { ViewSettings } from "../../../ViewSettings"
 
 export const FilterPanel = ({
     sportsBooks,
@@ -25,7 +27,13 @@ export const FilterPanel = ({
     games,
     changeGame,
     isOpenFilter,
-    toggleFilter
+    toggleFilter,
+    isTable,
+    isProp,
+    isPopular,
+    setTableView,
+    setPropFeedView,
+    setPopularFeedView
 }) => {
 
     const closeFilter = () => {
@@ -42,6 +50,7 @@ export const FilterPanel = ({
             onClose={closeFilter}
             open={isOpenFilter}
         >
+            <SettingsTitle>Data table settings:</SettingsTitle>
             <FilterPanelContainer>
                 <FilterPanelItem>
                     <SportsBookFilter books={sportsBooks} changeFilter={changeBook}/>
@@ -68,6 +77,15 @@ export const FilterPanel = ({
                     <RefreshButton />
                 </FilterPanelItem> */}
             </FilterPanelContainer>
+            <SettingsTitle>Display settings:</SettingsTitle>
+            <ViewSettings
+                isTable={isTable}
+                isProp={isProp}
+                isPopular={isPopular}
+                setTableView={setTableView}
+                setPropFeedView={setPropFeedView}
+                setPopularFeedView={setPopularFeedView}
+            />
         </DrawerStyled>
     )
 }

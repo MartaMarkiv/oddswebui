@@ -16,7 +16,10 @@ export const Header = ({
     selectedKey,
     opportunities,
     setOpportunities,
-    openFilter
+    openFilter,
+    isProp,
+    isPopular,
+    isTable
 }) => {
 
     const showFilter = () => {
@@ -40,6 +43,9 @@ export const Header = ({
                     selectedKey={selectedKey}
                     collection={opportunities}
                     setCollection={setOpportunities}
+                    isProp={isProp}
+                    isPopular={isPopular}
+                    isTable={isTable}
                 />
                 {/* <UserAvatar /> */}
             </HeaderControlPanel>

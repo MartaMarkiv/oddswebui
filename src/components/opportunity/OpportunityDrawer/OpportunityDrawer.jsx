@@ -1,13 +1,12 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import {Space} from "antd";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
-import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
+import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon, OpportunitiesWrapper} from "./styles";
 import {Switcher} from "../../Switcher";
-import {SubTitle} from "../../typography/SubTitle/SubTitle";
-import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
+import {CommonContext} from "../../../shared/context/CommonProvider";
 import {PendingScreen} from "../../../components/PendingScreen";
-import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
+import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
 
 const client = new WebSocket(OPPORTUNITY);
@@ -16,11 +15,14 @@ export const OpportunityDrawer = ({
     changeSelectedKey,
     selectedKey,
     setCollection,
-    collection
+    collection,
+    isProp,
+    isPopular,
+    isTable
 }) => {
 
-    const setDrawerOpened = useSetDrawerOpened();
-    const [visible, setVisible] = useState(true);
+    const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
+
     const [loading, setLoading] = useState(true);
 
     const [showAll, setShowAll] = useState(true);
@@ -36,6 +38,7 @@ export const OpportunityDrawer = ({
             const json = JSON.parse(event.data);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
+
             const parsedData = parser(allOpportunities);
             setCollection(parsedData);
         };
@@ -51,11 +54,9 @@ export const OpportunityDrawer = ({
 
     const showDrawer = () => {
         setDrawerOpened(true)
-        setVisible(true);
     };
 
     const onClose = () => {
-        setVisible(false);
         setDrawerOpened(false)
     };
 
@@ -67,14 +68,14 @@ export const OpportunityDrawer = ({
 
     return (
         <>
-            <OpportunityButton onClick={showDrawer}>
+            <OpportunityButton onClick={showDrawer} disabled={!(isProp || isPopular)}>
                 <StarIcon />
             </OpportunityButton>
             <DrawerStyled
-                placement="right"
+                placement={isTable ? "right" : "left"}
                 closable
                 mask={false}
-                width={DRAWER_WIDTH}
+                width={isProp&&isPopular ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
                 closeIcon={<CloseIcon />}
                 extra={
                     <Space>
@@ -90,19 +91,33 @@ export const OpportunityDrawer = ({
                     </Space>
                 }
                 onClose={onClose}
-                open={visible}
+                open={drawerOpened}
                 >
                 {
                     loading ? 
                         <PendingScreen position={"absolute"}/> :
-                        collection && collection.length ?
-                            <OpportunityList
-                                opportunities={list}
-                                selectOpportunity={changeSelectedKey}
-                                selectedOpportunity={selectedKey}
-                                allList={showAll}
-                            /> :
-                            <SubTitle>No opportunity right now</SubTitle>
+                        collection && collection.length &&
+                        <OpportunitiesWrapper>
+                            { isProp && 
+                                <OpportunityList
+                                    opportunities={list}
+                                    selectOpportunity={changeSelectedKey}
+                                    selectedOpportunity={selectedKey}
+                                    allList={showAll}
+                                    name="Prop"
+                                />
+                            }
+                            { isPopular &&
+                                <OpportunityList
+                                    opportunities={list}
+                                    selectOpportunity={changeSelectedKey}
+                                    selectedOpportunity={selectedKey}
+                                    allList={showAll}
+                                    name="Popular"
+                                />
+                            }
+                        </OpportunitiesWrapper>
+                            
                 }
             </DrawerStyled>
         </>
