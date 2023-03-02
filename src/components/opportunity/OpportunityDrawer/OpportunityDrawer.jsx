@@ -23,7 +23,6 @@ export const OpportunityDrawer = ({
     user
 }) => {
 
-    console.log("isOpenLogin: ", user);
     const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
 
     const [loading, setLoading] = useState(true);
@@ -38,7 +37,6 @@ export const OpportunityDrawer = ({
         });
 
         client.onmessage = (event) => {
-            console.log("onmessage: ", user);
             if (!user) {
                 setCollection(opportunityData);
                 return;
@@ -54,11 +52,11 @@ export const OpportunityDrawer = ({
         client.onerror = () => {
             console.log("Opportunity socket connection error");
         };
-    }
+    };
 
     useEffect(() => {
         connectSocket();
-    }, []);
+    }, [user]);
 
     const showDrawer = () => {
         setDrawerOpened(true)
