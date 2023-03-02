@@ -3,10 +3,7 @@ import { LoginForm, SubmitButton, ResetLink } from "./styles";
 import { Title } from "../typography/Title/Title";
 
 
-export const LoginWindow = ({ isOpen, toggleWindow }) => {
-    const onFinish = (values) => {
-        console.log('Success:', values);
-    };
+export const LoginWindow = ({ isOpen, login }) => {
 
     const passwordValidation = (rule, value, callback) => {
         const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
@@ -22,15 +19,13 @@ export const LoginWindow = ({ isOpen, toggleWindow }) => {
         open={isOpen}
         centered
         closable={false}
-        onOk={() => toggleWindow(false)}
-        onCancel={() => toggleWindow(false)}
         footer={null}
     >
         <Form
             name="ogin-form"
             className="login-form"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
+            initialValues={{ remember: false }}
+            onFinish={login}
             style={{ maxWidth: 200 }}
             autoComplete="off"
         >

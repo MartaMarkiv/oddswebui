@@ -9,7 +9,6 @@ import {PendingScreen} from "../../../components/PendingScreen";
 import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
 import opportunityData from "../../../opportunity_data.json";
-console.log(opportunityData);
 
 const client = new WebSocket(OPPORTUNITY);
 
@@ -21,9 +20,10 @@ export const OpportunityDrawer = ({
     isProp,
     isPopular,
     isTable,
-    isOpenLogin
+    user
 }) => {
 
+    console.log("isOpenLogin: ", user);
     const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
 
     const [loading, setLoading] = useState(true);
@@ -38,8 +38,8 @@ export const OpportunityDrawer = ({
         });
 
         client.onmessage = (event) => {
-            if (isOpenLogin) {
-                // const parsedData = parser(opportunityData);
+            console.log("onmessage: ", user);
+            if (!user) {
                 setCollection(opportunityData);
                 return;
             }
@@ -48,7 +48,6 @@ export const OpportunityDrawer = ({
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
 
             const parsedData = parser(allOpportunities);
-            // console.log(parsedData);
             setCollection(parsedData);
         };
 
@@ -77,7 +76,7 @@ export const OpportunityDrawer = ({
 
     return (
         <>
-            <OpportunityButton onClick={showDrawer} disabled={!(isProp || isPopular)}>
+            <OpportunityButton onClick={showDrawer} disabled={!(isProp || isPopular || !user)}>
                 <StarIcon />
             </OpportunityButton>
             <DrawerStyled
@@ -86,7 +85,7 @@ export const OpportunityDrawer = ({
                 mask={false}
                 width={isProp&&isPopular ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
                 closeIcon={<CloseIcon />}
-                blur={isOpenLogin}
+                blur={!user}
                 extra={
                     <Space>
                         <Switcher

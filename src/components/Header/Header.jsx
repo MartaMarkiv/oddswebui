@@ -20,7 +20,7 @@ export const Header = ({
     isProp,
     isPopular,
     isTable,
-    isOpenLogin
+    user
 }) => {
 
     const showFilter = () => {
@@ -47,7 +47,7 @@ export const Header = ({
                     isProp={isProp}
                     isPopular={isPopular}
                     isTable={isTable}
-                    isOpenLogin={isOpenLogin}
+                    user={user}
                 />
                 {/* <UserAvatar /> */}
             </HeaderControlPanel>
