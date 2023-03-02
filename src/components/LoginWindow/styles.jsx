@@ -12,6 +12,10 @@ const LoginForm = styled(Modal)`
         align-items: center;
     }
 
+    .ant-modal-header {
+        border: none;
+    }
+
     .ant-modal-content {
         padding: 40px 0;
     }

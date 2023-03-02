@@ -97,6 +97,7 @@ const DrawerStyled= styled(Drawer)`
   
   .ant-drawer-content-wrapper {
     box-shadow: none;
+    filter: ${({blur}) => blur ? 'blur(2px)' : ''};
   }
 
   .ant-drawer-body .spinner {

@@ -8,6 +8,8 @@ import {CommonContext} from "../../../shared/context/CommonProvider";
 import {PendingScreen} from "../../../components/PendingScreen";
 import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
+import opportunityData from "../../../opportunity_data.json";
+console.log(opportunityData);
 
 const client = new WebSocket(OPPORTUNITY);
 
@@ -18,7 +20,8 @@ export const OpportunityDrawer = ({
     collection,
     isProp,
     isPopular,
-    isTable
+    isTable,
+    isOpenLogin
 }) => {
 
     const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
@@ -35,11 +38,17 @@ export const OpportunityDrawer = ({
         });
 
         client.onmessage = (event) => {
+            if (isOpenLogin) {
+                // const parsedData = parser(opportunityData);
+                setCollection(opportunityData);
+                return;
+            }
             const json = JSON.parse(event.data);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
 
             const parsedData = parser(allOpportunities);
+            // console.log(parsedData);
             setCollection(parsedData);
         };
 
@@ -77,6 +86,7 @@ export const OpportunityDrawer = ({
                 mask={false}
                 width={isProp&&isPopular ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
                 closeIcon={<CloseIcon />}
+                blur={isOpenLogin}
                 extra={
                     <Space>
                         <Switcher

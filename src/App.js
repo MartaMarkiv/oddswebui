@@ -21,6 +21,7 @@ const AppStyled = styled.div`
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  filter: ${({blur}) => blur ? 'blur(2px)' : ''};
 `;
 
 const AppBody = styled.div`
@@ -65,6 +66,9 @@ function App() {
 
     const theme = themesMap[currentTheme];
     const [drawerOpened, setDrawerOpened] = useState(false);
+
+    const [isOpenLogin, setIsOpenLogin] = useState(true);
+    const [user, setUser] = useState(null);
 
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
@@ -183,7 +187,7 @@ function App() {
                     setDrawerOpened={setDrawerOpened}
                     isTable={tableVisible}
                 >
-                    <AppStyled>
+                    <AppStyled blur={!user}>
                         <Header
                             changeSelectedKey={changeSelectedKey}
                             selectedKey={selectedKey}
@@ -193,34 +197,38 @@ function App() {
                             isProp={propVisible}
                             isPopular={popularVisible}
                             isTable={tableVisible}
+                            isOpenLogin={!user}
                         />
-                        <LoginWindow isOpen={true}></LoginWindow>
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
                                 <Routes>
                                     <Route path="/" element=
                                     {
-                                        <Main
-                                            opportunities={opportunities}
-                                            selectedKey={selectedKey}
-                                            dataLength={data ? data.length : 0}
-                                            data={data}
-                                            sportsBooks={sportsBooks}
-                                            sportsTypes={sportsTypes}
-                                            pending={pending}
-                                            loadingRows={loadingProcess}
-                                            sliceCounter={dataLength}
-                                            betsTypes={betsTypes}
-                                            games={games}
-                                            toggleFilter={setIsOpenFilter}
-                                            isOpenFilter={isOpenFilter}
-                                            isTable={tableVisible}
-                                            isProp={propVisible}
-                                            isPopular={popularVisible}
-                                            setTableView={setTableVisible}
-                                            setPropFeedView={changePropFeedVisibility}
-                                            setPopularFeedView={changePopularFeedVisibility}
-                                        />
+                                        !user ?
+                                            <LoginWindow
+                                                isOpen={!user}
+                                                toggleWindow={setIsOpenLogin} />:
+                                            <Main
+                                                opportunities={opportunities}
+                                                selectedKey={selectedKey}
+                                                dataLength={data ? data.length : 0}
+                                                data={data}
+                                                sportsBooks={sportsBooks}
+                                                sportsTypes={sportsTypes}
+                                                pending={pending}
+                                                loadingRows={loadingProcess}
+                                                sliceCounter={dataLength}
+                                                betsTypes={betsTypes}
+                                                games={games}
+                                                toggleFilter={setIsOpenFilter}
+                                                isOpenFilter={isOpenFilter}
+                                                isTable={tableVisible}
+                                                isProp={propVisible}
+                                                isPopular={popularVisible}
+                                                setTableView={setTableVisible}
+                                                setPropFeedView={changePropFeedVisibility}
+                                                setPopularFeedView={changePopularFeedVisibility}
+                                            />
                                     }/>
                                 </Routes>
                             </QueryParamProvider>

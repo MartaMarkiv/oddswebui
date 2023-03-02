@@ -6,7 +6,16 @@ import { Title } from "../typography/Title/Title";
 export const LoginWindow = ({ isOpen, toggleWindow }) => {
     const onFinish = (values) => {
         console.log('Success:', values);
-      };
+    };
+
+    const passwordValidation = (rule, value, callback) => {
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+        if (regex.test(value)) {
+            return Promise.resolve();
+        } else {
+            return Promise.reject({message: 'Your password should be stronger.'});
+        }
+    }
       
     return <LoginForm
         title={<Title>Sign in to OddsBender</Title>}
@@ -18,7 +27,7 @@ export const LoginWindow = ({ isOpen, toggleWindow }) => {
         footer={null}
     >
         <Form
-            name="normal_login"
+            name="ogin-form"
             className="login-form"
             initialValues={{ remember: true }}
             onFinish={onFinish}
@@ -29,19 +38,21 @@ export const LoginWindow = ({ isOpen, toggleWindow }) => {
                 name="email"
                 rules={[{ required: true, message: 'Please input your email!' }]}
             >
-            <Input 
-                placeholder="Enter email"
-                size="large"
-                type="email"
-            />
+                <Input 
+                    placeholder="Enter email"
+                    size="large"
+                    type="email"
+                />
             </Form.Item>
 
             <Form.Item
                 name="password"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{
+                    required: true,
+                    validator: passwordValidation
+                }]}
             >
-                <Input
-                    type="password"
+                <Input.Password
                     placeholder="Enter password"
                     size="large"
                 />
