@@ -19,7 +19,6 @@ export const Header = ({
     openFilter,
     isProp,
     isPopular,
-    isTable
 }) => {
 
     const showFilter = () => {
@@ -45,7 +44,6 @@ export const Header = ({
                     setCollection={setOpportunities}
                     isProp={isProp}
                     isPopular={isPopular}
-                    isTable={isTable}
                 />
                 {/* <UserAvatar /> */}
             </HeaderControlPanel>

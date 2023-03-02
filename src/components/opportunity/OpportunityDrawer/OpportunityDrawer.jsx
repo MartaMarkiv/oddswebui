@@ -18,7 +18,6 @@ export const OpportunityDrawer = ({
     collection,
     isProp,
     isPopular,
-    isTable
 }) => {
 
     const { setDrawerOpened, drawerOpened } = useContext(CommonContext);
@@ -72,7 +71,7 @@ export const OpportunityDrawer = ({
                 <StarIcon />
             </OpportunityButton>
             <DrawerStyled
-                placement={isTable ? "right" : "left"}
+                placement="right"
                 closable
                 mask={false}
                 width={isProp&&isPopular ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
