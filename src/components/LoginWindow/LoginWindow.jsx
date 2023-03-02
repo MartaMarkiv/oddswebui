@@ -10,7 +10,7 @@ export const LoginWindow = ({ isOpen, login }) => {
         if (regex.test(value)) {
             return Promise.resolve();
         } else {
-            return Promise.reject({message: 'Your password should be stronger.'});
+            return Promise.reject({message: "Your password should be stronger."});
         }
     }
       
@@ -31,7 +31,7 @@ export const LoginWindow = ({ isOpen, login }) => {
         >
             <Form.Item
                 name="email"
-                rules={[{ required: true, message: 'Please input your email!' }]}
+                rules={[{ required: true, message: "Please input your email!" }]}
             >
                 <Input 
                     placeholder="Enter email"

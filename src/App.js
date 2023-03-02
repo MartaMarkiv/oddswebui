@@ -205,10 +205,7 @@ function App() {
                                     <Routes>
                                         <Route path="/" element=
                                         {
-                                            !user ?
-                                                <LoginWindow
-                                                    isOpen={!user}
-                                                    login={setUser} />:
+                                            user ?
                                                 <Main
                                                     opportunities={opportunities}
                                                     selectedKey={selectedKey}
@@ -229,6 +226,10 @@ function App() {
                                                     setTableView={setTableVisible}
                                                     setPropFeedView={changePropFeedVisibility}
                                                     setPopularFeedView={changePopularFeedVisibility}
+                                                /> :
+                                                <LoginWindow
+                                                    isOpen={!user}
+                                                    login={setUser}
                                                 />
                                         }/>
                                     </Routes>
