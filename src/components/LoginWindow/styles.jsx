@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Modal, Button } from "antd";
 
-const LoginForm = styled(Modal)`
+const LoginWrapper = styled(Modal)`
     .ant-modal-title {
         text-align: center;
     }
@@ -10,6 +10,7 @@ const LoginForm = styled(Modal)`
         display: flex;
         justify-content: center;
         align-items: center;
+        position: relative;
     }
 
     .ant-modal-header {
@@ -31,6 +32,18 @@ const LoginForm = styled(Modal)`
 
     .ant-form-item:last-child {
         margin-bottom: 0;
+    }
+
+    .reset-window {
+        margin-top: 20px;
+    }
+
+    .subTitle {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
     }
 `;
 
@@ -59,10 +72,17 @@ const ResetLink = styled.div`
     cursor: pointer;
     text-decoration: underline;
     display: inline-block;
+`;
+
+const SubTitle = styled.div`
+    color: ${({theme}) => theme.colors.textSecondary};
+    font-size: 16px;
+    font-weight: 500;
 `
 
 export {
-    LoginForm,
+    LoginWrapper,
     SubmitButton,
-    ResetLink
+    ResetLink,
+    SubTitle
 }
