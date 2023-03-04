@@ -1,12 +1,13 @@
+import { useState } from "react";
 import {List, ListItem, OpportunityListContainer, Title} from "./styles";
 import {OpportunityItem} from "../OpportunityItem";
 
 export const OpportunityList = ({
     opportunities,
-    selectOpportunity,
-    selectedOpportunity,
     name
 }) => {
+
+    const [selectedOpportunity, setSelectedOpportunity] = useState(null);
 
     return <OpportunityListContainer>
         <Title>{name} Feed</Title>
@@ -17,7 +18,7 @@ export const OpportunityList = ({
                         <OpportunityItem
                             data={item}
                             selected={selectedOpportunity ? selectedOpportunity.id : null}
-                            onSelect={selectOpportunity}
+                            onSelect={setSelectedOpportunity}
                         />
                     </ListItem>
                 })

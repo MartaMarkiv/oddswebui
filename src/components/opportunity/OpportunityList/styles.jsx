@@ -10,7 +10,9 @@ const List = styled.ul`
 `;
 const ListItem = styled.li`
   display: block;
-  margin-bottom: 12px;  
+  margin-bottom: 12px;
+  border: 4px solid;
+  border-color: ${({theme}) => theme.colors.drawer.bg};
 `;
 
 const Title = styled.div` 

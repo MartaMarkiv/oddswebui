@@ -41,11 +41,12 @@ function App() {
     //Filters
     const [selectedKey, setSelectedKey] = useState(null);
     const [opportunities, setOpportunities] = useState(null);
+    const [showAllList, setShowAllList] = useState(true);
 
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     //View settings
-    const [propVisible, setPropVisible] = useState(false);
+    const [propVisible, setPropVisible] = useState(true);
     const [popularVisible, setPopularVisible] = useState(true);
 
     const theme = themesMap[currentTheme];
@@ -88,6 +89,7 @@ function App() {
                             openFilter={setIsOpenFilter}
                             isProp={propVisible}
                             isPopular={popularVisible}
+                            setShowAll={setShowAllList}
                         />
                         <AppBody>
                             <QueryParamProvider adapter={ReactRouter6Adapter}>
@@ -101,6 +103,8 @@ function App() {
                                             isPopular={popularVisible}
                                             setPropFeedView={changePropFeedVisibility}
                                             setPopularFeedView={changePopularFeedVisibility}
+                                            showAll={showAllList}
+                                            setShowAll={setShowAllList}
                                         />
                                     }/>
                                 </Routes>

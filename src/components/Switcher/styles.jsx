@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
 const SwitcherContainer = styled.div`
-  height: 32px;
-  background: ${({theme}) => theme.colors.bgBody};
+  height: 48px;
+  padding: 8px;
+  background: ${({theme}) => theme.colors.drawer.bg};
   border-radius: 180px;
   display: flex;
   overflow: hidden;
