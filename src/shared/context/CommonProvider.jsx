@@ -4,14 +4,13 @@ import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH} from "../../constants";
 
 
 const Wrapper = styled.div`
-  transition: width 0.3s;
-  width: ${({drawerOpened, space}) => drawerOpened ? 'calc(100% - ' + space + 'px)' : '100%'};
+  width: 100%;
   height: 100%;
 `;
 
 export const CommonContext = React.createContext({});
 
-export const CommonProvider = ({fullFeed, drawerOpened, setDrawerOpened, children}) => {
+export const CommonProvider = ({drawerOpened, setDrawerOpened, children}) => {
 
   return (
     <CommonContext.Provider
@@ -19,9 +18,7 @@ export const CommonProvider = ({fullFeed, drawerOpened, setDrawerOpened, childre
         drawerOpened,
         setDrawerOpened
       }}>
-       <Wrapper
-        drawerOpened={drawerOpened} space={fullFeed ? MULTI_DRAWER_WIDTH : DRAWER_WIDTH}
-       >
+       <Wrapper>
            { children }
        </Wrapper>
     </CommonContext.Provider>

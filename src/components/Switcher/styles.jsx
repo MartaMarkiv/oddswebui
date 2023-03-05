@@ -26,6 +26,10 @@ const SwitcherInput = styled.input`
       color: ${({theme}) => theme.colors.textContrast};
     }
   }
+
+  &:disabled + label {
+    cursor: default;
+  }
 `;
 
 const SwitcherLabel = styled.label`

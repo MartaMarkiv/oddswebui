@@ -21,9 +21,13 @@ font-weight: 500;
 margin-bottom: 10px;
 `;
 
+const EmptyList = styled.div`
+`;
+
 export {
     OpportunityListContainer,
     List,
     ListItem,
-    Title
+    Title,
+    EmptyList
 }

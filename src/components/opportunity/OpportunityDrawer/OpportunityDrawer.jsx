@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
-import {Space} from "antd";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
 import {DrawerStyled, OpportunitiesWrapper} from "./styles";
 import {PendingScreen} from "../../../components/PendingScreen";
+import { EmptyView } from "../../EmptyView/EmptyView";
 import {OPPORTUNITY} from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
 
@@ -44,34 +44,14 @@ export const OpportunityDrawer = ({
         connectSocket();
     }, []);
 
-    const switchHandler = (value) => {
-        setShowAll(value === "all");
-    }
-
     const list = showAll ? collection : arbitrageFilter(collection);
 
     return (
-        <>
-        {/* <Switcher
-            leftText="All"
-            rightText="Arbs"
-            name="opportunity"
-            leftValue="all"
-            rightValue="arbs"
-            initialValue="all"
-            onUpdate={switchHandler}
-        /> */}
-        <DrawerStyled
-            extra={
-                <Space>
-                    
-                </Space>
-            }
-            >
+        <DrawerStyled>
             {
                 loading ? 
                     <PendingScreen position={"absolute"}/> :
-                    collection && collection.length &&
+                    isPopular || isProp ?
                     <OpportunitiesWrapper>
                         { isProp && 
                             <OpportunityList
@@ -85,10 +65,10 @@ export const OpportunityDrawer = ({
                                 name="Popular"
                             />
                         }
-                    </OpportunitiesWrapper>
+                    </OpportunitiesWrapper> :
+                    <EmptyView />
                         
             }
         </DrawerStyled>
-        </>
     )
 };

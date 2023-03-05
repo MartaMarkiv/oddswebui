@@ -76,7 +76,6 @@ function App() {
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
                 <CommonProvider
-                    fullFeed={propVisible && popularVisible}
                     drawerOpened={drawerOpened}
                     setDrawerOpened={setDrawerOpened}
                 >
