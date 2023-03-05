@@ -16,12 +16,15 @@ const ListItem = styled.li`
 `;
 
 const Title = styled.div` 
-font-size: 18px;
-font-weight: 500;
-margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
 `;
 
 const EmptyList = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({theme}) => theme.colors.textSecondary};
 `;
 
 export {
