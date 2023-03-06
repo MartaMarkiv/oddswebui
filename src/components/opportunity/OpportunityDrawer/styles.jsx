@@ -42,7 +42,13 @@ const StarIcon = styled(Star)`
 
 `
 
-const DrawerStyled= styled(Drawer)`
+const DrawerStyled= styled.div`
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
   .ant-drawer-content, .ant-drawer-header {
     background: ${({theme}) => theme.colors.drawer.bg};
     border-color: ${({theme}) => theme.colors.drawer.bg};
@@ -102,7 +108,6 @@ const DrawerStyled= styled(Drawer)`
 `
 
 const OpportunitiesWrapper = styled.div`
-  background: ${({theme}) => theme.colors.headerControls.bg};
   display: flex;
   align-items: center;
   justify-content: center;

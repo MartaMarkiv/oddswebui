@@ -29,6 +29,7 @@ const LogoImage = styled(Logo)`
 
 const HeaderControlPanel = styled.div`
   display: flex;
+  align-items: center;
 
   > *:first-child {
     margin-right: 24px;
