@@ -1,4 +1,5 @@
 import {Main} from "./pages/Main";
+import {Admin} from "./pages/Admin";
 import {Route, Routes} from "react-router-dom";
 import {Header} from "./components/Header";
 import styled from "styled-components";
@@ -96,6 +97,20 @@ function App() {
                                     <Route path="/" element=
                                     {
                                         <Main
+                                            toggleFilter={setIsOpenFilter}
+                                            isOpenFilter={isOpenFilter}
+                                            isProp={propVisible}
+                                            isPopular={popularVisible}
+                                            setPropFeedView={changePropFeedVisibility}
+                                            setPopularFeedView={changePopularFeedVisibility}
+                                            showAll={showAllList}
+                                            setShowAll={setShowAllList}
+                                        />
+                                    }/>
+
+                                    <Route path="/admin" element=
+                                    {
+                                        <Admin
                                             toggleFilter={setIsOpenFilter}
                                             isOpenFilter={isOpenFilter}
                                             isProp={propVisible}
