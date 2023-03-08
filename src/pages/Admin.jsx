@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import styled from "styled-components";
 import { Button } from 'antd';
 import axios from 'axios';
-import { FilterPanel } from "../components/table/components/FilterPanel";
-
+import { UsersTable } from '../components/usersTable/UsersTable';
+import { AdminWrapper } from '../components/AdminWrapper';
 
 const StyledMain = styled.div`
   position: relative;
@@ -30,7 +30,7 @@ export const Admin = ({
     // }, []);
 
     const sendReq = () => {
-        axios({url: `http://localhost:8000/create_user/`,
+        axios({url: `http://localhost:8000/user/`,
         data: {"name": "John", "last_name": "Doe", "email": "mmar@keplercode.com"},
         method: "post",
         headers: {
@@ -41,18 +41,6 @@ export const Admin = ({
         })
     }
     
-    return <StyledMain>
-        <FilterPanel
-            isOpenFilter={isOpenFilter}
-            toggleFilter={toggleFilter}
-            isProp={isProp}
-            isPopular={isPopular}
-            setPropFeedView={setPropFeedView}
-            setPopularFeedView={setPopularFeedView}
-        />
-
-        <Button onClick={sendReq}>Send</Button>
-
-    </StyledMain>
+    return <AdminWrapper/>
 
 }
