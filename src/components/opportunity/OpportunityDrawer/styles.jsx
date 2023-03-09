@@ -109,7 +109,7 @@ const DrawerStyled= styled.div`
 
 const OpportunitiesWrapper = styled.div`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 `;
 
