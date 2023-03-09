@@ -103,7 +103,6 @@ function App() {
                                             setPropFeedView={changePropFeedVisibility}
                                             setPopularFeedView={changePopularFeedVisibility}
                                             showAll={showAllList}
-                                            setShowAll={setShowAllList}
                                         />
                                     }/>
                                 </Routes>

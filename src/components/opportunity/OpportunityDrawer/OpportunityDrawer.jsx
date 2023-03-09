@@ -13,8 +13,7 @@ const clientProp = new WebSocket(OPPORTUNITY_PROP);
 export const OpportunityDrawer = ({
     isProp,
     isPopular,
-    showAll,
-    setShowAll
+    showAll
 }) => {
 
     const [collectionPopular, setCollectionPopular] = useState([]);
@@ -55,8 +54,6 @@ export const OpportunityDrawer = ({
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
 
             const parsedData = parser(allOpportunities);
-            console.log(parsedData);
-
 
             setCollectionProp(parsedData);
         };
