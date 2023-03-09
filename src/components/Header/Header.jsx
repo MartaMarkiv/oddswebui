@@ -9,6 +9,7 @@ import {
 import {Switcher} from "../Switcher";
 import {ThemeSwitcher} from "../ThemeSwitcher";
 import {UserAvatar} from "../UserAvatar/UserAvatar";
+import { Menu } from "../Menu";
 
 export const Header = ({
     openFilter,
@@ -47,7 +48,7 @@ export const Header = ({
                 </FilterButton>
                 
                 <ThemeSwitcher />
-                {/* <UserAvatar /> */}
+                <Menu>menu</Menu>
             </HeaderControlPanel>
         </HeaderStyled>
     )
