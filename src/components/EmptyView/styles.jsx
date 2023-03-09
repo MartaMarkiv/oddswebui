@@ -5,6 +5,7 @@ const Title = styled.div`
   font-weight: 400;
   font-size: 20px;
   color: ${({theme}) => theme.colors.textPrimary};
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
