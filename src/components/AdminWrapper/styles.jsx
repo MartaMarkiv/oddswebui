@@ -28,6 +28,10 @@ const LogoImage = styled(Logo)`
 const HeaderPanel = styled.div`
   display: flex;
   align-items: center;
+  
+  h2 {
+    margin-bottom: 0;
+  }
 `;
 
 const FilterImage = styled(FilterIcon)`
@@ -36,6 +40,13 @@ const FilterImage = styled(FilterIcon)`
 `;
 
 const AddUserButton = styled.button`
+  background: ${({theme}) => theme.colors.headerControls.bg};
+  color: ${({theme}) => theme.colors.textPrimary};
+  font-size: 16px;
+  border-radius: 20px;
+  border: none;
+  padding: 5px 15px;
+  margin-left: 20px;
 `
 
 export {

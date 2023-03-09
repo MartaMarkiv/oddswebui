@@ -1,8 +1,14 @@
 import {Table} from "antd";
 import React from 'react';
 import {StyledBettingTable} from "./styles";
+import { parseUsersData } from "./utils";
 
-export const UsersTable = () => {
+export const UsersTable = ({users}) => {
+  console.log("users:");
+  console.log(users);
+
+  const parsedData = parseUsersData(users);
+  console.log(parsedData);
 
     const data = [
         {
@@ -51,6 +57,7 @@ export const UsersTable = () => {
           title: 'User Id',
           dataIndex: 'userId',
           key: 'userId',
+          width: 70
         },
         {
           title: 'Name',
@@ -71,21 +78,25 @@ export const UsersTable = () => {
             title: 'IP Address',
             dataIndex: 'ipAddress',
             key: 'ipAddress',
+            width: 100,
           },
           {
             title: 'IP rule',
             dataIndex: 'ipRule',
             key: 'ipRule',
+            width: 150
           },
           {
             title: 'Location',
             dataIndex: 'location',
             key: 'location',
+            width: 70,
           },
           {
             title: 'Session time',
             dataIndex: 'session',
             key: 'session',
+            width: 70
           },
           {
             title: 'Reset password',
@@ -94,6 +105,7 @@ export const UsersTable = () => {
             render: () => (
                 <button>Reset</button>
             ),
+            width: 80
           },
           {
             title: 'Remove user',
@@ -110,9 +122,9 @@ export const UsersTable = () => {
         <Table
             className="table-layout"
             columns={columns}
-            dataSource={data}
+            dataSource={parsedData}
             sticky={true}
-            rowKey="key"
+            rowKey="id"
             bordered
             scroll={{ x: window.innerWidth }}
             pagination={false}
