@@ -4,10 +4,11 @@ import {OpportunityList} from "../OpportunityList";
 import {DrawerStyled, OpportunitiesWrapper} from "./styles";
 import {PendingScreen} from "../../../components/PendingScreen";
 import { EmptyView } from "../../EmptyView/EmptyView";
-import {OPPORTUNITY} from "../../../constants";
+import { OPPORTUNITY_POPULAR, OPPORTUNITY_PROP } from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
 
-const client = new WebSocket(OPPORTUNITY);
+const clientPopular = new WebSocket(OPPORTUNITY_POPULAR);
+const clientProp = new WebSocket(OPPORTUNITY_PROP);
 
 export const OpportunityDrawer = ({
     isProp,
@@ -16,35 +17,63 @@ export const OpportunityDrawer = ({
     setShowAll
 }) => {
 
-    const [collection, setCollection] = useState(null);
+    const [collectionPopular, setCollectionPopular] = useState([]);
+    const [collectionProp, setCollectionProp] = useState([]);
 
     const [loading, setLoading] = useState(true);
 
-    const connectSocket = () => {
+    const connectPopualrSocket = () => {
 
-        client.onopen =(() => {
+        clientPopular.onopen =(() => {
             setLoading(false);
         });
 
-        client.onmessage = (event) => {
+        clientPopular.onmessage = (event) => {
             const json = JSON.parse(event.data);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
 
             const parsedData = parser(allOpportunities);
-            setCollection(parsedData);
+
+            setCollectionPopular(parsedData);
         };
 
-        client.onerror = () => {
-            console.log("Opportunity socket connection error");
+        clientPopular.onerror = () => {
+            console.log("Popular opportunity socket connection error");
+        };
+    };
+
+    const connectPropSocket = () => {
+
+        clientProp.onopen =(() => {
+            setLoading(false);
+        });
+
+        clientProp.onmessage = (event) => {
+            const json = JSON.parse(event.data);
+            
+            const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
+
+            const parsedData = parser(allOpportunities);
+            console.log(parsedData);
+
+
+            setCollectionProp(parsedData);
+        };
+
+        clientProp.onerror = () => {
+            console.log("Prop opportunity socket connection error");
         };
     }
 
+
     useEffect(() => {
-        connectSocket();
+        connectPopualrSocket();
+        connectPropSocket();
     }, []);
 
-    const list = showAll ? collection : arbitrageFilter(collection);
+    const listPopular = showAll ? collectionPopular : arbitrageFilter(collectionPopular);
+    const listProp = showAll ? collectionProp : arbitrageFilter(collectionProp);
 
     return (
         <DrawerStyled>
@@ -55,13 +84,13 @@ export const OpportunityDrawer = ({
                     <OpportunitiesWrapper>
                         { isProp && 
                             <OpportunityList
-                                opportunities={list}
+                                opportunities={listProp}
                                 name="Prop"
                             />
                         }
                         { isPopular &&
                             <OpportunityList
-                                opportunities={list}
+                                opportunities={listPopular}
                                 name="Popular"
                             />
                         }

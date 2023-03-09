@@ -1,6 +1,8 @@
 const devConfig = {
     table_data: process.env.REACT_APP_TABLE_DATA,
-    opportunity: process.env.REACT_APP_OPPORTUNITY
+    opportunity: process.env.REACT_APP_OPPORTUNITY,
+    opportunityProp: process.env.REACT_APP_OPPORTUNITY_PROP,
+    opportunityPopular: process.env.REACT_APP_OPPORTUNITY_POPULAR
 }
 const prodConfig = {
     table_data: "wss://user:Oddsbender@backend.oddsbender.com/ws/table_data",
@@ -11,6 +13,8 @@ export const DRAWER_WIDTH = 400;
 export const MULTI_DRAWER_WIDTH = 800;
 export const TABLE_DATA = process.env.NODE_ENV === "production" ? prodConfig.table_data : devConfig.table_data
 export const OPPORTUNITY= process.env.NODE_ENV === "production" ? prodConfig.opportunity : devConfig.opportunity
+export const OPPORTUNITY_PROP = process.env.NODE_ENV === "production" ? prodConfig.opportunity : devConfig.opportunityProp
+export const OPPORTUNITY_POPULAR = process.env.NODE_ENV === "production" ? prodConfig.opportunity : devConfig.opportunityPopular
 
 export const QUARTERS_LIST = {
     q1: ["q1", "1st"],
