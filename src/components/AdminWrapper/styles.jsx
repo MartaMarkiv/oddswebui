@@ -28,6 +28,7 @@ const LogoImage = styled(Logo)`
 const HeaderPanel = styled.div`
   display: flex;
   align-items: center;
+  margin-bottom: 20px;
   
   h2 {
     margin-bottom: 0;
@@ -47,6 +48,7 @@ const AddUserButton = styled.button`
   border: none;
   padding: 5px 15px;
   margin-left: 20px;
+  cursor: pointer;
 `
 
 export {

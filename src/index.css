@@ -37,6 +37,6 @@ td.subBookHeader.odd {
 }
 
 .ant-table table {
-  width: auto !important;
-  min-width: auto !important;
+  width: 100% !important;
+  min-width: 100% !important;
 }

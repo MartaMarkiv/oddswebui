@@ -9,7 +9,9 @@ const common = {
                 bg: "#FFFFFF",
                 icon: "#000000"
             }
-        }
+        },
+
+        logoColor: "#ff573d",
     },
     fonts: {
         secondary: "'Poppins', sans-serif",

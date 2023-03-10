@@ -2,6 +2,7 @@ import {Table} from "antd";
 import React from 'react';
 import {StyledBettingTable} from "./styles";
 import { parseUsersData } from "./utils";
+import {InteractionOutlined, DeleteOutlined} from "@ant-design/icons";
 
 export const UsersTable = ({users}) => {
   console.log("users:");
@@ -70,51 +71,55 @@ export const UsersTable = ({users}) => {
           key: 'email',
         },
         {
-            title: 'Status',
-            dataIndex: 'status',
-            key: 'status',
-          },
-          {
-            title: 'IP Address',
-            dataIndex: 'ipAddress',
-            key: 'ipAddress',
-            width: 100,
-          },
-          {
-            title: 'IP rule',
-            dataIndex: 'ipRule',
-            key: 'ipRule',
-            width: 150
-          },
-          {
-            title: 'Location',
-            dataIndex: 'location',
-            key: 'location',
-            width: 70,
-          },
-          {
-            title: 'Session time',
-            dataIndex: 'session',
-            key: 'session',
-            width: 70
-          },
-          {
-            title: 'Reset password',
-            dataIndex: 'resetPassword',
-            key: 'resetPassword',
-            render: () => (
-                <button>Reset</button>
-            ),
-            width: 80
-          },
-          {
-            title: 'Remove user',
-            dataIndex: 'removeUser',
-            key: 'removeUser',
-            render: () => (
-                <button>Remove</button>
-            ),
-          },
+          title: 'Status',
+          dataIndex: 'status',
+          key: 'status',
+          width: 70
+        },
+        {
+          title: 'IP Address',
+          dataIndex: 'ipAddress',
+          key: 'ipAddress',
+          width: 100,
+        },
+        {
+          title: 'IP rule',
+          dataIndex: 'ipRule',
+          key: 'ipRule',
+          width: 150
+        },
+        {
+          title: 'Location',
+          dataIndex: 'location',
+          key: 'location',
+          width: 70,
+        },
+        {
+          title: 'Session time',
+          dataIndex: 'session',
+          key: 'session',
+          width: 90
+        },
+        {
+          title: 'Reset password',
+          dataIndex: 'resetPassword',
+          key: 'resetPassword',
+          render: () => (
+              <button><InteractionOutlined /></button>
+          ),
+          width: 115,
+          className: "userAction"
+        },
+        {
+          title: 'Remove user',
+          dataIndex: 'removeUser',
+          key: 'removeUser',
+          className: "userAction",
+          render: () => (
+              <button><DeleteOutlined /></button>
+          ),
+          width: 115,
+        },
           
       ];
 
