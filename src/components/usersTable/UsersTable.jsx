@@ -10,18 +10,14 @@ import {
 } from "@ant-design/icons";
 
 export const UsersTable = ({users}) => {
-  console.log("users:");
-  console.log(users);
 
   const parsedData = parseUsersData(users);
-  console.log(parsedData);
 
     const columns = [
         {
           title: 'User Id',
           dataIndex: 'userId',
           key: 'userId',
-          width: 70
         },
         {
           title: 'Name',
@@ -32,14 +28,13 @@ export const UsersTable = ({users}) => {
           title: 'Email',
           dataIndex: 'email',
           key: 'email',
+          width: 200
         },
         {
           title: 'Status',
           dataIndex: 'status',
           key: 'status',
-          width: 90,
           render: (status) => {
-            console.log(status);
             return status ? 
               <UserStatus>Active <button className="userActionButton"><LockOutlined className="userIcon"/></button></UserStatus> :
               <UserStatus>Inactive <button className="userActionButton"><UnlockOutlined className="userIcon"/></button></UserStatus>
@@ -49,25 +44,21 @@ export const UsersTable = ({users}) => {
           title: 'IP Address',
           dataIndex: 'ipAddress',
           key: 'ipAddress',
-          width: 100,
         },
         {
           title: 'IP rule',
           dataIndex: 'ipRule',
           key: 'ipRule',
-          width: 150
         },
         {
           title: 'Location',
           dataIndex: 'location',
           key: 'location',
-          width: 70,
         },
         {
           title: 'Session time',
           dataIndex: 'session',
           key: 'session',
-          width: 90
         },
         {
           title: 'Reset password',
@@ -76,7 +67,6 @@ export const UsersTable = ({users}) => {
           render: () => (
               <button className="userActionButton"><InteractionOutlined className="userIcon"/></button>
           ),
-          width: 115,
           className: "userAction"
         },
         {
@@ -87,7 +77,6 @@ export const UsersTable = ({users}) => {
           render: () => (
               <button className="userActionButton"><DeleteOutlined className="userIcon"/></button>
           ),
-          width: 115,
         },
           
       ];

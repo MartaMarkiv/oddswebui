@@ -1,5 +1,5 @@
 import axios from 'axios';
 
-export default axios.create({
-  baseURL: process.env.REACT_APP_TABLE_DATA
+export const client = axios.create({
+  baseURL: process.env.REACT_APP_API
 });

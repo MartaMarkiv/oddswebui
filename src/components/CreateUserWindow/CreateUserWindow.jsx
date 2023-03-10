@@ -31,7 +31,7 @@ export const CreateUserWindow = ({ isOpen, create, close }) => {
                 <Input 
                     placeholder="First email"
                     size="large"
-                    type="email"
+                    type="text"
                 />
             </Form.Item>
 

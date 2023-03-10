@@ -36,6 +36,7 @@ const StyledBettingTable = styled.div`
     }
 
     .ant-table-thead {
+      font-size: 14px;
       background: ${({theme}) => theme.colors.headerControls.bg};
       color: ${({theme}) => theme.colors.textPrimary};
     }
@@ -54,7 +55,10 @@ const StyledBettingTable = styled.div`
 const UserStatus = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  
+  span {
+    margin-left: 10px;
+  }
 `;
 
 export {
