@@ -1,8 +1,13 @@
-import {Table} from "antd";
+import { Table } from "antd";
 import React from 'react';
-import {StyledBettingTable} from "./styles";
+import { StyledBettingTable, UserStatus } from "./styles";
 import { parseUsersData } from "./utils";
-import {InteractionOutlined, DeleteOutlined} from "@ant-design/icons";
+import {
+  InteractionOutlined,
+  DeleteOutlined,
+  UnlockOutlined,
+  LockOutlined
+} from "@ant-design/icons";
 
 export const UsersTable = ({users}) => {
   console.log("users:");
@@ -10,48 +15,6 @@ export const UsersTable = ({users}) => {
 
   const parsedData = parseUsersData(users);
   console.log(parsedData);
-
-    const data = [
-        {
-          key: '1',
-          userId: "07876868",
-          name: 'John Brown',
-          email: "mail1",
-          status: 'online',
-          ipAddress: "127.0.0.1",
-          ipRule: "sdss",
-          location: "UA",
-          session: "1",
-          resetPassword: "sss",
-          removeUser: ""
-        },
-        {
-          name: 'Jim Green',
-          key: '2',
-          userId: "56454",
-          email: "mail1",
-          status: 'online',
-          ipAddress: "127.0.0.1",
-          ipRule: "sdss",
-          location: "UA",
-          session: "1",
-          resetPassword: "sss",
-          removeUser: ""
-        },
-        {
-          key: '3',
-          name: 'Joe Black',
-          userId: "343234",
-          email: "mail1",
-          status: 'online',
-          ipAddress: "127.0.0.1",
-          ipRule: "sdss",
-          location: "UA",
-          session: "1",
-          resetPassword: "sss",
-          removeUser: ""
-        },
-      ];
 
     const columns = [
         {
@@ -74,7 +37,13 @@ export const UsersTable = ({users}) => {
           title: 'Status',
           dataIndex: 'status',
           key: 'status',
-          width: 70
+          width: 90,
+          render: (status) => {
+            console.log(status);
+            return status ? 
+              <UserStatus>Active <button className="userActionButton"><LockOutlined className="userIcon"/></button></UserStatus> :
+              <UserStatus>Inactive <button className="userActionButton"><UnlockOutlined className="userIcon"/></button></UserStatus>
+          }
         },
         {
           title: 'IP Address',
@@ -105,7 +74,7 @@ export const UsersTable = ({users}) => {
           dataIndex: 'resetPassword',
           key: 'resetPassword',
           render: () => (
-              <button><InteractionOutlined /></button>
+              <button className="userActionButton"><InteractionOutlined className="userIcon"/></button>
           ),
           width: 115,
           className: "userAction"
@@ -116,7 +85,7 @@ export const UsersTable = ({users}) => {
           key: 'removeUser',
           className: "userAction",
           render: () => (
-              <button><DeleteOutlined /></button>
+              <button className="userActionButton"><DeleteOutlined className="userIcon"/></button>
           ),
           width: 115,
         },
