@@ -22,19 +22,6 @@ const StyledBettingTable = styled.div`
       text-align: center;
     }
 
-    .userActionButton {
-      border: none;
-      background: none;
-      height: 100%;
-      padding: 0;
-      cursor: pointer;
-      .userIcon {
-        font-size: 20px;
-        color: ${({theme}) => theme.colors.logoColor};
-        font-weight: 600;
-      }
-    }
-
     .ant-table-thead {
       font-size: 14px;
       background: ${({theme}) => theme.colors.headerControls.bg};

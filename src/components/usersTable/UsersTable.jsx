@@ -10,6 +10,7 @@ import {
 } from "@ant-design/icons";
 import { IpRuleCell } from "./components/IpRuleCell";
 import { TableRow } from "./components/TableRow/TableRow";
+import { ActionBlock } from "./components/ActionBlock";
 
 export const UsersTable = ({
   users,
@@ -42,25 +43,19 @@ export const UsersTable = ({
           dataIndex: 'status',
           key: 'status',
           render: (_, {email, status}) => {
-            return status ? 
-              <UserStatus>
-                Active
-                <button
-                  className="userActionButton"
-                  onClick={()=> toggleBlockStatus(email, 0)}
-                >
-                  <LockOutlined className="userIcon"/>
-                </button>
-              </UserStatus> :
-              <UserStatus>
-                Inactive
-                <button
-                  className="userActionButton"
-                  onClick={()=> toggleBlockStatus(email, 1)}
-                >
-                  <UnlockOutlined className="userIcon"/>
-                </button>
-                </UserStatus>
+            return status ?
+              <ActionBlock
+                title="Active"
+                type="active"
+                action={toggleBlockStatus}
+                data={{email, value: 0}}
+              /> :
+              <ActionBlock
+                title="Inactive"
+                type="inactive"
+                action={toggleBlockStatus}
+                data={{email, value: 1}}
+              />
           }
         },
         {
@@ -96,12 +91,11 @@ export const UsersTable = ({
           dataIndex: 'resetPassword',
           key: 'resetPassword',
           render: (_, { email }) => (
-                <button
-                  className="userActionButton"
-                  onClick={() => resetPassword(email)}
-                >
-                    <InteractionOutlined className="userIcon"/>
-                </button>
+            <ActionBlock
+              type="reset"
+              action={resetPassword}
+              data={{email}}
+            />
           ),
           className: "userAction"
         },
@@ -111,12 +105,11 @@ export const UsersTable = ({
           key: 'removeUser',
           className: "userAction",
           render: (_, {email}) => (
-              <button
-                className="userActionButton"
-                onClick={() => deleteUser(email)}
-              >
-                <DeleteOutlined className="userIcon"/>
-              </button>
+            <ActionBlock
+              type="remove"
+              action={deleteUser}
+              data={{email}}
+            />
           ),
         },
           
@@ -127,6 +120,7 @@ export const UsersTable = ({
         console.log(row);
       };
 
+    
       const components = {
         body: {
           row: TableRow,

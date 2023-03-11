@@ -43,7 +43,7 @@ export const IpRuleCell = ({
 
     let childNode = children;
     if (editable) {
-        childNode = !editing ? (
+        childNode = editing ? (
             <EditForm form={form} component={false}>
                 <FormItem name="ipRule">
                     <Input ref={inputRef} onPressEnter={save} onBlur={save} />

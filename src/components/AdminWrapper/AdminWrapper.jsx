@@ -42,7 +42,7 @@ export const AdminWrapper = () => {
         setShowForm(false);
     };
 
-    const deleteUser = (email) => {
+    const deleteUser = ({email}) => {
         console.log(email);
         deleteUserRequest(email, data => {
             console.log(data);
@@ -50,7 +50,7 @@ export const AdminWrapper = () => {
         })
     };
 
-    const toggleBlockStatus = (email, value) => {
+    const toggleBlockStatus = ({email, value}) => {
         console.log("block: ", email, "   ", value);
         updateUserRequest({email, field_name: "is_blocked", value_name: value}, data => {
             console.log(data);
@@ -59,11 +59,11 @@ export const AdminWrapper = () => {
 
     }
 
-    const resetPassword = (email) => {
+    const resetPassword = ({email}) => {
         console.log("reset password: ", email);
         resetPasswordRequest(email, data => {
             console.log(data);
-            getUsers();
+            // getUsers();
         })
     }
 
