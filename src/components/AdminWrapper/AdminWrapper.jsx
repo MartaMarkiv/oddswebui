@@ -15,6 +15,7 @@ import {
     updateUserRequest,
     resetPasswordRequest
 } from "../../api/userRequests";
+import { parseUsersData } from "../usersTable/utils";
 
 export const AdminWrapper = () => {
 
@@ -27,7 +28,8 @@ export const AdminWrapper = () => {
         getUsersRequest(({success, data, error}) => {
             setLoading(true);
             if (success) {
-                setUsers(data);
+                const parsedData = parseUsersData(data);
+                setUsers(parsedData);
             }
         })
     }
@@ -46,8 +48,10 @@ export const AdminWrapper = () => {
         console.log(email);
         deleteUserRequest(email, data => {
             console.log(data);
-            getUsers();
-        })
+            // getUsers();
+        });
+        const newData = users.filter((item) => item.email !== email);
+        setUsers(newData);
     };
 
     const toggleBlockStatus = ({email, value}) => {
@@ -65,6 +69,28 @@ export const AdminWrapper = () => {
             console.log(data);
             // getUsers();
         })
+    }
+
+    const updateRule = (userItem) => {
+        console.log("UPDATE: ");
+        console.log(userItem);
+        const {email, ipRule: rule} = userItem;
+        updateUserRequest({email, field_name: "regex_ip", value_name: rule}, data => {
+            console.log(data);
+            // getUsers();
+        });
+
+        const newData = [...users];
+        const index = newData.findIndex((item) => item.email === email);
+        const item = newData[index];
+        console.log(item);
+        newData.splice(index, 1, {
+        ...item,
+        ...userItem,
+        });
+        console.log(newData);
+        setUsers(newData);
+        
     }
 
     useEffect(() => {
@@ -93,6 +119,7 @@ export const AdminWrapper = () => {
                         deleteUser={deleteUser}
                         toggleBlockStatus={toggleBlockStatus}
                         resetPassword={resetPassword}
+                        updateRule={updateRule}
                     />
                     { 
                         showForm && <CreateUserWindow

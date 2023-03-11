@@ -35,24 +35,18 @@ const StyledBettingTable = styled.div`
       border-color: ${({ theme }) => theme.colors.table.border};
     }
   }
-
-  
-`;
-
-const UserStatus = styled.div`
-  display: flex;
-  align-items: center;
-
-  span {
-    margin-left: 10px;
-  }
 `;
 
 const SessionWrap = styled.div`
+`;
+
+const EmptyData = styled.div`
+  font-size: 20px;
+  color: ${({theme}) => theme.colors.textPrimary};
 `
 
 export {
     StyledBettingTable,
-    UserStatus,
-    SessionWrap
+    SessionWrap,
+    EmptyData
 }
