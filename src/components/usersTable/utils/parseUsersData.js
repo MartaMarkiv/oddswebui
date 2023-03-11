@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 export const parseUsersData = (list) => {
     return list.map(userItem => {
         const {
+            id,
             country,
             email,
             ip,
@@ -25,10 +26,10 @@ export const parseUsersData = (list) => {
             time,
             role,
             isOnline,
-            session: "1",
+            session: isOnline ? new Date(time) : null,
             resetPassword: "sss",
             removeUser: "",
-            userId: 21312,
+            userId: id,
         }
     });
 }

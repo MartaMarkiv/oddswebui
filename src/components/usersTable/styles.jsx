@@ -55,13 +55,17 @@ const StyledBettingTable = styled.div`
 const UserStatus = styled.div`
   display: flex;
   align-items: center;
-  
+
   span {
     margin-left: 10px;
   }
 `;
 
+const SessionWrap = styled.div`
+`
+
 export {
     StyledBettingTable,
-    UserStatus
+    UserStatus,
+    SessionWrap
 }

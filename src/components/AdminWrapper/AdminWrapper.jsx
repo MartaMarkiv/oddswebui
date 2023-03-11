@@ -8,7 +8,13 @@ import { UsersTable } from "../usersTable";
 import { Title } from "../typography/Title/Title";
 import { SubTitle } from "../typography/SubTitle/SubTitle";
 import { CreateUserWindow } from "../CreateUserWindow";
-import { createUserRequest, getUsersRequest } from "../../api/userRequests";
+import {
+    createUserRequest,
+    getUsersRequest,
+    deleteUserRequest,
+    updateUserRequest,
+    resetPasswordRequest
+} from "../../api/userRequests";
 
 export const AdminWrapper = () => {
 
@@ -34,6 +40,31 @@ export const AdminWrapper = () => {
            }
         });
         setShowForm(false);
+    };
+
+    const deleteUser = (email) => {
+        console.log(email);
+        deleteUserRequest(email, data => {
+            console.log(data);
+            getUsers();
+        })
+    };
+
+    const toggleBlockStatus = (email, value) => {
+        console.log("block: ", email, "   ", value);
+        updateUserRequest({email, field_name: "is_blocked", value_name: value}, data => {
+            console.log(data);
+            getUsers();
+        })
+
+    }
+
+    const resetPassword = (email) => {
+        console.log("reset password: ", email);
+        resetPasswordRequest(email, data => {
+            console.log(data);
+            getUsers();
+        })
     }
 
     useEffect(() => {
@@ -57,12 +88,17 @@ export const AdminWrapper = () => {
                         <SubTitle>Users</SubTitle>
                         <AddUserButton onClick={showCreateForm}>+ Add user</AddUserButton>
                     </HeaderPanel>
-                    <UsersTable users={users}></UsersTable>
+                    <UsersTable
+                        users={users}
+                        deleteUser={deleteUser}
+                        toggleBlockStatus={toggleBlockStatus}
+                        resetPassword={resetPassword}
+                    />
                     { 
                         showForm && <CreateUserWindow
-                            isOpen={showForm}
-                            create={createUser}
-                            close={closeCreateForm}
+                                isOpen={showForm}
+                                create={createUser}
+                                close={closeCreateForm}
                             />
                     }
                 </>
