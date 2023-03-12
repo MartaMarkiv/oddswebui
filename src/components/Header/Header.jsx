@@ -6,31 +6,9 @@ import {
     FilterButton,
     FilterImage
 } from "./styles";
-import {Switcher} from "../Switcher";
-import {ThemeSwitcher} from "../ThemeSwitcher";
-import {UserAvatar} from "../UserAvatar/UserAvatar";
+import { Switcher } from "../Switcher";
+import { ThemeSwitcher } from "../ThemeSwitcher";
 import { HeaderMenu } from "../HeaderMenu";
-import { Dropdown, Button, Space } from 'antd';
-
-const items2 = [
-    {
-      label: <a href="https://www.antgroup.com">1st menu item</a>,
-      key: '0',
-    },
-    {
-      label: <a href="https://www.aliyun.com">2nd menu item</a>,
-      key: '1',
-    },
-    {
-      type: 'divider',
-    },
-    {
-      label: '3rd menu item',
-      key: '3',
-    },
-  ];
-
-
 
 export const Header = ({
     openFilter,

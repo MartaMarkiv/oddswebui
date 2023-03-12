@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { Button, Dropdown } from "antd";
+import { Button } from "antd";
 
 const MenuButton = styled(Button)`
+  color: ${({theme}) => theme.colors.textPrimary};
+  background: ${({theme}) => theme.colors.drawer.bg};
   width: 48px;
   height: 48px;
   border-radius: 100%;
@@ -9,8 +11,6 @@ const MenuButton = styled(Button)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({theme}) => theme.colors.textPrimary};
-  background: ${({theme}) => theme.colors.drawer.bg};
   border: none;
   box-shadow: none;
 
@@ -30,13 +30,6 @@ const MenuButton = styled(Button)`
   }
 `;
 
-const MenuWrapper = styled(Dropdown)`
-  li.ant-dropdown-menu-item {
-    padding: 4px 20px;
-  }
-`;
-
 export {
-  MenuButton,
-  MenuWrapper
+  MenuButton
 }

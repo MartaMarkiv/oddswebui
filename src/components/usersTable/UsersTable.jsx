@@ -1,9 +1,10 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { StyledBettingTable, SessionWrap, EmptyData } from "./styles";
 import { IpRuleCell } from "./components/IpRuleCell";
 import { TableRow } from "./components/TableRow/TableRow";
 import { ActionBlock } from "./components/ActionBlock";
+import { ConfirmWindow } from "../ConfirmWindow";
 
 export const UsersTable = ({
 	users,
@@ -13,7 +14,31 @@ export const UsersTable = ({
 	updateRule
 }) => {
 
+	const [data, setData] = useState(null);
+	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
+
 	console.log(users);
+
+	const confirmAction = () => {
+		deleteUser(data);
+		setData(null);
+		setIsOpenConfirm(false);
+	}
+
+	const cancelAction = () => {
+		setData(null);
+		setIsOpenConfirm(false);
+	}
+
+	const handleDelete = (user) => {
+		setData(user);
+		setIsOpenConfirm(true);
+	};
+
+	const handleSave = (record) => {
+		updateRule(record);
+      };
+
 
     const columns = [
         {
@@ -101,18 +126,13 @@ export const UsersTable = ({
 			render: (_, {email}) => (
 				<ActionBlock
 				type="remove"
-				action={deleteUser}
+				action={handleDelete}
 				data={{email}}
 				/>
 			),
         },
           
       ];
-
-      const handleSave = (record) => {
-		updateRule(record);
-      };
-
     
       const components = {
         body: {
@@ -136,5 +156,11 @@ export const UsersTable = ({
 			/>:
 			<EmptyData>There is no users data yet.</EmptyData>
 		}
+		<ConfirmWindow
+			content={"Are you sure you want to delete user?"}
+			isOpen={isOpenConfirm}
+			handleCancel={cancelAction}
+			handleOk={confirmAction}
+		/>
     </StyledBettingTable>
 };
