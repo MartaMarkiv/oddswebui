@@ -11,6 +11,8 @@ export const DRAWER_WIDTH = 400;
 export const MULTI_DRAWER_WIDTH = 800;
 export const TABLE_DATA = process.env.NODE_ENV === "production" ? prodConfig.table_data : devConfig.table_data
 export const OPPORTUNITY= process.env.NODE_ENV === "production" ? prodConfig.opportunity : devConfig.opportunity
+export const OPPORTUNITY_PROP = process.env.REACT_APP_OPPORTUNITY_PROP;
+export const OPPORTUNITY_POPULAR = process.env.REACT_APP_OPPORTUNITY_POPULAR;
 
 export const QUARTERS_LIST = {
     q1: ["q1", "1st"],

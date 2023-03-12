@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
-import { PendingScreen } from "../components/PendingScreen";
 import { FilterPanel } from "../components/table/components/FilterPanel";
 import {OpportunityDrawer} from "../components/opportunity";
 
@@ -16,8 +15,7 @@ export const Main = ({
     isPopular,
     setPropFeedView,
     setPopularFeedView,
-    showAll,
-    setShowAll
+    showAll
 }) => {
     
     return <StyledMain>
@@ -33,7 +31,6 @@ export const Main = ({
             isProp={isProp}
             isPopular={isPopular}
             showAll={showAll}
-            setShowAll={setShowAll}
         />
     </StyledMain>
 
