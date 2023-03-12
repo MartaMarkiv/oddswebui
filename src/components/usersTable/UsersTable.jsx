@@ -17,8 +17,6 @@ export const UsersTable = ({
 	const [data, setData] = useState(null);
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
 
-	console.log(users);
-
 	const confirmAction = () => {
 		deleteUser(data);
 		setData(null);

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { notification } from "antd";
 import {
     Wrapper,
     HeaderPanel,
@@ -19,78 +20,90 @@ import { parseUsersData } from "../usersTable/utils";
 
 export const AdminWrapper = () => {
 
+    const openNotification = (content) => {
+        notification.error({
+          message: "Error",
+          description: content,
+        });
+    };
+
     const [loading, setLoading] = useState(false);
     const [users, setUsers] = useState([]);
     const [showForm, setShowForm] = useState(false);
 
     const getUsers = () => {
-        console.log("get users");
         getUsersRequest(({success, data, error}) => {
             setLoading(true);
             if (success) {
                 const parsedData = parseUsersData(data);
                 setUsers(parsedData);
+            } else {
+                openNotification(error || "Error happened, please try again later.");
             }
         })
     }
 
     const createUser = ({firstName: name, email, lastName: last_name}) => {
         createUserRequest({name, email, last_name}, (data) => {
-           console.log(data.success);
            if (data.success) {
-            getUsers();
-           }
+                getUsers();
+            } else {
+                openNotification(data.error || "Error happened, please try again later.");
+            }
         });
         setShowForm(false);
     };
 
     const deleteUser = ({email}) => {
-        console.log(email);
         deleteUserRequest(email, data => {
-            console.log(data);
-            // getUsers();
+            if (data.success) {
+                const newData = users.filter((item) => item.email !== email);
+                setUsers(newData);
+            } else {
+                openNotification(data.error || "Error happened, please try again later.");
+            }
         });
-        const newData = users.filter((item) => item.email !== email);
-        setUsers(newData);
     };
 
     const toggleBlockStatus = ({email, value}) => {
-        console.log("block: ", email, "   ", value);
         updateUserRequest({email, field_name: "is_blocked", value_name: value}, data => {
-            console.log(data);
-            getUsers();
-        })
+            if (data.success) {
+                getUsers();
+            } else {
+                openNotification(data.error || "Error happened, please try again later.");
+            }
+        });
+        
 
     }
 
     const resetPassword = ({email}) => {
-        console.log("reset password: ", email);
         resetPasswordRequest(email, data => {
-            console.log(data);
-            // getUsers();
+            if (!data.success) {
+                openNotification(data.error || "Error happened, please try again later.");
+            }
         })
     }
 
     const updateRule = (userItem) => {
-        console.log("UPDATE: ");
-        console.log(userItem);
         const {email, ipRule: rule} = userItem;
+        if (!rule) return;
         updateUserRequest({email, field_name: "regex_ip", value_name: rule}, data => {
-            console.log(data);
-            // getUsers();
-        });
-
-        const newData = [...users];
-        const index = newData.findIndex((item) => item.email === email);
-        const item = newData[index];
-        console.log(item);
-        newData.splice(index, 1, {
-        ...item,
-        ...userItem,
-        });
-        console.log(newData);
-        setUsers(newData);
+            if (data.success) {
+                const newData = [...users];
+                const index = newData.findIndex((item) => item.email === email);
+                const item = newData[index];
         
+                newData.splice(index, 1, {
+                    ...item,
+                    ...userItem,
+                });
+        
+                setUsers(newData);
+            } else {
+                openNotification(data.error || "Error happened, please try again later.");
+            }
+        });
     }
 
     useEffect(() => {

@@ -29,7 +29,7 @@ export const CreateUserWindow = ({ isOpen, create, close }) => {
                 rules={[{ required: true, message: "Please input first name!" }]}
             >
                 <Input 
-                    placeholder="First email"
+                    placeholder="First name"
                     size="large"
                     type="text"
                 />
