@@ -1,18 +1,22 @@
 const devConfig = {
     table_data: process.env.REACT_APP_TABLE_DATA,
-    opportunity: process.env.REACT_APP_OPPORTUNITY
+    opportunity: process.env.REACT_APP_OPPORTUNITY,
+    opportunity_prop: process.env.REACT_APP_OPPORTUNITY_PROP,
+    opportunity_popular: process.env.REACT_APP_OPPORTUNITY_POPULAR
 }
 const prodConfig = {
     table_data: "wss://user:Oddsbender@backend.oddsbender.com/ws/table_data",
-    opportunity: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed"
+    opportunity: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed",
+    opportunity_prop: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed_prop",
+    opportunity_popular: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed_popular"
 } 
 
 export const DRAWER_WIDTH = 400;
 export const MULTI_DRAWER_WIDTH = 800;
 export const TABLE_DATA = process.env.NODE_ENV === "production" ? prodConfig.table_data : devConfig.table_data
 export const OPPORTUNITY= process.env.NODE_ENV === "production" ? prodConfig.opportunity : devConfig.opportunity
-export const OPPORTUNITY_PROP = process.env.REACT_APP_OPPORTUNITY_PROP;
-export const OPPORTUNITY_POPULAR = process.env.REACT_APP_OPPORTUNITY_POPULAR;
+export const OPPORTUNITY_PROP = process.env.NODE_ENV === "production" ? prodConfig.opportunity_prop : devConfig.opportunity_prop;
+export const OPPORTUNITY_POPULAR = process.env.NODE_ENV === "production" ? prodConfig.opportunity_popular : devConfig.opportunity_popular;
 
 export const QUARTERS_LIST = {
     q1: ["q1", "1st"],
