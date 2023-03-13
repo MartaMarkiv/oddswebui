@@ -10,11 +10,13 @@ export const Switcher = ({
     initialValue,
     onUpdate,
     isProp,
-    isPopular
+    isPopular,
+    user
 }) => {
     const [selectedValue, setSelectedValue] = useState(initialValue);
 
     const checkHandler = e => {
+        if (!user) return;
         setSelectedValue(e.target.value);
         onUpdate && onUpdate(e.target.value)
     };
@@ -24,7 +26,7 @@ export const Switcher = ({
             <SwitcherInput
                 type="radio"
                 id={leftValue}
-                disabled={!(isProp || isPopular)}
+                disabled={!(isProp || isPopular) || !user}
                 value={leftValue}
                 name={name}
                 onChange={checkHandler}
@@ -36,7 +38,7 @@ export const Switcher = ({
                 type="radio"
                 id={rightValue}
                 value={rightValue}
-                disabled={!(isProp || isPopular)}
+                disabled={!(isProp || isPopular) || !user}
                 name={name}
                 onChange={checkHandler}
                 checked={selectedValue === rightValue}/>

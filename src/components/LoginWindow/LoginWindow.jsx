@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Form, Input } from "antd";
 import { LoginWrapper, SubmitButton, ResetLink, SubTitle } from "./styles";
 import { Title } from "../typography/Title/Title";
+import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
+import opportunityData from "../../opportunity_data.json";
+
 
 export const LoginWindow = ({ isOpen, login }) => {
 
@@ -31,7 +34,9 @@ export const LoginWindow = ({ isOpen, login }) => {
         }
     }
       
-    return <LoginWrapper
+    return <>
+    <OpportunityWrapper isPopular={true} isProp={true} listPopular={opportunityData} listProp={opportunityData}/>
+    <LoginWrapper
         title={<Title>{isReset ? "Reset your password?" : "Sign in to OddsBender"}</Title>}
         open={isOpen}
         centered
@@ -129,4 +134,5 @@ export const LoginWindow = ({ isOpen, login }) => {
             </Form>
         }
   </LoginWrapper>
+  </>
 }

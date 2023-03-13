@@ -95,14 +95,14 @@ function App() {
                                 isProp={propVisible}
                                 isPopular={popularVisible}
                                 setShowAll={setShowAllList}
+                                user={user}
                             />
                             <AppBody>
                                 <QueryParamProvider adapter={ReactRouter6Adapter}>
                                     <Routes>
                                         <Route path="/" element=
                                         {
-                                            user ?
-                                            <Main
+                                            user ? <Main
                                                 toggleFilter={setIsOpenFilter}
                                                 isOpenFilter={isOpenFilter}
                                                 isProp={propVisible}
@@ -110,6 +110,8 @@ function App() {
                                                 setPropFeedView={changePropFeedVisibility}
                                                 setPopularFeedView={changePopularFeedVisibility}
                                                 showAll={showAllList}
+                                                user={user}
+                                                setUser={setUser}
                                             />:
                                             <LoginWindow
                                                 isOpen={!user}

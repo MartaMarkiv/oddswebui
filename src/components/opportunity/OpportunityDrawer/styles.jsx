@@ -111,18 +111,11 @@ const DrawerStyled= styled.div`
     
 `
 
-const OpportunitiesWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-`;
-
 const CloseIcon = styled(Close)``
 
 export {
     OpportunityButton,
     DrawerStyled,
     StarIcon,
-    CloseIcon,
-    OpportunitiesWrapper
+    CloseIcon
 }

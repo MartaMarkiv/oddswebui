@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import { FilterPanel } from "../components/table/components/FilterPanel";
 import {OpportunityDrawer} from "../components/opportunity";
+import { LoginWindow } from '../components/LoginWindow';
 
 
 const StyledMain = styled.div`
@@ -15,8 +16,12 @@ export const Main = ({
     isPopular,
     setPropFeedView,
     setPopularFeedView,
-    showAll
+    showAll,
+    user,
+    setUser
 }) => {
+
+    console.log("MAINL ", user);
     
     return <StyledMain>
         <FilterPanel

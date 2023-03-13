@@ -13,10 +13,12 @@ export const Header = ({
     openFilter,
     isProp,
     isPopular,
-    setShowAll
+    setShowAll,
+    user
 }) => {
 
     const showFilter = () => {
+        if (!user) return;
         openFilter(true);
     };
 
@@ -40,8 +42,9 @@ export const Header = ({
                     isProp={isProp}
                     isPopular={isPopular}
                     onUpdate={switchHandler}
+                    user={user}
                 />
-                <FilterButton onClick={showFilter}>
+                <FilterButton onClick={showFilter} disabled={!user}>
                     <FilterImage />
                 </FilterButton>
                 
