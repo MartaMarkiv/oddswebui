@@ -22,7 +22,8 @@ export const getUsersRequest = (callback) => {
 export const updateUserRequest = (data, callback) => {
     client.put(`/update_user`, data)
         .then(res => {
-            callback({success: true});
+            const { data: { success, message }} = res;
+            callback({success, error: message});
         })
         .catch(err => {
             callback({success: false, error: err.message || err});
