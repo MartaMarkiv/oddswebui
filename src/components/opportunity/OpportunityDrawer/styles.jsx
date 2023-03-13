@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {ReactComponent as Star} from "../../../assets/icons/star.svg";
 import {ReactComponent as Close} from "../../../assets/icons/close.svg";
-import {Drawer} from "antd";
 
 const OpportunityButton = styled.button`
   width: 48px;

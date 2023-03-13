@@ -18,7 +18,6 @@ import {
     GameTime
 } from "./styles";
 import {TimeoutBadge} from "../../TimeoutBadge";
-import {TeamLogoGroup} from "../../TeamLogo";
 
 export const OpportunityItem = ({onSelect, data, selected}) => {
 

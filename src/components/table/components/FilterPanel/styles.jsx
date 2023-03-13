@@ -1,6 +1,5 @@
 import { Drawer } from "antd";
 import styled from "styled-components";
-import {Button} from "../../../../shared/styles";
 import {ReactComponent as Close} from "../../../../assets/icons/close.svg";
 
 const FilterPanelContainer = styled.ul`
@@ -78,15 +77,6 @@ const DrawerStyled = styled(Drawer)`
     }
   }
 
-`;
-
-
-const ButtonStyled = styled(Button)`
-  &:hover {
-    path {
-      stroke: ${({theme}) => theme.colors.button.arrowHover};   
-    }
-  }
 `;
 
 const CloseIcon = styled(Close)``;

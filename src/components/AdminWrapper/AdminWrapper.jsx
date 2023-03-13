@@ -73,8 +73,6 @@ export const AdminWrapper = () => {
                 openNotification(data.error || "Error happened, please try again later.");
             }
         });
-        
-
     }
 
     const resetPassword = ({email}) => {
@@ -143,7 +141,6 @@ export const AdminWrapper = () => {
                     }
                 </>
             }
-            
         </Wrapper>
     )
 }
