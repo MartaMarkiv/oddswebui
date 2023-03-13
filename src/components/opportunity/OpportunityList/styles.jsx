@@ -10,18 +10,27 @@ const List = styled.ul`
 `;
 const ListItem = styled.li`
   display: block;
-  margin-bottom: 12px;  
+  margin-bottom: 12px;
+  border: 4px solid;
+  border-color: ${({theme}) => theme.colors.drawer.bg};
 `;
 
 const Title = styled.div` 
-font-size: 18px;
-font-weight: 500;
-margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+`;
+
+const EmptyList = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  color: ${({theme}) => theme.colors.textSecondary};
 `;
 
 export {
     OpportunityListContainer,
     List,
     ListItem,
-    Title
+    Title,
+    EmptyList
 }
