@@ -6,7 +6,7 @@ import {
     FilterButton,
     FilterImage
 } from "./styles";
-import { Switcher } from "../Switcher";
+import { Switcher } from "../Switcher/Switcher";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { HeaderMenu } from "../HeaderMenu";
 

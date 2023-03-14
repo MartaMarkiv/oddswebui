@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Input } from "antd";
 import { LoginWrapper, SubmitButton, ResetLink, SubTitle } from "./styles";
 import { Title } from "../typography/Title/Title";
 import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
 import opportunityData from "../../opportunity_data.json";
-
+import { resetPasswordRequest, loginRequest } from "../../api/userRequests";
 
 export const LoginWindow = ({ isOpen, login }) => {
 
@@ -14,7 +14,10 @@ export const LoginWindow = ({ isOpen, login }) => {
     const reset = ({email}) => {
         console.log(email);
         if (email) {
-            setIsSetEmail(true);
+            resetPasswordRequest(email, data => {
+                console.log(data);
+                setIsSetEmail(true);
+            })
         } else {
             setIsSetEmail(false);
             setIsReset(false);
@@ -25,13 +28,10 @@ export const LoginWindow = ({ isOpen, login }) => {
         setIsReset(true);
     }
 
-    const passwordValidation = (rule, value, callback) => {
-        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
-        if (regex.test(value)) {
-            return Promise.resolve();
-        } else {
-            return Promise.reject({message: "Your password should be stronger."});
-        }
+    const onLogin = ({email, password}) => {
+        loginRequest(email, password, data => {
+            console.log(data);
+        });
     }
       
     return <>
@@ -94,7 +94,7 @@ export const LoginWindow = ({ isOpen, login }) => {
                 name="login-window"
                 className="login-window"
                 initialValues={{ remember: false }}
-                onFinish={login}
+                onFinish={onLogin}
                 style={{ maxWidth: 200 }}
                 autoComplete="off"
             >
@@ -113,7 +113,7 @@ export const LoginWindow = ({ isOpen, login }) => {
                     name="password"
                     rules={[{
                         required: true,
-                        validator: passwordValidation
+                        message: "Please input your password!"
                     }]}
                 >
                     <Input.Password

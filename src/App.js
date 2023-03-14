@@ -59,6 +59,10 @@ function App() {
 
     const [user, setUser] = useState(null);
 
+    const onLogin = (values) => {
+        console.log("On login: ", values);
+    }
+
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
         if (!popularVisible) {
@@ -89,10 +93,6 @@ function App() {
                     >
                         <AppStyled>
                             <Header
-                                changeSelectedKey={setSelectedKey}
-                                selectedKey={selectedKey}
-                                opportunities={opportunities}
-                                setOpportunities={setOpportunities}
                                 openFilter={setIsOpenFilter}
                                 isProp={propVisible}
                                 isPopular={popularVisible}
@@ -117,7 +117,7 @@ function App() {
                                             />:
                                             <LoginWindow
                                                 isOpen={!user}
-                                                login={setUser}
+                                                login={onLogin}
                                             />
                                         }/>
                                         <Route path="/account/password-reset/:token" element={
@@ -143,6 +143,7 @@ function App() {
                         <AppFooter/>
                     </AppStyled>
                 </CommonProvider>
+                </UserProvider>
             </ThemeProvider>
         </ThemePreferenceContext.Provider>
     );

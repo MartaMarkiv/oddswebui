@@ -13,10 +13,15 @@ const SubmitButton = styled(Button)`
         background: ${({theme}) => theme.colors.headerControls.bg};
     }
 
-    &:hover {
+    &:focus {
         color: ${({theme}) => theme.colors.textPrimary};
         background: ${({theme}) => theme.colors.headerControls.bg};
     }
+
+    &:hover {
+        color: ${({theme}) => theme.colors.drawer.bg};
+        background: ${({theme}) => theme.colors.textPrimary};
+      }
 `;
 
 export {

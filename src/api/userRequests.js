@@ -47,3 +47,23 @@ export const resetPasswordRequest = (email, callback) => {
         callback({success: false, error: err.message || err});
     })
 };
+
+export const updatePasswordRequest = (password, ip, token, callback) => {
+    client.put(`/user/${token}`, { password, ip })
+    .then(res => {
+        callback({success: true});
+    }).catch(err => {
+        console.log(err);
+        callback({success: false, error: err.message || err});
+    })
+};
+
+export const loginRequest = (email, password, callback) => {
+    client.post(`/login`, { email, password })
+    .then(res => {
+        console.log(res);
+        callback({success: true});
+    }).catch(err => {
+        callback({success: false, error: err.message || err});
+    })
+};
