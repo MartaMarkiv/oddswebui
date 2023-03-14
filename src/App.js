@@ -1,14 +1,17 @@
-import {Main} from "./pages/Main";
-import {Admin} from "./pages/Admin";
-import {Route, Routes} from "react-router-dom";
-import {Header} from "./components/Header";
+import { Main } from "./pages/Main";
+import { Admin } from "./pages/Admin";
+import { Route, Routes } from "react-router-dom";
+import { Header } from "./components/Header";
+import { LoginWindow } from "./components/LoginWindow";
 import styled from "styled-components";
-import {light, dark} from "./Theme.styled";
-import {ThemeProvider} from "styled-components";
-import {createContext, useEffect, useState} from "react";
-import {CommonProvider} from "./shared/context/CommonProvider";
-import {QueryParamProvider} from 'use-query-params';
-import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
+import { light, dark } from "./Theme.styled";
+import { ThemeProvider } from "styled-components";
+import { createContext, useEffect, useState } from "react";
+import { CommonProvider } from "./shared/context/CommonProvider";
+import { UserProvider } from "./shared/context/UserProvider";
+import { QueryParamProvider } from "use-query-params";
+import { ReactRouter6Adapter } from "use-query-params/adapters/react-router-6";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 const AppStyled = styled.div`
   padding: 0 40px;
@@ -17,6 +20,7 @@ const AppStyled = styled.div`
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  filter: ${({blur}) => blur ? "blur(2px)" : ""};
 `;
 
 const AppBody = styled.div`
@@ -36,7 +40,7 @@ export const ThemePreferenceContext = createContext();
 
 function App() {
 
-    const initialTheme = localStorage.getItem('theme') || 'light';
+    const initialTheme = localStorage.getItem("theme") || "light";
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
     //Filters
@@ -53,6 +57,8 @@ function App() {
     const theme = themesMap[currentTheme];
     const [drawerOpened, setDrawerOpened] = useState(false);
 
+    const [user, setUser] = useState(null);
+
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
         if (!popularVisible) {
@@ -68,58 +74,69 @@ function App() {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('theme') !== currentTheme) {
-            localStorage.setItem('theme', currentTheme);
+        if (localStorage.getItem("theme") !== currentTheme) {
+            localStorage.setItem("theme", currentTheme);
         }
     }, [currentTheme]);
 
     return (
         <ThemePreferenceContext.Provider value={{currentTheme, setCurrentTheme}}>
             <ThemeProvider theme={theme}>
-                <CommonProvider
-                    drawerOpened={drawerOpened}
-                    setDrawerOpened={setDrawerOpened}
-                >
-                    <AppStyled>
-                        <Header
-                            changeSelectedKey={setSelectedKey}
-                            selectedKey={selectedKey}
-                            opportunities={opportunities}
-                            setOpportunities={setOpportunities}
-                            openFilter={setIsOpenFilter}
-                            isProp={propVisible}
-                            isPopular={popularVisible}
-                            setShowAll={setShowAllList}
-                        />
-                        <AppBody>
-                            <QueryParamProvider adapter={ReactRouter6Adapter}>
-                                <Routes>
-                                    <Route path="/" element=
-                                    {
-                                        <Main
-                                            toggleFilter={setIsOpenFilter}
-                                            isOpenFilter={isOpenFilter}
-                                            isProp={propVisible}
-                                            isPopular={popularVisible}
-                                            setPropFeedView={changePropFeedVisibility}
-                                            setPopularFeedView={changePopularFeedVisibility}
-                                            showAll={showAllList}
+                <UserProvider currentUser={user} setCurrentUser={setUser}>
+                    <CommonProvider
+                        drawerOpened={drawerOpened}
+                        setDrawerOpened={setDrawerOpened}
+                    >
+                        <AppStyled>
+                            <Header
+                                changeSelectedKey={setSelectedKey}
+                                selectedKey={selectedKey}
+                                opportunities={opportunities}
+                                setOpportunities={setOpportunities}
+                                openFilter={setIsOpenFilter}
+                                isProp={propVisible}
+                                isPopular={popularVisible}
+                                setShowAll={setShowAllList}
+                                user={user}
+                            />
+                            <AppBody>
+                                <QueryParamProvider adapter={ReactRouter6Adapter}>
+                                    <Routes>
+                                        <Route path="/" element=
+                                        {
+                                            user ? <Main
+                                                toggleFilter={setIsOpenFilter}
+                                                isOpenFilter={isOpenFilter}
+                                                isProp={propVisible}
+                                                isPopular={popularVisible}
+                                                setPropFeedView={changePropFeedVisibility}
+                                                setPopularFeedView={changePopularFeedVisibility}
+                                                showAll={showAllList}
+                                                user={user}
+                                                setUser={setUser}
+                                            />:
+                                            <LoginWindow
+                                                isOpen={!user}
+                                                login={setUser}
+                                            />
+                                        }/>
+                                        <Route path="/account/password-reset/:token" element={
+                                            <ResetPasswordPage />}
                                         />
-                                    }/>
 
-                                    <Route path="/admin" element=
-                                    {
-                                        <Admin
-                                            toggleFilter={setIsOpenFilter}
-                                            isOpenFilter={isOpenFilter}
-                                            isProp={propVisible}
-                                            isPopular={popularVisible}
-                                            setPropFeedView={changePropFeedVisibility}
-                                            setPopularFeedView={changePopularFeedVisibility}
-                                            showAll={showAllList}
-                                            setShowAll={setShowAllList}
-                                        />
-                                    }/>
+                                        <Route path="/admin" element=
+                                        {
+                                            <Admin
+                                                toggleFilter={setIsOpenFilter}
+                                                isOpenFilter={isOpenFilter}
+                                                isProp={propVisible}
+                                                isPopular={popularVisible}
+                                                setPropFeedView={changePropFeedVisibility}
+                                                setPopularFeedView={changePopularFeedVisibility}
+                                                showAll={showAllList}
+                                                setShowAll={setShowAllList}
+                                            />
+                                        }/>
                                 </Routes>
                             </QueryParamProvider>
                         </AppBody>

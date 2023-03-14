@@ -42,6 +42,9 @@ const StarIcon = styled(Star)`
 `
 
 const DrawerStyled= styled.div`
+  &.ant-drawer {
+    z-index: 10;
+  }
   
   display: flex;
   flex-direction: row;
@@ -98,6 +101,7 @@ const DrawerStyled= styled.div`
   
   .ant-drawer-content-wrapper {
     box-shadow: none;
+    filter: ${({blur}) => blur ? 'blur(2px)' : ''};
   }
 
   .ant-drawer-body .spinner {
@@ -106,18 +110,11 @@ const DrawerStyled= styled.div`
     
 `
 
-const OpportunitiesWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-`;
-
 const CloseIcon = styled(Close)``
 
 export {
     OpportunityButton,
     DrawerStyled,
     StarIcon,
-    CloseIcon,
-    OpportunitiesWrapper
+    CloseIcon
 }
