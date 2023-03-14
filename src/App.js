@@ -1,15 +1,16 @@
-import {Main} from "./pages/Main";
-import {LoginWindow} from "./components/LoginWindow";
-import {Route, Routes} from "react-router-dom";
-import {Header} from "./components/Header";
+import { Main } from "./pages/Main";
+import { LoginWindow } from "./components/LoginWindow";
+import { Route, Routes } from "react-router-dom";
+import { Header } from "./components/Header";
 import styled from "styled-components";
-import {light, dark} from "./Theme.styled";
-import {ThemeProvider} from "styled-components";
-import {createContext, useEffect, useState} from "react";
-import {CommonProvider} from "./shared/context/CommonProvider";
+import { light, dark } from "./Theme.styled";
+import { ThemeProvider } from "styled-components";
+import { createContext, useEffect, useState } from "react";
+import { CommonProvider } from "./shared/context/CommonProvider";
 import { UserProvider } from "./shared/context/UserProvider";
-import {QueryParamProvider} from 'use-query-params';
-import {ReactRouter6Adapter} from 'use-query-params/adapters/react-router-6';
+import { QueryParamProvider } from "use-query-params";
+import { ReactRouter6Adapter } from "use-query-params/adapters/react-router-6";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 const AppStyled = styled.div`
   padding: 0 40px;
@@ -18,7 +19,7 @@ const AppStyled = styled.div`
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  filter: ${({blur}) => blur ? 'blur(2px)' : ''};
+  filter: ${({blur}) => blur ? "blur(2px)" : ""};
 `;
 
 const AppBody = styled.div`
@@ -38,7 +39,7 @@ export const ThemePreferenceContext = createContext();
 
 function App() {
 
-    const initialTheme = localStorage.getItem('theme') || 'light';
+    const initialTheme = localStorage.getItem("theme") || "light";
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
     //Filters
@@ -72,8 +73,8 @@ function App() {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('theme') !== currentTheme) {
-            localStorage.setItem('theme', currentTheme);
+        if (localStorage.getItem("theme") !== currentTheme) {
+            localStorage.setItem("theme", currentTheme);
         }
     }, [currentTheme]);
 
@@ -118,7 +119,11 @@ function App() {
                                                 login={setUser}
                                             />
                                         }/>
+                                        <Route path="/account/password-reset/:token" element={
+                                            <ResetPasswordPage />}
+                                        />
                                     </Routes>
+                                    
                                 </QueryParamProvider>
                             </AppBody>
                             <AppFooter/>
