@@ -118,6 +118,7 @@ function App() {
                                             <LoginWindow
                                                 isOpen={!user}
                                                 login={onLogin}
+                                                saveUser={setUser}
                                             />
                                         }/>
                                         <Route path="/account/password-reset/:token" element={

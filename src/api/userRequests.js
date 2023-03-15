@@ -58,11 +58,11 @@ export const updatePasswordRequest = (password, ip, token, callback) => {
     })
 };
 
-export const loginRequest = (email, password, callback) => {
-    client.post(`/login`, { email, password })
+export const loginRequest = (email, password, ip, callback) => {
+    client.post(`/login`, { email, password, ip })
     .then(res => {
         console.log(res);
-        callback({success: true});
+        callback(res.data);
     }).catch(err => {
         callback({success: false, error: err.message || err});
     })

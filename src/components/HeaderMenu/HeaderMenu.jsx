@@ -4,20 +4,24 @@ import { MenuButton } from "./styles";
 
 const items = [
     {
-		label: <a href="/admin">Admin</a>,
-		key: "0",
+      label: <a href="/admin">Admin</a>,
+      key: "0",
+    },
+    {
+      label: <div>Logout</div>,
+      key: "1"
     }
   ];
 
-  const menu = (<Menu items={items} />);
+const menu = (<Menu items={items} />);
 
 export const HeaderMenu = () => {
 
     return <Dropdown
-		overlay={menu}
-		trigger={["click"]}
-		placement="bottomRight"
+      overlay={menu}
+      trigger={["click"]}
+      placement="bottomRight"
 	>
-        <MenuButton><UserAvatar /></MenuButton>
+      <MenuButton><UserAvatar /></MenuButton>
   </Dropdown>
 }

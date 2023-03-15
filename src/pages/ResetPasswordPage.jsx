@@ -28,21 +28,19 @@ export const ResetPasswordPage = ({}) => {
         console.log("On reset");
         console.log(password);
         console.log(ipAddress);
-        // updatePasswordRequest(password, ipAddress, token, data => {
-        //     console.log(data);
-        //     if (data.success) {
-        //         navigate("/", { replace: true});
-        //     }
-        // });
+        updatePasswordRequest(password, ipAddress, token, data => {
+            console.log(data);
+            if (data.success) {
+                navigate("/", { replace: true});
+            }
+        });
     };
 
-    const getData = () => {
-        axios.get('https://api.db-ip.com/v2/free/self', function(data) {
-            const details = JSON.stringify(data, null, 2);
-            console.log(details);
-            console.log(details.ip);
-            setIpAddress(details.ip);
-          });
+    const getData = async () => {
+        const res = await axios.get('https://api.db-ip.com/v2/free/self');
+        const { data } = res;
+        setIpAddress(data.ipAddress);
+        console.log(data.ipAddress);
       }
       
       useEffect( () => {

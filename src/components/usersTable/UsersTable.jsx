@@ -15,6 +15,7 @@ export const UsersTable = ({
 	updateRule
 }) => {
 
+	console.log(users);
 	const [data, setData] = useState(null);
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
 
