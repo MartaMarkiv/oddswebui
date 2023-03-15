@@ -27,13 +27,28 @@ const OpportunityButton = styled.button`
       stroke: ${({theme}) => theme.colors.headerControls.starStrokeHover};
     } 
   }
+
+  &:disabled {
+    cursor: default;
+    background: ${({theme}) => theme.colors.headerControls.bg};
+    path {
+      stroke: ${({theme}) => theme.colors.headerControls.starStroke};
+      fill: ${({theme}) => theme.colors.headerControls.starBg};
+    } 
+  }
 `;
 
 const StarIcon = styled(Star)`
 
 `
 
-const DrawerStyled= styled(Drawer)`
+const DrawerStyled= styled.div`
+  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
   .ant-drawer-content, .ant-drawer-header {
     background: ${({theme}) => theme.colors.drawer.bg};
     border-color: ${({theme}) => theme.colors.drawer.bg};
@@ -42,7 +57,7 @@ const DrawerStyled= styled(Drawer)`
   .ant-drawer-header {
     position: relative;
     padding: 0 12px;
-    max-height: 96px;
+    max-height: 56px;
     flex-grow: 1;
     
     align-items: center;
@@ -50,7 +65,7 @@ const DrawerStyled= styled(Drawer)`
   }
 
   .ant-drawer-body {
-    padding: 0 12px;
+    padding: 0;
   }
 
   .ant-drawer-title {
@@ -92,6 +107,12 @@ const DrawerStyled= styled(Drawer)`
     
 `
 
+const OpportunitiesWrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+`;
+
 const CloseIcon = styled(Close)``
 
 export {
@@ -99,4 +120,5 @@ export {
     DrawerStyled,
     StarIcon,
     CloseIcon,
+    OpportunitiesWrapper
 }

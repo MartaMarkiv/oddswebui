@@ -23,3 +23,7 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+
+app:
+  table_data_url: 'wss://user:BenderInternational@backend.oddsbender.com/ws/table_data'
+  opportunity_url: 'wss://user:BenderInternational@backend.oddsbender.com/ws/opportunity_feed'

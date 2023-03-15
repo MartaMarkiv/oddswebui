@@ -1,110 +1,100 @@
 import {useState, useEffect} from "react";
-import {Space} from "antd";
 import { w3cwebsocket as WebSocket } from "websocket";
 import {OpportunityList} from "../OpportunityList";
-import {DrawerStyled, OpportunityButton, StarIcon, CloseIcon} from "./styles";
-import {Switcher} from "../../Switcher";
-import {SubTitle} from "../../typography/SubTitle/SubTitle";
-import {useSetDrawerOpened} from "../../../shared/context/CommonProvider";
+import {DrawerStyled, OpportunitiesWrapper} from "./styles";
 import {PendingScreen} from "../../../components/PendingScreen";
-import {DRAWER_WIDTH, OPPORTUNITY} from "../../../constants";
+import { EmptyView } from "../../EmptyView/EmptyView";
+import { OPPORTUNITY_POPULAR, OPPORTUNITY_PROP } from "../../../constants";
 import {parser, arbitrageFilter} from "../utils";
 
-const client = new WebSocket(OPPORTUNITY);
+const clientPopular = new WebSocket(OPPORTUNITY_POPULAR);
+const clientProp = new WebSocket(OPPORTUNITY_PROP);
 
 export const OpportunityDrawer = ({
-    changeSelectedKey,
-    selectedKey,
-    setCollection,
-    collection
+    isProp,
+    isPopular,
+    showAll
 }) => {
 
-    const setDrawerOpened = useSetDrawerOpened();
-    const [visible, setVisible] = useState(true);
+    const [collectionPopular, setCollectionPopular] = useState([]);
+    const [collectionProp, setCollectionProp] = useState([]);
+
     const [loading, setLoading] = useState(true);
 
-    const [showAll, setShowAll] = useState(true);
+    const connectPopualrSocket = () => {
 
-    const connectSocket = () => {
-
-        client.onopen =(() => {
+        clientPopular.onopen =(() => {
             setLoading(false);
-            setDrawerOpened(true);
         });
 
-        client.onmessage = (event) => {
+        clientPopular.onmessage = (event) => {
             const json = JSON.parse(event.data);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
+
             const parsedData = parser(allOpportunities);
-            setCollection(parsedData);
+
+            setCollectionPopular(parsedData);
         };
 
-        client.onerror = () => {
-            console.log("Opportunity socket connection error");
+        clientPopular.onerror = () => {
+            console.log("Popular opportunity socket connection error");
+        };
+    };
+
+    const connectPropSocket = () => {
+
+        clientProp.onopen =(() => {
+            setLoading(false);
+        });
+
+        clientProp.onmessage = (event) => {
+            const json = JSON.parse(event.data);
+            
+            const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
+
+            const parsedData = parser(allOpportunities);
+
+            setCollectionProp(parsedData);
+        };
+
+        clientProp.onerror = () => {
+            console.log("Prop opportunity socket connection error");
         };
     }
+
 
     useEffect(() => {
-        connectSocket();
+        connectPopualrSocket();
+        connectPropSocket();
     }, []);
 
-    const showDrawer = () => {
-        setDrawerOpened(true)
-        setVisible(true);
-    };
-
-    const onClose = () => {
-        setVisible(false);
-        setDrawerOpened(false)
-    };
-
-    const switchHandler = (value) => {
-        setShowAll(value === "all");
-    }
-
-    const list = showAll ? collection : arbitrageFilter(collection);
+    const listPopular = showAll ? collectionPopular : arbitrageFilter(collectionPopular);
+    const listProp = showAll ? collectionProp : arbitrageFilter(collectionProp);
 
     return (
-        <>
-            <OpportunityButton onClick={showDrawer}>
-                <StarIcon />
-            </OpportunityButton>
-            <DrawerStyled
-                placement="right"
-                closable
-                mask={false}
-                width={DRAWER_WIDTH}
-                closeIcon={<CloseIcon />}
-                extra={
-                    <Space>
-                        <Switcher
-                            leftText="All"
-                            rightText="Arbs"
-                            name="opportunity"
-                            leftValue="all"
-                            rightValue="arbs"
-                            initialValue="all"
-                            onUpdate={switchHandler}
-                        />
-                    </Space>
-                }
-                onClose={onClose}
-                open={visible}
-                >
-                {
-                    loading ? 
-                        <PendingScreen position={"absolute"}/> :
-                        collection && collection.length ?
+        <DrawerStyled>
+            {
+                loading ? 
+                    <PendingScreen position={"absolute"}/> :
+                    isPopular || isProp ?
+                    <OpportunitiesWrapper>
+                        { isProp && 
                             <OpportunityList
-                                opportunities={list}
-                                selectOpportunity={changeSelectedKey}
-                                selectedOpportunity={selectedKey}
-                                allList={showAll}
-                            /> :
-                            <SubTitle>No opportunity right now</SubTitle>
-                }
-            </DrawerStyled>
-        </>
+                                opportunities={listProp}
+                                name="Prop"
+                            />
+                        }
+                        { isPopular &&
+                            <OpportunityList
+                                opportunities={listPopular}
+                                name="Popular"
+                            />
+                        }
+                    </OpportunitiesWrapper> :
+                    <EmptyView />
+                        
+            }
+        </DrawerStyled>
     )
 };

@@ -8,7 +8,9 @@ export const Switcher = ({
     rightValue,
     name,
     initialValue,
-    onUpdate
+    onUpdate,
+    isProp,
+    isPopular
 }) => {
     const [selectedValue, setSelectedValue] = useState(initialValue);
 
@@ -22,6 +24,7 @@ export const Switcher = ({
             <SwitcherInput
                 type="radio"
                 id={leftValue}
+                disabled={!(isProp || isPopular)}
                 value={leftValue}
                 name={name}
                 onChange={checkHandler}
@@ -33,6 +36,7 @@ export const Switcher = ({
                 type="radio"
                 id={rightValue}
                 value={rightValue}
+                disabled={!(isProp || isPopular)}
                 name={name}
                 onChange={checkHandler}
                 checked={selectedValue === rightValue}/>

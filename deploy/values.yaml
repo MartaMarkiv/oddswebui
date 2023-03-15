@@ -86,3 +86,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+app:
+  table_data_url: ''
+  opportunity_url: ''

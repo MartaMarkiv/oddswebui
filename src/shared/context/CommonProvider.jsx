@@ -1,18 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from "styled-components";
-import {DRAWER_WIDTH} from "../../constants";
+import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH} from "../../constants";
 
 
 const Wrapper = styled.div`
-  transition: width 0.3s;
-  width: ${({drawerOpened}) => drawerOpened ? 'calc(100% - ' + DRAWER_WIDTH + 'px)' : '100%'};
+  width: 100%;
   height: 100%;
 `;
 
-const CommonContext = React.createContext({});
+export const CommonContext = React.createContext({});
 
-export const CommonProvider = ({children}) => {
-  const [drawerOpened, setDrawerOpened] = useState(false);
+export const CommonProvider = ({drawerOpened, setDrawerOpened, children}) => {
 
   return (
     <CommonContext.Provider
@@ -20,7 +18,7 @@ export const CommonProvider = ({children}) => {
         drawerOpened,
         setDrawerOpened
       }}>
-       <Wrapper drawerOpened={drawerOpened}>
+       <Wrapper>
            { children }
        </Wrapper>
     </CommonContext.Provider>

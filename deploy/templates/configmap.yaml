@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{include "web-ui.fullname" . }}-frontend-config
+data:
+  REACT_APP_TABLE_DATA: {{.Values.app.table_data_url}}
+  REACT_APP_OPPORTUNITY: {{.Values.app.opportunity_url}}
