@@ -1,6 +1,7 @@
 import { Dropdown, Menu } from "antd";
 import { UserAvatar } from "../UserAvatar/UserAvatar";
 import { MenuButton } from "./styles";
+import { Navigation } from "../Navigation";
 
 const items = [
     {
@@ -18,7 +19,7 @@ const menu = (<Menu items={items} />);
 export const HeaderMenu = () => {
 
     return <Dropdown
-      overlay={menu}
+      overlay={Navigation()}
       trigger={["click"]}
       placement="bottomRight"
 	>

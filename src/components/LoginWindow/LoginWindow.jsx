@@ -6,8 +6,11 @@ import { Title } from "../typography/Title/Title";
 import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
 import opportunityData from "../../opportunity_data.json";
 import { resetPasswordRequest, loginRequest } from "../../api/userRequests";
+import Cookies from 'universal-cookie';
+ 
+const cookies = new Cookies();
 
-export const LoginWindow = ({ isOpen, login, saveUser }) => {
+export const LoginWindow = ({ isOpen, saveUser }) => {
 
     const [isReset, setIsReset] = useState(false);
     const [isSentEmail, setIsSetEmail] = useState(false);
@@ -34,7 +37,8 @@ export const LoginWindow = ({ isOpen, login, saveUser }) => {
         loginRequest(email, password, ipAddress, data => {
             console.log(data);
             if (data.success) {
-                saveUser({toke: data.token});
+                saveUser(data.token);
+                cookies.set('token', data.token);
             } else {
                 notification.error({
                     message: "Error",

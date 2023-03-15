@@ -26,7 +26,7 @@ export const parseUsersData = (list) => {
             time,
             role,
             isOnline,
-            session: isOnline ? new Date(time) : null,
+            session: isOnline ? new Date(time).getTime() : null,
             resetPassword: "sss",
             removeUser: "",
             userId: id,

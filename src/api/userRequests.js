@@ -67,3 +67,13 @@ export const loginRequest = (email, password, ip, callback) => {
         callback({success: false, error: err.message || err});
     })
 };
+
+export const logoutRequest = (token, callback) => {
+    client.post(`/logout`, { token })
+    .then(res => {
+        console.log(res);
+        callback(res.data);
+    }).catch(err => {
+        callback({success: false, error: err.message || err});
+    })
+};

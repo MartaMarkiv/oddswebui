@@ -30,6 +30,11 @@ const LoginWrapper = styled(Modal)`
         box-shadow: none;
     }
 
+    .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
+        border-color: ${({theme}) => theme.colors.textSuccess};
+        box-shadow: none;
+    }
+
     .ant-form-item:last-child {
         margin-bottom: 0;
     }
@@ -60,8 +65,8 @@ const SubmitButton = styled(Button)`
     }
 
     &:hover {
-        color: ${({theme}) => theme.colors.textPrimary};
-        background: ${({theme}) => theme.colors.headerControls.bg};
+        color: ${({theme}) => theme.colors.headerControls.bg};
+        background: ${({theme}) => theme.colors.textPrimary};
     }
 `;
 

@@ -55,8 +55,8 @@ const SubmitButton = styled(Button)`
     }
 
     &:hover {
-        color: ${({theme}) => theme.colors.textPrimary};
-        background: ${({theme}) => theme.colors.headerControls.bg};
+        color: ${({theme}) => theme.colors.headerControls.bg};
+        background: ${({theme}) => theme.colors.textPrimary};
     }
 `;
 

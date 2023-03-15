@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Header } from "./components/Header";
 import { LoginWindow } from "./components/LoginWindow";
 import styled from "styled-components";
+import Cookies from 'universal-cookie';
 import { light, dark } from "./Theme.styled";
 import { ThemeProvider } from "styled-components";
 import { createContext, useEffect, useState } from "react";
@@ -34,11 +35,16 @@ const AppFooter = styled.div`
 const themesMap = {
     light,
     dark
-}
+};
+
+const cookies = new Cookies();
 
 export const ThemePreferenceContext = createContext();
 
 function App() {
+
+    const token = cookies.get('token');
+    console.log("TOKENL ", token);
 
     const initialTheme = localStorage.getItem("theme") || "light";
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
@@ -57,11 +63,7 @@ function App() {
     const theme = themesMap[currentTheme];
     const [drawerOpened, setDrawerOpened] = useState(false);
 
-    const [user, setUser] = useState(null);
-
-    const onLogin = (values) => {
-        console.log("On login: ", values);
-    }
+    const [user, setUser] = useState(token);
 
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
@@ -117,7 +119,6 @@ function App() {
                                             />:
                                             <LoginWindow
                                                 isOpen={!user}
-                                                login={onLogin}
                                                 saveUser={setUser}
                                             />
                                         }/>
