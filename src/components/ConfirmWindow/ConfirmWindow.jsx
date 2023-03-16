@@ -1,7 +1,7 @@
 import { ConfirmWrapper, MessageWrapper } from "./styles";
 
 
-export const ConfirmWindow = ({ isOpen, content, handleOk, handleCancel }) => {
+export const ConfirmWindow = ({ isOpen, content, handleOk, handleCancel, okText }) => {
       
     return <ConfirmWrapper
         open={isOpen}
@@ -9,7 +9,7 @@ export const ConfirmWindow = ({ isOpen, content, handleOk, handleCancel }) => {
         closable={false}
         onOk={handleOk}
         onCancel={handleCancel}
-        okText="Delete"
+        okText={okText}
     >
         <MessageWrapper>{content}</MessageWrapper>
   </ConfirmWrapper>

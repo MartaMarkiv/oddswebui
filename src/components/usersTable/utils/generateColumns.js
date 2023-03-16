@@ -29,8 +29,8 @@ export const generateColumns = ({
 			key: "status",
 			render: (_, {email, status}) => {
 				return status ?
-                actionRenderer("Active", "active", toggleStatusHandler, {email, value: 0}):
-                actionRenderer("Inactive", "inactive", toggleStatusHandler, {email, value: 1})
+					actionRenderer("Bnblocked", "blocked", toggleStatusHandler, {email, value: 0}):
+					actionRenderer("Unlocked", "unblocked", toggleStatusHandler, {email, value: 1})
           }
         },
         {

@@ -1,6 +1,5 @@
 import { Form, Input } from "antd";
-import { SubmitButton } from "./styles";
-
+import { SubmitButton, FormDrawer } from "./styles";
 
 export const ResetPassword = ({ reset }) => {
 
@@ -17,7 +16,7 @@ export const ResetPassword = ({ reset }) => {
     }
       
     return (
-        <Form
+        <FormDrawer
             name="reset-form"
             className="reset-form"
             initialValues={{ remember: false }}
@@ -69,9 +68,9 @@ export const ResetPassword = ({ reset }) => {
                     type="primary"
                     htmlType="submit"
                 >
-                    Save a new passowrd
+                    Save a new password
                 </SubmitButton>
             </Form.Item>
-        </Form>
+        </FormDrawer>
     )
 }

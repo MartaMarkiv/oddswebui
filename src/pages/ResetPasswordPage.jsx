@@ -19,7 +19,7 @@ const StyledMain = styled.div`
 `;
 
 export const ResetPasswordPage = ({}) => {
-    const { token } = useParams();
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [ipAddress, setIpAddress] = useState("");
@@ -28,7 +28,7 @@ export const ResetPasswordPage = ({}) => {
         console.log("On reset");
         console.log(password);
         console.log(ipAddress);
-        updatePasswordRequest(password, ipAddress, token, data => {
+        updatePasswordRequest(password, ipAddress, id, data => {
             console.log(data);
             if (data.success) {
                 navigate("/", { replace: true});

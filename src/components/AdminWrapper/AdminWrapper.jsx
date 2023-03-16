@@ -20,8 +20,8 @@ import { parseUsersData } from "../usersTable/utils";
 
 export const AdminWrapper = () => {
 
-    const openNotification = (content) => {
-        notification.error({
+    const openNotification = (type, content) => {
+        notification[type]({
           message: "Error",
           description: content,
         });
@@ -38,7 +38,7 @@ export const AdminWrapper = () => {
                 const parsedData = parseUsersData(data);
                 setUsers(parsedData);
             } else {
-                openNotification(error || "Error happened, please try again later.");
+                openNotification("error", error || "Error happened, please try again later.");
             }
         })
     }
@@ -48,7 +48,7 @@ export const AdminWrapper = () => {
            if (data.success) {
                 getUsers();
             } else {
-                openNotification(data.error || "Error happened, please try again later.");
+                openNotification("error", data.error || "Error happened, please try again later.");
             }
         });
         setShowForm(false);
@@ -60,7 +60,7 @@ export const AdminWrapper = () => {
                 const newData = users.filter((item) => item.email !== email);
                 setUsers(newData);
             } else {
-                openNotification(data.error || "Error happened, please try again later.");
+                openNotification("error", data.error || "Error happened, please try again later.");
             }
         });
     };
@@ -70,16 +70,14 @@ export const AdminWrapper = () => {
             if (data.success) {
                 getUsers();
             } else {
-                openNotification(data.error || "Error happened, please try again later.");
+                openNotification("error", data.error || "Error happened, please try again later.");
             }
         });
     }
 
     const resetPassword = ({email}) => {
         resetPasswordRequest(email, data => {
-            if (!data.success) {
-                openNotification(data.error || "Error happened, please try again later.");
-            }
+            openNotification(data.success ? "success" :"error", data.message || "Error happened, please try again later.");
         })
     }
 
@@ -99,7 +97,7 @@ export const AdminWrapper = () => {
         
                 setUsers(newData);
             } else {
-                openNotification(data.error || "Error happened, please try again later.");
+                openNotification("error", data.error || "Error happened, please try again later.");
             }
         });
     }

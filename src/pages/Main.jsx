@@ -2,8 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import { FilterPanel } from "../components/table/components/FilterPanel";
 import {OpportunityDrawer} from "../components/opportunity";
-import { LoginWindow } from '../components/LoginWindow';
-
 
 const StyledMain = styled.div`
   position: relative;
@@ -16,13 +14,12 @@ export const Main = ({
     isPopular,
     setPropFeedView,
     setPopularFeedView,
-    showAll,
-    user,
-    setUser
+    showAll
 }) => {
 
-    console.log("MAINL ", user);
-    
+    console.log("RENDER MAIIN ");
+
+
     return <StyledMain>
         <FilterPanel
             isOpenFilter={isOpenFilter}

@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {SwitcherContainer, SwitcherInput, SwitcherInputContainer, SwitcherLabel} from "./styles";
+import { useCurrentUser } from "../../shared/context/UserProvider";
 
 export const Switcher = ({
     leftText,
@@ -10,13 +11,13 @@ export const Switcher = ({
     initialValue,
     onUpdate,
     isProp,
-    isPopular,
-    user
+    isPopular
 }) => {
     const [selectedValue, setSelectedValue] = useState(initialValue);
+    const { currentUser } = useCurrentUser();
 
     const checkHandler = e => {
-        if (!user) return;
+        if (!currentUser) return;
         setSelectedValue(e.target.value);
         onUpdate && onUpdate(e.target.value)
     };
@@ -26,7 +27,7 @@ export const Switcher = ({
             <SwitcherInput
                 type="radio"
                 id={leftValue}
-                disabled={!(isProp || isPopular) || !user}
+                disabled={!(isProp || isPopular) || !currentUser}
                 value={leftValue}
                 name={name}
                 onChange={checkHandler}
@@ -38,7 +39,7 @@ export const Switcher = ({
                 type="radio"
                 id={rightValue}
                 value={rightValue}
-                disabled={!(isProp || isPopular) || !user}
+                disabled={!(isProp || isPopular) || !currentUser}
                 name={name}
                 onChange={checkHandler}
                 checked={selectedValue === rightValue}/>

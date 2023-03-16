@@ -9,17 +9,18 @@ import {
 import { Switcher } from "../Switcher/Switcher";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { HeaderMenu } from "../HeaderMenu";
+import { useCurrentUser } from "../../shared/context/UserProvider";
 
 export const Header = ({
     openFilter,
     isProp,
     isPopular,
-    setShowAll,
-    user
+    setShowAll
 }) => {
 
+    const { currentUser } = useCurrentUser();
     const showFilter = () => {
-        if (!user) return;
+        if (!currentUser) return;
         openFilter(true);
     };
 
@@ -43,9 +44,8 @@ export const Header = ({
                     isProp={isProp}
                     isPopular={isPopular}
                     onUpdate={switchHandler}
-                    user={user}
                 />
-                <FilterButton onClick={showFilter} disabled={!user}>
+                <FilterButton onClick={showFilter} disabled={!currentUser}>
                     <FilterImage />
                 </FilterButton>
                 

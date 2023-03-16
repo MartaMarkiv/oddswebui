@@ -9,11 +9,11 @@ import {
 export const ActionBlock = ({title, type, action, data}) => {
     let ActionIcon = (<span></span>);
     switch (type) {
-        case "active":
-            ActionIcon = (<LockOutlined className="userIcon"/>)
+        case "unblocked":
+            ActionIcon = (<LockOutlined className="userIcon" title="Block"/>)
             break;
-        case "inactive":
-            ActionIcon = (<UnlockOutlined className="userIcon"/>)
+        case "blocked":
+            ActionIcon = (<UnlockOutlined className="userIcon" title="Unblock"/>)
             break;
         case "reset":
             ActionIcon = (<InteractionOutlined className="userIcon"/>)

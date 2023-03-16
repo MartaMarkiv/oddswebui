@@ -1,34 +1,34 @@
 import { Menu } from "antd";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 import { logoutRequest } from "../../api/userRequests";
-import Cookies from "universal-cookie";
 import { useCurrentUser } from "../../shared/context/UserProvider";
 
 const items = [
     {
-      label: <a href="/admin">Admin</a>,
-      key: "0",
+      label: <NavLink to="/admin">Admin</NavLink>,
+      key: 0,
     },
     {
       label: <div>Logout</div>,
-      key: "1"
+      key: 1
     }
   ];
 
 export const Navigation = () => {
   const navigate = useNavigate();
-  const cookies = new Cookies();
   
-  const user = useCurrentUser();
-  console.log("USER: ", user);
+  const { currentUser, setCurrentUser } = useCurrentUser();
+  console.log("USER: ", currentUser);
 
   const clickMenu = ({ key }) => {
-    console.log(key);
-    if (key === 1) {
-      logoutRequest("", data => {
+    if (key === "1" && currentUser) {
+      console.log("before lohout");
+      logoutRequest(currentUser, data => {
         if (data.success) {
+          console.log("DELETE COOKIE");
+          document.cookie = "userToken=;";
+          setCurrentUser(null);
           navigate("/", { replace: true});
-          cookies.remove("token");
         }
       });
     }

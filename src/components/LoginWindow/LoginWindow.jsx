@@ -6,11 +6,12 @@ import { Title } from "../typography/Title/Title";
 import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
 import opportunityData from "../../opportunity_data.json";
 import { resetPasswordRequest, loginRequest } from "../../api/userRequests";
+import { useCurrentUser } from "../../shared/context/UserProvider";
 import Cookies from 'universal-cookie';
- 
 const cookies = new Cookies();
 
 export const LoginWindow = ({ isOpen, saveUser }) => {
+    const cookies = new Cookies();
 
     const [isReset, setIsReset] = useState(false);
     const [isSentEmail, setIsSetEmail] = useState(false);
@@ -35,10 +36,17 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
 
     const onLogin = ({email, password}) => {
         loginRequest(email, password, ipAddress, data => {
+            console.log("onLogin");
             console.log(data);
             if (data.success) {
                 saveUser(data.token);
-                cookies.set('token', data.token);
+                console.log("SAVE COOKIE");
+                // cookies.set('userToken', data.token);
+                // localStorage.setItem("userToken", data.token);
+                cookies.set('userBenderToken', data.token, { path: '/' });
+                document.cookie = `userToken=${data.token};path=/bender;`;
+                console.log(document.cookie);
+
             } else {
                 notification.error({
                     message: "Error",

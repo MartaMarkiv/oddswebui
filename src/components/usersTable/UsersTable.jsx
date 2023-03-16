@@ -18,6 +18,9 @@ export const UsersTable = ({
 	console.log(users);
 	const [data, setData] = useState(null);
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
+	const [titleConfirm, setTitleConfirm] = useState("");
+	const [typeConfirm, setTypeConfirm] = useState("");
+	const [textConfirm, setTextConfirm] = useState("");
 
 	const actionRenderer = (title, type, handler, data) => (<ActionBlock
 		title={title}
@@ -29,7 +32,16 @@ export const UsersTable = ({
 	const sessionRenderer = (data) => (<SessionWrap>{data}</SessionWrap>);
 
 	const confirmAction = () => {
-		deleteUser(data);
+		switch (typeConfirm) {
+			case "delete":
+				deleteUser(data);
+				break;
+			case "blocking":
+				toggleBlockStatus(data);
+				break;
+			default:
+				break;
+		}
 		setData(null);
 		setIsOpenConfirm(false);
 	}
@@ -37,22 +49,38 @@ export const UsersTable = ({
 	const cancelAction = () => {
 		setData(null);
 		setIsOpenConfirm(false);
+		setTypeConfirm("");
+		setTitleConfirm("");
+		setTextConfirm("");
 	}
 
 	const handleDelete = (user) => {
 		setData(user);
+		setTitleConfirm("Are you sure you want to delete user?");
+		setTypeConfirm("delete");
+		setTextConfirm("Delete");
 		setIsOpenConfirm(true);
 	};
 
 	const handleSave = (record) => {
 		updateRule(record);
-      };
+    };
+
+	const handleBlocking = (statusData) => {
+		console.log("handleBlocking: ", statusData);
+		const { value } = statusData;
+		setData(statusData);
+		setTypeConfirm("blocking");
+		setTextConfirm(value ? "Block" : "Unblock")
+		setTitleConfirm(`Are you sure you want to ${value ? "block" : "unblock"} user?`);
+		setIsOpenConfirm(true);
+	}
 
 
 	const columns = generateColumns({
 		actionRenderer,
 		sessionRenderer,
-		toggleStatusHandler: toggleBlockStatus,
+		toggleStatusHandler: handleBlocking,
 		saveRuleHandler: handleSave,
 		resetHandler: resetPassword,
 		deleteHandler: handleDelete
@@ -81,10 +109,11 @@ export const UsersTable = ({
 			<EmptyData>There is no users data yet.</EmptyData>
 		}
 		<ConfirmWindow
-			content={"Are you sure you want to delete user?"}
+			content={titleConfirm}
 			isOpen={isOpenConfirm}
 			handleCancel={cancelAction}
 			handleOk={confirmAction}
+			okText={textConfirm}
 		/>
     </StyledBettingTable>
 };

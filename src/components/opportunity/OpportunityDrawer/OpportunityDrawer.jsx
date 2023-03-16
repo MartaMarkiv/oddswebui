@@ -6,9 +6,8 @@ import { EmptyView } from "../../EmptyView/EmptyView";
 import { OPPORTUNITY_POPULAR, OPPORTUNITY_PROP } from "../../../constants";
 import { parser, arbitrageFilter } from "../utils";
 import { OpportunityWrapper } from "../OpportunityWrapper";
+import { useCurrentUser } from "../../../shared/context/UserProvider";
 
-const clientPopular = new WebSocket(OPPORTUNITY_POPULAR);
-const clientProp = new WebSocket(OPPORTUNITY_PROP);
 
 export const OpportunityDrawer = ({
     isProp,
@@ -16,8 +15,15 @@ export const OpportunityDrawer = ({
     showAll
 }) => {
 
+
+    console.log("WRAPPER RENDER");
     const [collectionPopular, setCollectionPopular] = useState([]);
     const [collectionProp, setCollectionProp] = useState([]);
+
+    const { currentUser } = useCurrentUser();
+    const clientPopular = new WebSocket(`${OPPORTUNITY_POPULAR}?token=${currentUser}`);
+    const clientProp = new WebSocket(`${OPPORTUNITY_PROP}?token=${currentUser}`);
+    console.log("CREAE SOCKET CONNECTION");
 
     const [loading, setLoading] = useState(true);
 
@@ -27,6 +33,7 @@ export const OpportunityDrawer = ({
             setLoading(false);
            
             const json = JSON.parse(event.data);
+            console.log(json);
             
             const allOpportunities = json.length ? json.map(item => item.games).flat() : [];
 

@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import { Header } from "./components/Header";
 import { LoginWindow } from "./components/LoginWindow";
 import styled from "styled-components";
-import Cookies from 'universal-cookie';
 import { light, dark } from "./Theme.styled";
 import { ThemeProvider } from "styled-components";
 import { createContext, useEffect, useState } from "react";
@@ -13,6 +12,8 @@ import { UserProvider } from "./shared/context/UserProvider";
 import { QueryParamProvider } from "use-query-params";
 import { ReactRouter6Adapter } from "use-query-params/adapters/react-router-6";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const AppStyled = styled.div`
   padding: 0 40px;
@@ -37,21 +38,18 @@ const themesMap = {
     dark
 };
 
-const cookies = new Cookies();
-
 export const ThemePreferenceContext = createContext();
-
 function App() {
+    
+    const testCookie = cookies.get('userBenderToken');
+    console.log("********* ", testCookie);
 
-    const token = cookies.get('token');
-    console.log("TOKENL ", token);
+    console.log(document.cookie);
 
     const initialTheme = localStorage.getItem("theme") || "light";
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
     //Filters
-    const [selectedKey, setSelectedKey] = useState(null);
-    const [opportunities, setOpportunities] = useState(null);
     const [showAllList, setShowAllList] = useState(true);
 
     const [isOpenFilter, setIsOpenFilter] = useState(false);
@@ -63,7 +61,7 @@ function App() {
     const theme = themesMap[currentTheme];
     const [drawerOpened, setDrawerOpened] = useState(false);
 
-    const [user, setUser] = useState(token);
+    const [user, setUser] = useState(testCookie);
 
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
@@ -99,7 +97,6 @@ function App() {
                                 isProp={propVisible}
                                 isPopular={popularVisible}
                                 setShowAll={setShowAllList}
-                                user={user}
                             />
                             <AppBody>
                                 <QueryParamProvider adapter={ReactRouter6Adapter}>
@@ -114,16 +111,15 @@ function App() {
                                                 setPropFeedView={changePropFeedVisibility}
                                                 setPopularFeedView={changePopularFeedVisibility}
                                                 showAll={showAllList}
-                                                user={user}
-                                                setUser={setUser}
                                             />:
                                             <LoginWindow
                                                 isOpen={!user}
                                                 saveUser={setUser}
                                             />
                                         }/>
-                                        <Route path="/account/password-reset/:token" element={
-                                            <ResetPasswordPage />}
+                                        <Route
+                                            path="/account/password-reset/:id"
+                                            element={<ResetPasswordPage />}
                                         />
 
                                         <Route path="/admin" element=

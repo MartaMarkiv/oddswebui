@@ -42,9 +42,9 @@ export const deleteUserRequest = (email, callback) => {
 export const resetPasswordRequest = (email, callback) => {
     client.post(`/send_email`, { email })
     .then(res => {
-        callback({success: true});
+        callback({success: true, message: res.data});
     }).catch(err => {
-        callback({success: false, error: err.message || err});
+        callback({success: false, message: err.message || err});
     })
 };
 
