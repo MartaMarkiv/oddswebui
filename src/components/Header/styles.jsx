@@ -65,6 +65,10 @@ const FilterButton = styled.button`
       stroke: ${({theme}) => theme.colors.headerControls.starStrokeHover};
     } 
   }
+
+  &:disabled {
+    cursor: default;
+  }
 `;
 
 const FilterImage = styled(FilterIcon)`

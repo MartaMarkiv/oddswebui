@@ -30,14 +30,25 @@ const FormDrawer = styled(Form)`
         border-color: ${({theme}) => theme.colors.textSuccess};
     }
 
-    input: focus {
-        border-color: ${({theme}) => theme.colors.textSuccess};
-        box-shadow: none;
+    .ant-input-affix-wrapper-status-error {
+        background-color: ${({theme}) => theme.colors.headerControls.bg} !important;
+    }
+
+    input {
+        background-color: ${({theme}) => theme.colors.headerControls.bg};
+        &:focus {
+            border-color: ${({theme}) => theme.colors.textSuccess};
+            box-shadow: none;
+        }
     }
 
     .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
         border-color: ${({theme}) => theme.colors.textSuccess};
         box-shadow: none;
+    }
+
+    .ant-input-password-icon.anticon {
+        color: ${({theme}) => theme.colors.textPrimary};
     }
 
     .ant-input-affix-wrapper-focused {

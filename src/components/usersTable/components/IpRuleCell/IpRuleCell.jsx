@@ -16,29 +16,27 @@ export const IpRuleCell = ({
     const [form] = Form.useForm();
 
     useEffect(() => {
-      if (editing) {
-        inputRef.current.focus();
-      }
+		if (editing) {
+			inputRef.current.focus();
+		}
     }, [editing]);
 
     const toggleEdit = () => {
-      setEditing(!editing);
-      form.setFieldsValue({
-        ipRule: record["ipRule"],
-      });
+		setEditing(!editing);
+		form.setFieldsValue({
+			ipRule: record["ipRule"],
+		});
     };
 
     const save = async () => {
-      try {
         const values = await form.validateFields();
         toggleEdit();
+        const { ipRule } = values;
+        if (!ipRule || ipRule === "-") return;
         handleSave({
           ...record,
           ...values,
         });
-      } catch (errInfo) {
-        console.log('Save failed:', errInfo);
-      }
     };
 
     let childNode = children;

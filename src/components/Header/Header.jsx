@@ -50,7 +50,7 @@ export const Header = ({
                 </FilterButton>
                 
                 <ThemeSwitcher />
-                <HeaderMenu></HeaderMenu>
+                { currentUser && <HeaderMenu></HeaderMenu>}
             </HeaderControlPanel>
         </HeaderStyled>
     )

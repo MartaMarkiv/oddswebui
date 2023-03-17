@@ -4,6 +4,7 @@ import { StyledBettingTable, SessionWrap, EmptyData } from "./styles";
 import { IpRuleCell } from "./components/IpRuleCell";
 import { TableRow } from "./components/TableRow/TableRow";
 import { ActionBlock } from "./components/ActionBlock";
+import { TimerCell } from "./components/TimerCell";
 import { ConfirmWindow } from "../ConfirmWindow";
 import { generateColumns } from "./utils/generateColumns";
 
@@ -15,7 +16,6 @@ export const UsersTable = ({
 	updateRule
 }) => {
 
-	console.log(users);
 	const [data, setData] = useState(null);
 	const [isOpenConfirm, setIsOpenConfirm] = useState(false);
 	const [titleConfirm, setTitleConfirm] = useState("");
@@ -29,7 +29,7 @@ export const UsersTable = ({
 		data={data}
 	/>);
 
-	const sessionRenderer = (data) => (<SessionWrap>{data}</SessionWrap>);
+	const sessionRenderer = (data) => (data ? <TimerCell  sessionTime={data}/> : <SessionWrap>-</SessionWrap>);
 
 	const confirmAction = () => {
 		switch (typeConfirm) {
@@ -67,7 +67,6 @@ export const UsersTable = ({
     };
 
 	const handleBlocking = (statusData) => {
-		console.log("handleBlocking: ", statusData);
 		const { value } = statusData;
 		setData(statusData);
 		setTypeConfirm("blocking");

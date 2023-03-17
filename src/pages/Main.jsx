@@ -17,9 +17,6 @@ export const Main = ({
     showAll
 }) => {
 
-    console.log("RENDER MAIIN ");
-
-
     return <StyledMain>
         <FilterPanel
             isOpenFilter={isOpenFilter}

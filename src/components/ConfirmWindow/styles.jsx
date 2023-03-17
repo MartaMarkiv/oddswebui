@@ -4,6 +4,7 @@ import { Modal } from "antd";
 const ConfirmWrapper = styled(Modal)`
     .ant-modal-content {
         padding: 30px 0;
+        background: ${({theme}) => theme.colors.headerControls.bg};
     }
     .ant-modal-footer {
         border: none;
@@ -12,16 +13,16 @@ const ConfirmWrapper = styled(Modal)`
         button {
             width: 100px;
             color: ${({theme}) => theme.colors.textPrimary};
-            background: ${({theme}) => theme.colors.drawer.bg};
             border: none;
             box-shadow: none;
+            background:  ${({theme}) => theme.colors.headerControls.bg};
           
-            &&:hover {
+            &:hover {
               color: ${({theme}) => theme.colors.drawer.bg};
               background: ${({theme}) => theme.colors.textPrimary};
             }
           
-            &&:focus {
+            &:focus {
               color: ${({theme}) => theme.colors.textPrimary};
               background: ${({theme}) => theme.colors.drawer.bg};
             }

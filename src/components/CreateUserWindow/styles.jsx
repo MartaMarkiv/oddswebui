@@ -14,12 +14,18 @@ const CreateUserForm = styled(Modal)`
 
     .ant-modal-header {
         border: none;
+        background: ${({theme}) => theme.colors.headerControls.bg};
     }
 
     .ant-modal-content {
         padding: 40px 0;
+        background: ${({theme}) => theme.colors.headerControls.bg};
     }
 
+    input {
+        background: ${({theme}) => theme.colors.headerControls.bg};
+    }
+    
     input: hover {
         border-color: ${({theme}) => theme.colors.textSuccess};
     }

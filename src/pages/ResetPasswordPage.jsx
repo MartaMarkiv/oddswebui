@@ -25,11 +25,7 @@ export const ResetPasswordPage = ({}) => {
     const [ipAddress, setIpAddress] = useState("");
 
     const onReset = ({password}) => {
-        console.log("On reset");
-        console.log(password);
-        console.log(ipAddress);
         updatePasswordRequest(password, ipAddress, id, data => {
-            console.log(data);
             if (data.success) {
                 navigate("/", { replace: true});
             }
@@ -40,11 +36,9 @@ export const ResetPasswordPage = ({}) => {
         const res = await axios.get('https://api.db-ip.com/v2/free/self');
         const { data } = res;
         setIpAddress(data.ipAddress);
-        console.log(data.ipAddress);
       }
       
       useEffect( () => {
-        console.log("get ip");
         getData()
       }, [])
 

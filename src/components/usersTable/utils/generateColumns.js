@@ -29,8 +29,8 @@ export const generateColumns = ({
 			key: "status",
 			render: (_, {email, status}) => {
 				return status ?
-					actionRenderer("Bnblocked", "blocked", toggleStatusHandler, {email, value: 0}):
-					actionRenderer("Unlocked", "unblocked", toggleStatusHandler, {email, value: 1})
+					actionRenderer("Blocked", "blocked", toggleStatusHandler, {email, value: 0}):
+					actionRenderer("Unblocked", "unblocked", toggleStatusHandler, {email, value: 1})
           }
         },
         {
@@ -57,7 +57,7 @@ export const generateColumns = ({
 			title: "Session time",
 			dataIndex: "session",
 			key: "session",
-			render: (_, { session }) => sessionRenderer(session || "-"),
+			render: (_, { session }) => sessionRenderer(session),
         },
         {
 			title: "Reset password",

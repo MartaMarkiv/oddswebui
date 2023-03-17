@@ -6,22 +6,18 @@ import { Title } from "../typography/Title/Title";
 import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
 import opportunityData from "../../opportunity_data.json";
 import { resetPasswordRequest, loginRequest } from "../../api/userRequests";
-import { useCurrentUser } from "../../shared/context/UserProvider";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 export const LoginWindow = ({ isOpen, saveUser }) => {
-    const cookies = new Cookies();
 
     const [isReset, setIsReset] = useState(false);
     const [isSentEmail, setIsSetEmail] = useState(false);
     const [ipAddress, setIpAddress] = useState(null);
 
     const reset = ({email}) => {
-        console.log(email);
         if (email) {
             resetPasswordRequest(email, data => {
-                console.log(data);
                 setIsSetEmail(true);
             })
         } else {
@@ -36,16 +32,9 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
 
     const onLogin = ({email, password}) => {
         loginRequest(email, password, ipAddress, data => {
-            console.log("onLogin");
-            console.log(data);
             if (data.success) {
                 saveUser(data.token);
-                console.log("SAVE COOKIE");
-                // cookies.set('userToken', data.token);
-                // localStorage.setItem("userToken", data.token);
                 cookies.set('userBenderToken', data.token, { path: '/' });
-                document.cookie = `userToken=${data.token};path=/bender;`;
-                console.log(document.cookie);
 
             } else {
                 notification.error({
@@ -60,11 +49,9 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
         const res = await axios.get('https://api.db-ip.com/v2/free/self');
         const { data } = res;
         setIpAddress(data.ipAddress);
-        console.log(data.ipAddress);
     }
     
     useEffect( () => {
-        console.log("get ip");
         getData()
     }, [])
       

@@ -2,6 +2,8 @@ import { Menu } from "antd";
 import { useNavigate, NavLink } from "react-router-dom";
 import { logoutRequest } from "../../api/userRequests";
 import { useCurrentUser } from "../../shared/context/UserProvider";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 const items = [
     {
@@ -18,15 +20,12 @@ export const Navigation = () => {
   const navigate = useNavigate();
   
   const { currentUser, setCurrentUser } = useCurrentUser();
-  console.log("USER: ", currentUser);
 
   const clickMenu = ({ key }) => {
     if (key === "1" && currentUser) {
-      console.log("before lohout");
       logoutRequest(currentUser, data => {
         if (data.success) {
-          console.log("DELETE COOKIE");
-          document.cookie = "userToken=;";
+          cookies.remove("userBenderToken", { path: '/' });
           setCurrentUser(null);
           navigate("/", { replace: true});
         }

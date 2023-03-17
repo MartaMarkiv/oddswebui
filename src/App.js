@@ -42,16 +42,12 @@ export const ThemePreferenceContext = createContext();
 function App() {
     
     const testCookie = cookies.get('userBenderToken');
-    console.log("********* ", testCookie);
-
-    console.log(document.cookie);
 
     const initialTheme = localStorage.getItem("theme") || "light";
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
 
     //Filters
     const [showAllList, setShowAllList] = useState(true);
-
     const [isOpenFilter, setIsOpenFilter] = useState(false);
 
     //View settings

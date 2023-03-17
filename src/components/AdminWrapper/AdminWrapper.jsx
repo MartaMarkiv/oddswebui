@@ -22,7 +22,7 @@ export const AdminWrapper = () => {
 
     const openNotification = (type, content) => {
         notification[type]({
-          message: "Error",
+          message: type.charAt(0).toUpperCase() + type.slice(1),
           description: content,
         });
     };

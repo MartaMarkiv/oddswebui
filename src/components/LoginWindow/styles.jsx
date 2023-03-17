@@ -15,10 +15,17 @@ const LoginWrapper = styled(Modal)`
 
     .ant-modal-header {
         border: none;
+        background: ${({theme}) => theme.colors.headerControls.bg};
     }
 
     .ant-modal-content {
         padding: 40px 0;
+        background: ${({theme}) => theme.colors.headerControls.bg};
+    }
+
+    input {
+        color: ${({theme}) => theme.colors.textPrimary};
+        background: ${({theme}) => theme.colors.headerControls.bg};
     }
 
     input: hover {
@@ -30,9 +37,20 @@ const LoginWrapper = styled(Modal)`
         box-shadow: none;
     }
 
-    .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
-        border-color: ${({theme}) => theme.colors.textSuccess};
-        box-shadow: none;
+    .ant-input-status-error {
+        background-color: ${({theme}) => theme.colors.headerControls.bg} !important;
+    }
+
+    .ant-input-affix-wrapper {
+        background: ${({theme}) => theme.colors.headerControls.bg};
+        &:hover {
+            border-color: ${({theme}) => theme.colors.textSuccess};
+            box-shadow: none;
+        }
+    }
+
+    .ant-input-password-icon.anticon {
+        color: ${({theme}) => theme.colors.textPrimary};
     }
 
     .ant-input-affix-wrapper-focused {
