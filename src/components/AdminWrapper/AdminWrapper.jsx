@@ -79,7 +79,7 @@ export const AdminWrapper = () => {
     }
 
     const resetPassword = ({email}) => {
-        resetPasswordRequest(email, userToken, data => {
+        resetPasswordRequest(email, data => {
             openNotification(data.success ? "success" :"error", data.message || "Error happened, please try again later.");
         })
     }

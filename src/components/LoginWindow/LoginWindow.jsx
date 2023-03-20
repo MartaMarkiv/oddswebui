@@ -14,9 +14,9 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
     const [isSentEmail, setIsSetEmail] = useState(false);
     const [loginError, setLoginError] = useState(null);
 
-    const reset = ({email}) => {
-        if (email) {
-            resetPasswordRequest(email, data => {
+    const reset = ({resetEmail}) => {
+        if (resetEmail) {
+            resetPasswordRequest(resetEmail, data => {
                 setIsSetEmail(true);
             })
         } else {

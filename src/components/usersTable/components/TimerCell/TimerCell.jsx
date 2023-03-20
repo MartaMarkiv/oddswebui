@@ -9,7 +9,7 @@ export const TimerCell = ({sessionTime}) => {
     const getTime = () => {
         const time = Date.now() - sessionTime;
     
-        setHours(Math.floor((time / (1000 * 60 * 60)) % 24));
+        setHours(Math.floor(time / (1000 * 60 * 60 * 24)));
         setMinutes(Math.floor((time / 1000 / 60) % 60));
     };
 

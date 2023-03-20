@@ -39,8 +39,8 @@ export const deleteUserRequest = (email, token, callback) => {
     })
 };
 
-export const resetPasswordRequest = (email, token, callback) => {
-    client.post(`/send_email`, { email, token })
+export const resetPasswordRequest = (email, callback) => {
+    client.post(`/send_email`, { email })
     .then(res => {
         callback({success: true, message: res.data});
     }).catch(err => {
