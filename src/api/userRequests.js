@@ -53,7 +53,6 @@ export const updatePasswordRequest = (password, token, callback) => {
     .then(res => {
         callback({success: true});
     }).catch(err => {
-        console.log(err);
         callback({success: false, error: err.message || err});
     })
 };
@@ -61,7 +60,6 @@ export const updatePasswordRequest = (password, token, callback) => {
 export const loginRequest = (email, password, callback) => {
     client.post(`/login`, { email, password })
     .then(res => {
-        console.log(res);
         callback(res.data);
     }).catch(err => {
         callback({success: false, error: err.message || err});
@@ -71,7 +69,6 @@ export const loginRequest = (email, password, callback) => {
 export const logoutRequest = (token, callback) => {
     client.post(`/logout`, { token })
     .then(res => {
-        console.log(res);
         callback(res.data);
     }).catch(err => {
         callback({success: false, error: err.message || err});

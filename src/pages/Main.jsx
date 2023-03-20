@@ -16,7 +16,6 @@ export const Main = ({
     setPopularFeedView,
     showAll
 }) => {
-
     return <StyledMain>
         <FilterPanel
             isOpenFilter={isOpenFilter}

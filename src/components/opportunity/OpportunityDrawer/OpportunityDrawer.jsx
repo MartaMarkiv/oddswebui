@@ -32,8 +32,6 @@ export const OpportunityDrawer = ({
            
             const json = JSON.parse(event.data);
             if (!json.success && json.message && userToken) {
-                console.log("BEFORE");
-                console.log(userToken);
                 openNotification(json.message);
             }
             
@@ -86,7 +84,7 @@ export const OpportunityDrawer = ({
     const listPopular = showAll ? collectionPopular : arbitrageFilter(collectionPopular);
     const listProp = showAll ? collectionProp : arbitrageFilter(collectionProp);
 
-    return (          
+    return (
         <DrawerStyled>
             {
                 loading ? 
