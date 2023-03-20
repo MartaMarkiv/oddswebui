@@ -4,18 +4,19 @@ import { Modal } from "antd";
 const ConfirmWrapper = styled(Modal)`
     .ant-modal-content {
         padding: 30px 0;
-        background: ${({theme}) => theme.colors.headerControls.bg};
+        background: ${({theme}) => theme.colors.modalWindow.bg};
     }
     .ant-modal-footer {
         border: none;
         text-align: center;
 
         button {
-            width: 100px;
+            background:  ${({theme}) => theme.colors.headerControls.bg};
             color: ${({theme}) => theme.colors.textPrimary};
+            width: 100px;
             border: none;
             box-shadow: none;
-            background:  ${({theme}) => theme.colors.headerControls.bg};
+            border-radius: 4px;
           
             &:hover {
               color: ${({theme}) => theme.colors.drawer.bg};

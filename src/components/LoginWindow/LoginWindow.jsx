@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react";
-import { Form, Input, notification } from "antd";
-import axios from "axios";
-import { LoginWrapper, SubmitButton, ResetLink, SubTitle } from "./styles";
-import { Title } from "../typography/Title/Title";
+import { useState } from "react";
+import { Form, Input } from "antd";
+import { SubmitButton, ResetLink, SubTitle, ErrorBlock } from "./styles";
 import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
 import opportunityData from "../../opportunity_data.json";
 import { resetPasswordRequest, loginRequest } from "../../api/userRequests";
 import Cookies from 'universal-cookie';
+import { ModalWindow } from "../ModalWindow";
 const cookies = new Cookies();
 
 export const LoginWindow = ({ isOpen, saveUser }) => {
 
     const [isReset, setIsReset] = useState(false);
     const [isSentEmail, setIsSetEmail] = useState(false);
-    const [ipAddress, setIpAddress] = useState(null);
+    const [loginError, setLoginError] = useState(null);
 
     const reset = ({email}) => {
         if (email) {
@@ -30,40 +29,37 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
         setIsReset(true);
     }
 
-    const onLogin = ({email, password}) => {
-        loginRequest(email, password, ipAddress, data => {
+    const onLogin = ({loginEmail: email, password}) => {
+        loginRequest(email, password, data => {
             if (data.success) {
-                saveUser(data.token);
+                saveUser({token: data.token, role: data.role});
                 cookies.set('userBenderToken', data.token, { path: '/' });
+                cookies.set('userBenderRole', data.role, { path: '/' });
 
             } else {
-                notification.error({
-                    message: "Error",
-                    description: data.message || data.error,
-                });
+                setLoginError(data.message || data.error);
+                setTimeout(() => setLoginError(null), 3000);
             }
         });
     };
-
-    const getData = async () => {
-        const res = await axios.get('https://api.db-ip.com/v2/free/self');
-        const { data } = res;
-        setIpAddress(data.ipAddress);
-    }
-    
-    useEffect( () => {
-        getData()
-    }, [])
       
     return <>
         <OpportunityWrapper isPopular={true} isProp={true} listPopular={opportunityData} listProp={opportunityData}/>
-        <LoginWrapper
-            title={<Title>{isReset ? "Reset your password?" : "Sign in to OddsBender"}</Title>}
-            open={isOpen}
-            centered
-            closable={false}
-            footer={null}
-        >
+            <ModalWindow
+                title={isReset ? "Reset your password?" : "Sign in to OddsBender"}
+                isOpen={isOpen}
+                isClosable={false}
+            >
+                {
+                    isReset ?
+                        isSentEmail ?
+                            <>
+                                <SubTitle>We have sent instruction to email you entered.</SubTitle>
+                                <SubTitle>You will receive instructions in case you entered a correct email address.</SubTitle>
+                            </>:
+                            <SubTitle>Enter the email to change your password.</SubTitle>:
+                        null
+                }
             {
                 isReset ? 
                 <Form
@@ -77,9 +73,6 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
                     {
                         isSentEmail ? 
                         <>
-                            <Form.Item className="subTitle">
-                                <SubTitle>Enter the email to change your password.</SubTitle>
-                            </Form.Item>
                             <Form.Item>
                                 <SubmitButton type="primary" htmlType="submit">
                                     Close
@@ -87,11 +80,8 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
                             </Form.Item>
                         </>:
                         <>
-                            <Form.Item className="subTitle">
-                                <SubTitle>Enter the email to change your password.</SubTitle>
-                            </Form.Item>
                             <Form.Item
-                                name="email"
+                                name="resetEmail"
                                 rules={[{ required: true, message: "Please input your email!" }]}
                             >
                                 <Input 
@@ -120,7 +110,7 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
                     autoComplete="off"
                 >
                     <Form.Item
-                        name="email"
+                        name="loginEmail"
                         rules={[{ required: true, message: "Please input your email!" }]}
                     >
                         <Input 
@@ -152,8 +142,9 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
                             Sign in
                         </SubmitButton>
                     </Form.Item>
+                    <ErrorBlock>{loginError}</ErrorBlock>
                 </Form>
             }
-    </LoginWrapper>
+    </ModalWindow>
   </>
 }

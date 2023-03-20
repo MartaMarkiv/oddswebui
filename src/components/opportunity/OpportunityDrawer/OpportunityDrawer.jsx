@@ -18,9 +18,10 @@ export const OpportunityDrawer = ({
     const [collectionPopular, setCollectionPopular] = useState([]);
     const [collectionProp, setCollectionProp] = useState([]);
 
-    const { currentUser } = useCurrentUser();
-    const clientPopular = new WebSocket(`${OPPORTUNITY_POPULAR}?token=${currentUser}`);
-    const clientProp = new WebSocket(`${OPPORTUNITY_PROP}?token=${currentUser}`);
+    const { currentUser: { token: userToken } } = useCurrentUser();
+
+    const clientPopular = new WebSocket(`${OPPORTUNITY_POPULAR}?token=${userToken}`);
+    const clientProp = new WebSocket(`${OPPORTUNITY_PROP}?token=${userToken}`);
 
     const [loading, setLoading] = useState(true);
 
@@ -30,7 +31,9 @@ export const OpportunityDrawer = ({
             setLoading(false);
            
             const json = JSON.parse(event.data);
-            if (!json.success && json.message) {
+            if (!json.success && json.message && userToken) {
+                console.log("BEFORE");
+                console.log(userToken);
                 openNotification(json.message);
             }
             

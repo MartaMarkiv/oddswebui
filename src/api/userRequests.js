@@ -3,15 +3,15 @@ import { client } from "./api";
 export const createUserRequest = (data, callback) => {
     client.post(`/user`, data)
         .then(res => {
-            callback({success: true});
+            callback(res.data);
         })
         .catch(err => {
-            callback({success: false, error: err.message || err});
+            callback({success: false, message: err.message || err});
         })
 };
 
-export const getUsersRequest = (callback) => {
-    client.get(`/users`)
+export const getUsersRequest = (token, callback) => {
+    client.get(`/users/${token}`)
     .then(res => {
         callback({success: true, data: res.data});
     }).catch(err => {
@@ -30,8 +30,8 @@ export const updateUserRequest = (data, callback) => {
         })
 };
 
-export const deleteUserRequest = (email, callback) => {
-    client.delete(`/user`, { data: { email }})
+export const deleteUserRequest = (email, token, callback) => {
+    client.delete(`/user`, { data: { email, token }})
     .then(res => {
         callback({success: true});
     }).catch(err => {
@@ -39,8 +39,8 @@ export const deleteUserRequest = (email, callback) => {
     })
 };
 
-export const resetPasswordRequest = (email, callback) => {
-    client.post(`/send_email`, { email })
+export const resetPasswordRequest = (email, token, callback) => {
+    client.post(`/send_email`, { email, token })
     .then(res => {
         callback({success: true, message: res.data});
     }).catch(err => {
@@ -48,8 +48,8 @@ export const resetPasswordRequest = (email, callback) => {
     })
 };
 
-export const updatePasswordRequest = (password, ip, token, callback) => {
-    client.put(`/user/${token}`, { password, ip })
+export const updatePasswordRequest = (password, token, callback) => {
+    client.put(`/user/${token}`, { password })
     .then(res => {
         callback({success: true});
     }).catch(err => {
@@ -58,8 +58,8 @@ export const updatePasswordRequest = (password, ip, token, callback) => {
     })
 };
 
-export const loginRequest = (email, password, ip, callback) => {
-    client.post(`/login`, { email, password, ip })
+export const loginRequest = (email, password, callback) => {
+    client.post(`/login`, { email, password })
     .then(res => {
         console.log(res);
         callback(res.data);

@@ -26,25 +26,22 @@ const SubmitButton = styled(Button)`
 
 const FormDrawer = styled(Form)`
     .ant-input-affix-wrapper:hover,
-    .ant-input-affix-wrapper:focus  {
-        border-color: ${({theme}) => theme.colors.textSuccess};
+    .ant-input-affix-wrapper:focus,
+    .ant-input-affix-wrapper  {
+        border-color: ${({theme}) => theme.colors.input.borderColor};
+        background-color: ${({theme}) => theme.colors.input.bg};
     }
 
     .ant-input-affix-wrapper-status-error {
-        background-color: ${({theme}) => theme.colors.headerControls.bg} !important;
+        background-color: ${({theme}) => theme.colors.input.bg} !important;
     }
 
     input {
-        background-color: ${({theme}) => theme.colors.headerControls.bg};
+        color: ${({theme}) => theme.colors.textPrimary};
+        background-color: ${({theme}) => theme.colors.input.bg};
         &:focus {
-            border-color: ${({theme}) => theme.colors.textSuccess};
-            box-shadow: none;
+            border-color: ${({theme}) => theme.colors.input.borderColor};
         }
-    }
-
-    .ant-input-affix-wrapper:not(.ant-input-affix-wrapper-disabled):hover {
-        border-color: ${({theme}) => theme.colors.textSuccess};
-        box-shadow: none;
     }
 
     .ant-input-password-icon.anticon {
@@ -52,8 +49,8 @@ const FormDrawer = styled(Form)`
     }
 
     .ant-input-affix-wrapper-focused {
-        border-color: ${({theme}) => theme.colors.textSuccess};
-        box-shadow: none;
+        border-color: ${({theme}) => theme.colors.input.borderColor};
+        box-shadow: ${({theme}) => "0 0 5px " + theme.colors.input.borderColor};
     }
 `;
 

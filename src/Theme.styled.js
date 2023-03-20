@@ -100,6 +100,15 @@ export const light = {
             arrowHover: '#FFFFFF'
         },
 
+        modalWindow: {
+            bg: '#FFFFFF'
+        },
+
+        input: {
+            bg: '#FFFFFF',
+            borderColor: '#DFE5EB'
+        },
+
         dropdown: {
             submenu: {
                 bg: '#FFFFFF',
@@ -201,6 +210,16 @@ export const dark = {
             arrow: '#90969C',
             arrowHover: '#FFFFFF',
 
+        },
+
+        modalWindow: {
+            bg: '#0C0B0E',
+            bgHover: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #2C3844',
+        },
+
+        input: {
+            bg: '#0C0B0E',
+            borderColor: '#90969C',
         },
 
         dropdown: {

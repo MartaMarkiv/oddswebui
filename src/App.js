@@ -12,6 +12,7 @@ import { UserProvider } from "./shared/context/UserProvider";
 import { QueryParamProvider } from "use-query-params";
 import { ReactRouter6Adapter } from "use-query-params/adapters/react-router-6";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
+import { PrivateRoute } from "./routes/PrivateRoute";
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -41,7 +42,8 @@ const themesMap = {
 export const ThemePreferenceContext = createContext();
 function App() {
     
-    const testCookie = cookies.get('userBenderToken');
+    const userToken = cookies.get('userBenderToken');
+    const userRole = cookies.get('userBenderRole');
 
     const initialTheme = localStorage.getItem("theme") || "light";
     const [currentTheme, setCurrentTheme] = useState(initialTheme);
@@ -57,7 +59,7 @@ function App() {
     const theme = themesMap[currentTheme];
     const [drawerOpened, setDrawerOpened] = useState(false);
 
-    const [user, setUser] = useState(testCookie);
+    const [user, setUser] = useState({token: userToken, role: userRole});
 
     const changePropFeedVisibility = (value) => {
         setPropVisible(value);
@@ -99,7 +101,7 @@ function App() {
                                     <Routes>
                                         <Route path="/" element=
                                         {
-                                            user ? <Main
+                                            user && user.token ? <Main
                                                 toggleFilter={setIsOpenFilter}
                                                 isOpenFilter={isOpenFilter}
                                                 isProp={propVisible}
@@ -109,28 +111,31 @@ function App() {
                                                 showAll={showAllList}
                                             />:
                                             <LoginWindow
-                                                isOpen={!user}
+                                                isOpen={!user || !user.token}
                                                 saveUser={setUser}
                                             />
                                         }/>
+
                                         <Route
                                             path="/account/password-reset/:id"
                                             element={<ResetPasswordPage />}
                                         />
 
-                                        <Route path="/admin" element=
-                                        {
-                                            <Admin
-                                                toggleFilter={setIsOpenFilter}
-                                                isOpenFilter={isOpenFilter}
-                                                isProp={propVisible}
-                                                isPopular={popularVisible}
-                                                setPropFeedView={changePropFeedVisibility}
-                                                setPopularFeedView={changePopularFeedVisibility}
-                                                showAll={showAllList}
-                                                setShowAll={setShowAllList}
-                                            />
-                                        }/>
+                                        <Route
+                                            path="/admin" element={
+                                                <PrivateRoute>
+                                                    <Admin
+                                                        toggleFilter={setIsOpenFilter}
+                                                        isOpenFilter={isOpenFilter}
+                                                        isProp={propVisible}
+                                                        isPopular={popularVisible}
+                                                        setPropFeedView={changePropFeedVisibility}
+                                                        setPopularFeedView={changePopularFeedVisibility}
+                                                        showAll={showAllList}
+                                                        setShowAll={setShowAllList}
+                                                    />
+                                                </PrivateRoute>
+                                            } />
                                 </Routes>
                             </QueryParamProvider>
                         </AppBody>

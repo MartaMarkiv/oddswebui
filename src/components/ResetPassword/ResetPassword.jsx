@@ -4,14 +4,17 @@ import { SubmitButton, FormDrawer } from "./styles";
 export const ResetPassword = ({ reset }) => {
 
     const passwordValidation = (rule, value, callback) => {
-        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,10}$/;
+        const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,10}$/;
         if (!value) {
             return Promise.reject({message: "Please, enter your password!"});
         }
         if (regex.test(value)) {
             return Promise.resolve();
         } else {
-            return Promise.reject({message: "Your password should be stronger."});
+            return Promise.reject({
+                message: "Passwords must have at least 8 characters and contain at least one uppercase letter, lowercase letter and number."
+            });
+                
         }
     }
       

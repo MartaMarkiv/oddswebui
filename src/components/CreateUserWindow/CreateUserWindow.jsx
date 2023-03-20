@@ -1,17 +1,14 @@
 import { Form, Input } from "antd";
-import { CreateUserForm, SubmitButton } from "./styles";
-import { Title } from "../typography/Title/Title";
+import { SubmitButton } from "./styles";
 import { CloseOutlined } from "@ant-design/icons";
-
+import { ModalWindow } from "../ModalWindow";
 
 export const CreateUserWindow = ({ isOpen, create, close }) => {
-      
-    return <CreateUserForm
-        title={<Title>Add new user</Title>}
-        open={isOpen}
-        centered
-        closable={false}
-        footer={null}
+    
+    return <ModalWindow
+        title={"Add new user"}
+        isOpen={isOpen}
+        isClosable={false}
     >
         <CloseOutlined 
             className="closeIcon"
@@ -62,5 +59,5 @@ export const CreateUserWindow = ({ isOpen, create, close }) => {
                 </SubmitButton>
             </Form.Item>
         </Form>
-  </CreateUserForm>
+  </ModalWindow>
 }

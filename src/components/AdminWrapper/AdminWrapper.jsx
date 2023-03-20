@@ -17,8 +17,11 @@ import {
     resetPasswordRequest
 } from "../../api/userRequests";
 import { parseUsersData } from "../usersTable/utils";
+import { useCurrentUser } from "../../shared/context/UserProvider";
 
 export const AdminWrapper = () => {
+
+    const { currentUser: {token: userToken} } = useCurrentUser();
 
     const openNotification = (type, content) => {
         notification[type]({
@@ -32,7 +35,7 @@ export const AdminWrapper = () => {
     const [showForm, setShowForm] = useState(false);
 
     const getUsers = () => {
-        getUsersRequest(({success, data, error}) => {
+        getUsersRequest(userToken, ({success, data, error}) => {
             setLoading(true);
             if (success) {
                 const parsedData = parseUsersData(data);
@@ -40,22 +43,22 @@ export const AdminWrapper = () => {
             } else {
                 openNotification("error", error || "Error happened, please try again later.");
             }
-        })
+        });
     }
 
     const createUser = ({firstName: name, email, lastName: last_name}) => {
-        createUserRequest({name, email, last_name}, (data) => {
+        createUserRequest({name, email, last_name, token: userToken}, (data) => {
            if (data.success) {
                 getUsers();
             } else {
-                openNotification("error", data.error || "Error happened, please try again later.");
+                openNotification("error", data.message || "Error happened, please try again later.");
             }
         });
         setShowForm(false);
     };
 
     const deleteUser = ({email}) => {
-        deleteUserRequest(email, data => {
+        deleteUserRequest(email, userToken, data => {
             if (data.success) {
                 const newData = users.filter((item) => item.email !== email);
                 setUsers(newData);
@@ -66,7 +69,7 @@ export const AdminWrapper = () => {
     };
 
     const toggleBlockStatus = ({email, value}) => {
-        updateUserRequest({email, field_name: "is_blocked", value_name: value}, data => {
+        updateUserRequest({email, field_name: "is_blocked", value_name: value, token: userToken}, data => {
             if (data.success) {
                 getUsers();
             } else {
@@ -76,7 +79,7 @@ export const AdminWrapper = () => {
     }
 
     const resetPassword = ({email}) => {
-        resetPasswordRequest(email, data => {
+        resetPasswordRequest(email, userToken, data => {
             openNotification(data.success ? "success" :"error", data.message || "Error happened, please try again later.");
         })
     }
@@ -84,7 +87,7 @@ export const AdminWrapper = () => {
     const updateRule = (userItem) => {
         const {email, ipRule: rule} = userItem;
         if (!rule) return;
-        updateUserRequest({email, field_name: "regex_ip", value_name: rule}, data => {
+        updateUserRequest({email, field_name: "regex_ip", value_name: rule, token: userToken}, data => {
             if (data.success) {
                 const newData = [...users];
                 const index = newData.findIndex((item) => item.email === email);
