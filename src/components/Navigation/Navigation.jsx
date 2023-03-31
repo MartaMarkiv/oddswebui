@@ -30,14 +30,14 @@ export const Navigation = () => {
     const clickMenu = ({ key }) => {
         if (key === "1" && currentUser) {
             logoutRequest(currentUser.token, data => {
-                if (data.success) {
-                    cookies.remove("userBenderToken", { path: '/' });
-                    cookies.remove("userBenderRole", { path: '/' });
+                // if (data.success) {
+                    cookies.remove("userBenderToken", { path: "/" });
+                    cookies.remove("userBenderRole", { path: "/" });
                     setCurrentUser(null);
                     navigate("/", { replace: true});
-                }
+                // }
             });
         }
     }
-    return <MenuWrapper items={items} onClick={clickMenu}/>
+    return <MenuWrapper items={items} onClick={clickMenu} disabled={!currentUser || !currentUser.token}/>
 }

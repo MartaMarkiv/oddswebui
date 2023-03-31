@@ -12,7 +12,7 @@ export const ResetPassword = ({ reset }) => {
             return Promise.resolve();
         } else {
             return Promise.reject({
-                message: "Passwords must have at least 8 characters and contain at least one uppercase letter, lowercase letter and number."
+                message: "Passwords must be 8 to 10 characters long and contain at least one uppercase letter, lowercase letter and number."
             });
                 
         }

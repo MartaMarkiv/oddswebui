@@ -29,7 +29,7 @@ const HeaderPanel = styled.div`
 `;
 
 const AddUserButton = styled.button`
-  background: ${({theme}) => theme.colors.headerControls.bg};
+  background: ${({theme}) => theme.colors.button.bg};
   color: ${({theme}) => theme.colors.textPrimary};
   font-size: 16px;
   border-radius: 20px;
@@ -37,6 +37,11 @@ const AddUserButton = styled.button`
   padding: 5px 15px;
   margin-left: 20px;
   cursor: pointer;
+
+  &:hover {
+    color: ${({theme}) => theme.colors.headerControls.bg};
+    background: ${({theme}) => theme.colors.textPrimary};
+  }
 `;
 
 export {

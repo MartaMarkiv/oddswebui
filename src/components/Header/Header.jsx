@@ -34,23 +34,28 @@ export const Header = ({
                 <LogoImage />
             </LogoLink>
             <HeaderControlPanel>
-                <Switcher
-                    leftText="All"
-                    rightText="Arbs"
-                    name="opportunity"
-                    leftValue="all"
-                    rightValue="arbs"
-                    initialValue="all"
-                    isProp={isProp}
-                    isPopular={isPopular}
-                    onUpdate={switchHandler}
-                />
-                <FilterButton onClick={showFilter} disabled={!currentUser}>
-                    <FilterImage />
-                </FilterButton>
-                
-                <ThemeSwitcher />
-                { currentUser && <HeaderMenu></HeaderMenu>}
+            { currentUser && currentUser.token &&
+                    <>
+                        <Switcher
+                            leftText="All"
+                            rightText="Arbs"
+                            name="opportunity"
+                            leftValue="all"
+                            rightValue="arbs"
+                            initialValue="all"
+                            isProp={isProp}
+                            isPopular={isPopular}
+                            onUpdate={switchHandler}
+                        />
+                        <FilterButton onClick={showFilter}>
+                            <FilterImage />
+                        </FilterButton>
+                    
+                    
+                        <ThemeSwitcher />
+                        <HeaderMenu></HeaderMenu>
+                    </>
+                }
             </HeaderControlPanel>
         </HeaderStyled>
     )

@@ -21,7 +21,7 @@ export const OpportunityList = ({
                     })
                 }
                 </List> :
-                <EmptyList>There is no opportunities right now.</EmptyList>
+                <EmptyList>There is not any opportunity right now.</EmptyList>
         }
         
     </OpportunityListContainer>
