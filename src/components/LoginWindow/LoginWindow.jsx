@@ -1,26 +1,29 @@
 import { useState } from "react";
 import { Form, Input } from "antd";
+import { ArrowLeftOutlined } from "@ant-design/icons";
 import { SubmitButton, ResetLink, SubTitle, ErrorBlock } from "./styles";
 import { OpportunityWrapper } from "../opportunity/OpportunityWrapper";
 import opportunityData from "../../opportunity_data.json";
 import { resetPasswordRequest, loginRequest } from "../../api/userRequests";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
 import { ModalWindow } from "../ModalWindow";
 const cookies = new Cookies();
 
 export const LoginWindow = ({ isOpen, saveUser }) => {
 
     const [isReset, setIsReset] = useState(false);
-    const [isSentEmail, setIsSetEmail] = useState(false);
+    const [isSentEmail, setIsSentEmail] = useState(false);
     const [loginError, setLoginError] = useState(null);
+    const [resultMessage, setResultMessage] = useState(null);
 
     const reset = ({resetEmail}) => {
         if (resetEmail) {
             resetPasswordRequest(resetEmail, data => {
-                setIsSetEmail(true);
+                setResultMessage(data.success ? null : data.message);
+                setIsSentEmail(true);
             })
         } else {
-            setIsSetEmail(false);
+            setIsSentEmail(false);
             setIsReset(false);
         }
     }
@@ -38,10 +41,15 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
 
             } else {
                 setLoginError(data.message || data.error);
-                setTimeout(() => setLoginError(null), 3000);
+                setTimeout(() => setLoginError(null), 5000);
             }
         });
     };
+
+    const goBack = () => {
+        setIsReset(false);
+        setIsSentEmail(false);
+    }
       
     return <>
         <OpportunityWrapper isPopular={true} isProp={true} listPopular={opportunityData} listProp={opportunityData}/>
@@ -54,8 +62,11 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
                     isReset ?
                         isSentEmail ?
                             <>
-                                <SubTitle>We have sent instruction to email you entered.</SubTitle>
-                                <SubTitle>You will receive instructions in case you entered a correct email address.</SubTitle>
+                            {resultMessage ? <SubTitle>{resultMessage}</SubTitle>:
+                                <>
+                                    <SubTitle>We have sent instruction to email you entered.</SubTitle>
+                                    <SubTitle>You will receive instructions in case you entered a correct email address.</SubTitle>
+                                </>}
                             </>:
                             <SubTitle>Enter the email to change your password.</SubTitle>:
                         null
@@ -80,6 +91,7 @@ export const LoginWindow = ({ isOpen, saveUser }) => {
                             </Form.Item>
                         </>:
                         <>
+                            <ArrowLeftOutlined className="backArrow" onClick={goBack}/>
                             <Form.Item
                                 name="resetEmail"
                                 rules={[{ required: true, message: "Please input your email!" }]}

@@ -88,6 +88,14 @@ const WindowWrapper = styled(Modal)`
         color: ${({theme}) => theme.colors.headerControls.bg};
         background: ${({theme}) => theme.colors.textPrimary};
     }
+
+    .backArrow {
+        color: ${({theme}) => theme.colors.textPrimary};
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        cursor: pointer;
+    }
 `;
 
 export {
