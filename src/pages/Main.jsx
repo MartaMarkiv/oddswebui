@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { FilterPanel } from "../components/table/components/FilterPanel";
 import {OpportunityDrawer} from "../components/opportunity";
 
-
 const StyledMain = styled.div`
   position: relative;
 `;
@@ -17,7 +16,6 @@ export const Main = ({
     setPopularFeedView,
     showAll
 }) => {
-    
     return <StyledMain>
         <FilterPanel
             isOpenFilter={isOpenFilter}
