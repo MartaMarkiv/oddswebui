@@ -1,6 +1,6 @@
 ## In this case we want to run the app against the XENA Training Cluster
 ## https://docs.tilt.dev/api.html#api.allow_k8s_contexts
-allow_k8s_contexts('arn:aws:eks:us-east-1:157485876214:cluster/oddsbender-cluster')
+allow_k8s_contexts('oddsbender')
 
 ## Run `helm template` on a given directory that contains a chart and return the fully rendered YAML.
 ## The `name` and `namespace` should be updated with the assigned student number.

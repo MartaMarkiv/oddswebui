@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from "styled-components";
-import {DRAWER_WIDTH, MULTI_DRAWER_WIDTH} from "../../constants";
 
 
 const Wrapper = styled.div`

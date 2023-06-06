@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {ReactComponent as Star} from "../../../assets/icons/star.svg";
 import {ReactComponent as Close} from "../../../assets/icons/close.svg";
-import {Drawer} from "antd";
 
 const OpportunityButton = styled.button`
   width: 48px;
@@ -43,11 +42,14 @@ const StarIcon = styled(Star)`
 `
 
 const DrawerStyled= styled.div`
+  &.ant-drawer {
+    z-index: 10;
+  }
   
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   .ant-drawer-content, .ant-drawer-header {
     background: ${({theme}) => theme.colors.drawer.bg};
@@ -99,6 +101,7 @@ const DrawerStyled= styled.div`
   
   .ant-drawer-content-wrapper {
     box-shadow: none;
+    filter: ${({blur}) => blur ? 'blur(2px)' : ''};
   }
 
   .ant-drawer-body .spinner {
@@ -107,18 +110,11 @@ const DrawerStyled= styled.div`
     
 `
 
-const OpportunitiesWrapper = styled.div`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-`;
-
 const CloseIcon = styled(Close)``
 
 export {
     OpportunityButton,
     DrawerStyled,
     StarIcon,
-    CloseIcon,
-    OpportunitiesWrapper
+    CloseIcon
 }

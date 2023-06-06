@@ -59,11 +59,15 @@ const FilterButton = styled.button`
   }
 
   &:hover {
-    background: ${({theme}) => theme.colors.headerControls.bgHover};
-    
+    color: ${({theme}) => theme.colors.headerControls.bg};
+    background: ${({theme}) => theme.colors.textPrimary};
     path {
-      stroke: ${({theme}) => theme.colors.headerControls.starStrokeHover};
+      stroke: ${({theme}) => theme.colors.headerControls.bg};
     } 
+  }
+
+  &:disabled {
+    cursor: default;
   }
 `;
 

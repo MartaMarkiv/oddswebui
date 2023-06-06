@@ -9,22 +9,8 @@ const OpportunityItemContainer = styled.div`
   font-weight: 400;
   font-size: 14px;
   color: ${({theme}) => theme.colors.textPrimary};
-  cursor: pointer;
   background: ${({theme}) => theme.colors.drawer.itemBg};
   transition: all .3s;
-  
-  &:hover {
-    background: ${({theme}) => theme.colors.drawer.itemBgSelected};
-    color: ${({theme}) => theme.colors.drawer.textSelected};,
-  }
-  
-  ${({selected, theme}) => {
-    return selected ? {
-        background: theme.colors.drawer.itemBgSelected,
-        color: theme.colors.drawer.textSelected,
-    } : {}
-  }};
-
   box-shadow: inset 0 0 17px ${({isHigh, theme}) => { return isHigh ? theme.colors.textSuccess : "none";}};
 `;
 
@@ -32,17 +18,6 @@ const Group = styled.div`
   padding: 7px 9px;
   border-radius: 4px;
   transition: background .3s;
-
-  &:hover {
-    background: ${({theme}) => theme.colors.drawer.groupBgSelected};
-  }
-
-  ${({selected, theme}) => {
-    return selected ? {
-      background: theme.colors.drawer.groupBgSelected,
-      color: theme.colors.drawer.textSelected,
-    } : {}
-  }};
 `
 
 const Header = styled.div`

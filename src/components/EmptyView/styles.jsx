@@ -14,6 +14,7 @@ const Title = styled.div`
 
 
 const SettingsImage = styled(SettingsIcon)`
+  fill: ${({theme}) => theme.colors.textPrimary};
   width: 20px;
   height: 20px;
   margin: 0 5px;

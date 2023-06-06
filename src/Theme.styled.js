@@ -9,7 +9,9 @@ const common = {
                 bg: "#FFFFFF",
                 icon: "#000000"
             }
-        }
+        },
+
+        logoColor: "#ff573d",
     },
     fonts: {
         secondary: "'Poppins', sans-serif",
@@ -35,6 +37,8 @@ export const light = {
         textDanger: "#FF0C0C",
 
         bgBadge: "#FFD43D",
+
+        linkColor: "#3367D6",
 
         betBox: {
             borderPrimary: "#F4F6F8",
@@ -96,6 +100,15 @@ export const light = {
             arrowHover: '#FFFFFF'
         },
 
+        modalWindow: {
+            bg: '#FFFFFF'
+        },
+
+        input: {
+            bg: '#FFFFFF',
+            borderColor: '#DFE5EB'
+        },
+
         dropdown: {
             submenu: {
                 bg: '#FFFFFF',
@@ -135,6 +148,8 @@ export const dark = {
         textDanger: "#FF0C0C",
 
         bgBadge: "#FFD43D",
+
+        linkColor: "#3367D6",
 
         betBox: {
             borderPrimary: "#2C3844",
@@ -195,6 +210,16 @@ export const dark = {
             arrow: '#90969C',
             arrowHover: '#FFFFFF',
 
+        },
+
+        modalWindow: {
+            bg: '#0C0B0E',
+            bgHover: 'linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), #2C3844',
+        },
+
+        input: {
+            bg: '#0C0B0E',
+            borderColor: '#90969C',
         },
 
         dropdown: {

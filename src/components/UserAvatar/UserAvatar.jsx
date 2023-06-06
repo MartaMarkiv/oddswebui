@@ -1,9 +1,10 @@
-import {AvatarContainer} from "./styles";
+import { AvatarContainer } from "./styles";
+import { UserOutlined } from "@ant-design/icons";
 
 export const UserAvatar = () => {
     return (
         <AvatarContainer>
-            <img src="/avatar.png" alt="userAvatar"/>
+            <UserOutlined></UserOutlined>
         </AvatarContainer>
     )
 }

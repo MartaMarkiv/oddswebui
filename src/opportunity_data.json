@@ -1,0 +1,185 @@
+[{
+  "awayTeam": "Pittsburgh",
+  "gameTime": "1ST HALF - 14:53",
+  "homeTeam": "Northwestern",
+  "id": "pittsburghNorthwesternTotal",
+  "sumProbability": 3,
+  "timeout": true,
+  "type": "Live",
+  "opportunity": {
+    "total": {
+      "id": "pittsburghNorthwesternTotal",
+      "items": [{
+        "betName": "Popular Total",
+        "id": "4b185c600",
+        "key": "total",
+        "name": "Total",
+        "probability": "53.488372",
+        "sportBook": "Caesars",
+        "type": "Home",
+        "typeValue": "O 125.5",
+        "value": "-115"
+      },
+      {
+        "betName": "Popular Total",
+        "id": "4b1855e",
+        "key": "total",
+        "name": "Total",
+        "probability": "53.27",
+        "sportBook": "Caesars",
+        "type": "Away",
+        "typeValue": "U 126.5",
+        "value": "-114"
+      }
+    ]
+    }
+  }
+},
+{
+  "awayTeam": "Los @ Chicago",
+  "gameTime": "Q3 00:00",
+  "homeTeam": "Game 1",
+  "id": "123456",
+  "sumProbability": 4,
+  "timeout": true,
+  "type": "Live",
+  "opportunity": {
+    "moneyline": {
+      "id": "123456",
+      "items": [{
+        "betName": "Moneyline",
+        "id": "4b100",
+        "key": "moneyline",
+        "name": "Moneyline",
+        "probability": "72",
+        "sportBook": "Barstool",
+        "type": "Home",
+        "typeValue": "Home",
+        "value": "-2500"
+      },
+      {
+        "betName": "Moneyline",
+        "id": "4b14565e",
+        "key": "moneyline",
+        "name": "Moneyline",
+        "probability": "53.27",
+        "sportBook": "Betmgm",
+        "type": "Away",
+        "typeValue": "Away",
+        "value": "850"
+      }
+    ]
+    }
+  }
+},
+{
+  "awayTeam": "Game2",
+  "gameTime": "1ST HALF - 14:53",
+  "homeTeam": "Game3",
+  "id": "1234567",
+  "sumProbability": -32,
+  "timeout": true,
+  "type": "Live",
+  "opportunity": {
+    "total": {
+      "id": "1234567",
+      "items": [{
+        "betName": "Popular Total",
+        "id": "4b185c600",
+        "key": "total",
+        "name": "Total",
+        "probability": "53.488372",
+        "sportBook": "Caesars",
+        "type": "Home",
+        "typeValue": "O 125.5",
+        "value": "-110"
+      },
+      {
+        "betName": "Popular Total",
+        "id": "4b1855e",
+        "key": "total",
+        "name": "Total",
+        "probability": "53.27",
+        "sportBook": "Barstool",
+        "type": "Away",
+        "typeValue": "U 126.5",
+        "value": "-125"
+      }
+    ]
+    }
+  }
+},
+{
+  "awayTeam": "Game4",
+  "gameTime": "Q4 10:13",
+  "homeTeam": "Game5",
+  "id": "123",
+  "sumProbability": -2,
+  "timeout": true,
+  "type": "Live",
+  "opportunity": {
+    "total": {
+      "id": "123",
+      "items": [{
+        "betName": "Popular Total",
+        "id": "34k2343",
+        "key": "total",
+        "name": "Total",
+        "probability": "3",
+        "sportBook": "Caesars",
+        "type": "Home",
+        "typeValue": "O 115.5",
+        "value": "-125"
+      },
+      {
+        "betName": "Popular Total",
+        "id": "3l3k3k",
+        "key": "total",
+        "name": "Total",
+        "probability": "7",
+        "sportBook": "Caesars",
+        "type": "Away",
+        "typeValue": "U 135.5",
+        "value": "-144"
+      }
+    ]
+    }
+  }
+},
+{
+  "awayTeam": "Pittsburgh",
+  "gameTime": "1ST HALF - 14:53",
+  "homeTeam": "Northwestern",
+  "id": "pittsburghNorthwesternTotal",
+  "sumProbability": -3,
+  "timeout": true,
+  "type": "Live",
+  "opportunity": {
+    "total": {
+      "id": "pittsburghNorthwesternTotal",
+      "items": [{
+        "betName": "Popular Total",
+        "id": "4b185c600",
+        "key": "total",
+        "name": "Total",
+        "probability": "53.488372",
+        "sportBook": "Caesars",
+        "type": "Home",
+        "typeValue": "O 125.5",
+        "value": "-115"
+      },
+      {
+        "betName": "Popular Total",
+        "id": "4b1855e",
+        "key": "total",
+        "name": "Total",
+        "probability": "53.27",
+        "sportBook": "Caesars",
+        "type": "Away",
+        "typeValue": "U 126.5",
+        "value": "-114"
+      }
+    ]
+    }
+  }
+}]
