@@ -1,7 +1,7 @@
 import { client } from "./api";
 
 export const createUserRequest = (data, callback) => {
-    client.post(`/user`, data)
+    client.post(`/api/user`, data)
         .then(res => {
             callback(res.data);
         })
@@ -11,7 +11,7 @@ export const createUserRequest = (data, callback) => {
 };
 
 export const getUsersRequest = (token, callback) => {
-    client.get(`/users/${token}`)
+    client.get(`/api/users/${token}`)
     .then(res => {
         callback({success: true, data: res.data});
     }).catch(err => {
@@ -20,7 +20,7 @@ export const getUsersRequest = (token, callback) => {
 };
 
 export const updateUserRequest = (data, callback) => {
-    client.put(`/update_user`, data)
+    client.put(`/api/update_user`, data)
         .then(res => {
             const { data: { success, message }} = res;
             callback({success, error: message});
@@ -31,7 +31,7 @@ export const updateUserRequest = (data, callback) => {
 };
 
 export const deleteUserRequest = (email, token, callback) => {
-    client.delete(`/user`, { data: { email, token }})
+    client.delete(`/api/user`, { data: { email, token }})
     .then(res => {
         callback({success: true});
     }).catch(err => {
@@ -40,7 +40,7 @@ export const deleteUserRequest = (email, token, callback) => {
 };
 
 export const resetPasswordRequest = (email, callback) => {
-    client.post(`/send_email`, { email })
+    client.post(`/api/send_email`, { email })
     .then(res => {
         callback(res.data);
     }).catch(err => {
@@ -49,7 +49,7 @@ export const resetPasswordRequest = (email, callback) => {
 };
 
 export const updatePasswordRequest = (password, token, callback) => {
-    client.put(`/user/${token}`, { password })
+    client.put(`/api/user/${token}`, { password })
     .then(res => {
         callback({success: true});
     }).catch(err => {
@@ -58,7 +58,7 @@ export const updatePasswordRequest = (password, token, callback) => {
 };
 
 export const loginRequest = (email, password, callback) => {
-    client.post(`/login`, { email, password })
+    client.post(`/api/login`, { email, password })
     .then(res => {
         callback(res.data);
     }).catch(err => {
@@ -67,7 +67,7 @@ export const loginRequest = (email, password, callback) => {
 };
 
 export const logoutRequest = (token, callback) => {
-    client.post(`/logout`, { token })
+    client.post(`/api/logout`, { token })
     .then(res => {
         callback(res.data);
     }).catch(err => {
