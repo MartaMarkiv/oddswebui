@@ -9,8 +9,12 @@ ingress:
   hosts:
     - host: oddsbender.com
       paths:
-        - path: /
+        - path: /.*
           pathType: ImplementationSpecific
+        - path: /api
+          pathType: ImplementationSpecific
+          service: oddsbender-back-end
+          port: 8000
   tls:
     - hosts:
         - oddsbender.com
@@ -25,5 +29,5 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 app:
-  table_data_url: 'wss://user:BenderInternational@backend.oddsbender.com/ws/table_data'
-  opportunity_url: 'wss://user:BenderInternational@backend.oddsbender.com/ws/opportunity_feed'
+  table_data_url: 'wss://user:BenderInternational@oddsbender.com/api/ws/table_data'
+  opportunity_url: 'wss://user:BenderInternational@oddsbender.com/api/ws/opportunity_feed'

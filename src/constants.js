@@ -5,10 +5,10 @@ const devConfig = {
     opportunity_popular: process.env.REACT_APP_OPPORTUNITY_POPULAR
 }
 const prodConfig = {
-    table_data: "wss://user:Oddsbender@backend.oddsbender.com/ws/table_data",
-    opportunity: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed",
-    opportunity_prop: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed_prop",
-    opportunity_popular: "wss://user:Oddsbender@backend.oddsbender.com/ws/opportunity_feed_popular"
+    table_data: "wss://user:Oddsbender@oddsbender.com/api/ws/table_data",
+    opportunity: "wss://user:Oddsbender@oddsbender.com/api/ws/opportunity_feed",
+    opportunity_prop: "wss://user:Oddsbender@oddsbender.com/api/ws/opportunity_feed_prop",
+    opportunity_popular: "wss://user:Oddsbender@oddsbender.com/api/ws/opportunity_feed_popular"
 } 
 
 export const DRAWER_WIDTH = 400;
