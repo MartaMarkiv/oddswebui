@@ -2,7 +2,7 @@ replicaCount: 1
 image:
   repository: nginx
   pullPolicy: Always
-  tag: 0.1.352
+  tag: 0.1.353
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
