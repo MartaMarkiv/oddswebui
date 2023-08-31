@@ -7,7 +7,7 @@ ingress:
     nginx.ingress.kubernetes.io/auth-secret: basic-auth
     nginx.ingress.kubernetes.io/auth-realm: Authentication Required
   hosts:
-    - host: oddsbender.com
+    - host: app.oddsbender.com
       paths:
         - path: /.*
           pathType: ImplementationSpecific
@@ -17,7 +17,7 @@ ingress:
           port: 8000
   tls:
     - hosts:
-        - oddsbender.com
+        - app.oddsbender.com
       secretName: oddsbender-tls
   defaultBackend: true
 

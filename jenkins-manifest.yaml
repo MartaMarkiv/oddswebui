@@ -1,6 +1,7 @@
 stages:
   lint:
     enabled: false
+  
   package: 
     enabled: true
     helmDir: deploy
@@ -8,9 +9,21 @@ stages:
   publish:
     enabled: true
     buildDir: build_images
-
+  
+  version:
+    versionUpdates:
+      - type: yaml
+        file: deploy/values.yaml
+        path: image.tag
+      - type: yaml
+        file: deploy/Chart.yaml
+        path: version
+      - type: yaml
+        file: deploy/Chart.yaml
+        path: appVersion
+  
   deploy:
-    enabled: true
+    enabled: false
     name: oddsbender-web-ui
     kubernetesConfig:
       name: oddsbender-cluster
