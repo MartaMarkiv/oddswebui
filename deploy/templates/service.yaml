@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "web-ui.fullname" . }}
+  name: {{ include "oddsbender-web-ui.fullname" . }}
   labels:
-    {{- include "web-ui.labels" . | nindent 4 }}
+    {{- include "oddsbender-web-ui.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -16,4 +16,4 @@ spec:
       protocol: TCP
       name: https
   selector:
-    {{- include "web-ui.selectorLabels" . | nindent 4 }}
+    {{- include "oddsbender-web-ui.selectorLabels" . | nindent 4 }}
