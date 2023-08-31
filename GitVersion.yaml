@@ -1,0 +1,12 @@
+patch-version-bump: feature
+minor-version-bump: develop
+commit-message-incrementing: MergeMessageOnly
+mode: ContinuosDelivery
+branches:
+  develop:
+    mode: ContinuosDelivery
+    increment: none
+    commit-message-incrementing: Enabled
+    tag: rc
+ignore:
+  sha: []
