@@ -49,7 +49,7 @@ export const resetPasswordRequest = (email, callback) => {
 };
 
 export const updatePasswordRequest = (password, token, callback) => {
-    client.put(`/api/user/${token}`, { password })
+    client.put(`/api/set_password/${token}`, { password })
     .then(res => {
         callback({success: true});
     }).catch(err => {
@@ -58,7 +58,7 @@ export const updatePasswordRequest = (password, token, callback) => {
 };
 
 export const loginRequest = (email, password, callback) => {
-    client.post(`/api/login`, { email, password })
+    client.post(`/api/login`, { email_or_username: email, password })
     .then(res => {
         callback(res.data);
     }).catch(err => {

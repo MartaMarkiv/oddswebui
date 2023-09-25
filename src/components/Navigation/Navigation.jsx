@@ -1,14 +1,12 @@
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { logoutRequest } from "../../api/userRequests";
 import { useCurrentUser } from "../../shared/context/UserProvider";
+import  useAuthenticated from "../../shared/hooks/useAuthenticated";
 import { MenuWrapper } from "./styles";
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
 export const Navigation = () => {
-    const navigate = useNavigate();
-    
-    const { currentUser, setCurrentUser } = useCurrentUser();
+    const { currentUser } = useCurrentUser();
+    const { handleLogout } = useAuthenticated();
 
     const items = currentUser && currentUser.role === "admin" ? [
         {
@@ -31,10 +29,7 @@ export const Navigation = () => {
         if (key === "1" && currentUser) {
             logoutRequest(currentUser.token, data => {
                 // if (data.success) {
-                    cookies.remove("userBenderToken", { path: "/" });
-                    cookies.remove("userBenderRole", { path: "/" });
-                    setCurrentUser(null);
-                    navigate("/", { replace: true});
+                    handleLogout();
                 // }
             });
         }

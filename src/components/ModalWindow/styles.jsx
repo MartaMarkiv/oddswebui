@@ -15,6 +15,9 @@ const WindowWrapper = styled(Modal)`
 
     .ant-modal-title {
         text-align: center;
+        > h1 > a {
+          margin: 0 auto;
+        }
     }
 
     .ant-modal-body {
