@@ -5,73 +5,35 @@ export const parser = data => {
     const collection = [];
     (data || []).forEach(({id, game, timeout, type, opportunity: _opportunity, time: gameTime}) => {
         const [awayTeam, homeTeam] = game.indexOf('@') >= 0 ? game.split(' @ ') : game.split(' v '); // Away @ Home
+        const gameBets = [...new Set(_opportunity.map(item => item.bets.name))];
 
-        const bets = _opportunity.reduce((acc, item) => {
-            const betKeys = Object.keys(item.bets)
-
-            for(const key of betKeys) {
-                if (['odds', 'sportsbooks', 'probability','type'].includes(key)) {
-                    acc[key] ||= [];
-                    acc[key].push(item.bets[key]);
-                } else {
-                    acc[key] = item.bets[key];
+        for (const key of gameBets) {
+            let sumProbability = 0;
+            const opps = _opportunity.filter(item => item.bets.name === key).map(( {bets} ) => {
+                sumProbability = bets.sum_probability;
+                return {
+                    id: uuidv4(),
+                    value: bets.odds,
+                    betName: bets.BET_NAME.trim(),
+                    name: bets.name,
+                    sportBook: bets.sportsbooks.trim(),
+                    typeValue: bets.type,
+                    probability: bets.probability,
                 }
-            }
-
-            return acc;
-        }, {});
-
-        const sumProbability = Number(bets.sum_probability);
-        const [away, home] = bets.odds;
-        const [sportsBookAway, sportsBookHome] = bets.sportsbooks.map(item => item.trim());
-
-        const [probabilityAway, probabilityHome] = bets.probability;
-
-        const key = camelCase(bets.name);
-
-        const [typeAway, typeHome] = key === "moneyline" ? ["Away", "Home"] : bets.type;
-
-        let opportunity = {};
-        opportunity[key] = {
-            id: camelCase(`${game} - ${bets.name}`),
-            items: [],
+            });
+            collection.push({
+                id: camelCase(`${id} - ${key}`),
+                homeTeam,
+                awayTeam,
+                timeout: !!(+timeout),
+                type,
+                opportunity: opps,
+                sumProbability,
+                gameTime
+            })
         }
-
-        home && opportunity[key].items.push({
-            id: uuidv4(),
-            value: home,
-            betName: bets.BET_NAME.trim(),
-            name: bets.name,
-            type: 'Home',
-            sportBook: sportsBookHome,
-            typeValue: typeHome,
-            probability: probabilityHome,
-            key
-        });
-
-        away && opportunity[key].items.push({
-            id: uuidv4(),
-            value: away,
-            betName: bets.BET_NAME.trim(),
-            name: bets.name,
-            type: 'Away',
-            sportBook: sportsBookAway,
-            typeValue: typeAway,
-            probability: probabilityAway,
-            key
-        });
-
-        collection.push({
-            id: camelCase(`${id} - ${bets.name}`),
-            homeTeam,
-            awayTeam,
-            timeout: !!(+timeout),
-            type,
-            opportunity,
-            sumProbability,
-            gameTime
-        });
     });
+
     return collection.sort((a, b) => b.sumProbability - a.sumProbability)
         .slice(0, 10);
 }
