@@ -10,6 +10,10 @@ export default function useAuthenticated() {
 
     const handleLogin = ({data, saveUser, rememberMe}) => {
         delete data.success
+        if (data.message === 'NEW_PASSWORD_REQUIRED') {
+            return navigate(`/account/password-reset/${data.token}`, { replace: true });
+        }
+
         const { token, role, refresh_token  } = data;
         saveUser(data);
         cookies.set('userBenderToken', token, { path: '/' });
