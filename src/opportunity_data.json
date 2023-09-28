@@ -6,10 +6,7 @@
   "sumProbability": 3,
   "timeout": true,
   "type": "Live",
-  "opportunity": {
-    "total": {
-      "id": "pittsburghNorthwesternTotal",
-      "items": [{
+  "opportunity": [{
         "betName": "Popular Total",
         "id": "4b185c600",
         "key": "total",
@@ -32,8 +29,6 @@
         "value": "-114"
       }
     ]
-    }
-  }
 },
 {
   "awayTeam": "Los @ Chicago",
@@ -43,10 +38,7 @@
   "sumProbability": 4,
   "timeout": true,
   "type": "Live",
-  "opportunity": {
-    "moneyline": {
-      "id": "123456",
-      "items": [{
+  "opportunity": [{
         "betName": "Moneyline",
         "id": "4b100",
         "key": "moneyline",
@@ -69,8 +61,6 @@
         "value": "850"
       }
     ]
-    }
-  }
 },
 {
   "awayTeam": "Game2",
@@ -80,10 +70,7 @@
   "sumProbability": -32,
   "timeout": true,
   "type": "Live",
-  "opportunity": {
-    "total": {
-      "id": "1234567",
-      "items": [{
+  "opportunity": [{
         "betName": "Popular Total",
         "id": "4b185c600",
         "key": "total",
@@ -106,8 +93,6 @@
         "value": "-125"
       }
     ]
-    }
-  }
 },
 {
   "awayTeam": "Game4",
@@ -117,10 +102,7 @@
   "sumProbability": -2,
   "timeout": true,
   "type": "Live",
-  "opportunity": {
-    "total": {
-      "id": "123",
-      "items": [{
+  "opportunity": [{
         "betName": "Popular Total",
         "id": "34k2343",
         "key": "total",
@@ -143,8 +125,6 @@
         "value": "-144"
       }
     ]
-    }
-  }
 },
 {
   "awayTeam": "Pittsburgh",
@@ -154,10 +134,7 @@
   "sumProbability": -3,
   "timeout": true,
   "type": "Live",
-  "opportunity": {
-    "total": {
-      "id": "pittsburghNorthwesternTotal",
-      "items": [{
+  "opportunity": [{
         "betName": "Popular Total",
         "id": "4b185c600",
         "key": "total",
@@ -179,7 +156,5 @@
         "typeValue": "U 126.5",
         "value": "-114"
       }
-    ]
-    }
-  }
+  ]
 }]

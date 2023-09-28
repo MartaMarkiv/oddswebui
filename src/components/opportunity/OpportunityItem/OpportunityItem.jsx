@@ -19,8 +19,9 @@ import {
 import {TimeoutBadge} from "../../TimeoutBadge";
 
 export const OpportunityItem = ({ data }) => {
-
     const isHigh =  data.opportunity ? data.sumProbability > 0 : false;
+    const bets = (data.opportunity || []).slice().reverse();
+
     return <OpportunityItemContainer isHigh={isHigh}>
         <Header>
             <Teams>
@@ -57,16 +58,7 @@ export const OpportunityItem = ({ data }) => {
                 </GridHead>
 
                 <GridBody>
-                    {
-                        data?.opportunity && Object.keys(data.opportunity).map((key, index) => {
-                            
-                            const bets = data.opportunity[key].items.slice().reverse();
-                            return <div key={index}>
-                                {
-                                    index > 1 && <Divider />
-                                }
-
-                                <Group>
+                    <Group>
                                     {
                                         bets.map((opportunity, i) => {
                                             return <GridRow key={i}>
@@ -79,9 +71,6 @@ export const OpportunityItem = ({ data }) => {
                                     }
                                     <div>EV: {data.sumProbability}</div>
                                 </Group>
-                            </div>
-                        })
-                    }
                 </GridBody>
             </Grid>
         </Body>
