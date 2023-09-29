@@ -1,19 +1,48 @@
 image:
-  repository: 157485876214.dkr.ecr.us-east-2.amazonaws.com/web-ui
-  tag: latest
+  repository: registry.oddsbender.com/oddsbender/web-ui
   pullPolicy: Always
 
-service:
-  type: ClusterIP
-  port: 80
+imagePullSecrets:
+  - name: oddsbender-image-pull-secret
 
 basicAuth:
   authString: user:$apr1$BuKn3DhM$nGKMk0hwQOObznaIef0FJ0
+
+app:
+  table_data_url: 'wss://user:BenderInternational@predev.oddsbender.com/api/ws/table_data'
+  opportunity_url: 'wss://user:BenderInternational@predev.oddsbender.com/api/ws/opportunity_feed'
 
 command: 
   - '"/bin/bash", "-c"'
 args:
   - exec nginx -g 'daemon off;'
 
-nodeSelector:
-  role: system
+ingress:
+  enabled: true
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  hosts:
+    - host: predev-app.oddsbender.com
+      paths:
+        - path: /.*
+          pathType: ImplementationSpecific
+        - path: /api
+          pathType: ImplementationSpecific
+          service: predev-oddsbender-back-end
+          port: 8000
+  tls:
+    - hosts:
+        - predev-app.oddsbender.com
+      secretName: predev-oddsbenderwebui-tls
+  defaultBackend: true
+
+service:
+  type: ClusterIP
+  port: 80
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80

@@ -8,13 +8,12 @@ allow_k8s_contexts('oddsbender')
 yaml = helm(
   'deploy',
   # The release name, equivalent to helm --name
-  name='oddsbender-web-ui',
+  name='predev-oddsbender-web-ui',
   # REPLACE HERE - The namespace to install in, equivalent to helm --namespace
-  namespace='dev-oddsbender',
+  namespace='predev-oddsbender',
   # The values file to substitute into the chart.
   values=[
     'conf-deploy/common.values.yaml',
-    'conf-deploy/development.values.yaml'
   ],
   # set=['command=["npm"]', 'args=["start"]']
 
@@ -29,7 +28,7 @@ k8s_yaml(yaml)
 ## Execute a live update of the code whenever a file in the frontend folder is changed.
 ## When the package.json or package-lock.json are changed trigger an npm install inside of the pod.
 ## https://docs.tilt.dev/api.html#api.docker_build-ui
-docker_build('157485876214.dkr.ecr.us-east-2.amazonaws.com/web-ui', '.',
+docker_build('registry.oddsbender.com/oddsbender/web-ui', '.',
 	dockerfile='build_images/web-ui/Dockerfile',
   # dockerfile='./Dockerfile.dev',
     ignore=['csv', 'Tiltfile', '.vscode', 'deploy/*', '.venv/*'],
@@ -45,4 +44,4 @@ docker_build('157485876214.dkr.ecr.us-east-2.amazonaws.com/web-ui', '.',
 ## Port 5000 - Backend Pod
 ## Port 9229 - NodeJS Debugging
 ## https://docs.tilt.dev/api.html#api.k8s_resource
-# k8s_resource('attendance-tracker', port_forwards=['3000:3000', '5000:5000', '9229:9229'])
+# k8s_resource('predev-oddsbender-web-ui', port_forwards=['8080:80'])

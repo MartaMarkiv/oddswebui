@@ -15,6 +15,9 @@ const WindowWrapper = styled(Modal)`
 
     .ant-modal-title {
         text-align: center;
+        > h1 > a {
+          margin: 0 auto;
+        }
     }
 
     .ant-modal-body {
@@ -59,6 +62,11 @@ const WindowWrapper = styled(Modal)`
         color: ${({theme}) => theme.colors.textPrimary};
     }
 
+
+    .ant-form {
+        width: 100%;
+    }
+
     .ant-form-item:last-child {
         margin-bottom: 0;
     }
@@ -76,7 +84,7 @@ const WindowWrapper = styled(Modal)`
         cursor: pointer;
     }
 
-    .ant-btn-primary,
+    .ant-btn-primaryx,
     input,
     .ant-input-affix-wrapper,
     .ant-input-password {
