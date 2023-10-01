@@ -24,8 +24,6 @@ export const OpportunityDrawer = ({
 
 
     const paramsString = `token=${userToken}&refresh_token=${refreshToken}`;
-    const clientPopular = new WebSocket(`${OPPORTUNITY_POPULAR}?${paramsString}`);
-    const clientProp = new WebSocket(`${OPPORTUNITY_PROP}?${paramsString}`);
 
     const [loading, setLoading] = useState(true);
 
@@ -49,14 +47,14 @@ export const OpportunityDrawer = ({
             }
         }
 
-        const allOpportunities = data.length ? data.map(item => item.games).flat() : [];
+        const allOpportunities = data?.length ? data.map(item => item.games).flat() : [];
         const parsedData = parser(allOpportunities);
 
         return parsedData;
     }
 
     const connectPopualrSocket = () => {
-
+        const clientPopular = new WebSocket(`${OPPORTUNITY_POPULAR}?${paramsString}`);
         clientPopular.onmessage = (event) => {
             const parsedData = emitClientData(event);
             setCollectionPopular(parsedData);
@@ -68,7 +66,7 @@ export const OpportunityDrawer = ({
     };
     
     const connectPropSocket = () => {
-
+        const clientProp = new WebSocket(`${OPPORTUNITY_PROP}?${paramsString}`);
         clientProp.onmessage = (event) => {
                         const parsedData = emitClientData(event);
 
